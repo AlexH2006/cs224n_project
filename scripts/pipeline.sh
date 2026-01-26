@@ -40,14 +40,14 @@ BASE_OUTPUT_DIR="results/run_${TIMESTAMP}"
 
 # --- Inference Settings ---
 INFERENCE_HANDLER="dpskcot" # Inference handler, options: "dpskcot", "dpsknoncot", "kiminacot"
-GPUS=4                    # Number of GPUs to use for vLLM inference
+GPUS=1                    # Number of GPUs to use for vLLM inference
 NUM_SAMPLES_INITIAL=8     # Number of proof samples to generate per problem in the initial round (Round 0)
 NUM_SAMPLES_CORRECTION=2  # Number of correction samples to generate per failed attempt in correction rounds (Round > 0)
 TEMPERATURE=1.0           # Inference temperature
 MAX_MODEL_LEN=40960       # Maximum model sequence length
 
 # --- Compilation Settings ---
-CPUS=32                   # Number of CPU cores to use for parallel compilation
+CPUS=30                   # Number of CPU cores to use for parallel compilation
 
 # --- Pipeline Control ---
 # Maximum number of correction rounds (0 for initial inference only, 1 for initial + one correction round, etc.)

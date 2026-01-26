@@ -89,6 +89,15 @@ def initiate_child(imports = DEFAULT_IMPORTS):
 
     child.sendline(f"{DEFAULT_LAKE_PATH} exe repl")
 
+    # Wait for REPL to start and clear any bash welcome messages
+    import time
+    time.sleep(2)
+    # Clear any pending output (bash MOTD, prompts, etc.)
+    try:
+        child.read_nonblocking(size=10000, timeout=1)
+    except:
+        pass
+
     response = send_command_and_wait(child, imports, timeout=IMPORT_TIMEOUT)
 
     # print(f"Initializing Lean REPL: (PID: {child.pid})", flush = True)
