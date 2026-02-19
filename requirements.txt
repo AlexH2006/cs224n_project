@@ -1,0 +1,16 @@
+# Core: SDPO (lean_sdpo_ttt.py) and MATH eval (eval_nl_MATH.py)
+torch>=2.0.0
+transformers>=4.40.0
+accelerate>=0.20.0
+datasets>=2.14.0
+sentencepiece
+protobuf>=3.20
+matplotlib>=3.5.0
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Optional: Lean verification (local or with Kimina)
+kimina-client>=0.2.0
+
+# Optional: run SDPO and MATH eval on Modal (cloud GPU)
+modal>=1.3.0
