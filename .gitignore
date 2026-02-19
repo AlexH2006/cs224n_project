@@ -1,0 +1,40 @@
+# Virtual env
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+*.swp
+*~
+
+# Env / secrets
+.env
+.env.local
+*.pem
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Nested git repos (track as submodules or remove their .git to include as normal folders)
+Goedel-Prover-V2/
+SDPO/
+kimina-lean-server/
+
+# Large / generated (uncomment if you don't want to track)
+# results/
+# *.ckpt
+# *.safetensors

@@ -1,0 +1,26 @@
+2026-02-18 16:40:10 | INFO | Logging to logs/kimina_prover_test/20260218_164010
+2026-02-18 16:40:10 | INFO | ============================================================
+2026-02-18 16:40:10 | INFO | SDPO Test-Time Self-Distillation for Lean
+2026-02-18 16:40:10 | INFO | ============================================================
+2026-02-18 16:40:10 | INFO | Model: AI-MO/Kimina-Prover-RL-1.7B
+2026-02-18 16:40:10 | INFO | Samples per iteration: 2
+2026-02-18 16:40:10 | INFO | Max iterations: 2
+2026-02-18 16:40:10 | INFO | Temperature: 0.7
+2026-02-18 16:40:10 | INFO | KL coefficient: 0.1
+2026-02-18 16:40:10 | INFO | KL alpha: 0.5
+2026-02-18 16:40:10 | INFO | Kimina URL: http://localhost:80
+2026-02-18 16:40:10 | INFO | Log directory: logs/kimina_prover_test/20260218_164010
+2026-02-18 16:40:10 | INFO | ============================================================
+2026-02-18 16:40:10 | INFO | Loading dataset from /Users/selinawan/Desktop/224n_project/Goedel-Prover-V2/dataset/minif2f.jsonl
+2026-02-18 16:40:10 | INFO | Loaded 1 problems
+2026-02-18 16:40:10 | INFO | Loading model AI-MO/Kimina-Prover-RL-1.7B...
+2026-02-18 16:40:15 | INFO | Loading reference model (frozen)...
+2026-02-18 16:40:22 | INFO | Model loaded on mps
+2026-02-18 16:40:22 | INFO | 
+[1/1] Starting problem...
+2026-02-18 16:40:22 | INFO | 
+============================================================
+2026-02-18 16:40:22 | INFO | Solving: mathd_algebra_478
+2026-02-18 16:40:22 | INFO | ============================================================
+2026-02-18 16:40:22 | INFO | 
+--- Iteration 1/2 ---
