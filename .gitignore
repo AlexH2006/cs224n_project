@@ -9,6 +9,9 @@ __pycache__/
 *$py.class
 *.so
 .Python
+*.pyo
+*.pyd
+*.pyc
 *.egg-info/
 .eggs/
 dist/
@@ -33,6 +36,11 @@ build/
 Goedel-Prover-V2/
 SDPO/
 kimina-lean-server/
+
+# Project
+collect.py
+output.txt
+*.log
 
 # Large / generated (uncomment if you don't want to track)
 # results/
