@@ -32,21 +32,20 @@ Key Implementations:
        f) RL update using SDPO gradient
      After max_iterations: reload model weights
 
-2. SDPO REWARD (compute_sdpo_reward method):
-   - Numerator: log π_θ(y_t | x, y_{<t}) — without feedback
-   - Denominator: log π_θ(y_t | x, f, y_{<t}) — with feedback
-   - Reward per token: log_prob_without_feedback - log_prob_with_feedback
-   - Model learns to generate proofs that don't need feedback correction
+2. SDPO LOSS (compute_sdpo_loss method, Eq. 11):
+   - Top-K + tail KL: KL(π_θ(·|x,y_{<t}) ‖ stopgrad(q_θ(·|x,f,y_{<t})))
+   - Only top-K tokens from student + a tail bucket (never full vocab softmax)
+   - Student = model without feedback, Teacher = model with feedback (stopgraded)
 
 3. RL UPDATE (rl_update method):
-   - Policy gradient: loss = -reward * log_prob
+   - Loss = mean per-token KL (direct gradient through student distribution)
    - Updates model weights
    - Model reloaded after max_iterations to prevent drift
 
 4. INTUITION:
-   - If π(y|x) >> π(y|x,f): reward is positive (good proof, feedback doesn't help)
-   - If π(y|x) << π(y|x,f): reward is negative (bad proof, needs feedback)
-   - Model learns to generate proofs that are already good without feedback
+   - High KL: student and teacher distributions differ a lot (proof needs feedback)
+   - Low KL: student already matches teacher (proof is good without feedback)
+   - Minimizing KL pushes student toward teacher, internalizing the feedback
 """
 
 import argparse
@@ -93,6 +92,7 @@ class SDPOConfig:
     # Test-time RL settings
     max_iterations: int = 5  # Max iterations per problem before model reload
     learning_rate: float = 1e-5  # Learning rate for RL updates
+    distillation_topk: int = 20  # Top-K tokens for KL approximation (Eq. 11)
     
     # Logging settings
     log_dir: str = "logs/sdpo_runs"
@@ -100,7 +100,11 @@ class SDPOConfig:
     # Whether to use the model's chat template
     use_chat_template: bool = True
     
-    # Feedback template (appended to prompt when computing denominator)
+    # Feedback mode for RL denominator prompt:
+    # - True: pass both past error messages AND failed proofs (full context)
+    # - False: pass only past error messages (no failed proof text)
+    feedback_include_failed_proof: bool = True
+    # Template when including both error + failed proof
     feedback_template: str = """
 The previous proof attempt failed with the following Lean compiler error:
 
@@ -111,6 +115,16 @@ Failed proof:
 
 Please analyze the error and provide a corrected proof.
 """
+    # Template when including only error messages (no failed proof)
+    feedback_template_errors_only: str = """
+The previous proof attempt failed with the following Lean compiler error:
+
+{feedback}
+
+Please analyze the error and provide a corrected proof.
+"""
+    # Separator between multiple feedback blocks in the prompt
+    feedback_separator: str = "\n\n---\n\n"
 
 
 # ============================================================================
@@ -451,10 +465,20 @@ class LeanVerifier:
 # ============================================================================
 
 def extract_proof_tactics(output: str) -> str:
-    """Extract proof tactics from model output."""
+    """
+    Extract proof tactics from model output.
+    
+    The model may output:
+    1. Just tactics: "rw [h₁]\nnorm_num"
+    2. Full theorem with tactics after ":= by"
+    3. Code in markdown blocks
+    4. Thinking blocks followed by code
+    
+    We need to extract ONLY the proof tactics (the lines after "by").
+    """
     output = output.strip()
     
-    # Handle Qwen3 thinking mode - extract content after </think>
+    # Handle Qwen3/Kimina thinking mode - extract content after </think>
     if "</think>" in output:
         output = output.split("</think>")[-1].strip()
     
@@ -462,77 +486,98 @@ def extract_proof_tactics(output: str) -> str:
     if output.startswith("<think>") and "</think>" not in output:
         return "sorry"
     
-    # Remove markdown code blocks if present
+    # Remove markdown code blocks if present - extract the code inside
     if "```" in output:
         code_pattern = r"```(?:lean4?|lean)?\n?(.*?)```"
         matches = re.findall(code_pattern, output, re.DOTALL)
         if matches:
-            output = matches[0].strip()
-        else:
-            parts = output.split("```")
-            for part in parts:
-                if part.startswith("lean") or part.startswith("lean4"):
-                    part = "\n".join(part.split("\n")[1:])
-                part = part.strip()
-                if part and not part.startswith("import") and "theorem" not in part[:50]:
-                    output = part
-                    break
+            # Take the last code block (usually the actual proof)
+            output = matches[-1].strip()
     
-    # Remove leading "by" if present
-    output = output.strip()
-    if output.lower().startswith("by"):
+    # If output contains ":= by", extract everything after the LAST ":= by"
+    # This handles cases where model outputs full theorem
+    if ":= by" in output:
+        # Find the last occurrence of ":= by"
+        last_by_idx = output.rfind(":= by")
+        output = output[last_by_idx + 5:].strip()  # +5 for ":= by"
+    elif " by\n" in output or " by " in output:
+        # Handle "... by\n  tactics" format
+        by_match = re.search(r'\bby\s*\n', output)
+        if by_match:
+            output = output[by_match.end():].strip()
+    
+    # Remove leading "by" if present (standalone)
+    if output.lower().startswith("by\n") or output.lower().startswith("by "):
         output = output[2:].strip()
+    elif output.lower() == "by":
+        return "sorry"
     
-    # Convert comma-separated tactics to newline-separated (Lean 3 -> Lean 4)
-    lines = []
-    current_line = ""
-    bracket_depth = 0
+    # Split into lines and filter out non-tactic lines
+    lines = output.split('\n')
     
-    for char in output:
-        if char in '([{':
-            bracket_depth += 1
-            current_line += char
-        elif char in ')]}':
-            bracket_depth -= 1
-            current_line += char
-        elif char == ',' and bracket_depth == 0:
-            current_line = current_line.strip()
-            if current_line:
-                lines.append(current_line)
-            current_line = ""
-        elif char == '\n':
-            current_line = current_line.strip()
-            if current_line:
-                lines.append(current_line)
-            current_line = ""
-        else:
-            current_line += char
+    # Lines to skip (not actual tactics)
+    skip_patterns = [
+        r'^import\s',           # import statements
+        r'^open\s',             # open statements  
+        r'^set_option\s',       # set_option directives
+        r'^theorem\s',          # theorem declarations
+        r'^lemma\s',            # lemma declarations
+        r'^def\s',              # def declarations
+        r'^/--',                # docstrings
+        r'^--',                 # comments
+        r'^\s*#',               # Lean commands like #check
+        r'^namespace\s',        # namespace
+        r'^section\s',          # section
+        r'^variable\s',         # variable declarations
+        r'^\(h[₀-₉]*\s*:',      # hypothesis declarations like (h₀ : ...)
+        r'^where\s',            # where clauses
+    ]
     
-    current_line = current_line.strip()
-    if current_line:
-        lines.append(current_line)
-    
-    # Clean up lines
     cleaned_lines = []
     for line in lines:
-        line = line.strip()
-        if not cleaned_lines and not line:
+        line_stripped = line.strip()
+        
+        # Skip empty lines at the beginning
+        if not cleaned_lines and not line_stripped:
             continue
-        if line.startswith("theorem") or line.startswith("import"):
+        
+        # Skip lines matching skip patterns
+        should_skip = False
+        for pattern in skip_patterns:
+            if re.match(pattern, line_stripped):
+                should_skip = True
+                break
+        
+        if should_skip:
             continue
-        if line.startswith("This") or line.startswith("The "):
+        
+        # Skip lines that look like theorem signatures (contain ": ... :=")
+        if re.match(r'.*:\s*\w+.*:=', line_stripped):
             continue
-        if line.endswith(','):
-            line = line[:-1].strip()
-        if line:
-            cleaned_lines.append(line)
+        
+        # Skip docstring content (lines starting with description text)
+        if line_stripped.startswith("The ") or line_stripped.startswith("This "):
+            continue
+        if line_stripped.startswith("where ") or line_stripped.startswith("Show that"):
+            continue
+            
+        # Remove trailing comma if present
+        if line_stripped.endswith(','):
+            line_stripped = line_stripped[:-1].strip()
+        
+        if line_stripped:
+            cleaned_lines.append(line_stripped)
     
-    output = "\n".join(cleaned_lines).strip()
+    # Stop at double newline (often separates proof from explanation)
+    result = "\n".join(cleaned_lines).strip()
+    if "\n\n" in result:
+        result = result.split("\n\n")[0].strip()
     
-    if "\n\n" in output:
-        output = output.split("\n\n")[0].strip()
+    # If we still have nothing useful, return sorry
+    if not result or result.lower() in ["by", "sorry", ""]:
+        return "sorry"
     
-    return output if output else "sorry"
+    return result
 
 
 def create_full_lean_code(theorem_code: str, proof_tactics: str) -> str:
@@ -679,18 +724,25 @@ You are an expert in mathematics and proving theorems in Lean 4.
     def create_feedback_prompt(
         self,
         theorem: dict,
-        feedback: str,
-        failed_proof: str,
+        feedback: str = "",
+        failed_proof: str = "",
+        feedback_history: list[tuple[str, str]] | None = None,
     ) -> str:
         """
         Create prompt WITH feedback.
         Used for: π(y|x,f) in SDPO formula (denominator)
         
-        Same model, but prompt includes error message and failed proof.
+        Same model, but prompt includes error message(s) and optionally failed proof(s).
+        If feedback_history is provided, all entries are appended (accumulated feedback).
+        Otherwise feedback/failed_proof are used as a single block (backward compatible).
+        When feedback_include_failed_proof is False, only error messages are included.
         """
         lean4_code = theorem.get("lean4_code", theorem.get("formal_statement", ""))
         informal = theorem.get("informal_prefix", "")
-        
+        include_proof = self.config.feedback_include_failed_proof
+        template_full = self.config.feedback_template
+        template_errors = self.config.feedback_template_errors_only
+
         user_content = "Think about and solve the following problem step by step in Lean 4."
         
         if informal:
@@ -698,11 +750,22 @@ You are an expert in mathematics and proving theorems in Lean 4.
         
         user_content += f"\n# Formal statement:\n```lean4\n{lean4_code}\n```\n"
         
-        # Add feedback (error + failed proof)
-        user_content += self.config.feedback_template.format(
-            feedback=feedback,
-            failed_proof=failed_proof
-        )
+        # Add feedback block(s): either accumulated history or single (feedback, failed_proof)
+        if feedback_history:
+            blocks = [
+                template_full.format(feedback=f, failed_proof=p) if include_proof
+                else template_errors.format(feedback=f)
+                for f, p in feedback_history
+            ]
+            user_content += self.config.feedback_separator.join(blocks)
+        else:
+            if include_proof:
+                user_content += template_full.format(
+                    feedback=feedback,
+                    failed_proof=failed_proof
+                )
+            else:
+                user_content += template_errors.format(feedback=feedback)
         
         if self.config.use_chat_template and hasattr(self.tokenizer, 'apply_chat_template'):
             messages = [
@@ -757,7 +820,8 @@ You are an expert in mathematics and proving theorems in Lean 4.
         )
         
         # Get generated token ids (excluding prompt)
-        generated_ids = outputs.sequences[0, inputs.input_ids.shape[1]:]
+        prompt_len = inputs["input_ids"].shape[1]
+        generated_ids = outputs.sequences[0, prompt_len:]
         
         # Decode to text
         generated_text = self.tokenizer.decode(
@@ -767,134 +831,144 @@ You are an expert in mathematics and proving theorems in Lean 4.
         
         return generated_text, generated_ids
     
-    def compute_sdpo_reward(
+    @staticmethod
+    def _add_tail(log_probs: torch.Tensor) -> torch.Tensor:
+        """Append a tail bucket: log(1 - sum(exp(log_probs))).
+
+        Matches SDPO repo core_algos.compute_self_distillation_loss.add_tail.
+        """
+        log_s = torch.logsumexp(log_probs, dim=-1, keepdim=True)
+        log_s = torch.clamp(log_s, max=-1e-7)
+        tail_log = torch.log(-torch.expm1(log_s))
+        return torch.cat([log_probs, tail_log], dim=-1)
+
+    def compute_sdpo_loss(
         self,
         base_prompt: str,
         feedback_prompt: str,
-        generated_response: str,
-    ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+        generated_ids: torch.Tensor,
+    ) -> tuple[torch.Tensor, float, float]:
         """
-        Compute SDPO reward: log π(y|x) - log π(y|x,f) for each token.
-        
-        SDPO Formula (Proposition 2.1):
-        reward_t = log π_θ(y_t | x, y_{<t}) - log π_θ(y_t | x, f, y_{<t})
-        
+        Compute SDPO loss via top-K + tail KL divergence (paper Eq. 11).
+
+        L_SDPO(θ) = Σ_t KL(π_θ(·|x,y_{<t}) ‖ stopgrad(q_θ(·|x,f,y_{<t})))
+
+        Approximated as:
+          Σ_t [ Σ_{ŷ ∈ topK(π)} π(ŷ) log(π(ŷ)/sg(q(ŷ)))
+                + p_tail · log(p_tail / sg(q_tail)) ]
+
+        Implementation follows SDPO repo (dp_actor + core_algos):
+        - Never materializes full (seq_len, vocab_size) log_softmax.
+        - Computes logsumexp once, then topk_logits - logsumexp for top-K
+          log probs.  Teacher reuses student's top-K indices.
+
         Args:
             base_prompt: Prompt WITHOUT feedback (x)
             feedback_prompt: Prompt WITH feedback (x, f)
-            generated_response: The generated proof y
-            
+            generated_ids: Token IDs from generation (reused for both passes)
+
         Returns:
-            tuple: (per_token_rewards, base_log_probs, total_reward)
-            
-        Intuition:
-        - If π(y|x) >> π(y|x,f): positive reward (proof is good without feedback)
-        - If π(y|x) << π(y|x,f): negative reward (proof needs feedback to improve)
+            (per_token_kl, total_reward_scalar, avg_kl_scalar)
         """
         model_device = next(self.model.parameters()).device
-        
-        # Tokenize base prompt + response (for numerator: π(y|x))
-        base_full = base_prompt + generated_response
-        base_inputs = self.tokenizer(
-            base_full,
-            return_tensors="pt",
-            truncation=True,
-            max_length=2048,
-        ).to(model_device)
-        
-        base_prompt_len = self.tokenizer(
-            base_prompt,
-            return_tensors="pt",
-            truncation=True,
-            max_length=2048,
-        ).input_ids.shape[1]
-        
-        # Tokenize feedback prompt + response (for denominator: π(y|x,f))
-        feedback_full = feedback_prompt + generated_response
-        feedback_inputs = self.tokenizer(
-            feedback_full,
-            return_tensors="pt",
-            truncation=True,
-            max_length=2048,
-        ).to(model_device)
-        
-        feedback_prompt_len = self.tokenizer(
-            feedback_prompt,
-            return_tensors="pt",
-            truncation=True,
-            max_length=2048,
-        ).input_ids.shape[1]
-        
-        # Get response token ids
-        response_ids = self.tokenizer(
-            generated_response,
-            return_tensors="pt",
-            truncation=True,
-            max_length=2048,
-        ).input_ids[0].to(model_device)
-        
-        # Forward pass for base prompt (with gradients for policy update)
-        base_outputs = self.model(**base_inputs)
-        base_logits = base_outputs.logits[:, base_prompt_len-1:-1, :]
-        base_log_probs = F.log_softmax(base_logits, dim=-1)
-        
-        # Forward pass for feedback prompt (no gradients needed for reward)
+        K = self.config.distillation_topk
+
+        # --- Tokenize prompts separately, concat with same generated_ids ---
+        base_prompt_ids = self.tokenizer(
+            base_prompt, return_tensors="pt", truncation=True, max_length=2048,
+        ).input_ids.to(model_device)
+        feedback_prompt_ids = self.tokenizer(
+            feedback_prompt, return_tensors="pt", truncation=True, max_length=2048,
+        ).input_ids.to(model_device)
+
+        response_ids = generated_ids.to(model_device)
+        if response_ids.dim() == 1:
+            response_ids = response_ids.unsqueeze(0)
+
+        base_input_ids = torch.cat([base_prompt_ids, response_ids], dim=1)
+        feedback_input_ids = torch.cat([feedback_prompt_ids, response_ids], dim=1)
+
+        base_prompt_len = base_prompt_ids.shape[1]
+        feedback_prompt_len = feedback_prompt_ids.shape[1]
+        seq_len = response_ids.shape[1]
+
+        # --- Student forward (with gradients) ---
+        # Logits at positions [prompt_len-1 .. prompt_len-1+seq_len) predict
+        # the response tokens.
+        student_logits = self.model(
+            input_ids=base_input_ids,
+        ).logits[0, base_prompt_len - 1 : base_prompt_len - 1 + seq_len]
+        # (seq_len, vocab_size)
+
+        # Top-K from student — avoids full log_softmax (repo pattern:
+        # dp_actor.py lines 530-535).
+        K_actual = min(K, student_logits.size(-1))
+        student_topk_logits, topk_indices = torch.topk(
+            student_logits, K_actual, dim=-1,
+        )  # (seq_len, K)
+        student_logsumexp = torch.logsumexp(
+            student_logits, dim=-1, keepdim=True,
+        )  # (seq_len, 1)
+        student_topk_logps = student_topk_logits - student_logsumexp  # (seq_len, K)
+
+        # --- Teacher forward (no gradients) ---
         with torch.no_grad():
-            feedback_outputs = self.model(**feedback_inputs)
-            feedback_logits = feedback_outputs.logits[:, feedback_prompt_len-1:-1, :]
-            feedback_log_probs = F.log_softmax(feedback_logits, dim=-1)
-        
-        # Align sequence lengths
-        seq_len = min(base_log_probs.shape[1], feedback_log_probs.shape[1], len(response_ids))
-        
-        # Gather log probs for actual generated tokens
-        # log π(y_t | x, y_{<t})
-        base_token_log_probs = base_log_probs[0, :seq_len, :].gather(
-            1, response_ids[:seq_len].unsqueeze(1)
-        ).squeeze(1)
-        
-        # log π(y_t | x, f, y_{<t})
-        feedback_token_log_probs = feedback_log_probs[0, :seq_len, :].gather(
-            1, response_ids[:seq_len].unsqueeze(1)
-        ).squeeze(1)
-        
-        # SDPO reward per token: log π(y|x) - log π(y|x,f)
-        per_token_rewards = base_token_log_probs - feedback_token_log_probs.detach()
-        
-        # Total reward (sum over tokens)
-        total_reward = per_token_rewards.sum()
-        
-        return per_token_rewards, base_token_log_probs, total_reward
+            teacher_logits = self.model(
+                input_ids=feedback_input_ids,
+            ).logits[0, feedback_prompt_len - 1 : feedback_prompt_len - 1 + seq_len]
+
+            # Gather teacher logits at student's top-K indices (repo pattern:
+            # dp_actor.py line 533).
+            teacher_topk_logits = torch.gather(
+                teacher_logits, dim=-1, index=topk_indices,
+            )
+            teacher_logsumexp = torch.logsumexp(
+                teacher_logits, dim=-1, keepdim=True,
+            )
+            teacher_topk_logps = teacher_topk_logits - teacher_logsumexp  # (seq_len, K)
+
+        # --- Add tail bucket (Eq. 11 tail term) ---
+        student_with_tail = self._add_tail(student_topk_logps)   # (seq_len, K+1)
+        teacher_with_tail = self._add_tail(teacher_topk_logps)   # (seq_len, K+1)
+
+        # --- Reverse KL: KL(π_θ ‖ stopgrad(q_θ)) ---
+        # F.kl_div(input, target, log_target=True) = exp(target)*(target - input)
+        # so input=teacher (stopgraded), target=student → KL(student ‖ teacher)
+        kl_per_bucket = F.kl_div(
+            teacher_with_tail.detach(),
+            student_with_tail,
+            reduction="none",
+            log_target=True,
+        )  # (seq_len, K+1)
+        per_token_kl = kl_per_bucket.sum(dim=-1)  # (seq_len,)
+
+        # Scalar metrics for logging
+        with torch.no_grad():
+            target_ids = response_ids[0]
+            student_lp = -F.cross_entropy(student_logits.detach(), target_ids, reduction="none")
+            teacher_lp = -F.cross_entropy(teacher_logits, target_ids, reduction="none")
+            total_reward = (student_lp - teacher_lp).sum().item()
+            avg_kl = per_token_kl.mean().item()
+
+        return per_token_kl, total_reward, avg_kl
     
-    def rl_update(
-        self,
-        per_token_rewards: torch.Tensor,
-        base_log_probs: torch.Tensor,
-    ):
+    def rl_update(self, per_token_kl: torch.Tensor) -> float:
         """
-        Perform SDPO policy gradient update.
-        
-        SDPO Loss (from Proposition 2.1):
-        L = -Σ_t reward_t · log π_θ(y_t | x, y_{<t})
-        
-        Where reward_t = log π(y_t|x) - log π(y_t|x,f)
-        
-        This encourages the model to generate proofs that are already good
-        without needing feedback correction.
+        Perform SDPO update using top-K + tail KL loss (Eq. 11).
+
+        L = (1/T) Σ_t KL(π_θ(·|x,y_{<t}) ‖ stopgrad(q_θ(·|x,f,y_{<t})))
+
+        The KL already carries correct gradients through the student
+        distribution; no REINFORCE-style reward weighting needed.
         """
-        # SDPO policy gradient: weight each token's log prob by its reward
-        # loss = -Σ_t reward_t · log π(y_t | x, y_{<t})
-        policy_loss = -(per_token_rewards.detach() * base_log_probs).sum()
-        
+        loss = per_token_kl.mean()
+
         self.optimizer.zero_grad()
-        policy_loss.backward()
-        
-        # Gradient clipping for stability
+        loss.backward()
         torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
-        
         self.optimizer.step()
-        
-        return policy_loss.item()
+
+        return loss.item()
     
     def solve_theorem(self, theorem: dict) -> dict:
         """
@@ -922,24 +996,39 @@ You are an expert in mathematics and proving theorems in Lean 4.
         lean4_code = theorem.get("lean4_code", theorem.get("formal_statement", ""))
         best_proof = None
         iteration_results = []
+        feedback_history: list[tuple[str, str]] = []  # Accumulate (feedback, failed_proof) across iterations
         
         for iteration in range(self.config.max_iterations):
             self.metrics.logger.info(f"\n--- Iteration {iteration + 1}/{self.config.max_iterations} ---")
             
             # Step 1: Generate ONE proof with base prompt (no feedback)
             base_prompt = self.create_base_prompt(theorem)
+            self.metrics.logger.info(f"  Generating proof...")
             raw_output, generated_ids = self.generate_proof(base_prompt)
+            
+            # Print raw model output for debugging
+            self.metrics.logger.info(f"  [RAW OUTPUT] ({len(raw_output)} chars):")
+            self.metrics.logger.info(f"  {raw_output[:500]}{'...' if len(raw_output) > 500 else ''}")
             
             # Extract tactics and create full Lean code
             tactics = extract_proof_tactics(raw_output)
             full_code = create_full_lean_code(lean4_code, tactics)
             
+            # Print extracted tactics and full code
+            self.metrics.logger.info(f"  [EXTRACTED TACTICS]:")
+            self.metrics.logger.info(f"  {tactics[:300]}{'...' if len(tactics) > 300 else ''}")
+            self.metrics.logger.info(f"  [FULL LEAN CODE]:")
+            for line in full_code.split('\n')[:20]:
+                self.metrics.logger.info(f"    {line}")
+            if full_code.count('\n') > 20:
+                self.metrics.logger.info(f"    ... ({full_code.count(chr(10)) - 20} more lines)")
+            
             # Step 2: Verify with Lean compiler
+            self.metrics.logger.info(f"  Verifying with Lean compiler...")
             result = self.verifier.verify(full_code)
             is_success = result["success"] and result["complete"]
             
-            self.metrics.logger.info(f"  Generated proof: {tactics[:100]}...")
-            self.metrics.logger.info(f"  Verification: {'SUCCESS' if is_success else 'FAILED'}")
+            self.metrics.logger.info(f"  [VERIFICATION RESULT]: {'SUCCESS' if is_success else 'FAILED'}")
             
             # Step 3: If correct, terminate
             if is_success:
@@ -968,56 +1057,54 @@ You are an expert in mathematics and proving theorems in Lean 4.
                 })
                 break
             
-            # Step 4: Extract error message
+            # Step 4: Extract error message and add to accumulated feedback
             feedback = result["feedback"]
             if not feedback:
                 feedback = "Proof verification failed (no specific error message)"
             
             self.metrics.logger.info(f"  Error: {feedback[:200]}...")
             
-            # Step 5: Create feedback prompt (with error + failed proof)
+            feedback_history.append((feedback, tactics))
+            
+            # Step 5: Create feedback prompt (with all accumulated errors + failed proofs)
             feedback_prompt = self.create_feedback_prompt(
                 theorem,
-                feedback=feedback,
-                failed_proof=tactics,
+                feedback_history=feedback_history,
             )
             
-            # Step 6: Compute SDPO reward: log π(y|x) - log π(y|x,f)
-            per_token_rewards, base_log_probs, total_reward = self.compute_sdpo_reward(
+            # Step 6: Compute SDPO loss via top-K + tail KL (Eq. 11)
+            per_token_kl, reward_value, avg_kl = self.compute_sdpo_loss(
                 base_prompt=base_prompt,
                 feedback_prompt=feedback_prompt,
-                generated_response=raw_output,
+                generated_ids=generated_ids,
             )
-            
-            reward_value = total_reward.item()
-            avg_token_reward = per_token_rewards.mean().item()
-            
+
             self.metrics.logger.info(f"  SDPO reward (total): {reward_value:.4f}")
-            self.metrics.logger.info(f"  SDPO reward (avg/token): {avg_token_reward:.4f}")
-            
-            # Step 7: RL update using SDPO gradient
-            loss = self.rl_update(per_token_rewards, base_log_probs)
+            self.metrics.logger.info(f"  SDPO KL (avg/token): {avg_kl:.4f}")
+
+            # Step 7: RL update using top-K + tail KL gradient
+            loss = self.rl_update(per_token_kl)
             self.metrics.logger.info(f"  SDPO loss: {loss:.4f}")
-            
+
             # Log metrics
             self.metrics.log_sample(
                 problem_id=problem_id,
                 iteration=iteration + 1,
                 sample_idx=0,
                 reward=reward_value,
-                kl_div=avg_token_reward,  # Using avg token reward as proxy
+                kl_div=avg_kl,
                 success=False,
                 proof=tactics,
                 feedback=feedback,
             )
-            
+
             iteration_results.append({
                 "iteration": iteration + 1,
                 "proof": tactics,
                 "success": False,
                 "feedback": feedback,
                 "reward": reward_value,
-                "avg_token_reward": avg_token_reward,
+                "avg_kl": avg_kl,
                 "loss": loss,
             })
         
@@ -1103,6 +1190,8 @@ Examples:
                         help="Directory for logs and plots (default: logs/sdpo_runs)")
     parser.add_argument("--temperature", type=float, default=0.7,
                         help="Sampling temperature (default: 0.7)")
+    parser.add_argument("--feedback_errors_only", action="store_true",
+                        help="Feedback mode: only pass past error messages (no failed proof text). Default: pass both errors and failed proofs.")
     args = parser.parse_args()
     
     # Create config
@@ -1113,6 +1202,7 @@ Examples:
         learning_rate=args.learning_rate,
         temperature=args.temperature,
         log_dir=args.log_dir,
+        feedback_include_failed_proof=not args.feedback_errors_only,
     )
     
     # Initialize metrics tracker
@@ -1127,6 +1217,7 @@ Examples:
     metrics.logger.info(f"Learning rate: {config.learning_rate}")
     metrics.logger.info(f"Temperature: {config.temperature}")
     metrics.logger.info(f"Kimina URL: {config.kimina_server_url}")
+    metrics.logger.info(f"Feedback mode: {'errors only' if not config.feedback_include_failed_proof else 'errors + failed proofs'}")
     metrics.logger.info(f"Log directory: {metrics.run_dir}")
     metrics.logger.info("="*60)
     
