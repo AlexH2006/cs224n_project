@@ -406,7 +406,7 @@ try:
             os.environ["HUGGING_FACE_HUB_TOKEN"] = os.environ["HF_TOKEN"]
         
         import torch
-        from transformers import AutoModelForCausalLM, AutoTokenizer
+        from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
         from vllm import LLM
         
         print(f"Loading model: {trainer_self.model_name}...")
@@ -434,12 +434,28 @@ try:
         print("vLLM engine initialized!")
         
         # HuggingFace model for training (gradient computation)
-        trainer_self.model = AutoModelForCausalLM.from_pretrained(
-            trainer_self.model_name,
-            torch_dtype=trainer_self.dtype,
-            device_map="auto",
-            trust_remote_code=True,
-        )
+        # For large models (7B+), use 8-bit quantization to save memory
+        is_large_model = "8B" in trainer_self.model_name or "7B" in trainer_self.model_name
+        
+        if is_large_model:
+            print("Loading HuggingFace model with 8-bit quantization for memory efficiency...")
+            quantization_config = BitsAndBytesConfig(
+                load_in_8bit=True,
+                llm_int8_enable_fp32_cpu_offload=False,
+            )
+            trainer_self.model = AutoModelForCausalLM.from_pretrained(
+                trainer_self.model_name,
+                quantization_config=quantization_config,
+                device_map="auto",
+                trust_remote_code=True,
+            )
+        else:
+            trainer_self.model = AutoModelForCausalLM.from_pretrained(
+                trainer_self.model_name,
+                torch_dtype=trainer_self.dtype,
+                device_map="auto",
+                trust_remote_code=True,
+            )
         trainer_self.model.train()
         
         # Enable gradient checkpointing to reduce memory usage

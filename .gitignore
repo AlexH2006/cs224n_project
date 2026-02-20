@@ -20,6 +20,7 @@ build/
 # IDE / OS
 .idea/
 .vscode/
+.cursor
 .cursor/
 .DS_Store
 *.swp
