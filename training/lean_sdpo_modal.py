@@ -161,6 +161,8 @@ try:
             "datasets",
             "matplotlib",
             "httpx",
+            "bitsandbytes",  # For 8-bit quantization of large models
+            "peft",  # For LoRA training with quantized models
         )
     )
     
@@ -434,14 +436,19 @@ try:
         print("vLLM engine initialized!")
         
         # HuggingFace model for training (gradient computation)
-        # For large models (7B+), use 8-bit quantization to save memory
-        is_large_model = "8B" in trainer_self.model_name or "7B" in trainer_self.model_name
+        # For large models (7B+), use 4-bit quantization + LoRA for trainable gradients
+        # Check for models >= 7B (but not 1.7B which contains "7B" substring)
+        is_large_model = ("8B" in trainer_self.model_name or "7B" in trainer_self.model_name) and "1.7B" not in trainer_self.model_name
         
         if is_large_model:
-            print("Loading HuggingFace model with 8-bit quantization for memory efficiency...")
+            from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
+            
+            print("Loading HuggingFace model with 4-bit quantization + LoRA for training...")
             quantization_config = BitsAndBytesConfig(
-                load_in_8bit=True,
-                llm_int8_enable_fp32_cpu_offload=False,
+                load_in_4bit=True,
+                bnb_4bit_compute_dtype=torch.bfloat16,
+                bnb_4bit_use_double_quant=True,
+                bnb_4bit_quant_type="nf4",
             )
             trainer_self.model = AutoModelForCausalLM.from_pretrained(
                 trainer_self.model_name,
@@ -449,6 +456,21 @@ try:
                 device_map="auto",
                 trust_remote_code=True,
             )
+            
+            # Prepare model for k-bit training
+            trainer_self.model = prepare_model_for_kbit_training(trainer_self.model)
+            
+            # Add LoRA adapters for training
+            lora_config = LoraConfig(
+                r=16,  # LoRA rank
+                lora_alpha=32,
+                target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"],
+                lora_dropout=0.05,
+                bias="none",
+                task_type="CAUSAL_LM",
+            )
+            trainer_self.model = get_peft_model(trainer_self.model, lora_config)
+            trainer_self.model.print_trainable_parameters()
         else:
             trainer_self.model = AutoModelForCausalLM.from_pretrained(
                 trainer_self.model_name,
@@ -1341,462 +1363,20 @@ try:
             return str(model_save_dir)
 
     # ========================================================================
-    # SDPO Training Service (GPU) - A100-80GB (for 7-8B models)
+    # NOTE: A100-80GB class removed to avoid unnecessary GPU allocation
     # ========================================================================
-    
-    @app.cls(
-        image=inference_image,
-        gpu="A100-80GB",
-        timeout=3600,
-        scaledown_window=600,
-        volumes={"/cache": hf_cache_volume, "/output": output_volume},
-        secrets=[modal.Secret.from_name("huggingface")],
-    )
-    class SDPOTrainerA100_80GB:
-        """SDPO trainer running on Modal GPU (A100-80GB for 7-8B models).
-        
-        This class has identical methods to SDPOTrainer but with different GPU/memory settings.
-        """
-        
-        model_name: str = modal.parameter(default="Goedel-LM/Goedel-Prover-V2-8B")
-        
-        @modal.enter()
-        def setup(self):
-            # Reduced vLLM memory to 0.30 to leave room for HF model optimizer states
-            _setup_trainer(self, gpu_memory_utilization=0.30, max_model_len=4096, gpu_name="A100-80GB")
-        
-        @staticmethod
-        def _get_field(data: dict, field_names: list, default: str = "") -> str:
-            for field_name in field_names:
-                if field_name in data and data[field_name]:
-                    value = data[field_name]
-                    if isinstance(value, str):
-                        return value
-                    elif isinstance(value, (list, tuple)) and len(value) > 0:
-                        return str(value[0])
-            return default
-        
-        @modal.method()
-        def run_sdpo(self, config_dict: dict, problem: dict) -> dict:
-            import torch
-            import torch.nn.functional as F
-            from datetime import datetime
-            
-            config = SDPOConfig(**config_dict)
-            
-            metrics = {
-                "iterations": [], "losses": [], "rewards": [],
-                "kl_divs": [], "entropies": [], "grad_norms": [], "timestamps": [],
-            }
-            
-            logs = {
-                "problem": problem, "config": config_dict,
-                "iteration_logs": [], "start_time": datetime.now().isoformat(),
-            }
-            
-            optimizer = torch.optim.AdamW(self.model.parameters(), lr=config.learning_rate)
-            feedback_history: list[tuple[str, str]] = []
-            best_proof = None
-            base_prompt = self._create_base_prompt(config, problem)
-            
-            for iteration in range(config.max_iterations):
-                iter_start = time.time()
-                print(f"\n--- Iteration {iteration + 1}/{config.max_iterations} ---")
-                
-                raw_output, generated_ids = self._generate_proof(config, base_prompt)
-                print(f"  Generated {len(raw_output)} chars")
-                
-                is_degenerate = self._is_degenerate_output(raw_output)
-                is_truncated = "<think>" in raw_output and "</think>" not in raw_output
-                
-                tactics = self._extract_proof_tactics(raw_output)
-                lean4_code = self._get_field(problem, config.theorem_fields)
-                header = self._get_field(problem, config.header_fields)
-                full_code = self._create_full_lean_code(config, lean4_code, tactics, header)
-                
-                max_verify_retries = 3
-                verification = None
-                for verify_attempt in range(max_verify_retries):
-                    verification = LeanVerifier().verify.remote(full_code)
-                    if not verification.get("is_server_error", False):
-                        break
-                    if verify_attempt < max_verify_retries - 1:
-                        print(f"  Server error, retrying ({verify_attempt + 1}/{max_verify_retries})...")
-                        time.sleep(5)
-                
-                is_success = verification["success"] and verification["complete"]
-                is_server_error = verification.get("is_server_error", False)
-                is_sorry_tactic = tactics.strip().lower() == "sorry"
-                
-                if is_sorry_tactic:
-                    is_success = False
-                    verification["complete"] = False
-                    verification["has_sorry"] = True
-                    if is_degenerate:
-                        verification["feedback"] = "Output got stuck in a reasoning loop."
-                        verification["is_degenerate"] = True
-                    elif is_truncated:
-                        verification["feedback"] = "Output was truncated before completing."
-                        verification["is_truncated"] = True
-                    else:
-                        verification["feedback"] = "No valid proof tactics found."
-                
-                if is_server_error:
-                    print(f"  Verification: SERVER ERROR")
-                elif is_degenerate:
-                    print(f"  Verification: FAILED (reasoning loop)")
-                elif is_truncated:
-                    print(f"  Verification: FAILED (truncated)")
-                elif is_sorry_tactic:
-                    print(f"  Verification: FAILED (no tactics)")
-                else:
-                    print(f"  Verification: {'SUCCESS' if is_success else 'FAILED'}")
-                
-                current_teacher_prompt = self._create_feedback_prompt(config, problem, feedback_history) if feedback_history else None
-                
-                iter_log = {
-                    "iteration": iteration + 1,
-                    "student_prompt": base_prompt,
-                    "teacher_prompt": current_teacher_prompt,
-                    "raw_output": raw_output,
-                    "extracted_tactics": tactics,
-                    "full_code": full_code,
-                    "verification": verification,
-                    "success": is_success,
-                }
-                
-                if is_success:
-                    best_proof = tactics
-                    iter_log.update({"loss": None, "reward": None, "kl_div": None, "entropy": None, "grad_norm": None})
-                    logs["iteration_logs"].append(iter_log)
-                    metrics["iterations"].append(iteration + 1)
-                    metrics["losses"].append(0.0)
-                    metrics["rewards"].append(1.0)
-                    metrics["kl_divs"].append(0.0)
-                    metrics["entropies"].append(0.0)
-                    metrics["grad_norms"].append(0.0)
-                    metrics["timestamps"].append(time.time() - iter_start)
-                    print(f"  ✓ Proof found!")
-                    break
-                
-                if is_server_error:
-                    iter_log.update({"loss": None, "reward": None, "kl_div": None, "entropy": None, "grad_norm": None, "server_error": True})
-                    logs["iteration_logs"].append(iter_log)
-                    print(f"  Skipping SDPO update due to server error")
-                    continue
-                
-                feedback = verification.get("feedback") or "Proof verification failed"
-                feedback_history.append((feedback, tactics))
-                
-                teacher_prompt = self._create_feedback_prompt(config, problem, feedback_history)
-                print(f"  SDPO: Student sees problem only, Teacher sees {len(feedback_history)} feedback(s)")
-                
-                per_token_kl, reward, avg_kl, entropy = self._compute_sdpo_loss(config, base_prompt, teacher_prompt, generated_ids)
-                
-                loss = per_token_kl.mean()
-                optimizer.zero_grad()
-                loss.backward()
-                
-                grad_norm = sum(p.grad.data.norm(2).item() ** 2 for p in self.model.parameters() if p.grad is not None) ** 0.5
-                torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
-                optimizer.step()
-                
-                loss_val = loss.item()
-                print(f"  Loss: {loss_val:.4f}, Reward: {reward:.4f}, KL: {avg_kl:.4f}")
-                print(f"  Entropy: {entropy:.4f}, Grad norm: {grad_norm:.4f}")
-                
-                iter_log["teacher_prompt"] = teacher_prompt
-                iter_log.update({"loss": loss_val, "reward": reward, "kl_div": avg_kl, "entropy": entropy, "grad_norm": grad_norm, "feedback": feedback})
-                logs["iteration_logs"].append(iter_log)
-                
-                metrics["iterations"].append(iteration + 1)
-                metrics["losses"].append(loss_val)
-                metrics["rewards"].append(reward)
-                metrics["kl_divs"].append(avg_kl)
-                metrics["entropies"].append(entropy)
-                metrics["grad_norms"].append(grad_norm)
-                metrics["timestamps"].append(time.time() - iter_start)
-            
-            logs["end_time"] = datetime.now().isoformat()
-            logs["success"] = best_proof is not None
-            logs["best_proof"] = best_proof
-            logs["metrics"] = metrics
-            
-            model_save_path = self._save_results(config, logs, metrics)
-            logs["model_save_path"] = model_save_path
-            
-            return logs
-        
-        def _create_base_prompt(self, config, theorem):
-            lean4_code = self._get_field(theorem, config.theorem_fields)
-            header = self._get_field(theorem, config.header_fields)
-            has_header = bool(header.strip())
-            
-            user_content = f"Prove the following Lean 4 theorem.\n\n```lean4\n{lean4_code}\n```\n\n"
-            user_content += "After your reasoning, output ONLY the proof tactics in a ```lean4 code block. "
-            user_content += "The tactics should replace `sorry`. "
-            if has_header:
-                user_content += "Do NOT include `import`, `theorem`, or `:= sorry` in your final answer."
-            else:
-                user_content += "Include any necessary `import` statements. Do NOT include `theorem` or `:= sorry`."
-            
-            if hasattr(self.tokenizer, 'apply_chat_template'):
-                messages = [{"role": "system", "content": config.system_prompt}, {"role": "user", "content": user_content}]
-                try:
-                    return self.tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-                except:
-                    pass
-            return f"System: {config.system_prompt}\n\nUser: {user_content}\n\nAssistant:"
-        
-        def _create_feedback_prompt(self, config, theorem, feedback_history):
-            lean4_code = self._get_field(theorem, config.theorem_fields)
-            informal = self._get_field(theorem, config.informal_fields)
-            header = self._get_field(theorem, config.header_fields)
-            has_header = bool(header.strip())
-            
-            user_content = f"Prove the following Lean 4 theorem.\n\n"
-            if informal:
-                user_content += f"Problem: {informal}\n\n"
-            user_content += f"```lean4\n{lean4_code}\n```\n\n"
-            
-            if feedback_history:
-                user_content += "Previous errors:\n"
-                blocks = [config.feedback_attempt_template_errors_only.format(feedback=f) for f, p in feedback_history]
-                user_content += config.feedback_separator.join(blocks)
-                user_content += "\n\nAvoid these errors."
-            
-            if has_header:
-                user_content += "\n\nProvide corrected proof tactics:"
-            else:
-                user_content += "\n\nProvide corrected proof tactics (include any necessary imports):"
-            
-            feedback_system_prompt = config.system_prompt + " After reasoning, output the proof tactics in a ```lean4 code block."
-            
-            if hasattr(self.tokenizer, 'apply_chat_template'):
-                messages = [{"role": "system", "content": feedback_system_prompt}, {"role": "user", "content": user_content}]
-                try:
-                    return self.tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-                except:
-                    pass
-            return f"System: {feedback_system_prompt}\n\nUser: {user_content}\n\nAssistant:"
-        
-        def _generate_proof(self, config, prompt):
-            import torch
-            from vllm import SamplingParams
-            
-            sampling_params = SamplingParams(
-                temperature=config.temperature, top_p=config.top_p,
-                max_tokens=config.max_new_tokens, stop=config.stop_tokens,
-            )
-            outputs = self.vllm_engine.generate([prompt], sampling_params)
-            raw_output = outputs[0].outputs[0].text
-            
-            output_ids = self.tokenizer(raw_output, return_tensors="pt", truncation=True, max_length=2048)["input_ids"]
-            return raw_output, output_ids.to(self.device)
-        
-        def _is_degenerate_output(self, output, threshold=5):
-            if output.count("Wait,") >= threshold:
-                return True
-            for pattern in ["the theorem statement is", "We need to prove", "Let me", "I need to"]:
-                if output.lower().count(pattern) >= threshold * 2:
-                    return True
-            words = output.split()
-            if len(words) < 30:
-                return False
-            for phrase_len in [5, 8, 10, 15, 20]:
-                if len(words) < phrase_len:
-                    continue
-                phrase_counts = {}
-                for i in range(len(words) - phrase_len):
-                    phrase = " ".join(words[i:i + phrase_len])
-                    phrase_counts[phrase] = phrase_counts.get(phrase, 0) + 1
-                if phrase_counts and max(phrase_counts.values()) >= threshold:
-                    return True
-            return False
-        
-        def _extract_tactics_from_code_block(self, block):
-            import re
-            lines = []
-            for line in block.strip().split("\n"):
-                stripped = line.strip()
-                if not stripped or stripped.startswith("--") or stripped.startswith("import ") or stripped.startswith("open "):
-                    continue
-                if stripped.startswith("theorem ") or stripped.startswith("lemma ") or stripped.startswith("example "):
-                    continue
-                if re.search(r"≠\s*\d+\s*:=", stripped) or re.search(r"[≠=<>]\s*\d+\s*:=", stripped):
-                    continue
-                if stripped.endswith(":=") or stripped.endswith(":= by"):
-                    continue
-                if re.search(r"^\d+\s*\*.*[≠=<>]", stripped) and ":=" not in stripped and "by" not in stripped.lower():
-                    continue
-                lines.append(stripped)
-            return "\n".join(lines)
-        
-        def _extract_proof_tactics(self, output):
-            import re
-            output = output.strip()
-            
-            if self._is_degenerate_output(output):
-                print("  WARNING: Detected degenerate/looping output")
-                return "sorry"
-            
-            tactics = None
-            
-            if "</think>" in output:
-                after_think = output.split("</think>")[-1].strip()
-                if after_think:
-                    code_pattern = r"```(?:lean4?|lean|tactics)?\n?(.*?)```"
-                    matches = re.findall(code_pattern, after_think, re.DOTALL)
-                    if matches:
-                        for match in matches:
-                            extracted = self._extract_tactics_from_code_block(match)
-                            if extracted and extracted.lower() not in ["sorry", "by"]:
-                                tactics = extracted
-                                break
-                    if not tactics:
-                        extracted = self._extract_tactics_from_code_block(after_think)
-                        if extracted and extracted.lower() not in ["sorry", "by"]:
-                            tactics = extracted
-            
-            if not tactics and "<think>" in output:
-                think_match = re.search(r"<think>(.*?)(?:</think>|$)", output, re.DOTALL)
-                if think_match:
-                    think_content = think_match.group(1)
-                    code_pattern = r"```(?:lean4?|lean|tactics)?\n?(.*?)```"
-                    matches = re.findall(code_pattern, think_content, re.DOTALL)
-                    if matches:
-                        all_tactics = []
-                        for match in matches:
-                            extracted = self._extract_tactics_from_code_block(match)
-                            if extracted and extracted.lower() not in ["sorry", "by"]:
-                                all_tactics.append(extracted)
-                        if all_tactics:
-                            tactics = "\n".join(all_tactics)
-            
-            if not tactics:
-                code_pattern = r"```(?:lean4?|lean|tactics)?\n?(.*?)```"
-                matches = re.findall(code_pattern, output, re.DOTALL)
-                if matches:
-                    for match in matches:
-                        extracted = self._extract_tactics_from_code_block(match)
-                        if extracted and extracted.lower() not in ["sorry", "by"]:
-                            tactics = extracted
-                            break
-            
-            if not tactics and ":= by" in output:
-                by_idx = output.rfind(":= by")
-                after_by = output[by_idx + 5:].strip()
-                if after_by:
-                    lines = []
-                    for line in after_by.split("\n"):
-                        stripped = line.strip()
-                        if not stripped or stripped.startswith("--"):
-                            continue
-                        if stripped.startswith("```") or stripped.startswith("theorem"):
-                            break
-                        lines.append(stripped)
-                    if lines:
-                        tactics = "\n".join(lines)
-            
-            return tactics if tactics else "sorry"
-        
-        def _create_full_lean_code(self, config, lean4_code, tactics, header):
-            import re
-            dataset_header = header.strip() if header else ""
-            
-            model_imports = []
-            model_tactics = tactics
-            
-            tactic_lines = tactics.strip().split("\n")
-            import_lines = []
-            other_lines = []
-            for line in tactic_lines:
-                stripped = line.strip()
-                if stripped.startswith("import ") or stripped.startswith("open ") or stripped.startswith("set_option "):
-                    import_lines.append(stripped)
-                else:
-                    other_lines.append(line)
-            
-            if import_lines:
-                model_imports = import_lines
-                model_tactics = "\n".join(other_lines)
-            
-            if dataset_header:
-                final_header = dataset_header
-            elif model_imports:
-                final_header = "\n".join(model_imports)
-            else:
-                final_header = config.default_header
-            
-            theorem_match = re.search(r"(theorem|lemma|example)\s+\w+[^:]*:\s*[^:]+:=\s*by\s*sorry", lean4_code, re.DOTALL)
-            if theorem_match:
-                full_code = lean4_code.replace(":= by\n  sorry", f":= by\n  {model_tactics}")
-                full_code = full_code.replace(":= by sorry", f":= by\n  {model_tactics}")
-                full_code = full_code.replace(":=by\n  sorry", f":= by\n  {model_tactics}")
-                full_code = full_code.replace(":=by sorry", f":= by\n  {model_tactics}")
-            else:
-                full_code = lean4_code.replace("sorry", model_tactics)
-            
-            if final_header and not full_code.strip().startswith("import"):
-                full_code = final_header + "\n\n" + full_code
-            
-            return full_code
-        
-        def _compute_sdpo_loss(self, config, base_prompt, teacher_prompt, generated_ids):
-            import torch
-            import torch.nn.functional as F
-            
-            student_prompt_ids = self.tokenizer(base_prompt, return_tensors="pt", truncation=True, max_length=2048)["input_ids"].to(self.device)
-            teacher_prompt_ids = self.tokenizer(teacher_prompt, return_tensors="pt", truncation=True, max_length=2048)["input_ids"].to(self.device)
-            
-            response_ids = generated_ids
-            student_input_ids = torch.cat([student_prompt_ids, response_ids], dim=1)
-            teacher_input_ids = torch.cat([teacher_prompt_ids, response_ids], dim=1)
-            
-            student_prompt_len = student_prompt_ids.shape[1]
-            teacher_prompt_len = teacher_prompt_ids.shape[1]
-            seq_len = response_ids.shape[1]
-            
-            with torch.no_grad():
-                teacher_logits = self.model(teacher_input_ids).logits[0, teacher_prompt_len - 1 : teacher_prompt_len - 1 + seq_len]
-                teacher_probs = F.softmax(teacher_logits, dim=-1)
-            
-            student_logits = self.model(student_input_ids).logits[0, student_prompt_len - 1 : student_prompt_len - 1 + seq_len]
-            student_log_probs = F.log_softmax(student_logits, dim=-1)
-            
-            kl_div = F.kl_div(student_log_probs, teacher_probs, reduction='none').sum(dim=-1)
-            avg_kl = kl_div.mean().item()
-            
-            student_probs = F.softmax(student_logits, dim=-1)
-            entropy = -(student_probs * student_log_probs).sum(dim=-1).mean().item()
-            
-            reward = -avg_kl
-            
-            return kl_div, reward, avg_kl, entropy
-        
-        def _save_results(self, config, logs, metrics):
-            import json
-            from pathlib import Path
-            
-            output_dir = Path("/output") / config.output_dir
-            output_dir.mkdir(parents=True, exist_ok=True)
-            
-            problem_id = logs["problem"].get("name", logs["problem"].get("problem_id", f"problem_{config.problem_idx}"))
-            run_dir = output_dir / f"{problem_id}_{logs['start_time'].replace(':', '-')}"
-            run_dir.mkdir(parents=True, exist_ok=True)
-            
-            log_path = run_dir / "logs.json"
-            with open(log_path, "w") as f:
-                json.dump(logs, f, indent=2, default=str)
-            print(f"Logs saved to {log_path}")
-            
-            model_save_dir = run_dir / "model"
-            model_save_dir.mkdir(parents=True, exist_ok=True)
-            self.model.save_pretrained(model_save_dir)
-            self.tokenizer.save_pretrained(model_save_dir)
-            print(f"Model saved to {model_save_dir}")
-            
-            return str(model_save_dir)
+    # 
+    # Running 7-8B models (like Goedel-Prover-V2-8B) on A100-80GB currently has
+    # memory issues due to loading both vLLM and HuggingFace models simultaneously.
+    # 
+    # Known issues with 8B models:
+    # 1. OOM during optimizer.step() - vLLM + HF model + optimizer states > 80GB
+    # 2. 8-bit quantization causes NaN loss (no gradient support)
+    # 3. LoRA + 4-bit quantization is experimental
+    #
+    # For now, use the default A100-40GB configuration with 1-2B models.
+    # See docs/GPU_CONFIG_NOTES.md for details.
+    # ========================================================================
 
     # ========================================================================
     # Local Entrypoint
@@ -1864,12 +1444,12 @@ try:
             theorem_field: Override field name for theorem code (optional)
             informal_field: Override field name for informal statement (optional)
             header_field: Override field name for Lean header/imports (optional)
-            gpu: GPU configuration (A100-40GB, A100-80GB, H100). Use A100-80GB or H100 for 7-8B models.
+            gpu: GPU configuration (currently only A100-40GB is supported).
         
         GPU configurations:
             - A100-40GB (default): For 1-2B models (e.g., Kimina-Prover-RL-1.7B)
-            - A100-80GB: For 7-8B models (e.g., Goedel-Prover-V2-8B)
-            - H100: Best performance for large models
+            - A100-80GB/H100: NOT SUPPORTED - 8B models have memory issues with SDPO training
+              (see docs/GPU_CONFIG_NOTES.md for details)
         
         Supported datasets (auto-detected field names):
             - cat-searcher/minif2f-lean4 (lean4_code, header)
@@ -1879,8 +1459,7 @@ try:
         
         Supported models:
             - AI-MO/Kimina-Prover-RL-1.7B (default, thinking model)
-            - Goedel-LM/Goedel-Prover-V2-8B (use --gpu A100-80GB)
-            - Any HuggingFace causal LM with chat template support
+            - Other 1-2B models that fit in A100-40GB memory
         """
         from datasets import load_dataset
         
@@ -1984,16 +1563,17 @@ try:
             config_dict["default_header"] = default_header
         
         # Select trainer class based on GPU configuration
+        # NOTE: A100-80GB and H100 classes have been removed due to memory issues with 8B models
+        # See docs/GPU_CONFIG_NOTES.md for details
         gpu_upper = gpu.upper()
-        if gpu_upper in ["A100-80GB", "A100_80GB"]:
-            print(f"\nUsing A100-80GB GPU (for 7-8B models)")
-            trainer = SDPOTrainerA100_80GB(model_name=model)
-        elif gpu_upper in ["H100"]:
-            print(f"\nUsing H100 GPU (best performance)")
-            trainer = SDPOTrainerH100(model_name=model)
-        else:
-            print(f"\nUsing A100-40GB GPU (default, for 1-2B models)")
-            trainer = SDPOTrainer(model_name=model)
+        if gpu_upper in ["A100-80GB", "A100_80GB", "H100"]:
+            print(f"\n⚠️  WARNING: {gpu} GPU requested but not currently supported for SDPO training.")
+            print(f"    8B models have memory issues (OOM during optimizer step).")
+            print(f"    Falling back to A100-40GB with 1-2B models.")
+            print(f"    See docs/GPU_CONFIG_NOTES.md for details.\n")
+        
+        print(f"Using A100-40GB GPU (for 1-2B models)")
+        trainer = SDPOTrainer(model_name=model)
         
         print("Starting SDPO training on Modal...")
         results = trainer.run_sdpo.remote(config_dict, problem)
