@@ -20,6 +20,7 @@ build/
 # IDE / OS
 .idea/
 .vscode/
+.cursor/
 .DS_Store
 *.swp
 *~
@@ -38,11 +39,17 @@ SDPO/
 kimina-lean-server/
 
 # Project
+assets/
 collect.py
 output.txt
 *.log
 
+# Generated / run outputs
+sdpo_results/
+logs/
+results/
+eval_nl_MATH/
+
 # Large / generated (uncomment if you don't want to track)
-# results/
 # *.ckpt
 # *.safetensors

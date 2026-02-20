@@ -40,19 +40,19 @@ Make sure Kimina server is running:
 # Using Docker
 docker run -d -p 80:80 projectnumina/kimina-lean-server:2.0.0
 
-# Or from source (see kimina-lean-server/README.md)
+# Or from source (see setup/kimina-lean-server-setup or kimina-lean-server/README.md)
 ```
 
 ## Usage
 
-Basic usage:
+Basic usage (from project root):
 ```bash
-python lean_sdpo_ttt.py --n_problems 5 --n_samples 4 --max_iterations 3
+python training/lean_sdpo_ttt.py --n_problems 5 --n_samples 4 --max_iterations 3
 ```
 
 Full options:
 ```bash
-python lean_sdpo_ttt.py \
+python training/lean_sdpo_ttt.py \
     --model "Qwen/Qwen3-1.7B" \
     --dataset "Goedel-Prover-V2/dataset/minif2f.jsonl" \
     --n_problems 10 \
