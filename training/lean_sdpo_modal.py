@@ -86,7 +86,7 @@ class SDPOConfig:
         "statement", "code", "theorem", "problem_statement"
     ])
     informal_fields: list = field(default_factory=lambda: [
-        "informal_prefix", "problem", "informal_statement",
+        "informal_prefix", "informal_stmt", "problem", "informal_statement",
         "natural_language", "description", "question", "informal"
     ])
     header_fields: list = field(default_factory=lambda: [
@@ -97,12 +97,12 @@ class SDPOConfig:
     ])
     
     # Generation settings
-    max_new_tokens: int = 8192  # Increased for thinking models that need more tokens
+    max_new_tokens: int = 16384  # Increased for thinking models that need more tokens
     temperature: float = 0.6
     top_p: float = 0.95
     stop_tokens: list = field(default_factory=lambda: [
         "<|im_end|>", "<|endoftext|>", "</s>", "<|end|>", 
-        "[/INST]", "```\n\n", "<|eot_id|>"
+        "[/INST]", "<|eot_id|>"
     ])
     
     # Test-time RL settings
@@ -373,7 +373,7 @@ try:
         "A100-40GB": {
             "gpu": "A100-40GB",
             "vllm_gpu_memory_utilization": 0.25,
-            "vllm_max_model_len": 4096,
+            "vllm_max_model_len": 8192,
             "description": "Default: A100 40GB, suitable for 1-2B models",
         },
         "A100-80GB": {
@@ -506,7 +506,7 @@ try:
         
         @modal.enter()
         def setup(self):
-            _setup_trainer(self, gpu_memory_utilization=0.25, max_model_len=4096, gpu_name="A100-40GB")
+            _setup_trainer(self, gpu_memory_utilization=0.25, max_model_len=8096, gpu_name="A100-40GB")
         
         @staticmethod
         def _get_field(data: dict, field_names: list, default: str = "") -> str:
@@ -590,9 +590,6 @@ try:
                 
                 print(f"  Generated {len(raw_output)} chars")
                 
-                # Check for degenerate output (model stuck in loop)
-                is_degenerate = self._is_degenerate_output(raw_output)
-                
                 # Check for truncated output (has <think> but no </think>)
                 is_truncated = "<think>" in raw_output and "</think>" not in raw_output
                 
@@ -624,10 +621,7 @@ try:
                     verification["complete"] = False
                     verification["has_sorry"] = True
                     # Provide specific feedback based on why we got "sorry"
-                    if is_degenerate:
-                        verification["feedback"] = "Output got stuck in a reasoning loop. Focus on the proof strategy and output tactics directly without excessive deliberation."
-                        verification["is_degenerate"] = True
-                    elif is_truncated:
+                    if is_truncated:
                         verification["feedback"] = "Output was truncated before completing. Be more concise in reasoning and output the proof tactics sooner."
                         verification["is_truncated"] = True
                     else:
@@ -635,8 +629,6 @@ try:
                 
                 if is_server_error:
                     print(f"  Verification: SERVER ERROR (will not count as failed proof)")
-                elif is_degenerate:
-                    print(f"  Verification: FAILED (model stuck in reasoning loop)")
                 elif is_truncated:
                     print(f"  Verification: FAILED (output truncated, no tactics produced)")
                 elif is_sorry_tactic:
@@ -766,34 +758,25 @@ try:
         def _create_base_prompt(self, config: SDPOConfig, theorem: dict) -> str:
             """Create base prompt WITHOUT feedback (for STUDENT model).
             
-            The student prompt contains ONLY the formal theorem statement.
-            No informal description is included - the student must learn to
-            solve problems from the formal statement alone.
+            The student prompt includes both the informal problem description
+            (if available) and the formal Lean 4 statement.
             
             Uses dataset-agnostic field extraction to support various dataset formats.
             Works with thinking models that output <think>...</think> then the answer.
             """
-            # Use dataset-agnostic field extraction
             lean4_code = self._get_field(theorem, config.theorem_fields)
-            header = self._get_field(theorem, config.header_fields)
-            has_header = bool(header.strip())
+            informal = self._get_field(theorem, config.informal_fields)
             
-            # Student prompt: formal theorem only (no informal description)
-            user_content = f"Prove the following Lean 4 theorem.\n\n"
-            user_content += f"```lean4\n{lean4_code}\n```\n\n"
-            user_content += "After your reasoning, output ONLY the proof tactics (not the full theorem) in a ```lean4 code block. "
-            user_content += "The tactics should replace `sorry`. "
+            user_content = "Think about and solve the following problem step by step in Lean 4."
+            if informal:
+                user_content += f"\n# Problem:{informal}"
+            user_content += f"\n# Formal statement:\n```lean4\n{lean4_code}\n```\n"
             
-            if has_header:
-                # Dataset provides imports, so model should not include them
-                user_content += "Do NOT include `import`, `theorem`, or `:= sorry` in your final answer."
-            else:
-                # Dataset doesn't provide imports, model should include necessary ones
-                user_content += "Include any necessary `import` statements at the beginning of your code block. Do NOT include `theorem` or `:= sorry` in your final answer."
+            system_content = "You are an expert in mathematics and proving theorems in Lean 4."
             
             if hasattr(self.tokenizer, 'apply_chat_template'):
                 messages = [
-                    {"role": "system", "content": config.system_prompt},
+                    {"role": "system", "content": system_content},
                     {"role": "user", "content": user_content}
                 ]
                 try:
@@ -801,9 +784,9 @@ try:
                         messages, tokenize=False, add_generation_prompt=True
                     )
                 except:
-                    prompt = f"System: {config.system_prompt}\n\nUser: {user_content}\n\nAssistant:"
+                    prompt = f"System: {system_content}\n\nUser: {user_content}\n\nAssistant:"
             else:
-                prompt = f"System: {config.system_prompt}\n\nUser: {user_content}\n\nAssistant:"
+                prompt = f"System: {system_content}\n\nUser: {user_content}\n\nAssistant:"
             
             return prompt
         
@@ -904,47 +887,6 @@ try:
             
             return generated_text, generated_ids
         
-        def _is_degenerate_output(self, output: str, threshold: int = 5) -> bool:
-            """Detect if the model output is degenerate (stuck in a loop).
-            
-            Returns True if:
-            1. Any phrase of 5+ words appears more than `threshold` times
-            2. Common looping patterns are detected (e.g., "Wait," appearing many times)
-            
-            This indicates the model got stuck repeating itself.
-            """
-            # Quick check for common looping indicators
-            # Count occurrences of "Wait," which is a common loop pattern
-            wait_count = output.count("Wait,")
-            if wait_count >= threshold:
-                return True
-            
-            # Count occurrences of repeated sentence starters
-            for pattern in ["the theorem statement is", "We need to prove", "Let me", "I need to"]:
-                if output.lower().count(pattern) >= threshold * 2:
-                    return True
-            
-            # Split into words for phrase-based detection
-            words = output.split()
-            if len(words) < 30:
-                return False
-            
-            # Check for repeated phrases of various lengths (5 to 20 words)
-            for phrase_len in [5, 8, 10, 15, 20]:
-                if len(words) < phrase_len:
-                    continue
-                phrase_counts = {}
-                for i in range(len(words) - phrase_len):
-                    phrase = " ".join(words[i:i + phrase_len])
-                    phrase_counts[phrase] = phrase_counts.get(phrase, 0) + 1
-                
-                # If any phrase appears more than threshold times, it's degenerate
-                max_count = max(phrase_counts.values()) if phrase_counts else 0
-                if max_count >= threshold:
-                    return True
-            
-            return False
-        
         def _extract_tactics_from_code_block(self, block: str) -> str:
             """Extract tactics from a single code block, filtering out non-tactic lines.
             
@@ -1002,16 +944,9 @@ try:
             2. Code blocks within <think> if no </think>
             3. Any code blocks in the output
             
-            Also detects degenerate/looping outputs where the model gets stuck.
             """
             output = output.strip()
             tactics = None
-            
-            # Detect degenerate/looping output
-            # If the same phrase appears many times, the model got stuck
-            if self._is_degenerate_output(output):
-                print("  WARNING: Detected degenerate/looping output from model")
-                return "sorry"
             
             # Strategy 1: If there's a complete thinking block, extract from after it
             if "</think>" in output:
@@ -1152,12 +1087,8 @@ try:
                 else:
                     theorem_with_proof = theorem_code
             
-            # Determine which header to use
-            if has_header:
-                # Dataset provides header, use it directly
-                final_header = header
-            elif model_imports:
-                # No dataset header, but model generated imports - use them
+            # Use model-generated imports; fall back to default header if none
+            if model_imports:
                 final_header_parts = []
                 final_header_parts.extend(model_imports)
                 if model_set_options:
@@ -1168,7 +1099,6 @@ try:
                     final_header_parts.extend(model_opens)
                 final_header = "\n".join(final_header_parts)
             else:
-                # No dataset header and no model imports - use configurable default
                 final_header = config.default_header
             
             return f"{final_header}\n\n{theorem_with_proof}"
@@ -1388,7 +1318,7 @@ try:
         "statement", "code", "theorem", "problem_statement"
     ]
     DEFAULT_INFORMAL_FIELDS = [
-        "informal_prefix", "problem", "informal_statement",
+        "informal_prefix", "informal_stmt", "problem", "informal_statement",
         "natural_language", "description", "question", "informal"
     ]
     DEFAULT_HEADER_FIELDS = ["header", "imports", "preamble", "prefix"]
@@ -1415,7 +1345,7 @@ try:
         max_iterations: int = 5,
         learning_rate: float = 1e-5,
         temperature: float = 0.6,
-        feedback_errors_only: bool = False,
+        feedback_errors_only: bool = True,
         system_prompt: str = "",
         default_header: str = "",
         theorem_field: str = "",
