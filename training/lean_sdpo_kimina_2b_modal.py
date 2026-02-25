@@ -130,7 +130,7 @@ open BigOperators Real Nat Topology Rat"""
     feedback_separator: str = "\n"
     
     # Output settings
-    output_dir: str = "test-time-SDPO"
+    output_dir: str = "kimina_2b"
 
 
 # ============================================================================
@@ -1523,15 +1523,15 @@ try:
             print(f"  Final entropy: {results['metrics']['entropies'][-1]:.4f}")
             print(f"  Final grad norm: {results['metrics']['grad_norms'][-1]:.4f}")
         
-        print("\nResults saved to Modal volume 'sdpo-output' under 'test-time-SDPO/'")
+        print("\nResults saved to Modal volume 'sdpo-output' under 'kimina_2b/'")
         
         # Save a local copy of the results, metrics, and plots
         import json
         from pathlib import Path
         from datetime import datetime
         
-        local_output_dir = Path("sdpo_results")
-        local_output_dir.mkdir(exist_ok=True)
+        local_output_dir = Path("sdpo_results") / "kimina_2b"
+        local_output_dir.mkdir(parents=True, exist_ok=True)
         
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         run_dir = local_output_dir / f"run_{problem_idx}_{timestamp}"
