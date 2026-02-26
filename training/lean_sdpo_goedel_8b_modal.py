@@ -354,7 +354,9 @@ try:
     # LoRA weights are the bridge: Unsloth saves → vLLM loads from disk.
     # ========================================================================
 
+    # LoRA on all linear layers: embed + lm_head + attn + MLP (~48.6M params @ r=16).
     LORA_TARGET_MODULES = [
+        "embed_tokens", "lm_head",
         "q_proj", "k_proj", "v_proj", "o_proj",
         "gate_proj", "up_proj", "down_proj",
     ]
@@ -467,7 +469,7 @@ try:
         model_name: str = modal.parameter(default="Goedel-LM/Goedel-Prover-V2-8B")
         lora_rank: int = modal.parameter(default=16)
         lora_alpha: int = modal.parameter(default=32)
-        
+
         @modal.enter()
         def setup(self):
             # max_model_len must fit prompt + max_new_tokens (8192). 10240 leaves room for prompts.
