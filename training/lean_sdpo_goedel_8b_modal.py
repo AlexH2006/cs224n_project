@@ -21,6 +21,7 @@ Usage:
     modal run lean_sdpo_goedel_8b_modal.py --problem-idx 0
     modal run lean_sdpo_goedel_8b_modal.py --problem-idx 0 --lora-rank 32
     modal run lean_sdpo_goedel_8b_modal.py --problem-idx 0 --gradient-accumulation-steps 8
+    python lean_sdpo_goedel_8b_modal.py --test-extraction   # run tactic extraction tests (no Modal)
 """
 
 import json
@@ -107,6 +108,186 @@ open BigOperators Real Nat Topology Rat"""
 
     # Output
     output_dir: str = "goedel-sdpo-results"
+
+
+# ============================================================================
+# Tactic extraction (module-level for testing without Modal)
+# ============================================================================
+
+def _extract_tactics_from_code_block(block: str) -> str:
+    """Extract tactic body from raw contents of a ```lean / ```lean4 / ``` code block (no fences).
+    
+    Split into lines; remove theorem/lemma/example header through `:= by`.
+    Preserve module directives: import , open , set_option .
+    If block has no theorem header (raw tactics), treat entire block as tactic body.
+    Return tactic body as newline-joined string with trailing blank lines removed.
+    """
+    lines = block.split("\n")
+    result_lines: list[str] = []
+    in_tactic_body = False
+
+    for line in lines:
+        stripped = line.strip()
+        if not stripped:
+            if in_tactic_body:
+                result_lines.append("")
+            continue
+
+        if stripped.startswith(("import ", "open ", "set_option ")):
+            result_lines.append(stripped)
+            continue
+
+        if not in_tactic_body:
+            if stripped.startswith(("theorem ", "lemma ", "example ")) and ":= by" in stripped:
+                after_by = stripped.split(":= by", 1)[1].strip()
+                if after_by:
+                    result_lines.append(after_by)
+                in_tactic_body = True
+                continue
+            if stripped.endswith(":= by") or stripped in (":= by", "by"):
+                in_tactic_body = True
+                continue
+            if re.match(r"^[\(\[]", stripped) or stripped.endswith(":="):
+                continue
+            in_tactic_body = True
+
+        result_lines.append(stripped)
+
+    while result_lines and not result_lines[-1].strip():
+        result_lines.pop()
+
+    return "\n".join(result_lines)
+
+
+def _extract_proof_tactics(output: str) -> str:
+    """Extract proof tactics using priority order and best-block scoring.
+    
+    A) After </think>: score all code blocks, take best; else raw text.
+    B) Inside <think>...</think>|$: extract all code blocks, concatenate.
+    C) Any code block in output: select best.
+    D) After := by: up to 10 non-empty non-comment lines.
+    
+    Score: fewer sorry > longer length. Reject empty/sorry/by. Return sorry on failure.
+    """
+    code_pattern = r"```(?:lean4?|lean|tactics)?\n?(.*?)```"
+
+    def score_block(t: str) -> tuple[int, int]:
+        if not t or t.lower() in ("sorry", "by"):
+            return (-999, 0)
+        sc = t.lower().count("sorry")
+        return (-sc, len(t))
+
+    def pick_best(matches: list[str]) -> Optional[str]:
+        best, best_score = None, None
+        for m in matches:
+            extracted = _extract_tactics_from_code_block(m)
+            sc = score_block(extracted)
+            if sc[0] == -999:
+                continue
+            if best_score is None or sc > best_score:
+                best, best_score = extracted, sc
+        return best
+
+    tactics: Optional[str] = None
+
+    # A) </think> present: only text after last </think>
+    if "</think>" in output:
+        after = output.split("</think>")[-1].strip()
+        matches = re.findall(code_pattern, after, re.DOTALL)
+        if matches:
+            tactics = pick_best(matches)
+        if not tactics:
+            tactics = _extract_tactics_from_code_block(after)
+            if not tactics or tactics.lower() in ("sorry", "by"):
+                tactics = None
+
+    # B) <think> present: inside think region
+    if not tactics and "<think>" in output:
+        m = re.search(r"<think>(.*?)(?:</think>|$)", output, re.DOTALL)
+        if m:
+            matches = re.findall(code_pattern, m.group(1), re.DOTALL)
+            if matches:
+                parts = []
+                for blk in matches:
+                    ex = _extract_tactics_from_code_block(blk)
+                    if ex and ex.lower() not in ("sorry", "by"):
+                        parts.append(ex)
+                if parts:
+                    tactics = "\n".join(parts)
+
+    # C) Any code block in output
+    if not tactics:
+        matches = re.findall(code_pattern, output, re.DOTALL)
+        if matches:
+            tactics = pick_best(matches)
+
+    # D) := by fallback
+    if not tactics and ":= by" in output:
+        idx = output.rfind(":= by")
+        after = output[idx + 5:].strip()
+        if "```" in after:
+            after = after.split("```")[0]
+        lines = []
+        for line in after.split("\n")[:10]:
+            s = line.strip()
+            if s and not s.startswith("--") and s.lower() not in ("sorry", "by"):
+                lines.append(s)
+        if lines:
+            tactics = "\n".join(lines)
+
+    # Final cleanup
+    if tactics:
+        if tactics.lower().startswith("by\n") or tactics.lower().startswith("by "):
+            tactics = tactics[2:].strip()
+        elif tactics.lower().strip() == "by":
+            tactics = None
+    if tactics:
+        st = tactics.strip()
+        if st in ("sorry", "by", "by sorry") or len(st) < 3:
+            tactics = None
+
+    return tactics if tactics else "sorry"
+
+
+def _run_extraction_tests() -> None:
+    """Run sanity checks on tactic extraction. No Modal required."""
+    cases = [
+        # (i) clean ```lean4 block with theorem header
+        (
+            "i",
+            "Some text\n```lean4\ntheorem foo (n : Nat) : n + 0 = n := by\n  simp\n```",
+        ),
+        # (ii) ```lean block with raw tactics only
+        (
+            "ii",
+            "```lean\n  rw [add_comm]\n  simp\n```",
+        ),
+        # (iii) output with <think>...</think> and code after </think>
+        (
+            "iii",
+            "<think>Let me think...</think>\n```lean4\ntheorem bar : 1 + 1 = 2 := by\n  norm_num\n```",
+        ),
+        # (iv) truncated <think> with code inside
+        (
+            "iv",
+            "<think>The proof is:\n```lean\n  simp\n  rfl\n```",
+        ),
+        # (v) multiple code blocks, first contains sorry, second is longer/cleaner
+        (
+            "v",
+            "```lean4\ntheorem x : 1 = 1 := by sorry\n```\nActually:\n```lean4\ntheorem x : 1 = 1 := by\n  rfl\n```",
+        ),
+        # (vi) no code blocks but has := by and a few tactic lines
+        (
+            "vi",
+            "theorem baz : True := by\n  trivial\n  done",
+        ),
+    ]
+    for label, inp in cases:
+        out = _extract_proof_tactics(inp)
+        print(f"[{label}] extracted ({len(out)} chars):")
+        print(out[:200] + ("..." if len(out) > 200 else ""))
+        print()
 
 
 # ============================================================================
@@ -863,211 +1044,28 @@ try:
             self.tokenizer.save_pretrained(save_path)
             print(f"  LoRA weights saved (v{self.lora_version}) -> {save_path}")
         
-        def _extract_tactics_from_code_block(self, block: str) -> str:
-            """Extract proof tactics from a code block by stripping the theorem header.
-            
-            The model typically outputs a full theorem block:
-              theorem foo (x : T) : goal := by
-                tactic1
-                tactic2
-            
-            We strip the declaration header (theorem/lemma name, parameters, goal type,
-            and the `:= by` delimiter) and return only the tactic body.  Import/open/
-            set_option lines are preserved for downstream header extraction.
-            """
-            lines = block.split("\n")
-            result_lines: list[str] = []
-            in_tactic_body = False
-
-            for line in lines:
-                stripped = line.strip()
-                if not stripped:
-                    if in_tactic_body:
-                        result_lines.append("")
-                    continue
-
-                # Always preserve module-level directives
-                if stripped.startswith(("import ", "open ", "set_option ")):
-                    result_lines.append(stripped)
-                    continue
-
-                if not in_tactic_body:
-                    # We haven't entered the tactic body yet — look for `:= by`
-                    if stripped.startswith(("theorem ", "lemma ", "example ")):
-                        # Start of a declaration; check if `:= by` is on this line
-                        if ":= by" in stripped:
-                            # Tactics may follow on the same line after `:= by`
-                            after_by = stripped.split(":= by", 1)[1].strip()
-                            if after_by:
-                                result_lines.append(after_by)
-                            in_tactic_body = True
-                        # Otherwise keep scanning for the `:= by` on a later line
-                        continue
-
-                    # Multi-line signature: parameter lines or goal type before `:= by`
-                    if stripped.endswith(":= by"):
-                        in_tactic_body = True
-                        continue
-                    if stripped == ":= by" or stripped == "by":
-                        in_tactic_body = True
-                        continue
-                    # Still part of the signature (parameters, type, etc.) — skip
-                    if re.match(r"^[\(\[]", stripped) or stripped.endswith(":="):
-                        continue
-                    # If the block has no theorem header at all (just raw tactics),
-                    # treat every line as tactic body.
-                    in_tactic_body = True
-                    # Fall through to append this line
-
-                # Inside the tactic body — keep everything
-                result_lines.append(stripped)
-
-            # Remove trailing empty lines
-            while result_lines and not result_lines[-1].strip():
-                result_lines.pop()
-
-            return "\n".join(result_lines)
-        
-        def _strip_special_tokens_from_generation(self, text: str) -> str:
-            """Remove leading/trailing Goedel (Qwen) special tokens from vLLM output.
-            
-            Goedel-Prover-V2-8B uses eos_token=<|im_end|>, pad_token=<|endoftext|>.
-            vLLM may still include these in .text in some edge cases; stripping ensures
-            parsing and tokenization align with the model's actual generation.
-            """
+        @staticmethod
+        def _strip_special_tokens_from_generation(text: str) -> str:
+            """Strip Goedel/Qwen special tokens from vLLM output."""
             if not text:
                 return text
-            # Strip trailing tokens (often appear if stop didn't fire)
             for tok in ("<|im_end|>", "<|endoftext|>"):
                 if text.endswith(tok):
                     text = text[: -len(tok)].rstrip()
-            # Strip leading assistant turn start (defensive if prompt leaked into output)
-            start_marker = "<|im_start|>assistant"
-            if text.startswith(start_marker):
-                text = text[len(start_marker):].lstrip("\n").lstrip()
+            if text.startswith("<|im_start|>assistant"):
+                text = text[len("<|im_start|>assistant"):].lstrip("\n").lstrip()
             elif text.startswith("<|im_start|>"):
                 text = text[len("<|im_start|>"):].lstrip("\n").lstrip()
             return text.strip()
 
+        @staticmethod
+        def _extract_tactics_from_code_block(block: str) -> str:
+            """Delegate to module-level extraction."""
+            return _extract_tactics_from_code_block(block)
+
         def _extract_proof_tactics(self, output: str) -> str:
-            """Extract proof tactics from model output.
-            
-            Goedel-Prover (Qwen2/Qwen3 chat) may output <think>reasoning</think> then the answer,
-            or code blocks directly. We extract tactics from:
-            1. Content after </think> (preferred)
-            2. Code blocks within <think> if no </think>
-            3. Any code blocks in the output
-            4. \":= by\"-style tactic lines
-            """
-            output = output.strip()
-            tactics = None
-            
-            # Strategy 1: If there's a complete thinking block, extract from after it.
-            # Pick the best block (fewest sorry, then longest) rather than the first.
-            if "</think>" in output:
-                after_think = output.split("</think>")[-1].strip()
-                if after_think:
-                    code_pattern = r"```(?:lean4?|lean|tactics)?\n?(.*?)```"
-                    matches = re.findall(code_pattern, after_think, re.DOTALL)
-                    if matches:
-                        best, best_score = None, None
-                        for match in matches:
-                            extracted = self._extract_tactics_from_code_block(match)
-                            if not extracted or extracted.lower() in ("sorry", "by"):
-                                continue
-                            sorry_count = extracted.lower().split("sorry").__len__() - 1
-                            length = len(extracted)
-                            score = (-sorry_count, length)
-                            if best_score is None or score > best_score:
-                                best, best_score = extracted, score
-                        if best is not None:
-                            tactics = best
-                    # If no code block, try the raw text after </think>
-                    if not tactics:
-                        extracted = self._extract_tactics_from_code_block(after_think)
-                        if extracted and extracted.lower() not in ["sorry", "by"]:
-                            tactics = extracted
-            
-            # Strategy 2: Extract from code blocks inside <think> (model often puts partial proofs there)
-            if not tactics and "<think>" in output:
-                think_match = re.search(r"<think>(.*?)(?:</think>|$)", output, re.DOTALL)
-                if think_match:
-                    think_content = think_match.group(1)
-                    code_pattern = r"```(?:lean4?|lean|tactics)?\n?(.*?)```"
-                    matches = re.findall(code_pattern, think_content, re.DOTALL)
-                    if matches:
-                        # Collect all tactic-like content from code blocks
-                        all_tactics = []
-                        for match in matches:
-                            extracted = self._extract_tactics_from_code_block(match)
-                            if extracted and extracted.lower() not in ["sorry", "by"]:
-                                all_tactics.append(extracted)
-                        if all_tactics:
-                            tactics = "\n".join(all_tactics)
-            
-            # Strategy 3: Look for code blocks anywhere in output.
-            # The model often emits a sketch (with sorry) first and the real proof
-            # later, so we score every block and pick the best one: fewest sorry
-            # lines first, then longest (most complete) as tiebreaker.
-            if not tactics:
-                code_pattern = r"```(?:lean4?|lean|tactics)?\n?(.*?)```"
-                matches = re.findall(code_pattern, output, re.DOTALL)
-                if matches:
-                    best, best_score = None, None
-                    for match in matches:
-                        extracted = self._extract_tactics_from_code_block(match)
-                        if not extracted or extracted.lower() in ("sorry", "by"):
-                            continue
-                        sorry_count = extracted.lower().split("sorry").__len__() - 1
-                        length = len(extracted)
-                        score = (-sorry_count, length)  # fewer sorrys wins, then longer
-                        if best_score is None or score > best_score:
-                            best, best_score = extracted, score
-                    if best is not None:
-                        tactics = best
-            
-            # Strategy 4: Look for ":= by" pattern and extract what follows
-            if not tactics and ":= by" in output:
-                by_idx = output.rfind(":= by")
-                after_by = output[by_idx + 5:].strip()
-                # Take until end of line or code block
-                if "```" in after_by:
-                    after_by = after_by.split("```")[0]
-                lines = after_by.split("\n")
-                tactic_lines = []
-                for line in lines[:10]:  # Take first 10 lines max
-                    stripped = line.strip()
-                    if stripped and stripped.lower() not in ["sorry", "by", ""]:
-                        if not stripped.startswith("--"):  # Skip comments
-                            tactic_lines.append(stripped)
-                if tactic_lines:
-                    tactics = "\n".join(tactic_lines)
-            
-            # Clean up the tactics
-            if tactics:
-                # Remove leading "by" if present
-                if tactics.lower().startswith("by\n") or tactics.lower().startswith("by "):
-                    tactics = tactics[2:].strip()
-                elif tactics.lower() == "by":
-                    tactics = None
-                    
-            # Validate tactics — reject only if the entire body is trivially empty.
-            # We intentionally do NOT reject proofs that contain sorry in sub-goals;
-            # the Lean verifier will flag those, and the scoring logic already
-            # prefers blocks with fewer sorry occurrences.
-            if tactics:
-                stripped_tactics = tactics.strip()
-                if stripped_tactics in ("sorry", "by", "by sorry"):
-                    tactics = None
-                elif len(stripped_tactics) < 3:
-                    tactics = None
-            
-            # If no tactics extracted, return sorry - don't try to infer from reasoning
-            # The previous heuristic of looking for keywords like "simp" in reasoning was
-            # too aggressive and could match incidental word usage (e.g., "simply")
-            # Better to return sorry and let the verification fail properly
-            
-            return tactics if tactics else "sorry"
+            """Delegate to module-level extraction."""
+            return _extract_proof_tactics(output)
         
         def _create_full_lean_code(self, config: SDPOConfig, theorem_code: str, proof_tactics: str, header: str = "") -> str:
             """Create full Lean 4 code by replacing sorry with proof tactics.
@@ -1540,4 +1538,9 @@ except ImportError:
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    if "--test-extraction" in sys.argv:
+        print("Running tactic extraction sanity tests...")
+        _run_extraction_tests()
+    else:
+        main()

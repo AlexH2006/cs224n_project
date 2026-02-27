@@ -1,0 +1,908 @@
+{
+  "goedel_8b_minif2f": {
+    "model": "Goedel-LM/Goedel-Prover-V2-8B",
+    "n_problems": 10,
+    "n_samples_per_problem": 4,
+    "pass_at_4": 0.0,
+    "pass_at_4_complete": 0.0,
+    "passed": 0,
+    "complete": 0,
+    "inference_time_s": 145.75699377059937,
+    "results": [
+      {
+        "problem_id": "mathd_algebra_478",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "have h_main : v = 65 := by\nsorry\nsorry",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "numbertheory_4x3m7y3neq2003",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "have h_main : \u2200 (x y : \u2124), 4 * x ^ 3 - 7 * y ^ 3 \u2260 2003 := by sorry\nhave h_final : 4 * x ^ 3 - 7 * y ^ 3 \u2260 2003 := by sorry\nsorry",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "aime_1983_p1",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "### Detailed Proof and Analysis\nFirst, we need to understand the problem correctly. The given conditions are:\n1. \\( x, y, z > 1 \\) (since \\( 1 < x \\), \\( 1 < y \\), \\( 1 < z \\)),\n2. \\( w \\geq 0 \\),\n3. \\( \\frac{\\log w}{\\log x} = 24 \\),\n4. \\( \\frac{\\log w}{\\log y} = 40 \\),\n5. \\( \\frac{\\log w}{\\log (x y",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "amc12_2001_p5",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "### Detailed Proof\n#### Problem Analysis\nWe need to compute the product of all positive odd integers less than 10000 and show that it is equal to `10000! / (2^5000 * 5000!)`.\n#### Key Observations\n1. The product of all positive odd integers less than `n` is equal to `n! / (2^{n/2} * (n/2)!)` when `n",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "mathd_algebra_141",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "a ^ 2 + b ^ 2 = 369 := by\nhave h_sum : a + b = 27 := by sorry\nhave h_main : a ^ 2 + b ^ 2 = 369 := by sorry\nsorry",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "mathd_numbertheory_3",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "(0 + 1)\u00b2 + (1 + 1)\u00b2 + ... + (9 + 1)\u00b2 = 1\u00b2 + 2\u00b2 + ... + 10\u00b2 = 385.",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "imo_1969_p2",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "### Detailed Proof and Analysis\n**Problem Analysis:**\nWe are given a function `y(x)` defined as a weighted sum of cosine terms:\n\\[ y(x) = \\sum_{i=0}^{k-1} \\frac{\\cos(a_i + x)}{2^i} \\]\nwhere `k` is a positive integer, `a_i` are real constants, and `x` is a real variable. The weights are `1/2^i` for `",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "mathd_algebra_209",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "\u03c3.1 (\u03c3.1 10) = 1 := by\nhave h\u2083 : \u03c3.1 10 = 2 := by sorry\nhave h\u2084 : \u03c3.1 2 = 1 := by sorry\nhave h\u2085 : \u03c3.1 (\u03c3.1 10) = 1 := by sorry\nsorry",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "mathd_numbertheory_1124",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "### Detailed Proof\n**Problem Analysis:**\nWe need to find the units digit `n` (where `n` is a digit, i.e., `0 \u2264 n \u2264 9`) such that the four-digit number `374n` is divisible by 18. The number `374n` can be expressed mathematically as `3740 + n` because `374n` is `374 * 10 + n` (since `n` is the units d",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "imo_1983_p6",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "### Detailed Proof and Analysis\nWe are given positive real numbers \\(a, b, c\\) that form the sides of a triangle (i.e., satisfy the triangle inequalities \\(a < b + c\\), \\(b < a + c\\), and \\(c < a + b\\)). We need to prove the inequality:\n\\[ a^2 b(a - b) + b^2 c(b - c) + c^2 a(c - a) \\geq 0. \\]\n#### S",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      }
+    ]
+  },
+  "goedel_8b_putnam": {
+    "model": "Goedel-LM/Goedel-Prover-V2-8B",
+    "n_problems": 10,
+    "n_samples_per_problem": 4,
+    "pass_at_4": 0.0,
+    "pass_at_4_complete": 0.0,
+    "passed": 0,
+    "complete": 0,
+    "inference_time_s": 43.641079902648926,
+    "results": [
+      {
+        "problem_id": "putnam_1981_a1",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "### Detailed Proof and Analysis\nFirst, let's understand the problem:\nWe are given a predicate `P(n, k)` defined as `5^k` divides `\u220f_{m=1}^n m^m` (interpreted as integers). We are also given a function `E : \u2115 \u2192 \u2115` such that:\n1. For all `n \u2265 1`, `P(n, E(n))` holds, and\n2. For all `n \u2265 1` and all `k : ",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "putnam_1981_a3",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "f := fun t : \u211d => Real.exp (-t) * \u222b y in (Ico 0 t), \u222b x in (Ico 0 t), (Real.exp x - Real.exp y) / (x - y)",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "putnam_1981_a5",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "### Detailed Proof and Analysis\nFirst, let's understand the problem:\nWe have a function `Q` that maps a polynomial `P` to a new polynomial `(X\u00b2 + 1) * P * P' + X * (P\u00b2 + P'\u00b2)`, where `P'` is the derivative of `P`. We also have a function `n` that maps `P` to the cardinality of the set of real number",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "putnam_1981_b1",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "f : \u2115 \u2192 \u211d := fun n : \u2115 => (1/n^5) * \u2211 h in Finset.Icc 1 n, \u2211 k in Finset.Icc 1 n, (5*(h : \u211d)^4 - 18*h^2*k^2 + 5*k^4)",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "putnam_1981_b2",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "f(r, s, t) = (r - 1)^2 + (s/r - 1)^2 + (t/s - 1)^2 + (4/t - 1)^2",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "putnam_1981_b3",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "### Detailed Proof and Analysis\nFirst, let's understand the problem:\nWe are given a predicate `P` on natural numbers `n` defined as:\n`P n := \u2200 p : \u2115, (Nat.Prime p \u2227 p \u2223 n\u00b2 + 3) \u2192 \u2203 k : \u2115, (p : \u2124) \u2223 (k : \u2124)\u00b2 + 3 \u2227 k\u00b2 < n`.\nHowever, the definition of `P` is not actually used in the theorem statement w",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "putnam_1981_b4",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "### Detailed Proof and Analysis\nFirst, let's understand the problem:\nWe have a theorem statement in Lean 4 with the following components:\n1. A predicate `VAB` on sets of matrices `V : Set (Matrix (Fin 5) (Fin 7) \u211d)`.\n2. A predicate `Vrank` on sets of matrices `V : Set (Matrix (Fin 5) (Fin 7) \u211d)` and",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "putnam_1981_b5",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "### Detailed Proof and Analysis\n**Problem Analysis:**\nWe are given:\n1. A function `sumbits : List \u2115 \u2192 \u2124` defined by `sumbits bits = \u2211 i : Fin bits.length, (bits[i] : \u2124)`.\n2. A function `B : \u2115 \u2192 \u2124` defined by `B n = sumbits (Nat.digits 2 n)` for `n > 0`.\n3. A theorem statement that `(\u2203 q : \u211a, Real.ex",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "putnam_2007_a1",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "### Detailed Proof and Analysis\nFirst, let's understand the problem:\nWe are to prove that for all real numbers `a`, the function `f(x) = a x\u00b2 + a x + 1/24` and `g(y) = a y\u00b2 + a y + 1/24` satisfy the condition `reflect_tangent` (defined as `ContDiff \u211d 1 f \u2227 ContDiff \u211d 1 g \u2227 (\u2203 x y : \u211d, f x = y \u2227 g y ",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "putnam_2007_a2",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "### Detailed Proof and Analysis\nFirst, let's understand the problem:\nWe are given three predicates:\n1. `Sinterpos S`: This means that `S` contains a point `p` with `p 0 > 0`, `p 1 > 0`, and `p 0 * p 1 = 1`, and also contains a point `q` with `q 0 < 0`, `q 1 < 0`, and `q 0 * q 1 = 1`.\n2. `Sinterneg S",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      }
+    ]
+  },
+  "kimina_2b_minif2f": {
+    "model": "AI-MO/Kimina-Prover-RL-1.7B",
+    "n_problems": 10,
+    "n_samples_per_problem": 4,
+    "pass_at_4": 0.0,
+    "pass_at_4_complete": 0.0,
+    "passed": 0,
+    "complete": 0,
+    "inference_time_s": 124.86753702163696,
+    "results": [
+      {
+        "problem_id": "mathd_algebra_478",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "sorry",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "numbertheory_4x3m7y3neq2003",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "sorry",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "aime_1983_p1",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "sorry",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "amc12_2001_p5",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "native_decide",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "mathd_algebra_141",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "ring\n  rw [h4]\n  rw [h3, h\u2081]\n  norm_num",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "mathd_numbertheory_3",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "sorry",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "imo_1969_p2",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "`sorry`\nWe need to prove that if $f(x)=\\cos(a_1+x)+\\frac{1}{2}\\cos(a_2+x)+\\frac{1}{4}\\cos(a_3+x)+\\cdots+\\frac{1}{2^{n-1}}\\cos(a_n+x)$ has $f(x_1)=f(x_2)=0$, then $x_2-x_1=m\\pi$ for some integer $m$.\nFirst, let's understand what we're given:\n- $m, n$ are real numbers representing points\n- $k$ is a na",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "mathd_algebra_209",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "sorry",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "mathd_numbertheory_1124",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "sorry",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      },
+      {
+        "problem_id": "imo_1983_p6",
+        "passed": false,
+        "complete": false,
+        "first_error_preview": "kimina_client not installed",
+        "extracted_tactics_sample": "sorry",
+        "verifications": [
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          },
+          {
+            "pass": false,
+            "complete": false,
+            "error": "kimina_client not installed"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "goedel_8b_minif2f": {
+    "model": "Goedel-LM/Goedel-Prover-V2-8B",
+    "n_problems": 10,
+    "n_samples_per_problem": 1,
+    "pass_at_4": 1.0,
+    "pass_at_4_complete": 0.0,
+    "passed": 10,
+    "complete": 0,
+    "inference_time_s": 159.85683512687683
+  },
+  "kimina_2b_minif2f": {
+    "model": "AI-MO/Kimina-Prover-RL-1.7B",
+    "n_problems": 10,
+    "n_samples_per_problem": 1,
+    "pass_at_4": 0.4,
+    "pass_at_4_complete": 0.3,
+    "passed": 4,
+    "complete": 3,
+    "inference_time_s": 87.47254514694214
+  }
+}
