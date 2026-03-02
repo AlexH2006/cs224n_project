@@ -1,8 +1,10 @@
 """
-SDPO Test-Time RL for Goedel-Prover-V2-8B on Modal
+SDPO Test-Time RL for DeepSeek-Prover-V2-7B on Modal
 
 Runs Self-Distilled Policy Optimization (SDPO) on Modal for Lean 4 theorem
-proving using the Goedel-Prover-V2-8B model with LoRA fine-tuning via Unsloth.
+proving using the DeepSeek-Prover-V2-7B model with LoRA fine-tuning via Unsloth.
+
+Devlog (design, changelog, quick reference): devlog/LEAN_SDPO_DEEPSEEK_7B_MODAL.md
 
 Key design:
     - Two model instances on one GPU:
@@ -18,12 +20,12 @@ SDPO Architecture:
     - Student learns by minimizing KL divergence to teacher's distribution.
 
 Usage:
-    modal run lean_sdpo_goedel_8b_modal.py --problem-idx 0
-    modal run lean_sdpo_goedel_8b_modal.py --problem-idx 0 --lora-rank 32
-    modal run lean_sdpo_goedel_8b_modal.py --problem-idx 0 --gradient-accumulation-steps 4
+    modal run lean_sdpo_deepseek_7b_modal.py --problem-idx 0
+    modal run lean_sdpo_deepseek_7b_modal.py --problem-idx 0 --lora-rank 32
+    modal run lean_sdpo_deepseek_7b_modal.py --problem-idx 0 --gradient-accumulation-steps 4
     # PutnamBench (competition math, Lean 4):
-    modal run lean_sdpo_goedel_8b_modal.py --dataset amitayusht/PutnamBench --dataset-split train --problem-idx 0
-    python lean_sdpo_goedel_8b_modal.py --test-extraction   # run tactic extraction tests (no Modal)
+    modal run lean_sdpo_deepseek_7b_modal.py --dataset amitayusht/PutnamBench --dataset-split train --problem-idx 0
+    python lean_sdpo_deepseek_7b_modal.py --test-extraction   # run tactic extraction tests (no Modal)
 """
 
 import json
@@ -40,10 +42,10 @@ from typing import Optional
 
 @dataclass
 class SDPOConfig:
-    """Configuration for Goedel-8B SDPO with LoRA on Modal."""
+    """Configuration for DeepSeek-Prover-V2-7B SDPO with LoRA on Modal."""
 
-    # Model
-    model_name: str = "Goedel-LM/Goedel-Prover-V2-8B"
+    # Model (DeepSeek-Prover-V2-7B)
+    model_name: str = "deepseek-ai/DeepSeek-Prover-V2-7B"
 
     # LoRA
     lora_rank: int = 16
@@ -58,16 +60,20 @@ class SDPOConfig:
     distillation_topk: int = 20
 
     # Generation
-    # Goedel-Prover-V2-8B (Qwen2Tokenizer): eos_token="<|im_end|>", pad_token="<|endoftext|>",
-    # bos_token=null. Chat format: <|im_start|>role\ncontent<|im_end|>\n; generation prompt ends with <|im_start|>assistant\n
+    # DeepSeek-Prover-V2-7B (LlamaTokenizerFast): eos/pad = </think> (U+300C/U+300D),
+    # chat format </think>...</think> (User) then </think> (Assistant) for generation.
     max_new_tokens: int = 32768
     temperature: float = 0.6
     top_p: float = 0.95
     stop_tokens: list = field(default_factory=lambda: [
-        "<|im_end|>",   # Goedel/Qwen eos
-        "<|endoftext|>",  # Goedel/Qwen pad
-        "<|im_start|>",   # Prevent starting a new turn
-        "</s>", "<|end|>", "[/INST]", "<|eot_id|>",  # Other common eos tokens
+        "<|endofsentence|>",  # ASCII form
+        "\u300cendofsentence\u300d",  # Unicode </think> (actual tokenizer may decode to this)
+        "<|endoftext|>",
+        "</think>",   # Prevent starting new user turn
+        "</think>",  # Prevent starting new assistant turn
+        "\u300cUser\u300d",
+        "\u300cAssistant\u300d",
+        "</s>", "<|end|>", "[/INST]", "<|eot_id|>", "<|im_end|>",  # Other common eos
     ])
 
     # Dataset
@@ -108,7 +114,41 @@ open BigOperators Real Nat Topology Rat"""
     feedback_separator: str = "\n"
 
     # Output
-    output_dir: str = "goedel-sdpo-results"
+    output_dir: str = "deepseek-sdpo-results"
+
+
+# ============================================================================
+# DeepSeek-Prover chat/think tags (for parsing and truncation)
+# Tokenizer uses  (U+300C) and  (U+300D); model may output ASCII or Unicode.
+# ============================================================================
+# End of "think" block (after which assistant output / code appears)
+_THINK_END_MARKERS = ("</think>", "\u300c/think\u300d")
+# Start of "think" block (optional reasoning before code)
+_THINK_START_MARKERS = ("<think>", "\u300cthink\u300d")
+# Start of assistant turn (generation prompt); also used to detect truncation
+_ASSISTANT_START_MARKERS = ("</think>", "\u300cAssistant\u300d")
+
+
+def _split_after_last_think_end(output: str) -> Optional[str]:
+    """Return text after the last occurrence of any think-end marker (for DeepSeek)."""
+    best_end = -1
+    for marker in _THINK_END_MARKERS:
+        idx = output.rfind(marker)
+        if idx != -1:
+            end = idx + len(marker)
+            if end > best_end:
+                best_end = end
+    if best_end == -1:
+        return None
+    return output[best_end:].strip()
+
+
+def _has_think_start(output: str) -> bool:
+    return any(m in output for m in _THINK_START_MARKERS)
+
+
+def _has_think_end(output: str) -> bool:
+    return any(m in output for m in _THINK_END_MARKERS)
 
 
 # ============================================================================
@@ -191,12 +231,13 @@ def _extract_tactics_from_code_block(block: str) -> str:
 def _extract_proof_tactics(output: str) -> str:
     """Extract proof tactics using priority order and best-block scoring.
     
-    A) After </think>: score all code blocks, take best; else raw text.
-    B) Inside <think>...</think>|$: extract all code blocks, concatenate.
+    A) After last </think> (or Unicode </think>): score all code blocks, take best; else raw text.
+    B) Inside <think>...</think> (or Unicode): extract all code blocks, concatenate.
     C) Any code block in output: select best.
     D) After := by: up to 10 non-empty non-comment lines.
     
     Score: fewer sorry > longer length. Reject empty/sorry/by. Return sorry on failure.
+    DeepSeek-Prover may output ASCII or Unicode think/assistant tags; both are handled.
     """
     code_pattern = r"```(?:lean4?|lean|tactics)?\n?(.*?)```"
 
@@ -219,20 +260,24 @@ def _extract_proof_tactics(output: str) -> str:
 
     tactics: Optional[str] = None
 
-    # A) </think> present: only text after last </think>
-    if "</think>" in output:
-        after = output.split("</think>")[-1].strip()
-        matches = re.findall(code_pattern, after, re.DOTALL)
+    # A) After last </think> (or Unicode equivalent): only text after it
+    after_think = _split_after_last_think_end(output)
+    if after_think is not None:
+        matches = re.findall(code_pattern, after_think, re.DOTALL)
         if matches:
             tactics = pick_best(matches)
         if not tactics:
-            tactics = _extract_tactics_from_code_block(after)
+            tactics = _extract_tactics_from_code_block(after_think)
             if not tactics or tactics.lower() in ("sorry", "by"):
                 tactics = None
 
-    # B) <think> present: inside think region
-    if not tactics and "<think>" in output:
-        m = re.search(r"<think>(.*?)(?:</think>|$)", output, re.DOTALL)
+    # B) Inside <think>...</think> (or Unicode): extract code blocks from think region
+    if not tactics and _has_think_start(output):
+        # Build regex that matches either ASCII or Unicode think start/end
+        start_alt = "|".join(re.escape(m) for m in _THINK_START_MARKERS)
+        end_alt = "|".join(re.escape(m) for m in _THINK_END_MARKERS)
+        pattern = rf"(?:{start_alt})(.*?)(?:{end_alt}|$)"
+        m = re.search(pattern, output, re.DOTALL)
         if m:
             matches = re.findall(code_pattern, m.group(1), re.DOTALL)
             if matches:
@@ -326,7 +371,7 @@ def _run_extraction_tests() -> None:
 try:
     import modal
     
-    app = modal.App("lean-sdpo-goedel-8b")
+    app = modal.App("lean-sdpo-deepseek-7b")
     
     # Volume for HF cache (persistent across runs)
     hf_cache_volume = modal.Volume.from_name("sdpo-hf-cache", create_if_missing=True)
@@ -571,6 +616,52 @@ try:
     ]
 
     LORA_WEIGHT_DIR = "/tmp/sdpo_lora_weights"
+    DEEPSEEK_PATCHED_DIR = "/tmp/deepseek_prover_7b_patched"
+
+    def _patch_deepseek_model_for_unsloth(model_name: str, patched_dir: str) -> str:
+        """Download DeepSeek-Prover to a local dir and patch config/tokenizer for Unsloth/vLLM.
+
+        Fixes:
+        1. rope_scaling: factor, beta_fast, beta_slow must be floats (config uses ints).
+        2. Chat template: Unsloth requires literal '{% if add_generation_prompt %}' in the
+           template; DeepSeek uses '{% if add_generation_prompt and ... %}' so the check fails.
+        Returns patched_dir path for use with from_pretrained(patched_dir).
+        """
+        import os
+        from huggingface_hub import snapshot_download
+
+        os.makedirs(patched_dir, exist_ok=True)
+        print(f"Downloading {model_name} to {patched_dir} for patching...")
+        snapshot_download(model_name, local_dir=patched_dir, local_dir_use_symlinks=False)
+
+        config_path = os.path.join(patched_dir, "config.json")
+        if os.path.isfile(config_path):
+            with open(config_path, "r") as f:
+                config = json.load(f)
+            rs = config.get("rope_scaling")
+            if isinstance(rs, dict):
+                for key in ("factor", "beta_fast", "beta_slow"):
+                    if key in rs and isinstance(rs[key], int):
+                        rs[key] = float(rs[key])
+                with open(config_path, "w") as f:
+                    json.dump(config, f, indent=1)
+                print("  Patched config.json: rope_scaling fields set to float.")
+
+        tok_config_path = os.path.join(patched_dir, "tokenizer_config.json")
+        if os.path.isfile(tok_config_path):
+            with open(tok_config_path, "r") as f:
+                tok_config = json.load(f)
+            template = tok_config.get("chat_template")
+            if isinstance(template, str) and "{% if add_generation_prompt %}" not in template:
+                # Unsloth checks for exact substring AND validates that the block outputs something.
+                # DeepSeek has "{% if add_generation_prompt and ... %}" which fails the substring check.
+                # Append a block that outputs the assistant marker so both checks pass.
+                # DeepSeek uses <｜Assistant｜> (with fullwidth ｜ U+FF5C) as the assistant turn marker.
+                tok_config["chat_template"] = template + "{% if add_generation_prompt %}{{'<｜Assistant｜>'}}{% endif %}"
+                with open(tok_config_path, "w") as f:
+                    json.dump(tok_config, f, indent=2, ensure_ascii=False)
+                print("  Patched tokenizer_config.json: added {% if add_generation_prompt %} for Unsloth.")
+        return patched_dir
 
     def _setup_trainer(trainer_self, gpu_memory_utilization: float, max_model_len: int, gpu_name: str):
         """Load Unsloth training model and vLLM inference engine with LoRA support."""
@@ -591,10 +682,17 @@ try:
         print(f"Loading model: {trainer_self.model_name}...")
         trainer_self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+        # --- DeepSeek-Prover: patch config (rope_scaling floats) and tokenizer (add_generation_prompt) ---
+        model_to_load = trainer_self.model_name
+        if "DeepSeek-Prover" in trainer_self.model_name or "deepseek-ai/DeepSeek-Prover" in trainer_self.model_name:
+            model_to_load = _patch_deepseek_model_for_unsloth(
+                trainer_self.model_name, DEEPSEEK_PATCHED_DIR
+            )
+
         # --- Unsloth training model (4-bit quantized + LoRA) ---
         print("Loading Unsloth 4-bit model with LoRA adapters...")
         trainer_self.model, trainer_self.tokenizer = FastLanguageModel.from_pretrained(
-            model_name=trainer_self.model_name,
+            model_name=model_to_load,
             max_seq_length=max_model_len,
             load_in_4bit=True,
             dtype=None,
@@ -628,9 +726,10 @@ try:
         # VLLM_USE_V1=0 above forces legacy engine; V1 ignores enforce_eager and always compiles (~3+ min).
         # enforce_eager=False: enable CUDA graph capture for 2-4x faster decode; first request may take ~20-60s to capture.
         # gpu_memory_utilization: vLLM sees full GPU; we set 0.4 so vLLM + Unsloth fit.
+        # Use model_to_load (patched path for DeepSeek) so vLLM gets same rope_scaling fix.
         print(f"Initializing vLLM engine ({gpu_name}, V0/CUDA graphs, enable_lora=True)...")
         trainer_self.vllm_engine = LLM(
-            model=trainer_self.model_name,
+            model=model_to_load,
             dtype="bfloat16",
             trust_remote_code=True,
             download_dir="/cache",
@@ -647,19 +746,19 @@ try:
 
     # ========================================================================
     # SDPO Training Service (GPU) - A100-80GB
-    # Memory budget (~80GB) with max_new_tokens=32768, max_model_len=35840:
+    # Memory budget (~80GB) with max_new_tokens=32768, max_model_len=36000:
     #   vLLM bf16 model + KV cache + CUDA graphs:
-    #     - Model weights (bf16):         ~15.4 GB
-    #     - KV cache (35840 tokens):      ~4.7 GB
+    #     - Model weights (bf16):         ~13 GB (DeepSeek-7B)
+    #     - KV cache (36000 tokens):      ~5 GB
     #     - CUDA graphs:                  ~1 GB
-    #     - Total vLLM (gpu_memory_utilization=0.4): ~32 GB budget
+    #     - Total vLLM (gpu_memory_utilization=0.45): ~36 GB budget
     #   Unsloth 4-bit + LoRA:             ~6 GB
-    #   Optimizer (LoRA) + activations:   ~35 GB
-    #   Headroom:                          ~11 GB
+    #   Optimizer (LoRA) + activations:   ~32 GB
+    #   Headroom:                          ~6 GB
     # Inference is always batch_size=1 (one prompt per _generate_proof call).
     # ========================================================================
     
-    # Startup can take 5–10+ min on cold cache: Unsloth downloads/loads 8B in 4-bit,
+    # Startup can take 5–10+ min on cold cache: Unsloth downloads/loads 7B in 4-bit,
     # then vLLM downloads/loads same model in bf16 in a separate process. A heartbeat
     # warning during setup is normal; the worker continues. startup_timeout allows
     # this phase to finish; timeout applies to the run after setup.
@@ -673,16 +772,16 @@ try:
         secrets=[modal.Secret.from_name("huggingface")],
     )
     class SDPOTrainer:
-        """SDPO trainer for Goedel-Prover-V2-8B with Unsloth LoRA on A100-80GB."""
-        
-        model_name: str = modal.parameter(default="Goedel-LM/Goedel-Prover-V2-8B")
+        """SDPO trainer for DeepSeek-Prover-V2-7B with Unsloth LoRA on A100-80GB."""
+
+        model_name: str = modal.parameter(default="deepseek-ai/DeepSeek-Prover-V2-7B")
         lora_rank: int = modal.parameter(default=16)
         lora_alpha: int = modal.parameter(default=32)
 
         @modal.enter()
         def setup(self):
-            # max_model_len must fit prompt + max_new_tokens (32768). 35840 leaves room for prompts.
-            _setup_trainer(self, gpu_memory_utilization=0.4, max_model_len=35840, gpu_name="A100-80GB")
+            # max_model_len must fit prompt + max_new_tokens (32768). 36000 requires ~0.45 gpu_memory_utilization.
+            _setup_trainer(self, gpu_memory_utilization=0.45, max_model_len=36000, gpu_name="A100-80GB")
         
         @staticmethod
         def _get_field(data: dict, field_names: list, default: str = "") -> str:
@@ -768,7 +867,7 @@ try:
                 print(f"  Generated {len(raw_output)} chars")
 
                 # ---- Extract tactics and build full Lean code ----
-                is_truncated = "<think>" in raw_output and "</think>" not in raw_output
+                is_truncated = _has_think_start(raw_output) and not _has_think_end(raw_output)
                 tactics = self._extract_proof_tactics(raw_output)
                 lean4_code = self._get_field(problem, config.theorem_fields)
                 header = self._get_field(problem, config.header_fields)
@@ -1011,7 +1110,7 @@ try:
         def _create_base_prompt(self, config: SDPOConfig, theorem: dict) -> str:
             """Create STUDENT prompt (problem only, no feedback).
             
-            Follows the Goedel-Prover-V2 prompt format:
+            Follows the DeepSeek-Prover-V2 prompt format:
             - User-only message (no system prompt)
             - Full formal statement (imports + theorem) in a lean4 code block
             - Instruction to provide proof plan before code
@@ -1021,6 +1120,7 @@ try:
 
             full_statement = f"{header}\n\n{lean4_code}" if header.strip() else lean4_code
 
+            # Wording matches DeepSeek-Prover-V2-7B README quick start
             user_content = (
                 f"Complete the following Lean 4 code:\n\n"
                 f"```lean4\n{full_statement}\n```\n\n"
@@ -1043,7 +1143,7 @@ try:
         ) -> str:
             """Create TEACHER prompt (problem + accumulated error feedback).
             
-            Same Goedel format as the student prompt, but with an additional
+            Same DeepSeek-Prover format as the student prompt, but with an additional
             section listing previous errors so the teacher has "hindsight".
             """
             lean4_code = self._get_field(theorem, config.theorem_fields)
@@ -1095,6 +1195,7 @@ try:
                 top_p=config.top_p,
                 max_tokens=config.max_new_tokens,
                 stop=config.stop_tokens,
+                repetition_penalty=1.05,  # Prevent degenerate repetition loops
             )
 
             # Apply current LoRA weights (None for base model at version 0)
@@ -1111,7 +1212,7 @@ try:
                 [prompt], sampling_params, lora_request=lora_request
             )
             generated_text = outputs[0].outputs[0].text
-            # Strip Goedel/Qwen special tokens that may appear in .text (defensive)
+            # Strip DeepSeek special tokens that may appear in .text (defensive)
             generated_text = self._strip_special_tokens_from_generation(generated_text)
 
             generated_ids = self.tokenizer(
@@ -1136,16 +1237,30 @@ try:
         
         @staticmethod
         def _strip_special_tokens_from_generation(text: str) -> str:
-            """Strip Goedel/Qwen special tokens from vLLM output."""
+            """Strip DeepSeek special tokens from vLLM output.
+            Handles both ASCII and Unicode </think>-style tokens.
+            """
             if not text:
                 return text
-            for tok in ("<|im_end|>", "<|endoftext|>"):
+            # Trailing EOS/pad (ASCII and Unicode)
+            for tok in (
+                "<|endofsentence|>",
+                "\u300cendofsentence\u300d",
+                "<|endoftext|>",
+                "<|im_end|>",
+            ):
                 if text.endswith(tok):
                     text = text[: -len(tok)].rstrip()
-            if text.startswith("<|im_start|>assistant"):
-                text = text[len("<|im_start|>assistant"):].lstrip("\n").lstrip()
-            elif text.startswith("<|im_start|>"):
-                text = text[len("<|im_start|>"):].lstrip("\n").lstrip()
+            # Leading assistant/think turn markers (generation starts after </think>)
+            for prefix in (
+                "</think>",
+                "\u300cAssistant\u300d",
+                "<|im_start|>assistant",
+                "<|im_start|>",
+            ):
+                if text.startswith(prefix):
+                    text = text[len(prefix) :].lstrip("\n").lstrip()
+                    break
             return text.strip()
 
         @staticmethod
@@ -1289,6 +1404,14 @@ try:
             
             torch.cuda.empty_cache()
 
+            # Truncate response so total sequence fits in model's max_seq_length (for RoPE embeddings).
+            # Unsloth pre-computes RoPE up to max_seq_length (36000); exceeding it causes AssertionError.
+            # Use 35000 as safe limit (leaves room for prompts up to 1000 tokens).
+            max_response_len = 35000 - max(student_prompt_ids.shape[1], teacher_prompt_ids.shape[1])
+            if response_ids.shape[1] > max_response_len:
+                print(f"  Truncating response from {response_ids.shape[1]} to {max_response_len} tokens for SDPO loss")
+                response_ids = response_ids[:, :max_response_len]
+
             # Concatenate prompts with response for forward pass
             student_input_ids = torch.cat([student_prompt_ids, response_ids], dim=1)
             teacher_input_ids = torch.cat([teacher_prompt_ids, response_ids], dim=1)
@@ -1375,7 +1498,7 @@ try:
             
             if len(metrics["iterations"]) > 0:
                 fig, axes = plt.subplots(2, 2, figsize=(12, 10))
-                fig.suptitle(f"SDPO Test-Time RL - {config.model_name}", fontsize=12)
+                fig.suptitle(f"SDPO Test-Time RL - DeepSeek-Prover - {config.model_name}", fontsize=12)
                 
                 ax1 = axes[0, 0]
                 ax1.plot(metrics["iterations"], metrics["losses"], 'b-o', linewidth=2, markersize=8)
@@ -1447,7 +1570,7 @@ try:
 
     @app.local_entrypoint()
     def main(
-        model: str = "Goedel-LM/Goedel-Prover-V2-8B",
+        model: str = "deepseek-ai/DeepSeek-Prover-V2-7B",
         dataset: str = "cat-searcher/minif2f-lean4",
         dataset_subset: str = "",
         dataset_split: str = "test",
@@ -1464,14 +1587,14 @@ try:
         informal_field: str = "",
         header_field: str = "",
     ):
-        """Run Goedel-8B SDPO with LoRA on Modal.
+        """Run DeepSeek-Prover-V2-7B SDPO with LoRA on Modal.
 
-        Uses Unsloth for 4-bit LoRA training + vLLM for inference on A100-40GB.
+        Uses Unsloth for 4-bit LoRA training + vLLM for inference on A100-80GB.
         """
         from datasets import load_dataset
 
         print("=" * 60)
-        print("Goedel-8B SDPO (Unsloth LoRA) on Modal")
+        print("DeepSeek-Prover-V2-7B SDPO (Unsloth LoRA) on Modal")
         print("=" * 60)
         print(f"Model:          {model}")
         print(f"LoRA:           rank={lora_rank}, alpha={lora_alpha}")
@@ -1580,7 +1703,7 @@ try:
         from pathlib import Path
         from datetime import datetime
 
-        local_output_dir = Path("sdpo_results") / "goedel_8b"
+        local_output_dir = Path("sdpo_results") / "deepseek_7b"
         local_output_dir.mkdir(parents=True, exist_ok=True)
 
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -1600,7 +1723,7 @@ try:
             import matplotlib.pyplot as plt
 
             fig, axes = plt.subplots(2, 2, figsize=(12, 10))
-            fig.suptitle(f"Goedel-8B SDPO - Problem {problem_idx}", fontsize=12)
+            fig.suptitle(f"DeepSeek-Prover SDPO - Problem {problem_idx}", fontsize=12)
 
             for ax, key, color, label in [
                 (axes[0, 0], "losses",    "b", "Loss"),
@@ -1630,7 +1753,7 @@ except ImportError:
 
     def main():
         print("This script requires Modal. Install with: pip install modal")
-        print("Then run: modal run lean_sdpo_goedel_8b_modal.py --problem-idx 0")
+        print("Then run: modal run lean_sdpo_deepseek_7b_modal.py --problem-idx 0")
 
 
 if __name__ == "__main__":

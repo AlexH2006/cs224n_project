@@ -140,7 +140,7 @@ open BigOperators Real Nat Topology Rat"""
 try:
     import modal
     
-    app = modal.App("lean-sdpo-ttt")
+    app = modal.App("lean-sdpo-kimina")
     
     # Volume for HF cache (persistent across runs)
     hf_cache_volume = modal.Volume.from_name("sdpo-hf-cache", create_if_missing=True)
@@ -180,7 +180,7 @@ try:
         image=kimina_image,
         cpu=8,
         memory=16384,
-        timeout=600,
+        timeout=1200,
         scaledown_window=300,
         allow_concurrent_inputs=100,
     )
@@ -245,7 +245,7 @@ try:
             retry_delay = 3
             for attempt in range(max_retries):
                 try:
-                    with httpx.Client(timeout=180.0) as client:
+                    with httpx.Client(timeout=600.0) as client:
                         response = client.post(
                             "http://localhost:8000/verify",
                             json={
@@ -282,7 +282,7 @@ try:
     
     @app.cls(
         image=inference_image,
-        timeout=300,
+        timeout=900,
         scaledown_window=300,
     )
     class LeanVerifier:
@@ -597,6 +597,46 @@ try:
                 # Use dataset-agnostic field extraction
                 lean4_code = self._get_field(problem, config.theorem_fields)
                 header = self._get_field(problem, config.header_fields)
+
+                # Guard: if the formal statement is entirely commented out (e.g. the
+                # dataset entry is tagged "-- Error: Real.log"), there is nothing to
+                # prove.  A file of just imports + comments compiles fine in Lean and
+                # would produce a spurious success signal — skip immediately.
+                if self._theorem_code_is_commented_out(lean4_code):
+                    print(f"  Skipping: formal statement is entirely commented out (unsupported problem)")
+                    verification = {
+                        "success": False,
+                        "complete": False,
+                        "has_sorry": True,
+                        "feedback": "Formal statement is entirely commented out — this problem is not supported (e.g. '-- Error: Real.log').",
+                        "errors": ["Commented-out formal statement"],
+                        "messages": [],
+                        "sorries": [],
+                        "source": "skipped",
+                        "is_server_error": False,
+                    }
+                    full_code = lean4_code
+                    is_success = False
+                    is_server_error = False
+                    # Record and break immediately — no point iterating
+                    iteration_log = {
+                        "iteration": iteration + 1,
+                        "student_prompt": base_prompt,
+                        "teacher_prompt": None,
+                        "raw_output": raw_output,
+                        "extracted_tactics": tactics,
+                        "full_code": full_code,
+                        "verification": verification,
+                        "success": False,
+                        "loss": None,
+                        "reward": None,
+                        "kl_div": None,
+                        "entropy": None,
+                        "grad_norm": None,
+                    }
+                    logs["iteration_logs"].append(iteration_log)
+                    break
+
                 full_code = self._create_full_lean_code(config, lean4_code, tactics, header)
                 
                 # Verify with retry logic for server errors
@@ -622,7 +662,7 @@ try:
                     verification["has_sorry"] = True
                     # Provide specific feedback based on why we got "sorry"
                     if is_truncated:
-                        verification["feedback"] = "Output was truncated before completing. Be more concise in reasoning and output the proof tactics sooner."
+                        verification["feedback"] = "Reasoning was cut off before completion. Be concise: end your reasoning and output the proof tactics sooner."
                         verification["is_truncated"] = True
                     else:
                         verification["feedback"] = "No valid proof tactics found. Output actual Lean 4 tactics in a ```lean4 code block."
@@ -898,6 +938,15 @@ try:
                 stripped = line.strip()
                 if not stripped:
                     continue
+                # Skip pure comment lines — they are never valid tactics.
+                if stripped.startswith("--"):
+                    continue
+                # Strip inline trailing comments (e.g. "· -- explain goal" → "·").
+                # A space followed by "--" marks a Lean comment; everything after is prose.
+                if " --" in stripped:
+                    stripped = stripped[:stripped.index(" --")].rstrip()
+                    if not stripped:
+                        continue
                 # Preserve imports, open, set_option for header extraction
                 if stripped.startswith("import "):
                     lines.append(stripped)
@@ -1036,11 +1085,35 @@ try:
             
             return tactics if tactics else "sorry"
         
+        @staticmethod
+        def _theorem_code_is_commented_out(theorem_code: str) -> bool:
+            """Return True if every non-empty, non-import line in theorem_code is a comment.
+            
+            This happens for problems in minif2f that are tagged '-- Error: Real.log'
+            (or similar) — the entire formal statement is commented out and there is
+            nothing to prove.  Attempting to verify such code always succeeds trivially
+            (Lean sees only imports + comments), producing a spurious reward signal.
+            """
+            for line in theorem_code.splitlines():
+                stripped = line.strip()
+                if not stripped:
+                    continue
+                if stripped.startswith("import "):
+                    continue
+                if stripped.startswith("--"):
+                    continue
+                return False  # found at least one real Lean line
+            return True
+
         def _create_full_lean_code(self, config: SDPOConfig, theorem_code: str, proof_tactics: str, header: str = "") -> str:
             """Create full Lean 4 code by replacing sorry with proof tactics.
             
             If header is provided (from dataset), uses it and strips model-generated imports.
             If no header, extracts imports from model output and uses configurable default as fallback.
+            
+            Returns a string containing only comments/imports (no real theorem) when the
+            theorem_code is entirely commented-out (e.g. "-- Error: Real.log" problems in
+            minif2f).  Callers must detect this with _theorem_code_is_commented_out().
             """
             has_header = bool(header.strip())
             
@@ -1081,9 +1154,18 @@ try:
             else:
                 last_sorry = theorem_code.rfind("sorry")
                 if last_sorry != -1:
-                    theorem_with_proof = (
-                        theorem_code[:last_sorry] + indented_proof + theorem_code[last_sorry + 5:]
-                    )
+                    before = theorem_code[:last_sorry]
+                    after  = theorem_code[last_sorry + 5:]
+                    # If the context immediately before "sorry" is ":= " (bare sorry, no "by"),
+                    # we must prepend "by\n  " so the tactics run in tactic mode.
+                    # Without this, tactics like "constructor" land as ":= constructor"
+                    # which is invalid Lean 4, but the Kimina verifier can silently accept it
+                    # and return a spurious success.
+                    if before.rstrip().endswith(":="):
+                        stripped_before = before.rstrip()
+                        theorem_with_proof = stripped_before + f" by\n  {indented_proof}" + after
+                    else:
+                        theorem_with_proof = before + indented_proof + after
                 else:
                     theorem_with_proof = theorem_code
             
