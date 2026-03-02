@@ -1,8 +1,13 @@
 # Generation Speed — Current Engineering Specs & Optimization Options
 
+**Date:** 2026-02-28  
+**Topics:** vllm, generation, performance
+
+---
+
 This document captures the current vLLM/inference configuration in `lean_sdpo_goedel_8b_modal.py` that affects **token generation speed**, and proposes changes to improve throughput.
 
-**Timing:** Per-step timings (setup + each iteration) are now recorded; see [TIMING_ANALYSIS.md](TIMING_ANALYSIS.md) for a one-iteration run and bottleneck analysis.
+**Timing:** Per-step timings (setup + each iteration) are now recorded; see [20260301_timing_analysis.md](20260301_timing_analysis.md) for a one-iteration run and bottleneck analysis.
 
 ---
 
@@ -43,7 +48,7 @@ trainer_self.vllm_engine = LLM(
 
 - **`VLLM_USE_FLASHINFER_SAMPLER`** is set to **`"0"`** so vLLM does **not** use FlashInfer-based sampling.
 - **Reason:** FlashInfer (and building it) can depend on `nvcc`; the Modal image is `debian_slim` without a CUDA toolkit, so we disabled it to avoid build/runtime errors.
-- **Effect:** We fall back to vLLM’s default (PyTorch) sampling path, which is slower than fused FlashInfer kernels.
+- **Effect:** We fall back to vLLM's default (PyTorch) sampling path, which is slower than fused FlashInfer kernels.
 
 ---
 
@@ -63,18 +68,18 @@ Generation is **single-prompt**: `generate([prompt], sampling_params, lora_reque
 ## 4. Why These Choices Were Made
 
 - **`enforce_eager=True`:** Avoid CUDA graph capture to reduce **peak memory** and avoid OOM when sharing the GPU with Unsloth. Eager also avoids graph capture time and potential failures with LoRA.
-- **`gpu_memory_utilization=0.35`:** Leave enough GPU memory for the 4-bit Unsloth model, LoRA, optimizer state, and activations so training doesn’t OOM.
+- **`gpu_memory_utilization=0.35`:** Leave enough GPU memory for the 4-bit Unsloth model, LoRA, optimizer state, and activations so training doesn't OOM.
 - **`max_num_seqs=1`:** SDPO loop is single-problem; no need for multi-sequence scheduling. Keeps memory predictable.
-- **FlashInfer off:** Image doesn’t provide `nvcc`; turning it off avoids build and runtime issues.
+- **FlashInfer off:** Image doesn't provide `nvcc`; turning it off avoids build and runtime issues.
 
 So the current setup **trades off decode speed for stability and memory safety** on one A100-80GB with Unsloth + vLLM.
 
 ---
 
-## 5. What You’re Likely Seeing
+## 5. What You're Likely Seeing
 
-- **If the metric is “27 tokens / minute”** (0.45 tok/s): That’s pathologically slow. Possible causes: CPU-bound post-processing, very long prompt processing, or a run where vLLM was still compiling/loading. Check logs for “est. speed output: X toks/s” to see vLLM’s reported decode rate.
-- **If the metric is “~27 tokens / second”** (e.g. “28.05 toks/s” in logs): That’s consistent with **eager mode + no CUDA graphs + single sequence**. For 8192 max tokens, 8K / 27 ≈ **5+ minutes** per full generation, which matches “really slow” for interactive use.
+- **If the metric is "27 tokens / minute"** (0.45 tok/s): That's pathologically slow. Possible causes: CPU-bound post-processing, very long prompt processing, or a run where vLLM was still compiling/loading. Check logs for "est. speed output: X toks/s" to see vLLM's reported decode rate.
+- **If the metric is "~27 tokens / second"** (e.g. "28.05 toks/s" in logs): That's consistent with **eager mode + no CUDA graphs + single sequence**. For 8192 max tokens, 8K / 27 ≈ **5+ minutes** per full generation, which matches "really slow" for interactive use.
 
 ---
 
@@ -100,7 +105,7 @@ So the current setup **trades off decode speed for stability and memory safety**
 
 4. **Enable FlashInfer (fused sampling)**  
    - Use a **custom Modal image** that includes CUDA toolkit and builds **FlashInfer** (or use a pre-built wheel if available).  
-   - Set **`VLLM_USE_FLASHINFER_SAMPLER=1`** (or vLLM’s current env for FlashInfer).  
+   - Set **`VLLM_USE_FLASHINFER_SAMPLER=1`** (or vLLM's current env for FlashInfer).  
    - **Effect:** Faster sampling and potentially better memory use; exact gain depends on vLLM version and hardware.
 
 5. **Try vLLM V1 engine**  
@@ -121,12 +126,12 @@ So the current setup **trades off decode speed for stability and memory safety**
    - **Risk:** Possible quality/accuracy drop and LoRA compatibility; needs validation.
 
 9. **Profile and log**  
-   - Log vLLM’s **throughput (tokens/s)** and **time to first token** per request.  
-   - Distinguish “slow decode” from “long prompt encoding” or “slow Python/verification” after generation.
+   - Log vLLM's **throughput (tokens/s)** and **time to first token** per request.  
+   - Distinguish "slow decode" from "long prompt encoding" or "slow Python/verification" after generation.
 
 ---
 
-## 7. Quick reference: where it’s set
+## 7. Quick reference: where it's set
 
 | What | Where in code |
 |------|----------------|
@@ -141,4 +146,4 @@ So the current setup **trades off decode speed for stability and memory safety**
 
 1. Set **`enforce_eager=False`** and **`max_model_len=8192`** (or 6144), and optionally **`max_new_tokens=4096`**.  
 2. Run one SDPO iteration and watch for OOM.  
-3. If stable, measure “est. speed output” in logs and wall-clock time for one generation; then consider FlashInfer + V1 and `gpu_memory_utilization` tweaks.
+3. If stable, measure "est. speed output" in logs and wall-clock time for one generation; then consider FlashInfer + V1 and `gpu_memory_utilization` tweaks.

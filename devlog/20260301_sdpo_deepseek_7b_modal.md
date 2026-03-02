@@ -1,5 +1,10 @@
 # Devlog: `lean_sdpo_deepseek_7b_modal.py`
 
+**Date:** 2026-03-01  
+**Topics:** sdpo, deepseek, modal
+
+---
+
 Single-file devlog for the **DeepSeek-Prover-V2-7B** SDPO training script on Modal. Check here for purpose, design, and a dated changelog.
 
 ---
@@ -24,12 +29,12 @@ Use this section to see what changed and when. Add new entries at the **top** un
 ### 2026-03-01 (Unsloth + config compatibility)
 
 - **rope_scaling:** DeepSeek-Prover-V2-7B `config.json` uses integer `factor` (16), `beta_fast` (32), `beta_slow` (1). Transformers/Unsloth expect floats, so loading logged warnings and could break. **Fix:** Pre-download model to a temp dir and rewrite `config.json` so all `rope_scaling` numeric fields are floats.
-- **Chat template / add_generation_prompt:** Unsloth’s `fix_chat_template()` requires the tokenizer’s chat_template to contain the literal `{% if add_generation_prompt %}`. DeepSeek’s template uses `{% if add_generation_prompt and not ns.is_last_user ... %}`, so Unsloth’s check fails and raises RuntimeError. **Fix:** In the same pre-download step, patch `tokenizer_config.json` by appending a no-op `{% if add_generation_prompt %}{% endif %}` so the check passes; generation still uses the rest of the template.
-- **Implementation:** Added `_patch_deepseek_model_for_unsloth()` (downloads via `huggingface_hub.snapshot_download`, patches config + tokenizer, returns path). Setup loads Unsloth and vLLM from this patched path when the model name is DeepSeek-Prover. See “Unsloth / vLLM compatibility” below.
+- **Chat template / add_generation_prompt:** Unsloth's `fix_chat_template()` requires the tokenizer's chat_template to contain the literal `{% if add_generation_prompt %}`. DeepSeek's template uses `{% if add_generation_prompt and not ns.is_last_user ... %}`, so Unsloth's check fails and raises RuntimeError. **Fix:** In the same pre-download step, patch `tokenizer_config.json` by appending a no-op `{% if add_generation_prompt %}{% endif %}` so the check passes; generation still uses the rest of the template.
+- **Implementation:** Added `_patch_deepseek_model_for_unsloth()` (downloads via `huggingface_hub.snapshot_download`, patches config + tokenizer, returns path). Setup loads Unsloth and vLLM from this patched path when the model name is DeepSeek-Prover. See "Unsloth / vLLM compatibility" below.
 
 ### 2026-03-01 (naming)
 
-- **8b → 7b:** Renamed script to `lean_sdpo_deepseek_7b_modal.py`, devlog to `LEAN_SDPO_DEEPSEEK_7B_MODAL.md`. App name `lean-sdpo-deepseek-7b`, local output dir `sdpo_results/deepseek_7b`. All usage examples and references updated.
+- **8b → 7b:** Renamed script to `lean_sdpo_deepseek_7b_modal.py`, devlog to `20260301_sdpo_deepseek_7b_modal.md`. App name `lean-sdpo-deepseek-7b`, local output dir `sdpo_results/deepseek_7b`. All usage examples and references updated.
 
 ### 2026-03-01
 
@@ -97,7 +102,7 @@ We do **not** change any other keys (e.g. `type`, `original_max_position_embeddi
 
 ### 2.2 Bug 2: Unsloth chat-template check for `add_generation_prompt` (detailed)
 
-**What happens:** When Unsloth loads a tokenizer, it runs a helper called `fix_chat_template()` (in `unsloth/tokenizer_utils.py`). That function **requires** the tokenizer’s chat template (a Jinja2 string) to contain the **exact** substring:
+**What happens:** When Unsloth loads a tokenizer, it runs a helper called `fix_chat_template()` (in `unsloth/tokenizer_utils.py`). That function **requires** the tokenizer's chat template (a Jinja2 string) to contain the **exact** substring:
 
 ```text
 {% if add_generation_prompt %}
@@ -110,9 +115,9 @@ RuntimeError: Unsloth: The tokenizer `deepseek-ai/DeepSeek-Prover-V2-7B`
 does not have a {% if add_generation_prompt %} for generation purposes.
 ```
 
-So the **bug** is that Unsloth’s check is a simple string match: it looks for that exact phrase. It does **not** accept variants like `{% if add_generation_prompt and ... %}`.
+So the **bug** is that Unsloth's check is a simple string match: it looks for that exact phrase. It does **not** accept variants like `{% if add_generation_prompt and ... %}`.
 
-**What DeepSeek’s template actually has:** The DeepSeek-Prover-V2-7B `tokenizer_config.json` uses a chat template that *does* use `add_generation_prompt`, but inside a longer condition, for example:
+**What DeepSeek's template actually has:** The DeepSeek-Prover-V2-7B `tokenizer_config.json` uses a chat template that *does* use `add_generation_prompt`, but inside a longer condition, for example:
 
 ```jinja2
 {% if add_generation_prompt and not ns.is_last_user and not ns.is_tool %}{{'</think>'}}{% endif %}
@@ -123,11 +128,11 @@ So the template:
 - Does respect `add_generation_prompt` for when to add the assistant turn.
 - Does **not** contain the exact substring `{% if add_generation_prompt %}` (there is no `%}` immediately after `add_generation_prompt`; instead there is ` and not ...`).
 
-So the **root cause** is the combination of (1) Unsloth’s strict substring check and (2) DeepSeek’s template using a compound condition. Functionally the template is correct; only the check fails.
+So the **root cause** is the combination of (1) Unsloth's strict substring check and (2) DeepSeek's template using a compound condition. Functionally the template is correct; only the check fails.
 
 **Why it matters:** Without passing this check, Unsloth refuses to continue and we never get to load the model. So we must make the template string contain that exact substring somewhere.
 
-**Fix (what we do):** We do **not** rewrite or simplify DeepSeek’s full template (that could change behavior). We only make the check pass:
+**Fix (what we do):** We do **not** rewrite or simplify DeepSeek's full template (that could change behavior). We only make the check pass:
 
 1. In the same patched directory, we read `tokenizer_config.json` and get the `chat_template` string.
 2. If that string **does not** already contain `{% if add_generation_prompt %}`, we **append** a no-op block to the end of the template:
@@ -139,7 +144,7 @@ So the **root cause** is the combination of (1) Unsloth’s strict substring che
 Effects:
 
 - The template string now contains the exact substring Unsloth looks for, so `fix_chat_template()` passes.
-- The **rest** of the template is unchanged. All of DeepSeek’s original logic (including `{% if add_generation_prompt and not ns.is_last_user and not ns.is_tool %}...`) still runs first. The appended block is a no-op (it renders nothing when `add_generation_prompt` is true or false), so it does not change the formatted output. So generation and training behavior stay the same; we only satisfy the checker.
+- The **rest** of the template is unchanged. All of DeepSeek's original logic (including `{% if add_generation_prompt and not ns.is_last_user and not ns.is_tool %}...`) still runs first. The appended block is a no-op (it renders nothing when `add_generation_prompt` is true or false), so it does not change the formatted output. So generation and training behavior stay the same; we only satisfy the checker.
 
 ---
 
@@ -165,7 +170,7 @@ So both Unsloth and vLLM see the **same** patched config and tokenizer; neither 
 
 - **Model:** `deepseek-ai/DeepSeek-Prover-V2-7B` (7B is the small Prover).
 - **Tokenizer:** LlamaTokenizerFast. EOS/pad use `</think>`-style tokens (Unicode U+300C / U+300D possible in decoded text). Chat format: `</think>` (User) then `</think>` (Assistant) for generation.
-- **Stop tokens (config):** ASCII `<|endofsentence|>`, `<|endoftext|>`, `</think>`, `</think>`; Unicode `\u300cendofsentence\u300d`, `\u300cUser\u300d`, `\u300cAssistant\u300d`; plus common fallbacks. vLLM stops on these so generation doesn’t start a new turn.
+- **Stop tokens (config):** ASCII `<|endofsentence|>`, `<|endoftext|>`, `</think>`, `</think>`; Unicode `\u300cendofsentence\u300d`, `\u300cUser\u300d`, `\u300cAssistant\u300d`; plus common fallbacks. vLLM stops on these so generation doesn't start a new turn.
 - **Strip:** `_strip_special_tokens_from_generation()` removes trailing EOS variants and leading assistant/think markers (ASCII and Unicode) before tactic extraction.
 
 ---
@@ -180,8 +185,8 @@ So both Unsloth and vLLM see the **same** patched config and tokenizer; neither 
 
 ## 5. Prompts
 
-- **Student:** `_create_base_prompt()` — one user message: “Complete the following Lean 4 code:” + ` ```lean4 ``` ` with full statement (header + theorem) + “Before producing the Lean 4 code… provide a detailed proof plan…” (matches DeepSeek-Prover README).
-- **Teacher:** `_create_feedback_prompt()` — same structure + “Previous proof attempts produced these errors: … Avoid these errors.” + same proof-plan instruction. Feedback is errors-only by default (`feedback_include_failed_proof=False`).
+- **Student:** `_create_base_prompt()` — one user message: "Complete the following Lean 4 code:" + ` ```lean4 ``` ` with full statement (header + theorem) + "Before producing the Lean 4 code… provide a detailed proof plan…" (matches DeepSeek-Prover README).
+- **Teacher:** `_create_feedback_prompt()` — same structure + "Previous proof attempts produced these errors: … Avoid these errors." + same proof-plan instruction. Feedback is errors-only by default (`feedback_include_failed_proof=False`).
 - **Chat format:** `tokenizer.apply_chat_template(..., add_generation_prompt=True)` so the model gets correct User/Assistant framing.
 
 ---
@@ -214,8 +219,8 @@ So both Unsloth and vLLM see the **same** patched config and tokenizer; neither 
 
 ## 8. Related devlogs
 
-- **Bugfixes (Goedel/Modal):** `devlog/BUGFIXES_20260301.md` — verification timeouts, LoRA targets, quick-reject, Kimina response handling (same pipeline ideas apply).
-- **Goedel script summary:** `devlog/GOEDEL_8B_SDPO_CHANGES.md` — same SDPO design; this devlog is the DeepSeek-7B counterpart.
+- **Bugfixes (Goedel/Modal):** [20260301_bugfixes_sdpo_modal.md](20260301_bugfixes_sdpo_modal.md) — verification timeouts, LoRA targets, quick-reject, Kimina response handling (same pipeline ideas apply).
+- **Goedel script summary:** [20260224_sdpo_goedel_8b_modal.md](20260224_sdpo_goedel_8b_modal.md) — same SDPO design; this devlog is the DeepSeek-7B counterpart.
 
 ---
 

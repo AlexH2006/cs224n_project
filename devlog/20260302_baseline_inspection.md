@@ -1,5 +1,10 @@
 # Baseline Inspection — Goedel 8B & Kimina 1.7B
 
+**Date:** 2026-03-02  
+**Topics:** baseline, evaluation, minif2f, goedel, kimina
+
+---
+
 Centralized notes for the minif2f-lean4 baseline (first 40 problems, pass@4). Both models achieve **35/40 (87.5%)** and fail on the **same 5 problems** (confirmed from both run summaries in the repo).
 
 **References:** [baseline/README.md](../baseline/README.md) | Run: `modal run baseline/lean_baseline_eval_modal.py --n-problems 40 --pass-k 4`

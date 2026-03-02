@@ -1,6 +1,9 @@
 # GPU Configuration Notes for SDPO Training
 
-## Overview
+**Date:** 2026-02-20  
+**Topics:** gpu, config, sdpo
+
+---
 
 This document tracks known issues and configurations for running SDPO test-time training on different GPU configurations.
 

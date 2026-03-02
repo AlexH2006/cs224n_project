@@ -1,4 +1,9 @@
-# Bugfixes & Observations — 2026-03-02
+# Bugfixes & Observations — Verification (Kimina 2B / Goedel / DeepSeek)
+
+**Date:** 2026-03-02  
+**Topics:** bugfixes, verification, kimina, sdpo
+
+---
 
 Session focused on investigating and fixing a cluster of false-positive verification bugs in `lean_sdpo_kimina_2b_modal.py` (and the parallel Goedel 8B / DeepSeek 7B files). All bugs were discovered by inspecting SDPO run logs in `sdpo_results/kimina_2b/`.
 

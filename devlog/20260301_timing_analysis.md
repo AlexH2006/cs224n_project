@@ -1,4 +1,9 @@
-# Timing Analysis — One-Iteration Run (2026-03-01)
+# Timing Analysis — One-Iteration Run
+
+**Date:** 2026-03-01  
+**Topics:** timing, performance, vllm
+
+---
 
 Instrumentation was added to record every step in the SDPO pipeline (setup + per-iteration). This document summarizes one run with **max_iterations=1**, **problem_idx=0** (mathd_algebra_478), **CUDA graphs enabled** (`enforce_eager=False`), and **gpu_memory_utilization=0.4**.
 

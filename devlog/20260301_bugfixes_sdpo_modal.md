@@ -1,4 +1,9 @@
-# Bugfixes & Changes — 2026-03-01
+# Bugfixes & Changes — SDPO Modal (Goedel 8B)
+
+**Date:** 2026-03-01  
+**Topics:** bugfixes, sdpo, modal, timeouts, lora
+
+---
 
 Session focused on fixing runtime failures in `lean_sdpo_goedel_8b_modal.py` when running SDPO training on Modal with PutnamBench problems. Each issue was discovered sequentially by running the training loop end-to-end.
 

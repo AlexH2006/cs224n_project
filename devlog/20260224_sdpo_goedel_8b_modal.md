@@ -1,5 +1,10 @@
 # Goedel-8B SDPO Modal Pipeline — Summary of Important Changes
 
+**Date:** 2026-02-24  
+**Topics:** sdpo, goedel, modal
+
+---
+
 This document summarizes the important changes in `lean_sdpo_goedel_8b_modal.py` relative to the original Kimina-based SDPO setup. The philosophy is **modular, containerized code** with clear comments so failures are localized.
 
 ---

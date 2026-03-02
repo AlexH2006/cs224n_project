@@ -47,10 +47,9 @@ modal token new   # one-time auth
 ├── requirements.txt
 ├── requirements_conda.txt     # Optional Conda environment
 ├── dataset/                   # Input datasets
-├── devlog/                    # Change logs and engineering notes
-│   ├── GOEDEL_8B_SDPO_CHANGES.md   # Goedel-8B pipeline summary
-│   ├── GPU_CONFIG_NOTES.md         # GPU config and OOM notes
-│   └── GENERATION_SPEED_SPECS.md   # vLLM generation speed and optimizations
+├── devlog/                    # Change logs and engineering notes (see devlog/README.md)
+│   ├── README.md                   # Naming convention and index
+│   └── YYYYMMDD_topic_slug.md      # Dated entries (e.g. 20260302_bugfixes_verification.md)
 ├── docs/                      # Documentation
 │   ├── core_algo_explained.md
 │   ├── README_SDPO.md
@@ -105,7 +104,7 @@ modal run training/lean_sdpo_goedel_8b_modal.py --problem-idx 1 --max-iterations
 modal run training/lean_sdpo_goedel_8b_modal.py --problem-idx 0 --lora-rank 32 --gradient-accumulation-steps 8
 ```
 
-Local results: `sdpo_results/goedel_8b/run_{problem_idx}_{timestamp}/`. For pipeline details and generation-speed notes, see [devlog/GOEDEL_8B_SDPO_CHANGES.md](devlog/GOEDEL_8B_SDPO_CHANGES.md) and [devlog/GENERATION_SPEED_SPECS.md](devlog/GENERATION_SPEED_SPECS.md).
+Local results: `sdpo_results/goedel_8b/run_{problem_idx}_{timestamp}/`. For pipeline details and generation-speed notes, see [devlog/](devlog/) (index: [devlog/README.md](devlog/README.md)) — e.g. [20260224_sdpo_goedel_8b_modal.md](devlog/20260224_sdpo_goedel_8b_modal.md), [20260228_generation_speed_specs.md](devlog/20260228_generation_speed_specs.md).
 
 ### 2. SDPO locally
 
@@ -157,7 +156,7 @@ Configure paths and model in the CONFIGURATION section inside `scripts/pipeline.
 ## References
 
 - Algorithm and loss: [docs/core_algo_explained.md](docs/core_algo_explained.md)
-- **Devlog** (change logs and specs): [devlog/](devlog/) — Goedel-8B pipeline summary, GPU config notes, generation speed and optimization options
+- **Devlog** (change logs and specs): [devlog/](devlog/) — index in [devlog/README.md](devlog/README.md); dated entries (YYYYMMDD_topic_slug.md) for pipeline summaries, bugfixes, GPU config, generation speed
 - Kimina: [projectnumina.ai](https://projectnumina.ai)
 - Modal: [modal.com](https://modal.com)
 - MATH: [hendrycks/math](https://github.com/hendrycks/math)
