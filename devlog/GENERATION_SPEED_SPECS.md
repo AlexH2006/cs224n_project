@@ -1,6 +1,8 @@
 # Generation Speed — Current Engineering Specs & Optimization Options
 
-This document captures the current vLLM/inference configuration in `lean_sdpo_goedel_8b_modal.py` that affects **token generation speed**, and proposes changes to improve throughput. If you're seeing ~27 tokens/min (or even ~27 tokens/s feeling slow for 8K-token runs), the knobs below are why.
+This document captures the current vLLM/inference configuration in `lean_sdpo_goedel_8b_modal.py` that affects **token generation speed**, and proposes changes to improve throughput.
+
+**Timing:** Per-step timings (setup + each iteration) are now recorded; see [TIMING_ANALYSIS.md](TIMING_ANALYSIS.md) for a one-iteration run and bottleneck analysis.
 
 ---
 
@@ -9,8 +11,8 @@ This document captures the current vLLM/inference configuration in `lean_sdpo_go
 | Setting | Current value | Effect on speed |
 |--------|----------------|-----------------|
 | **Engine** | Legacy V0 (`VLLM_USE_V1=0`) | V1 would use torch.compile (3+ min first run) but can be faster once warm. We force V0 for predictable startup. |
-| **`enforce_eager`** | **`True`** | **Disables CUDA graph capture.** Every decoding step goes through Python → kernel launch; no fused decode. This is the **#1 speed killer** — CUDA graphs typically give **2–4×** decode speedup. |
-| **`gpu_memory_utilization`** | **0.35** | vLLM gets ~28 GB on an 80 GB GPU. Rest is left for Unsloth (4-bit + LoRA + optimizer). Lower utilization → smaller KV cache and less headroom for graph memory. |
+| **`enforce_eager`** | **`False`** | **CUDA graphs enabled.** First request may take ~20–60s to capture; decode is ~2–4× faster (e.g. ~73 tok/s observed). |
+| **`gpu_memory_utilization`** | **0.4** | vLLM gets ~32 GB on an 80 GB GPU. Rest is left for Unsloth (4-bit + LoRA + optimizer). |
 | **`max_model_len`** | **10240** | Max sequence length (prompt + generated). Drives KV cache size. |
 | **`max_num_seqs`** | **1** | Only one sequence in flight. No batching; no opportunity to hide latency with concurrent sequences. |
 | **`enable_lora`** | True | Required for SDPO; LoRA adapter overlay has some overhead. |
@@ -26,7 +28,7 @@ os.environ["VLLM_USE_FLASHINFER_SAMPLER"] = "0"
 trainer_self.vllm_engine = LLM(
     model=trainer_self.model_name,
     dtype="bfloat16",
-    gpu_memory_utilization=gpu_memory_utilization,  # 0.35
+    gpu_memory_utilization=gpu_memory_utilization,  # 0.4
     max_model_len=max_model_len,                     # 10240
     max_num_seqs=1,
     enable_lora=True,

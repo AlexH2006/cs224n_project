@@ -48,7 +48,8 @@ output.txt
 # Generated / run outputs
 sdpo_results/
 logs/
-results/
+results/*
+!results/misc/
 eval_nl_MATH/
 
 # Large / generated (uncomment if you don't want to track)
