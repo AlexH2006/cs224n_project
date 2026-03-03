@@ -136,7 +136,12 @@ This is a **test-time** self-distillation implementation, which differs from ful
 | KL divergence | Monitoring only | Used in loss function |
 | Scale | Single problem | Batch training |
 
-For full SDPO training, see the `SDPO/` directory which uses the verl framework.
+For full SDPO training on Modal, see:
+- `training/lean_sdpo_kimina_2b_modal.py` — Kimina-Prover-RL-1.7B
+- `training/lean_sdpo_kimina_distill_1_7b_modal.py` — Kimina-Prover-Distill-1.7B
+- `training/lean_sdpo_goedel_8b_modal.py` — Goedel-Prover-V2-8B (LoRA)
+
+The `SDPO/` directory uses the verl framework for batch training.
 
 ## References
 

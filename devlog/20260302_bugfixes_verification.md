@@ -215,3 +215,44 @@ A more conservative approach would be to only use Strategy 2 as a last resort an
 | `_theorem_code_is_commented_out()` helper + guard | All 3 | Detect and skip HF dataset's 17 broken problems |
 | Fix `:= sorry` → `:= by\n  tactics` assembly | All 3 | Produce valid Lean 4 tactic-mode proofs from HF-style formal statements |
 | Backport timeout fixes to Kimina 2B | `lean_sdpo_kimina_2b_modal.py` | Match Goedel 8B timeouts; prevent `FunctionTimeoutError` crashes |
+
+---
+
+## Follow-up fix: Unsolved goals treated as verification failure
+
+### Problem (from Observation above)
+The verifier only treated messages with `severity == "error"` as failures. Lean 4 can report "unsolved goals" as `severity: "warning"` or `"information"`, so incomplete proofs (e.g. `constructor · intro h` with open goals) were reported as `success: true`, `complete: true`.
+
+### Fix applied
+In `LeanVerifier.verify` (all four training files: `lean_sdpo_kimina_2b_modal.py`, `lean_sdpo_kimina_distill_1_7b_modal.py`, `lean_sdpo_goedel_8b_modal.py`, `lean_sdpo_deepseek_7b_modal.py`): when iterating over Kimina `messages`, treat any message whose text contains `"unsolved goals"` (case-insensitive) as an error regardless of severity. Add that message to `errors` and set `has_error = True`, so the run is no longer marked complete.
+
+---
+
+## Follow-up fix: No tactic extraction from truncated reasoning (strict formatting)
+
+### Problem (from Observation above)
+Strategy 2 extracted tactics from code blocks inside `<think>` when the model never closed with `</think>` (truncated output). Those tactics are mid-reasoning scratchpad attempts and can be incomplete, wasting verification and causing false positives.
+
+### Fix applied
+- **Main loop:** If output is truncated (`<think>` present, `</think>` absent), set `tactics = "sorry"` and do not call `_extract_proof_tactics`.
+- **`_extract_proof_tactics`:** At the start, if `<think>` is in the output and `</think>` is not, return `"sorry"` immediately (so truncated traces never yield extracted tactics).
+- **Strategy 2 removed:** The branch that extracted from code blocks inside `<think>` when there was no `</think>` was removed. Extraction now uses only: (1) content after `</think>` (complete thinking), (2) code blocks anywhere in the output when reasoning is complete, (3) the existing ":= by" pattern (Strategy 4).
+
+Applied to all four training files: `lean_sdpo_kimina_2b_modal.py`, `lean_sdpo_kimina_distill_1_7b_modal.py`, `lean_sdpo_goedel_8b_modal.py`, and `lean_sdpo_deepseek_7b_modal.py`.
+
+---
+
+## Follow-up: Goedel and DeepSeek verification parity
+
+The same verification fixes (unsolved goals, truncated → sorry, Kimina server health/restart) were originally applied only to the Kimina training files. They have been backported to **Goedel** and **DeepSeek** so all four pipelines behave consistently.
+
+### Summary of changes applied to `lean_sdpo_goedel_8b_modal.py` and `lean_sdpo_deepseek_7b_modal.py`
+
+| Area | Change |
+|------|--------|
+| **KiminaLeanServer** | Extracted `_start_lean_server()`; added `_ensure_server_alive()` called at top of every `verify()`. On connect/timeout/other failure, retry loop restarts the server instead of sleeping. HTTP timeout 60 s, 3 retries (was 600 s / 10 retries). |
+| **LeanVerifier** | Message parsing: treat any message whose text contains `"unsolved goals"` (case-insensitive) as an error regardless of severity. |
+| **Main loop** | If output is truncated (`<think>` without `</think>`; DeepSeek uses `_has_think_start` / `_has_think_end`), set `tactics = "sorry"` and do not call `_extract_proof_tactics`. |
+| **_extract_proof_tactics** | Early return `"sorry"` when reasoning is incomplete (<think> present, </think> absent). Removed Strategy B (extract from code blocks inside <think> when truncated). |
+
+Devlog references: verification slowness / iteration 3–4 fix is documented in `20260302_verification_slowness_iter3_4.md`; unsolved-goals and truncated-tactic fixes are in this file above.

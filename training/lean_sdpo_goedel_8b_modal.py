@@ -192,9 +192,11 @@ def _extract_proof_tactics(output: str) -> str:
     """Extract proof tactics using priority order and best-block scoring.
     
     A) After </think>: score all code blocks, take best; else raw text.
-    B) Inside <think>...</think>|$: extract all code blocks, concatenate.
-    C) Any code block in output: select best.
-    D) After := by: up to 10 non-empty non-comment lines.
+    B) Any code block in output: select best.
+    C) After := by: up to 10 non-empty non-comment lines.
+    
+    If reasoning is incomplete (<think> without </think>), return sorry — do not
+    extract from code blocks inside <think> (strict formatting).
     
     Score: fewer sorry > longer length. Reject empty/sorry/by. Return sorry on failure.
     """
@@ -219,6 +221,10 @@ def _extract_proof_tactics(output: str) -> str:
 
     tactics: Optional[str] = None
 
+    # Strict: incomplete reasoning trace → sorry (no extraction from <think>)
+    if "<think>" in output and "</think>" not in output:
+        return "sorry"
+
     # A) </think> present: only text after last </think>
     if "</think>" in output:
         after = output.split("</think>")[-1].strip()
@@ -230,27 +236,13 @@ def _extract_proof_tactics(output: str) -> str:
             if not tactics or tactics.lower() in ("sorry", "by"):
                 tactics = None
 
-    # B) <think> present: inside think region
-    if not tactics and "<think>" in output:
-        m = re.search(r"<think>(.*?)(?:</think>|$)", output, re.DOTALL)
-        if m:
-            matches = re.findall(code_pattern, m.group(1), re.DOTALL)
-            if matches:
-                parts = []
-                for blk in matches:
-                    ex = _extract_tactics_from_code_block(blk)
-                    if ex and ex.lower() not in ("sorry", "by"):
-                        parts.append(ex)
-                if parts:
-                    tactics = "\n".join(parts)
-
-    # C) Any code block in output
+    # B) Any code block in output
     if not tactics:
         matches = re.findall(code_pattern, output, re.DOTALL)
         if matches:
             tactics = pick_best(matches)
 
-    # D) := by fallback
+    # C) := by fallback
     if not tactics and ":= by" in output:
         idx = output.rfind(":= by")
         after = output[idx + 5:].strip()
@@ -377,14 +369,20 @@ try:
     class KiminaLeanServer:
         """High-performance Lean verification using Kimina Lean Server."""
         
-        @modal.enter()
-        def start_server(self):
-            """Start the Kimina Lean Server."""
+        def _start_lean_server(self):
+            """(Re)start the Lean server subprocess and block until it responds."""
             import subprocess
             import os
             import time
             import httpx
-            
+
+            if hasattr(self, "server_proc") and self.server_proc is not None:
+                try:
+                    self.server_proc.kill()
+                    self.server_proc.wait(timeout=5)
+                except Exception:
+                    pass
+
             env = {
                 **os.environ,
                 "LEAN_SERVER_HOST": "0.0.0.0",
@@ -402,13 +400,11 @@ try:
             
             print("Starting Kimina Lean Server...")
             
-            # Wait for server to be ready with health check
             max_wait = 60
             start_time = time.time()
             while time.time() - start_time < max_wait:
                 try:
                     with httpx.Client(timeout=5.0) as client:
-                        # Try a simple verification to check if server is ready
                         response = client.post(
                             "http://localhost:8000/verify",
                             json={
@@ -424,18 +420,54 @@ try:
                 time.sleep(2)
             
             print(f"Warning: Kimina server may not be fully ready after {max_wait}s")
+
+        def _ensure_server_alive(self):
+            """Check that the Lean server subprocess is alive and responsive; restart if not."""
+            import httpx
+
+            if self.server_proc.poll() is not None:
+                print(f"Lean server subprocess exited (code {self.server_proc.returncode}), restarting...")
+                self._start_lean_server()
+                return
+
+            try:
+                with httpx.Client(timeout=5.0) as client:
+                    resp = client.post(
+                        "http://localhost:8000/verify",
+                        json={
+                            "codes": [{"custom_id": "health", "proof": "example : True := trivial"}],
+                            "infotree_type": "original",
+                        },
+                    )
+                    if resp.status_code == 200:
+                        return
+            except Exception:
+                pass
+
+            print("Lean server unresponsive, restarting...")
+            self._start_lean_server()
+
+        @modal.enter()
+        def start_server(self):
+            """Start the Kimina Lean Server on container entry."""
+            self._start_lean_server()
         
         @modal.method()
         def verify(self, lean_code: str, custom_id: str = "1") -> dict:
-            """Verify Lean code using the Kimina server."""
+            """Verify Lean code using the Kimina server.
+            HTTP timeout is 60s so verification fails fast; normal proofs complete in under a minute.
+            """
             import httpx
             import time
             
-            max_retries = 10
+            self._ensure_server_alive()
+
+            http_timeout = 60.0
+            max_retries = 3
             retry_delay = 3
             for attempt in range(max_retries):
                 try:
-                    with httpx.Client(timeout=600.0) as client:
+                    with httpx.Client(timeout=http_timeout) as client:
                         response = client.post(
                             "http://localhost:8000/verify",
                             json={
@@ -446,23 +478,21 @@ try:
                         response.raise_for_status()
                         return response.json()
                 except httpx.ConnectError as e:
-                    # Connection refused - server not ready yet
                     if attempt < max_retries - 1:
-                        print(f"Kimina verify attempt {attempt + 1} failed: {e}, retrying in {retry_delay}s...")
-                        time.sleep(retry_delay)
+                        print(f"Kimina verify attempt {attempt + 1} failed (connect): {e}, restarting server...")
+                        self._start_lean_server()
                         continue
                     return {"error": str(e), "is_server_error": True}
                 except httpx.TimeoutException as e:
-                    # Timeout - server overloaded or proof too complex
                     if attempt < max_retries - 1:
-                        print(f"Kimina verify timeout on attempt {attempt + 1}, retrying...")
-                        time.sleep(retry_delay)
+                        print(f"Kimina verify timeout on attempt {attempt + 1}, restarting server...")
+                        self._start_lean_server()
                         continue
                     return {"error": f"Verification timeout: {str(e)}", "is_server_error": True}
                 except Exception as e:
                     if attempt < max_retries - 1:
-                        print(f"Kimina verify attempt {attempt + 1} failed: {e}, retrying...")
-                        time.sleep(retry_delay)
+                        print(f"Kimina verify attempt {attempt + 1} failed: {e}, restarting server...")
+                        self._start_lean_server()
                         continue
                     return {"error": str(e), "is_server_error": True}
     
@@ -512,8 +542,13 @@ try:
                     
                     errors = []
                     for msg in messages:
-                        if isinstance(msg, dict) and msg.get("severity") == "error":
-                            errors.append(msg.get("data", str(msg)))
+                        if not isinstance(msg, dict):
+                            continue
+                        msg_text = msg.get("data", str(msg))
+                        if msg.get("severity") == "error":
+                            errors.append(msg_text)
+                        elif "unsolved goals" in (msg_text or "").lower():
+                            errors.append(msg_text or "unsolved goals")
                     
                     has_error = len(errors) > 0 or status == "error"
                     has_sorry = len(sorries) > 0
@@ -769,7 +804,10 @@ try:
 
                 # ---- Extract tactics and build full Lean code ----
                 is_truncated = "<think>" in raw_output and "</think>" not in raw_output
-                tactics = self._extract_proof_tactics(raw_output)
+                if is_truncated:
+                    tactics = "sorry"
+                else:
+                    tactics = self._extract_proof_tactics(raw_output)
                 lean4_code = self._get_field(problem, config.theorem_fields)
                 header = self._get_field(problem, config.header_fields)
 

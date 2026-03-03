@@ -15,6 +15,9 @@ Engineering notes, bugfixes, and specs for the SDPO/Lean pipeline. Entries use a
 
 | Date       | File | Topics |
 |------------|------|--------|
+| 2026-03-03 | [20260303_sdpo_output_analysis.md](20260303_sdpo_output_analysis.md) | sdpo, reward, loss, distillation |
+| 2026-03-02 | [20260302_lean_verification_system_deep_dive.md](20260302_lean_verification_system_deep_dive.md) | verification, kimina, modal, timeouts, containers, debugging |
+| 2026-03-02 | [20260302_verification_slowness_iter3_4.md](20260302_verification_slowness_iter3_4.md) | verification, kimina, sdpo, performance, modal |
 | 2026-03-02 | [20260302_bugfixes_verification.md](20260302_bugfixes_verification.md) | bugfixes, verification, kimina, sdpo |
 | 2026-03-02 | [20260302_baseline_inspection.md](20260302_baseline_inspection.md) | baseline, evaluation, minif2f, goedel, kimina |
 | 2026-03-02 | [20260302_baseline_kimina_redirect.md](20260302_baseline_kimina_redirect.md) | baseline, kimina |

@@ -4,7 +4,7 @@ Test-time reinforcement learning for Lean 4 theorem proving using **SDPO (Self-D
 
 ## Overview
 
-- **SDPO**: The model improves at a single problem by distilling from itself: it sees compiler feedback only when computing the teacher distribution; at test time it uses only the problem (no feedback). See [Algorithm details](docs/core_algo_explained.md). Two Modal pipelines: **Kimina 2B** (full fine-tune) and **Goedel 8B** (LoRA with Unsloth).
+- **SDPO**: The model improves at a single problem by distilling from itself: it sees compiler feedback only when computing the teacher distribution; at test time it uses only the problem (no feedback). See [Algorithm details](docs/core_algo_explained.md). Modal pipelines: **Kimina 2B** (full fine-tune), **Kimina Distill 1.7B** (AI-MO/Kimina-Prover-Distill-1.7B), and **Goedel 8B** (LoRA with Unsloth).
 - **Lean verification**: Proofs are checked via [Kimina](https://projectnumina.ai) or a local Lean 4 toolchain.
 - **MATH evaluation**: [eval/eval_nl_MATH.py](eval/eval_nl_MATH.py) runs few-shot MATH with local or [Modal](https://modal.com) inference.
 
@@ -61,7 +61,8 @@ modal token new   # one-time auth
 │   ├── eval_minif2f_kimina.py
 │   └── eval_minif2f_qwen.py
 ├── training/                  # SDPO test-time RL
-│   ├── lean_sdpo_kimina_2b_modal.py   # SDPO on Modal: Kimina-Prover 1.7B
+│   ├── lean_sdpo_kimina_2b_modal.py           # SDPO on Modal: Kimina-Prover-RL-1.7B
+│   ├── lean_sdpo_kimina_distill_1_7b_modal.py # SDPO on Modal: Kimina-Prover-Distill-1.7B
 │   ├── lean_sdpo_goedel_8b_modal.py   # SDPO on Modal: Goedel-Prover-V2-8B (LoRA/Unsloth)
 │   └── lean_sdpo_ttt.py       # Local SDPO test-time RL
 ├── verification/              # Proof verification utilities
@@ -75,7 +76,8 @@ modal token new   # one-time auth
 ├── src/                       # Pipeline utilities (compile, inference, summarize)
 ├── SDPO/                      # SDPO/verl-related training utilities (submodule)
 ├── sdpo_results/              # SDPO run outputs (gitignored)
-│   ├── kimina_2b/             # Kimina 2B runs: run_{problem_idx}_{timestamp}/
+│   ├── kimina_2b/             # Kimina 2B (RL 1.7B) runs: run_{problem_idx}_{timestamp}/
+│   ├── kimina_distill_1_7b/   # Kimina Distill 1.7B runs: run_{problem_idx}_{timestamp}/
 │   └── goedel_8b/             # Goedel 8B runs: run_{problem_idx}_{timestamp}/
 └── results/                   # Other run outputs (gitignored optional)
 ```
@@ -86,7 +88,7 @@ All commands below are run from the **project root**.
 
 ### 1. SDPO on Modal (recommended for full pipeline)
 
-Two Modal pipelines: **Kimina 2B** (full fine-tune, A100-40GB) and **Goedel 8B** (LoRA with Unsloth, A100-80GB). Both use GPU inference and Lean verification via Kimina; results are written to the `sdpo-output` volume and synced locally.
+Three Modal pipelines: **Kimina 2B** (full fine-tune, A100-40GB), **Kimina Distill 1.7B** (A100-40GB), and **Goedel 8B** (LoRA with Unsloth, A100-80GB). All use GPU inference and Lean verification via Kimina; results are written to the `sdpo-output` volume and synced locally.
 
 **Kimina 2B** (`lean_sdpo_kimina_2b_modal.py`) — Kimina-Prover-RL-1.7B, full model updates:
 
@@ -96,6 +98,15 @@ modal run training/lean_sdpo_kimina_2b_modal.py --max-iterations 10 --problem-id
 ```
 
 Local results: `sdpo_results/kimina_2b/run_{problem_idx}_{timestamp}/`.
+
+**Kimina Distill 1.7B** (`lean_sdpo_kimina_distill_1_7b_modal.py`) — AI-MO/Kimina-Prover-Distill-1.7B, full model updates:
+
+```bash
+modal run training/lean_sdpo_kimina_distill_1_7b_modal.py --problem-idx 0
+modal run training/lean_sdpo_kimina_distill_1_7b_modal.py --max-iterations 10 --problem-idx 0
+```
+
+Local results: `sdpo_results/kimina_distill_1_7b/run_{problem_idx}_{timestamp}/`.
 
 **Goedel 8B** (`lean_sdpo_goedel_8b_modal.py`) — Goedel-Prover-V2-8B with Unsloth LoRA, gradient accumulation (default 4), proof-plan prompt format. Requires A100-80GB.
 

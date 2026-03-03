@@ -31,28 +31,28 @@ Supported Datasets (auto-detected field names):
     - Custom datasets with: statement, code, theorem, problem_statement, etc.
 
 Supported Models:
-    - AI-MO/Kimina-Prover-RL-1.7B (default, thinking model)
+    - AI-MO/Kimina-Prover-Distill-1.7B (default, distilled prover)
     - Goedel-LM/Goedel-Prover-V2-8B
     - Any HuggingFace causal LM with chat template support
 
 Usage:
-    # Run on Modal with default settings (miniF2F dataset, Kimina model)
-    modal run lean_sdpo_modal.py --problem-idx 0
+    # Run on Modal with default settings (miniF2F dataset, Kimina Distill 1.7B)
+    modal run lean_sdpo_kimina_distill_1_7b_modal.py --problem-idx 0
 
     # Custom dataset (PutnamBench)
-    modal run lean_sdpo_modal.py --dataset amitayusht/PutnamBench --dataset-split train --problem-idx 0
+    modal run lean_sdpo_kimina_distill_1_7b_modal.py --dataset amitayusht/PutnamBench --dataset-split train --problem-idx 0
 
     # Custom model
-    modal run lean_sdpo_modal.py --model Goedel-LM/Goedel-Prover-V2-8B --problem-idx 5
+    modal run lean_sdpo_kimina_distill_1_7b_modal.py --model Goedel-LM/Goedel-Prover-V2-8B --problem-idx 5
 
     # More iterations with custom temperature
-    modal run lean_sdpo_modal.py --max-iterations 10 --temperature 0.7 --problem-idx 0
+    modal run lean_sdpo_kimina_distill_1_7b_modal.py --max-iterations 10 --temperature 0.7 --problem-idx 0
 
     # Override field names for custom datasets
-    modal run lean_sdpo_modal.py --dataset my/custom-dataset --theorem-field my_theorem_code --problem-idx 0
+    modal run lean_sdpo_kimina_distill_1_7b_modal.py --dataset my/custom-dataset --theorem-field my_theorem_code --problem-idx 0
 
     # Custom system prompt
-    modal run lean_sdpo_modal.py --system-prompt "You are an expert mathematician." --problem-idx 0
+    modal run lean_sdpo_kimina_distill_1_7b_modal.py --system-prompt "You are an expert mathematician." --problem-idx 0
 """
 
 import json
@@ -71,7 +71,7 @@ from typing import Optional
 class SDPOConfig:
     """Configuration for SDPO on Modal."""
     # Model settings
-    model_name: str = "AI-MO/Kimina-Prover-RL-1.7B"
+    model_name: str = "AI-MO/Kimina-Prover-Distill-1.7B"
     
     # Dataset settings
     dataset_name: str = "cat-searcher/minif2f-lean4"
@@ -130,7 +130,7 @@ open BigOperators Real Nat Topology Rat"""
     feedback_separator: str = "\n"
     
     # Output settings
-    output_dir: str = "kimina_2b"
+    output_dir: str = "kimina_distill_1_7b"
 
 
 # ============================================================================
@@ -140,7 +140,7 @@ open BigOperators Real Nat Topology Rat"""
 try:
     import modal
     
-    app = modal.App("lean-sdpo-kimina")
+    app = modal.App("lean-sdpo-kimina-distill")
     
     # Volume for HF cache (persistent across runs)
     hf_cache_volume = modal.Volume.from_name("sdpo-hf-cache", create_if_missing=True)
@@ -552,9 +552,9 @@ try:
         secrets=[modal.Secret.from_name("huggingface")],
     )
     class SDPOTrainer:
-        """SDPO trainer running on Modal GPU (A100-40GB for 1-2B models)."""
+        """SDPO trainer running on Modal GPU (A100-40GB for Kimina Distill 1.7B)."""
         
-        model_name: str = modal.parameter(default="AI-MO/Kimina-Prover-RL-1.7B")
+        model_name: str = modal.parameter(default="AI-MO/Kimina-Prover-Distill-1.7B")
         
         @modal.enter()
         def setup(self):
@@ -1472,7 +1472,7 @@ try:
     # 2. 8-bit quantization causes NaN loss (no gradient support)
     # 3. LoRA + 4-bit quantization is experimental
     #
-    # For now, use the default A100-40GB configuration with 1-2B models.
+    # For now, use the default A100-40GB configuration with Kimina Distill 1.7B.
     # See docs/GPU_CONFIG_NOTES.md for details.
     # ========================================================================
 
@@ -1505,7 +1505,7 @@ try:
 
     @app.local_entrypoint()
     def main(
-        model: str = "AI-MO/Kimina-Prover-RL-1.7B",
+        model: str = "AI-MO/Kimina-Prover-Distill-1.7B",
         dataset: str = "cat-searcher/minif2f-lean4",
         dataset_subset: str = "",
         dataset_split: str = "test",
@@ -1545,7 +1545,7 @@ try:
             gpu: GPU configuration (currently only A100-40GB is supported).
         
         GPU configurations:
-            - A100-40GB (default): For 1-2B models (e.g., Kimina-Prover-RL-1.7B)
+            - A100-40GB (default): For 1-2B models (e.g., Kimina-Prover-Distill-1.7B)
             - A100-80GB/H100: NOT SUPPORTED - 8B models have memory issues with SDPO training
               (see docs/GPU_CONFIG_NOTES.md for details)
         
@@ -1556,7 +1556,7 @@ try:
             - Custom datasets with: statement, code, theorem, problem_statement, etc.
         
         Supported models:
-            - AI-MO/Kimina-Prover-RL-1.7B (default, thinking model)
+            - AI-MO/Kimina-Prover-Distill-1.7B (default, distilled prover)
             - Other 1-2B models that fit in A100-40GB memory
         """
         from datasets import load_dataset
@@ -1667,10 +1667,10 @@ try:
         if gpu_upper in ["A100-80GB", "A100_80GB", "H100"]:
             print(f"\n⚠️  WARNING: {gpu} GPU requested but not currently supported for SDPO training.")
             print(f"    8B models have memory issues (OOM during optimizer step).")
-            print(f"    Falling back to A100-40GB with 1-2B models.")
+            print(f"    Falling back to A100-40GB with Kimina Distill 1.7B.")
             print(f"    See docs/GPU_CONFIG_NOTES.md for details.\n")
         
-        print(f"Using A100-40GB GPU (for 1-2B models)")
+        print(f"Using A100-40GB GPU (for Kimina Distill 1.7B)")
         trainer = SDPOTrainer(model_name=model)
         
         print("Starting SDPO training on Modal...")
@@ -1691,17 +1691,17 @@ try:
             print(f"  Final entropy: {results['metrics']['entropies'][-1]:.4f}")
             print(f"  Final grad norm: {results['metrics']['grad_norms'][-1]:.4f}")
         
-        print("\nResults saved to Modal volume 'sdpo-output' under 'kimina_2b/'")
+        print("\nResults saved to Modal volume 'sdpo-output' under 'kimina_distill_1_7b/'")
         
         # Save a local copy of the results, metrics, and plots
-        # Organize by dataset: sdpo_results/kimina_2b/{dataset_name}/run_{problem_idx}_{timestamp}
+        # Organize by dataset: sdpo_results/kimina_distill_1_7b/{dataset_name}/run_{problem_idx}_{timestamp}
         import json
         from pathlib import Path
         from datetime import datetime
         
         dataset_folder = dataset.split("/")[-1] if "/" in dataset else dataset
         dataset_folder = dataset_folder.replace("/", "_")
-        local_output_dir = Path("sdpo_results") / "kimina_2b" / dataset_folder
+        local_output_dir = Path("sdpo_results") / "kimina_distill_1_7b" / dataset_folder
         local_output_dir.mkdir(parents=True, exist_ok=True)
         
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -1774,7 +1774,7 @@ except ImportError:
     
     def main():
         print("This script requires Modal. Install with: pip install modal")
-        print("Then run: modal run lean_sdpo_modal.py --model <model> --problem-idx <idx>")
+        print("Then run: modal run lean_sdpo_kimina_distill_1_7b_modal.py --model <model> --problem-idx <idx>")
 
 
 if __name__ == "__main__":
