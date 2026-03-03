@@ -70,7 +70,8 @@ modal token new   # one-time auth
 │   └── verify_single_proof.py
 ├── scripts/                   # Shell scripts and helpers
 │   ├── pipeline.sh            # Inference → compile → summarize pipeline
-│   └── modal_test.py
+│   ├── modal_test.py
+│   └── sort_kimina_2b_results.py   # Sort/inspect SDPO run results (e.g. kimina_2b)
 ├── setup/                     # Server and environment setup
 │   └── kimina-lean-server-setup/
 ├── src/                       # Pipeline utilities (compile, inference, summarize)

@@ -33,6 +33,7 @@ Engineering notes, bugfixes, and specs for the SDPO/Lean pipeline. Entries use a
 - **baseline** — Minif2f-lean4 baseline runs, pass@k, failed problems.
 - **bugfixes** — Fixes and root-cause notes (timeouts, LoRA, verification, etc.).
 - **config** — GPU, memory, environment configuration.
+- **distillation** — SDPO loss/reward, student–teacher log-prob difference, output analysis.
 - **evaluation** — Accuracy, summaries, inspection scripts.
 - **generation** — vLLM sampling, speed, max_model_len.
 - **gpu** — A100/H100, OOM, memory utilization.
