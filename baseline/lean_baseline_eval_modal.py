@@ -5,7 +5,7 @@ What this file does (as requested):
 
 Function 1 (generate):
     - Takes pass@k and n_problems
-    - Selects first n_problems (indices 0, 1, 2, ..., n_problems-1)
+    - If n_problems >= 244: uses all test problems in order. Else: random sample (distinct, seed)
     - For each selected problem, generates k independent proof attempts
     - Runs generation in parallel on Modal (each attempt is a separate remote call)
     - Writes outputs locally to a JSONL file (and also optionally to /output volume if enabled)
@@ -25,7 +25,7 @@ Or from inside baseline/:
 
 Notes:
     - This uses Goedel-Prover-V2-8B by default.
-    - Dataset defaults to cat-searcher/minif2f-lean4 (test split).
+    - Dataset defaults to HaimingW/minif2f-lean4 (test split, paper-style MiniF2F).
     - Kimina verification is done in series as requested.
 """
 
@@ -33,8 +33,10 @@ from __future__ import annotations
 
 import json
 import os
+import random
 import re
 import time
+import hashlib
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
@@ -42,7 +44,7 @@ from threading import Lock
 from typing import Any, Dict, List, Optional, Tuple
 
 # Verification robustness: timeout (seconds), retries on server error/timeout
-VERIFY_TIMEOUT_S = 150
+VERIFY_TIMEOUT_S = 30
 VERIFY_RETRIES = 3
 VERIFY_RETRY_WAIT_S = 3
 
@@ -92,10 +94,12 @@ class EvalConfig:
     # Model
     model_name: str = "Goedel-LM/Goedel-Prover-V2-8B"
 
-    # Dataset
-    dataset_name: str = "cat-searcher/minif2f-lean4"
+    # Dataset (official MiniF2F Lean4 for paper-style eval)
+    dataset_name: str = "HaimingW/minif2f-lean4"
     dataset_subset: Optional[str] = None
     dataset_split: str = "test"
+    
+    seed: int = 42
 
     # Field mapping
     theorem_fields: list = field(default_factory=lambda: [
@@ -108,18 +112,21 @@ class EvalConfig:
     id_fields: list = field(default_factory=lambda: [
         "problem_id", "name", "id", "idx", "index",
     ])
+    # Natural-language problem text for minif2f paper prompt (# Problem: ...)
+    problem_fields: list = field(default_factory=lambda: [
+        "statement", "problem", "informal_statement", "question",
+    ])
 
     # Fallback header
     default_header: str = """import Mathlib
-import Aesop
 
 set_option maxHeartbeats 400000
 
 open BigOperators Real Nat Topology Rat
 """
 
-    # Generation
-    max_new_tokens: int = 4096
+    # Generation (minif2f paper: temperature=0.6, top_p=0.95, max_tokens=8096)
+    max_new_tokens: int = 8096
     temperature: float = 0.6
     top_p: float = 0.95
     stop_tokens: list = field(default_factory=lambda: [
@@ -476,13 +483,24 @@ def extract_proof_tactics(output: str) -> str:
 
 def create_full_lean_code(cfg: EvalConfig, theorem_code: str, proof_tactics: str, header: str = "") -> str:
     """
-    Replace the main theorem's `sorry` with the extracted proof tactics.
-    If header exists in dataset, use it; else use cfg.default_header.
+    Build the exact Lean file we will verify:
+      - If dataset provides `header`, use it.
+      - Else if theorem_code already starts with `import`, use theorem_code as-is.
+      - Else prepend cfg.default_header.
+    Then replace the last `sorry` in that full file with proof_tactics.
     """
-    has_header = bool((header or "").strip())
-    final_header = header.strip() if has_header else cfg.default_header.strip()
 
-    # Remove any model-generated import/open/set_option lines from tactics (keep tactics only)
+    # 1) Construct the full file (same policy as _build_prompt)
+    if header.strip():
+        full_file = f"{header.strip()}\n\n{theorem_code}"
+    else:
+        full_file = (
+            theorem_code
+            if theorem_code.lstrip().startswith("import ")
+            else f"{cfg.default_header.strip()}\n\n{theorem_code}"
+        )
+
+    # 2) Clean tactics (strip any header-ish lines)
     clean_lines: List[str] = []
     for line in (proof_tactics or "").split("\n"):
         s = line.strip()
@@ -493,8 +511,8 @@ def create_full_lean_code(cfg: EvalConfig, theorem_code: str, proof_tactics: str
     tactics_clean = "\n".join(clean_lines).strip() or "sorry"
     indented = "\n  ".join(tactics_clean.split("\n"))
 
-    # Replace only the last `sorry` occurrence as a safe default
-    tc = theorem_code
+    # 3) Replace last sorry in the *full file*
+    tc = full_file
     if ":= by sorry" in tc:
         tc = tc.replace(":= by sorry", f":= by\n  {indented}")
     elif ":= by\n  sorry" in tc:
@@ -504,10 +522,9 @@ def create_full_lean_code(cfg: EvalConfig, theorem_code: str, proof_tactics: str
         if last != -1:
             tc = tc[:last] + indented + tc[last + len("sorry"):]
         else:
-            # If the theorem has no sorry placeholder, just append tactics (rare)
             tc = tc + "\n\n" + f"by\n  {indented}\n"
 
-    return f"{final_header}\n\n{tc}\n"
+    return f"{tc}\n"
 
 
 if modal is not None:
@@ -538,9 +555,10 @@ if modal is not None:
             # Fast startup for short-ish runs
             os.environ["VLLM_USE_V1"] = "0"
             os.environ["VLLM_USE_FLASHINFER_SAMPLER"] = "0"
+            model_name = os.environ.get("EVAL_MODEL_NAME", EvalConfig().model_name)
 
             self.llm = LLM(
-                model=EvalConfig().model_name,
+                model=model_name,
                 dtype="bfloat16",
                 trust_remote_code=True,
                 download_dir="/cache",
@@ -549,26 +567,28 @@ if modal is not None:
                 max_num_seqs=1,
                 enforce_eager=True,
             )
-            # Tokenizer (for chat template) via transformers
+
             from transformers import AutoTokenizer
-            self.tokenizer = AutoTokenizer.from_pretrained(EvalConfig().model_name, trust_remote_code=True)
+            self.tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
             if self.tokenizer.pad_token is None and self.tokenizer.eos_token is not None:
                 self.tokenizer.pad_token = self.tokenizer.eos_token
+            
+            print(f"[ProofGenerator] Loaded model: {model_name}")
+            print(f"[ProofGenerator] Tokenizer name_or_path: {getattr(self.tokenizer, 'name_or_path', None)}")
 
-        def _build_prompt(self, cfg: EvalConfig, header: str, theorem_code: str) -> str:
-            full_stmt = f"{header}\n\n{theorem_code}" if header.strip() else theorem_code
-
-            # IMPORTANT: you said "tell the model to only output Lean code" and "treat any failure as failure".
-            # Same prompt as training pipeline (SDPO _create_base_prompt).
-            user_content = (
-                f"Complete the following Lean 4 code:\n\n"
-                f"```lean4\n{full_stmt}\n```\n\n"
-                f"Before producing the Lean 4 code to formally prove the given theorem, "
-                f"provide a detailed proof plan outlining the main proof steps and strategies.\n"
-                f"The plan should highlight key ideas, intermediate lemmas, and proof "
-                f"structures that will guide the construction of the final formal proof."
-            )
-            messages = [{"role": "user", "content": user_content}]
+        def _build_prompt(self, cfg: EvalConfig, header: str, theorem_code: str, problem_text: str = "") -> str:
+            if header.strip():
+                full_stmt = f"{header.strip()}\n\n{theorem_code}"
+            else:
+                full_stmt = theorem_code if theorem_code.lstrip().startswith("import ") else f"{cfg.default_header.strip()}\n\n{theorem_code}"
+            
+            prompt = "Think about and solve the following problem step by step in Lean 4."
+            prompt += f"\n# Problem:{problem_text.strip()}"
+            prompt += f"\n# Formal statement:\n```lean4\n{full_stmt}\n```\n"
+            messages = [
+                {"role": "system", "content": "You are an expert in mathematics and Lean 4."},
+                {"role": "user", "content": prompt},
+            ]
             return self.tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
 
         @modal.method()
@@ -581,21 +601,25 @@ if modal is not None:
         ) -> dict:
             from vllm import SamplingParams
 
-            cfg = EvalConfig(**cfg_dict)
+            cfg = EvalConfig()
+            cfg.__dict__.update(cfg_dict)
             theorem_code = _get_field(problem, cfg.theorem_fields)
             header = _get_field(problem, cfg.header_fields)
+            problem_text = _get_field(problem, cfg.problem_fields)
             pid = _get_field(problem, cfg.id_fields, f"problem_{problem_idx}")
 
-            prompt = self._build_prompt(cfg, header, theorem_code)
+            prompt = self._build_prompt(cfg, header, theorem_code, problem_text=problem_text)
 
-            # Make attempts differ
-            # vLLM SamplingParams supports seed (recent versions); if not, it will ignore.
+            base = f"{cfg.dataset_name}:{pid}:{attempt}:{cfg.seed}"
+            digest = hashlib.sha256(base.encode("utf-8")).digest()
+            seed_val = int.from_bytes(digest[:4], "big")  # 32-bit stable seed
+
             sp = SamplingParams(
                 temperature=cfg.temperature,
                 top_p=cfg.top_p,
                 max_tokens=cfg.max_new_tokens,
                 stop=cfg.stop_tokens,
-                seed=attempt + 1337,
+                seed=seed_val,
             )
 
             out = self.llm.generate([prompt], sp)[0].outputs[0].text
@@ -609,6 +633,7 @@ if modal is not None:
                 "problem_id": pid,
                 "attempt": attempt,
                 "full_code": full_code,
+                "raw_output": out,
             }
 
 
@@ -621,10 +646,12 @@ def generate_proofs_parallel(
     pass_k: int,
     n_problems: int,
     output_path: Path,
+    full_outputs_path: Optional[Path] = None,
 ) -> Path:
     """
-    Generates k attempts for each of the first n_problems (indices 0, 1, ..., n_problems-1).
-    Runs generation in parallel (Modal map).
+    Generates k attempts for each of n_problems from the dataset.
+    If n_problems >= 244 (or >= dataset size), uses all test problems in order.
+    Otherwise randomly samples n_problems (distinct). Runs generation in parallel (Modal map).
     Writes JSONL records to output_path.
     Returns output_path.
     """
@@ -639,9 +666,23 @@ def generate_proofs_parallel(
     else:
         ds = load_dataset(cfg.dataset_name, split=cfg.dataset_split)
 
-    selected = list(range(0, min(n_problems, len(ds))))
+    ds_len = len(ds)
+    print(f"[config] dataset={cfg.dataset_name} split={cfg.dataset_split} len={ds_len} n_problems={n_problems} seed={cfg.seed} pass_k={pass_k} verify_timeout_s={VERIFY_TIMEOUT_S}")
+    if ds_len != 244:
+        print(f"[WARNING] Test split has {ds_len} problems (expected 244). Dataset: {cfg.dataset_name}, split: {cfg.dataset_split}")
+
+    n_sample = min(n_problems, ds_len)
+    if n_problems >= 244 or n_problems >= ds_len:
+        selected = list(range(ds_len))
+        print(f"[generate] Using all {ds_len} test problems in order")
+    else:
+        random.seed(cfg.seed)
+        selected = sorted(random.sample(range(ds_len), n_sample))
     if not selected:
-        raise ValueError(f"No problems selected. n_problems={n_problems}, dataset_size={len(ds)}")
+        raise ValueError(f"No problems selected. n_problems={n_problems}, dataset_size={ds_len}")
+
+    assert len(selected) == len(set(selected)), "selected indices must be distinct"
+    print(f"[generate] selected indices: n={len(selected)}, first5={selected[:5]}, last5={selected[-5:]}")
 
     # Create all (problem_idx, attempt) pairs
     jobs: List[Tuple[int, int]] = []
@@ -658,11 +699,14 @@ def generate_proofs_parallel(
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     gen = ProofGenerator()
-    cfg_dict = cfg.__dict__
+    cfg_dict = cfg.__dict__.copy()
 
-    print(f"[generate] Selected {len(selected)} problems (first n_problems)")
+    if n_problems < 244 and n_problems < ds_len:
+        print(f"[generate] Selected {len(selected)} problems (random sample, seed={cfg.seed})")
     print(f"[generate] Generating pass@{pass_k}: total attempts = {len(jobs)}")
-    print(f"[generate] Writing JSONL to: {output_path}")
+    print(f"[generate] Writing proofs JSONL to: {output_path}")
+    if full_outputs_path:
+        print(f"[generate] Writing full outputs to: {full_outputs_path}")
 
     # Parallel generation: one remote call per attempt
     results_iter = gen.generate_one.map(
@@ -673,14 +717,29 @@ def generate_proofs_parallel(
         order_outputs=False,  # allow Modal to stream results as they finish
     )
 
-    # Stream to disk as results arrive
-    with output_path.open("w", encoding="utf-8") as f:
-        count = 0
-        for r in results_iter:
-            f.write(json.dumps(r) + "\n")
-            count += 1
-            if count % 10 == 0:
-                print(f"[generate] wrote {count}/{len(jobs)} attempts...")
+    # Stream to disk as results arrive (proofs only + optional full outputs)
+    if full_outputs_path:
+        full_outputs_path.parent.mkdir(parents=True, exist_ok=True)
+    count = 0
+    full_file = full_outputs_path.open("w", encoding="utf-8") if full_outputs_path else None
+    try:
+        with output_path.open("w", encoding="utf-8") as f:
+            for r in results_iter:
+                proofs_rec = {
+                    "problem_idx": r["problem_idx"],
+                    "problem_id": r["problem_id"],
+                    "attempt": r["attempt"],
+                    "full_code": r["full_code"],
+                }
+                f.write(json.dumps(proofs_rec) + "\n")
+                if full_file:
+                    full_file.write(json.dumps(r) + "\n")
+                count += 1
+                if count % 10 == 0:
+                    print(f"[generate] wrote {count}/{len(jobs)} attempts...")
+    finally:
+        if full_file:
+            full_file.close()
 
     print(f"[generate] done. wrote {count} attempts.")
     return output_path
@@ -805,18 +864,19 @@ if modal is not None:
 
     @app.local_entrypoint()
     def main(
-        n_problems: int = 100,
+        n_problems: int = 244,
         pass_k: int = 1,
-        dataset: str = "cat-searcher/minif2f-lean4",
+        dataset: str = "HaimingW/minif2f-lean4",
         split: str = "test",
         model: str = "Goedel-LM/Goedel-Prover-V2-8B",
         temperature: float = 0.6,
         top_p: float = 0.95,
-        max_new_tokens: int = 4096,
+        max_new_tokens: int = 8096,
         out_dir: str = "results",
         out_name: str = "",
         verify_only: bool = False,
         generate_only: bool = False,
+        seed: int = 42,
     ):
         """
         Default behavior: generate (parallel) -> verify (serial) and print summary.
@@ -829,16 +889,19 @@ if modal is not None:
             model_name=model,
             dataset_name=dataset,
             dataset_split=split,
+            seed=seed,
             temperature=temperature,
             top_p=top_p,
             max_new_tokens=max_new_tokens,
             local_results_dir=out_dir,
         )
 
+        os.environ["EVAL_MODEL_NAME"] = cfg.model_name
         print(f"[config] model: {cfg.model_name}")
 
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-        run_dir = Path(cfg.local_results_dir) / f"run_{ts}"
+        model_safe = cfg.model_name.replace("/", "-")
+        run_dir = Path(cfg.local_results_dir) / f"run_{model_safe}_{ts}"
         run_dir.mkdir(parents=True, exist_ok=True)
 
         # If user passes an explicit out_name, treat it as a path
@@ -848,6 +911,7 @@ if modal is not None:
             proofs_path = run_dir / "proofs.jsonl"
 
         summary_path = run_dir / "summary.json"
+        full_outputs_path = proofs_path.parent / "full_outputs.jsonl"
 
         # If verify_only, we assume out_name points at an existing JSONL file
         if verify_only:
@@ -858,10 +922,9 @@ if modal is not None:
             return
 
         # Otherwise generate unless generate_only=False?
-        if not generate_only:
-            generate_proofs_parallel(cfg, pass_k=pass_k, n_problems=n_problems, output_path=proofs_path)
-        else:
-            generate_proofs_parallel(cfg, pass_k=pass_k, n_problems=n_problems, output_path=proofs_path)
+        if not verify_only:
+            generate_proofs_parallel(cfg, pass_k=pass_k, n_problems=n_problems, output_path=proofs_path, full_outputs_path=full_outputs_path)
+        if generate_only:
             print("[generate-only] Done.")
             return
 

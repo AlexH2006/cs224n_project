@@ -1,0 +1,1709 @@
+{
+  "output_path": "results/run_AI-MO-Kimina-Prover-RL-1.7B_20260302_192734/proofs.jsonl",
+  "n_problems": 100,
+  "n_success": 78,
+  "accuracy": 0.78,
+  "results": [
+    {
+      "problem_idx": 1,
+      "problem_id": "numbertheory_4x3m7y3neq2003",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 6,
+      "problem_id": "imo_1969_p2",
+      "success": false,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": false,
+        "has_sorry": true,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 7,
+      "problem_id": "mathd_algebra_209",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 8,
+      "problem_id": "mathd_numbertheory_1124",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 11,
+      "problem_id": "mathd_algebra_33",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 14,
+      "problem_id": "amc12b_2020_p2",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 17,
+      "problem_id": "mathd_algebra_419",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 18,
+      "problem_id": "amc12a_2020_p10",
+      "success": false,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": false,
+        "has_sorry": true,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 20,
+      "problem_id": "mathd_numbertheory_427",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 22,
+      "problem_id": "imosl_2007_algebra_p6",
+      "success": false,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": false,
+        "has_sorry": true,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 23,
+      "problem_id": "mathd_algebra_398",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 24,
+      "problem_id": "imo_1963_p5",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 25,
+      "problem_id": "mathd_numbertheory_430",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 26,
+      "problem_id": "mathd_algebra_459",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 28,
+      "problem_id": "mathd_algebra_320",
+      "success": false,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": false,
+        "has_sorry": true,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 31,
+      "problem_id": "mathd_numbertheory_277",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 35,
+      "problem_id": "mathd_algebra_176",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 39,
+      "problem_id": "numbertheory_notequiv2i2jasqbsqdiv8",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 40,
+      "problem_id": "mathd_algebra_156",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 41,
+      "problem_id": "mathd_numbertheory_12",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 43,
+      "problem_id": "mathd_numbertheory_447",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 49,
+      "problem_id": "mathd_algebra_171",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 50,
+      "problem_id": "mathd_numbertheory_227",
+      "success": false,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": false,
+        "has_sorry": true,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 53,
+      "problem_id": "imo_1959_p1",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 55,
+      "problem_id": "induction_sumkexp3eqsumksq",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 56,
+      "problem_id": "numbertheory_fxeq4powxp6powxp9powx_f2powmdvdf2pown",
+      "success": false,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": false,
+        "has_sorry": true,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 57,
+      "problem_id": "imo_1992_p1",
+      "success": false,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": false,
+        "has_sorry": true,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 58,
+      "problem_id": "imo_1982_p1",
+      "success": false,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": false,
+        "has_sorry": true,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 59,
+      "problem_id": "aime_1987_p5",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 62,
+      "problem_id": "mathd_numbertheory_728",
+      "success": false,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": false,
+        "has_sorry": true,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 67,
+      "problem_id": "mathd_algebra_44",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 68,
+      "problem_id": "mathd_algebra_215",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 69,
+      "problem_id": "mathd_numbertheory_293",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 70,
+      "problem_id": "mathd_numbertheory_769",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 71,
+      "problem_id": "mathd_algebra_452",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 74,
+      "problem_id": "mathd_numbertheory_342",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 75,
+      "problem_id": "mathd_numbertheory_483",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 83,
+      "problem_id": "induction_pord1p1on2powklt5on2",
+      "success": false,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": false,
+        "has_sorry": true,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 86,
+      "problem_id": "mathd_algebra_412",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 87,
+      "problem_id": "amc12a_2013_p4",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 88,
+      "problem_id": "mathd_algebra_392",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 90,
+      "problem_id": "induction_prod1p1onk3le3m1onn",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 91,
+      "problem_id": "mathd_numbertheory_343",
+      "success": false,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": false,
+        "has_sorry": true,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 92,
+      "problem_id": "mathd_algebra_756",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 93,
+      "problem_id": "amc12b_2002_p7",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 94,
+      "problem_id": "mathd_algebra_80",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 96,
+      "problem_id": "amc12_2000_p12",
+      "success": false,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": false,
+        "has_sorry": true,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 97,
+      "problem_id": "mathd_numbertheory_135",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 107,
+      "problem_id": "mathd_algebra_170",
+      "success": false,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": false,
+        "has_sorry": true,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 108,
+      "problem_id": "mathd_algebra_432",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 114,
+      "problem_id": "mathd_numbertheory_618",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 116,
+      "problem_id": "amc12b_2020_p6",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 117,
+      "problem_id": "mathd_numbertheory_435",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 118,
+      "problem_id": "algebra_others_exirrpowirrrat",
+      "success": false,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": false,
+        "has_sorry": true,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 129,
+      "problem_id": "mathd_algebra_153",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 136,
+      "problem_id": "amc12a_2021_p22",
+      "success": false,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": false,
+        "has_sorry": true,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 137,
+      "problem_id": "mathd_numbertheory_229",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 139,
+      "problem_id": "mathd_algebra_313",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 141,
+      "problem_id": "amc12a_2002_p6",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 142,
+      "problem_id": "amc12a_2003_p23",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 143,
+      "problem_id": "mathd_algebra_129",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 147,
+      "problem_id": "mathd_algebra_304",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 150,
+      "problem_id": "amc12b_2002_p19",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 151,
+      "problem_id": "mathd_numbertheory_341",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 154,
+      "problem_id": "mathd_algebra_113",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 158,
+      "problem_id": "algebra_amgm_sumasqdivbgeqsuma",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 160,
+      "problem_id": "mathd_numbertheory_320",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 162,
+      "problem_id": "induction_1pxpownlt1pnx",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 163,
+      "problem_id": "mathd_algebra_148",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 165,
+      "problem_id": "induction_11div10tonmn1ton",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 166,
+      "problem_id": "algebra_amgm_sum1toneqn_prod1tonleq1",
+      "success": false,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": false,
+        "has_sorry": true,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 169,
+      "problem_id": "mathd_algebra_332",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 173,
+      "problem_id": "mathd_numbertheory_254",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 178,
+      "problem_id": "mathd_algebra_513",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 179,
+      "problem_id": "mathd_algebra_143",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 181,
+      "problem_id": "aime_1984_p7",
+      "success": false,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": false,
+        "has_sorry": true,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 183,
+      "problem_id": "aime_1983_p3",
+      "success": false,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": false,
+        "has_sorry": true,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 186,
+      "problem_id": "amc12_2001_p21",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 187,
+      "problem_id": "mathd_numbertheory_239",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 188,
+      "problem_id": "amc12b_2002_p2",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 189,
+      "problem_id": "mathd_algebra_196",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 193,
+      "problem_id": "mathd_algebra_270",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 194,
+      "problem_id": "amc12a_2021_p12",
+      "success": false,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": false,
+        "has_sorry": true,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 195,
+      "problem_id": "mathd_algebra_362",
+      "success": false,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": false,
+        "has_sorry": true,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 200,
+      "problem_id": "amc12a_2021_p3",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 203,
+      "problem_id": "mathd_numbertheory_66",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 207,
+      "problem_id": "aime_1990_p15",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 208,
+      "problem_id": "mathd_numbertheory_235",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 211,
+      "problem_id": "mathd_numbertheory_234",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 220,
+      "problem_id": "aime_1991_p9",
+      "success": false,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": false,
+        "has_sorry": true,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 222,
+      "problem_id": "mathd_algebra_158",
+      "success": false,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": false,
+        "has_sorry": true,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 223,
+      "problem_id": "algebra_absxm1pabsxpabsxp1eqxp2_0leqxleq1",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 224,
+      "problem_id": "aime_1990_p4",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 227,
+      "problem_id": "amc12_2000_p20",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 228,
+      "problem_id": "mathd_algebra_302",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 230,
+      "problem_id": "mathd_algebra_139",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 234,
+      "problem_id": "aime_1989_p8",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 238,
+      "problem_id": "mathd_algebra_400",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 240,
+      "problem_id": "mathd_numbertheory_185",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    },
+    {
+      "problem_idx": 241,
+      "problem_id": "mathd_algebra_441",
+      "success": true,
+      "chosen_attempt": 0,
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      }
+    }
+  ],
+  "ts": "2026-03-02T20:08:50.067636"
+}
