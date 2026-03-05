@@ -1,6 +1,6 @@
 # Test-Time Self-Distillation for Lean Theorem Proving
 
-This implements a simplified test-time self-distillation pipeline based on SDPO (Self-Distilled Policy Optimization) for Lean 4 theorem proving.
+**TL;DR** — Test-time and full SDPO (Self-Distilled Policy Optimization) for Lean 4: generate proof attempts, verify with a Lean backend, use feedback for self-distillation and (on Modal) gradient updates.
 
 ## Overview
 
@@ -10,38 +10,48 @@ The pipeline works as follows:
 ┌─────────────────────────────────────────────────────────────┐
 │                    Test-Time Self-Distillation              │
 ├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│  1. Generate N proof attempts with Qwen3-1.6B               │
+│  1. Generate N proof attempts (vLLM / transformers)         │
 │                     ↓                                       │
-│  2. Verify each proof with Kimina (Lean compiler)           │
+│  2. Verify each proof (Kimina HTTP or local lake exe repl)   │
 │                     ↓                                       │
 │  3. If success → Return proof                               │
-│     If failure → Extract compiler errors as feedback        │
+│     If failure → Extract compiler errors as feedback         │
 │                     ↓                                       │
 │  4. Reprompt with feedback (self-distillation)              │
-│     - Include error messages from failed attempts           │
-│     - Include successful proofs as demonstrations           │
+│     - Include error messages from failed attempts            │
+│     - Include successful proofs as demonstrations            │
 │                     ↓                                       │
 │  5. Compute KL divergence for policy regularization         │
 │                     ↓                                       │
 │  6. Repeat until success or max iterations                  │
-│                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
+### Verification backends
+
+| Backend | Use case | Package / script |
+|--------|----------|-------------------|
+| **Kimina** (HTTP) | Cloud or local Docker Lean server | `sdpo_modal` (Modal), `verification/verify_proofs_kimina.py` |
+| **Local Lean** (`lake exe repl`) | No Kimina; verify in mathlib4 workspace | `sdpo_modal_local_verify`, `sdpo_modal.local_lean_verifier` |
+
+Modal pipelines that use **Kimina** live in `sdpo_modal/` and are invoked by `training/lean_sdpo_*_modal.py` (e.g. Kimina 2B, Distill 1.7B, Goedel 8B). The **local verification** pipeline lives in `sdpo_modal_local_verify/` and is invoked by `training/lean_sdpo_local_verify_modal.py` (generate/train on Modal; verification runs on your machine via `lake exe repl`).
+
 ## Requirements
 
+**Local test-time only (no Modal):**
 ```bash
 pip install torch transformers kimina-client
 ```
 
-Make sure Kimina server is running:
+**Kimina server** (for Kimina-backed pipelines):
 ```bash
 # Using Docker
 docker run -d -p 80:80 projectnumina/kimina-lean-server:2.0.0
 
-# Or from source (see setup/kimina-lean-server-setup or kimina-lean-server/README.md)
+# Or from source (see setup/kimina-lean-server-setup)
 ```
+
+**Local Lean verification** (for `sdpo_modal_local_verify` or `lean_sdpo_local_verify_modal.py`): install [elan](https://github.com/leanprover/elan) and build a mathlib4 workspace (e.g. `Goedel-Prover-main/mathlib4`). See `devlog/20260303_local_lean_verifier_setup.md`.
 
 ## Usage
 
@@ -136,12 +146,17 @@ This is a **test-time** self-distillation implementation, which differs from ful
 | KL divergence | Monitoring only | Used in loss function |
 | Scale | Single problem | Batch training |
 
-For full SDPO training on Modal, see:
+**Full SDPO training on Modal** (Kimina verification):
 - `training/lean_sdpo_kimina_2b_modal.py` — Kimina-Prover-RL-1.7B
 - `training/lean_sdpo_kimina_distill_1_7b_modal.py` — Kimina-Prover-Distill-1.7B
-- `training/lean_sdpo_goedel_8b_modal.py` — Goedel-Prover-V2-8B (LoRA)
+- `training/lean_sdpo_goedel_8b_modal.py` — Goedel-Prover-V2-8B (LoRA/Unsloth)
+- `training/lean_sdpo_qwen_3b_modal.py` / `lean_sdpo_qwen_3b_lora_modal.py` — Qwen 3B
+- `training/lean_sdpo_deepseek_7b_modal.py` — DeepSeek 7B
 
-The `SDPO/` directory uses the verl framework for batch training.
+**Local Lean verification** (no Kimina on Modal; verify on your machine):
+- `training/lean_sdpo_local_verify_modal.py` — uses `sdpo_modal_local_verify`; requires elan + mathlib4.
+
+The `SDPO/` directory contains the verl framework used for batch training.
 
 ## References
 

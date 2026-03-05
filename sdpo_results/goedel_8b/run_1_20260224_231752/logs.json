@@ -1,0 +1,112 @@
+{
+  "problem": {
+    "id": "numbertheory_4x3m7y3neq2003",
+    "split": "test",
+    "formal_statement": "theorem numbertheory_4x3m7y3neq2003\n  (x y : \u2124) :\n  4 * x^3 - 7 * y^3 \u2260 2003 := sorry",
+    "header": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology",
+    "informal_stmt": "Show that there are no integers $x$ and $y$ such that $4x^3 - 7y^3 = 2003$.",
+    "informal_proof": "We have that $2003 = 1 + 7 \\times 286$. So $4x^3 - 7y^3 = 2003 \\iff 4x^3-1=7(y^3+286)$.\nWe also observe that for every integer $x$, the rest of the division of $x^3$ by $7$ is $0$, $1$, or $6$. So the rest of the division of $4x^3-1$ by $7$ is $6$, $3$, or $2$.\nAs a result, $7$ does not divide $4x^3-1$, but since $7(y^3+286)$ is divisible by $7$, the equation cannot have integers solutions."
+  },
+  "config": {
+    "model_name": "Goedel-LM/Goedel-Prover-V2-8B",
+    "lora_rank": 16,
+    "lora_alpha": 32,
+    "gradient_accumulation_steps": 4,
+    "dataset_name": "cat-searcher/minif2f-lean4",
+    "dataset_subset": null,
+    "dataset_split": "test",
+    "problem_idx": 1,
+    "max_iterations": 1,
+    "learning_rate": 1e-05,
+    "temperature": 0.6,
+    "feedback_include_failed_proof": false,
+    "theorem_fields": [
+      "lean4_code",
+      "formal_statement",
+      "lean4_statement",
+      "statement",
+      "code",
+      "theorem",
+      "problem_statement"
+    ],
+    "informal_fields": [
+      "informal_prefix",
+      "informal_stmt",
+      "problem",
+      "informal_statement",
+      "natural_language",
+      "description",
+      "question",
+      "informal"
+    ],
+    "header_fields": [
+      "header",
+      "imports",
+      "preamble",
+      "prefix"
+    ],
+    "id_fields": [
+      "problem_id",
+      "name",
+      "id",
+      "idx",
+      "index"
+    ]
+  },
+  "iteration_logs": [
+    {
+      "iteration": 1,
+      "lora_version": 0,
+      "student_prompt": "<|im_start|>user\nComplete the following Lean 4 code:\n\n```lean4\nimport Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : \u2124) :\n  4 * x^3 - 7 * y^3 \u2260 2003 := sorry\n```\n\nBefore producing the Lean 4 code to formally prove the given theorem, provide a detailed proof plan outlining the main proof steps and strategies.\nThe plan should highlight key ideas, intermediate lemmas, and proof structures that will guide the construction of the final formal proof.<|im_end|>\n<|im_start|>assistant\n",
+      "teacher_prompt": null,
+      "raw_output": "### Detailed Proof and Analysis\n\nFirst, we need to prove that there are no integers \\(x\\) and \\(y\\) such that \\(4x^3 - 7y^3 = 2003\\). \n\n#### Step 1: Understand the Equation Modulo 7\nConsider the equation modulo 7:\n\\[ 4x^3 - 7y^3 \\equiv 2003 \\pmod{7} \\]\nSince \\(7y^3 \\equiv 0 \\pmod{7}\\), this simplifies to:\n\\[ 4x^3 \\equiv 2003 \\pmod{7} \\]\nNow, reduce \\(2003 \\pmod{7}\\):\n\\[ 2003 = 7 \\times 286 + 1 \\implies 2003 \\equiv 1 \\pmod{7} \\]\nSo:\n\\[ 4x^3 \\equiv 1 \\pmod{7} \\]\n\n#### Step 2: Find Possible Values of \\(x^3 \\pmod{7}\\)\nWe can compute \\(x^3 \\pmod{7}\\) for all residues \\(x \\pmod{7}\\):\n- If \\(x \\equiv 0 \\pmod{7}\\), then \\(x^3 \\equiv 0 \\pmod{7}\\).\n- If \\(x \\equiv 1 \\pmod{7}\\), then \\(x^3 \\equiv 1 \\pmod{7}\\).\n- If \\(x \\equiv 2 \\pmod{7}\\), then \\(x^3 \\equiv 8 \\equiv 1 \\pmod{7}\\).\n- If \\(x \\equiv 3 \\pmod{7}\\), then \\(x^3 \\equiv 27 \\equiv 6 \\pmod{7}\\).\n- If \\(x \\equiv 4 \\pmod{7}\\), then \\(x^3 \\equiv 64 \\equiv 1 \\pmod{7}\\).\n- If \\(x \\equiv 5 \\pmod{7}\\), then \\(x^3 \\equiv 125 \\equiv 6 \\pmod{7}\\).\n- If \\(x \\equiv 6 \\pmod{7}\\), then \\(x^3 \\equiv 216 \\equiv 6 \\pmod{7}\\).\n\nThus, the possible values of \\(x^3 \\pmod{7}\\) are \\(0, 1, 6\\).\n\n#### Step 3: Multiply by 4 and Find \\(4x^3 \\pmod{7}\\)\nMultiply the possible values of \\(x^3 \\pmod{7}\\) by 4 (noting that \\(4 \\equiv 4 \\pmod{7}\\)):\n- If \\(x^3 \\equiv 0 \\pmod{7}\\), then \\(4x^3 \\equiv 0 \\pmod{7}\\).\n- If \\(x^3 \\equiv 1 \\pmod{7}\\), then \\(4x^3 \\equiv 4 \\pmod{7}\\).\n- If \\(x^3 \\equiv 6 \\pmod{7}\\), then \\(4x^3 \\equiv 24 \\equiv 3 \\pmod{7}\\).\n\nThus, the possible values of \\(4x^3 \\pmod{7}\\) are \\(0, 3, 4\\).\n\nBut we need \\(4x^3 \\equiv 1 \\pmod{7}\\), which is not among the possible values. This is a contradiction, so no integer solutions \\((x, y)\\) exist.\n\n#### Step 4: Conclusion\nSince \\(4x^3 \\equiv 1 \\pmod{7}\\) is impossible, the equation \\(4x^3 - 7y^3 = 2003\\) has no integer solutions.\n\n### Step-by-Step Abstract Plan\n\n1. **Reduce the equation modulo 7**:\n   - Simplify \\(4x^3 - 7y^3 \\equiv 2003 \\pmod{7}\\) to \\(4x^3 \\equiv 1 \\pmod{7}\\).\n\n2. **Compute \\(x^3 \\pmod{7}\\) for all residues**:\n   - Find all possible values of \\(x^3 \\pmod{7}\\) (i.e., \\(0, 1, 6\\)).\n\n3. **Multiply by 4 and find \\(4x^3 \\pmod{7}\\)**:\n   - Compute \\(4 \\times 0 \\equiv 0\\), \\(4 \\times 1 \\equiv 4\\), and \\(4 \\times 6 \\equiv 3 \\pmod{7}\\).\n   - The possible values are \\(0, 3, 4\\).\n\n4. **Compare with the required condition**:\n   - Since \\(1\\) is not among the possible values of \\(4x^3 \\pmod{7}\\), no solutions exist.\n\n5. **Conclude that the equation has no integer solutions**.\n\n### Lean 4 Proof with `have` Statements\n\n```lean4\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : \u2124) :\n  4 * x^3 - 7 * y^3 \u2260 2003 := by\n  have h_main : (4 * x^3 - 7 * y^3) % 7 \u2260 2003 % 7 := by sorry\n  have h_final : 4 * x^3 - 7 * y^3 \u2260 2003 := by sorry\n  sorry\n```\n\n### Complete Lean 4 Proof\n\n```lean4\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : \u2124) :\n  4 * x^3 - 7 * y^3 \u2260 2003 := by\n  have h_main : (4 * x^3 - 7 * y^3) % 7 \u2260 2003 % 7 := by\n    have h\u2081 : (4 * x^3 - 7 * y^3) % 7 = (4 * (x % 7)^3) % 7 := by\n      have h\u2082 : (4 * x^3 - 7 * y^3) % 7 = (4 * x^3) % 7 := by\n        have h\u2083 : (7 * y^3 : \u2124) % 7 = 0 := by\n          simp [Int.mul_emod, Int.pow_succ]\n        omega\n      have h\u2084 : (4 * x^3 : \u2124) % 7 = (4 * (x % 7)^3) % 7 := by\n        have h\u2085 : (x : \u2124) % 7 = x % 7 := by simp\n        have h\u2086 : (x : \u2124) ^ 3 % 7 = (x % 7) ^ 3 % 7 := by\n          have h\u2087 : (x : \u2124) % 7 = x % 7 := by simp\n          have h\u2088 : (x : \u2124) ^ 3 % 7 = (x % 7) ^ 3 % 7 := by\n            calc\n              (x : \u2124) ^ 3 % 7 = ((x % 7) ^ 3) % 7 := by\n                simp [pow_three, Int.mul_emod, Int.add_emod]\n              _ = (x % 7) ^ 3 % 7 := by simp\n          exact h\u2088\n        have h\u2089 : (4 * x ^ 3 : \u2124) % 7 = (4 * (x % 7) ^ 3) % 7 := by\n          calc\n            (4 * x ^ 3 : \u2124) % 7 = (4 * (x ^ 3 % 7)) % 7 := by\n              simp [Int.mul_emod]\n            _ = (4 * ((x % 7) ^ 3 % 7)) % 7 := by rw [h\u2086]\n            _ = (4 * (x % 7) ^ 3) % 7 := by simp [Int.mul_emod]\n        exact h\u2089\n      omega\n    have h\u2082 : (4 * (x % 7)^3 : \u2124) % 7 = 0 \u2228 (4 * (x % 7)^3 : \u2124) % 7 = 3 \u2228 (4 * (x % 7)^3 : \u2124) % 7 = 4 := by\n      have h\u2083 : x % 7 = 0 \u2228 x % 7 = 1 \u2228 x % 7 = 2 \u2228 x % 7 = 3 \u2228 x % 7 = 4 \u2228 x % 7 = 5 \u2228 x % 7 = 6 := by\n        omega\n      rcases h\u2083 with (h\u2083 | h\u2083 | h\u2083 | h\u2083 | h\u2083 | h\u2083 | h\u2083) <;>\n        (try omega) <;>\n        (try {\n          simp [h\u2083, pow_three, Int.mul_emod, Int.add_emod]\n          <;> norm_num <;> omega\n        })\n    have h\u2083 : (4 * x ^ 3 - 7 * y ^ 3 : \u2124) % 7 \u2260 2003 % 7 := by\n      have h\u2084 : (4 * x ^ 3 - 7 * y ^ 3 : \u2124) % 7 = (4 * (x % 7) ^ 3 : \u2124) % 7 := by\n        omega\n      rw [h\u2084]\n      have h\u2085 : (2003 : \u2124) % 7 = 1 := by norm_num\n      have h\u2086 : (4 * (x % 7) ^ 3 : \u2124) % 7 = 0 \u2228 (4 * (x % 7) ^ 3 : \u2124) % 7 = 3 \u2228 (4 * (x % 7) ^ 3 : \u2124) % 7 = 4 := by\n        exact h\u2082\n      rcases h\u2086 with (h\u2086 | h\u2086 | h\u2086) <;>\n        (try omega) <;>\n        (try {\n          omega\n        })\n    exact h\u2083\n  \n  have h_final : 4 * x^3 - 7 * y^3 \u2260 2003 := by\n    intro h\n    have h\u2081 : (4 * x^3 - 7 * y^3) % 7 = 2003 % 7 := by\n      rw [h]\n    have h\u2082 : (4 * x^3 - 7 * y^3) % 7 \u2260 2003 % 7 := h_main\n    contradiction\n  \n  exact h_final\n```",
+      "extracted_tactics": "have h_main : (4 * x^3 - 7 * y^3) % 7 \u2260 2003 % 7 := by\nhave h\u2081 : (4 * x^3 - 7 * y^3) % 7 = (4 * (x % 7)^3) % 7 := by\nhave h\u2082 : (4 * x^3 - 7 * y^3) % 7 = (4 * x^3) % 7 := by\nhave h\u2083 : (7 * y^3 : \u2124) % 7 = 0 := by\nsimp [Int.mul_emod, Int.pow_succ]\nomega\nhave h\u2084 : (4 * x^3 : \u2124) % 7 = (4 * (x % 7)^3) % 7 := by\nhave h\u2085 : (x : \u2124) % 7 = x % 7 := by simp\nhave h\u2086 : (x : \u2124) ^ 3 % 7 = (x % 7) ^ 3 % 7 := by\nhave h\u2087 : (x : \u2124) % 7 = x % 7 := by simp\nhave h\u2088 : (x : \u2124) ^ 3 % 7 = (x % 7) ^ 3 % 7 := by\ncalc\n(x : \u2124) ^ 3 % 7 = ((x % 7) ^ 3) % 7 := by\nsimp [pow_three, Int.mul_emod, Int.add_emod]\n_ = (x % 7) ^ 3 % 7 := by simp\nexact h\u2088\nhave h\u2089 : (4 * x ^ 3 : \u2124) % 7 = (4 * (x % 7) ^ 3) % 7 := by\ncalc\n(4 * x ^ 3 : \u2124) % 7 = (4 * (x ^ 3 % 7)) % 7 := by\nsimp [Int.mul_emod]\n_ = (4 * ((x % 7) ^ 3 % 7)) % 7 := by rw [h\u2086]\n_ = (4 * (x % 7) ^ 3) % 7 := by simp [Int.mul_emod]\nexact h\u2089\nomega\nhave h\u2082 : (4 * (x % 7)^3 : \u2124) % 7 = 0 \u2228 (4 * (x % 7)^3 : \u2124) % 7 = 3 \u2228 (4 * (x % 7)^3 : \u2124) % 7 = 4 := by\nhave h\u2083 : x % 7 = 0 \u2228 x % 7 = 1 \u2228 x % 7 = 2 \u2228 x % 7 = 3 \u2228 x % 7 = 4 \u2228 x % 7 = 5 \u2228 x % 7 = 6 := by\nomega\nrcases h\u2083 with (h\u2083 | h\u2083 | h\u2083 | h\u2083 | h\u2083 | h\u2083 | h\u2083) <;>\n(try omega) <;>\n(try {\nsimp [h\u2083, pow_three, Int.mul_emod, Int.add_emod]\n<;> norm_num <;> omega\n})\nhave h\u2083 : (4 * x ^ 3 - 7 * y ^ 3 : \u2124) % 7 \u2260 2003 % 7 := by\nhave h\u2084 : (4 * x ^ 3 - 7 * y ^ 3 : \u2124) % 7 = (4 * (x % 7) ^ 3 : \u2124) % 7 := by\nomega\nrw [h\u2084]\nhave h\u2085 : (2003 : \u2124) % 7 = 1 := by norm_num\nhave h\u2086 : (4 * (x % 7) ^ 3 : \u2124) % 7 = 0 \u2228 (4 * (x % 7) ^ 3 : \u2124) % 7 = 3 \u2228 (4 * (x % 7) ^ 3 : \u2124) % 7 = 4 := by\nexact h\u2082\nrcases h\u2086 with (h\u2086 | h\u2086 | h\u2086) <;>\n(try omega) <;>\n(try {\nomega\n})\nexact h\u2083\n\nhave h_final : 4 * x^3 - 7 * y^3 \u2260 2003 := by\nintro h\nhave h\u2081 : (4 * x^3 - 7 * y^3) % 7 = 2003 % 7 := by\nrw [h]\nhave h\u2082 : (4 * x^3 - 7 * y^3) % 7 \u2260 2003 % 7 := h_main\ncontradiction\n\nexact h_final",
+      "full_code": "import Mathlib\nimport Aesop\n\nset_option maxHeartbeats 400000\n\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : \u2124) :\n  4 * x^3 - 7 * y^3 \u2260 2003 := have h_main : (4 * x^3 - 7 * y^3) % 7 \u2260 2003 % 7 := by\n  have h\u2081 : (4 * x^3 - 7 * y^3) % 7 = (4 * (x % 7)^3) % 7 := by\n  have h\u2082 : (4 * x^3 - 7 * y^3) % 7 = (4 * x^3) % 7 := by\n  have h\u2083 : (7 * y^3 : \u2124) % 7 = 0 := by\n  simp [Int.mul_emod, Int.pow_succ]\n  omega\n  have h\u2084 : (4 * x^3 : \u2124) % 7 = (4 * (x % 7)^3) % 7 := by\n  have h\u2085 : (x : \u2124) % 7 = x % 7 := by simp\n  have h\u2086 : (x : \u2124) ^ 3 % 7 = (x % 7) ^ 3 % 7 := by\n  have h\u2087 : (x : \u2124) % 7 = x % 7 := by simp\n  have h\u2088 : (x : \u2124) ^ 3 % 7 = (x % 7) ^ 3 % 7 := by\n  calc\n  (x : \u2124) ^ 3 % 7 = ((x % 7) ^ 3) % 7 := by\n  simp [pow_three, Int.mul_emod, Int.add_emod]\n  _ = (x % 7) ^ 3 % 7 := by simp\n  exact h\u2088\n  have h\u2089 : (4 * x ^ 3 : \u2124) % 7 = (4 * (x % 7) ^ 3) % 7 := by\n  calc\n  (4 * x ^ 3 : \u2124) % 7 = (4 * (x ^ 3 % 7)) % 7 := by\n  simp [Int.mul_emod]\n  _ = (4 * ((x % 7) ^ 3 % 7)) % 7 := by rw [h\u2086]\n  _ = (4 * (x % 7) ^ 3) % 7 := by simp [Int.mul_emod]\n  exact h\u2089\n  omega\n  have h\u2082 : (4 * (x % 7)^3 : \u2124) % 7 = 0 \u2228 (4 * (x % 7)^3 : \u2124) % 7 = 3 \u2228 (4 * (x % 7)^3 : \u2124) % 7 = 4 := by\n  have h\u2083 : x % 7 = 0 \u2228 x % 7 = 1 \u2228 x % 7 = 2 \u2228 x % 7 = 3 \u2228 x % 7 = 4 \u2228 x % 7 = 5 \u2228 x % 7 = 6 := by\n  omega\n  rcases h\u2083 with (h\u2083 | h\u2083 | h\u2083 | h\u2083 | h\u2083 | h\u2083 | h\u2083) <;>\n  (try omega) <;>\n  (try {\n  simp [h\u2083, pow_three, Int.mul_emod, Int.add_emod]\n  <;> norm_num <;> omega\n  })\n  have h\u2083 : (4 * x ^ 3 - 7 * y ^ 3 : \u2124) % 7 \u2260 2003 % 7 := by\n  have h\u2084 : (4 * x ^ 3 - 7 * y ^ 3 : \u2124) % 7 = (4 * (x % 7) ^ 3 : \u2124) % 7 := by\n  omega\n  rw [h\u2084]\n  have h\u2085 : (2003 : \u2124) % 7 = 1 := by norm_num\n  have h\u2086 : (4 * (x % 7) ^ 3 : \u2124) % 7 = 0 \u2228 (4 * (x % 7) ^ 3 : \u2124) % 7 = 3 \u2228 (4 * (x % 7) ^ 3 : \u2124) % 7 = 4 := by\n  exact h\u2082\n  rcases h\u2086 with (h\u2086 | h\u2086 | h\u2086) <;>\n  (try omega) <;>\n  (try {\n  omega\n  })\n  exact h\u2083\n  \n  have h_final : 4 * x^3 - 7 * y^3 \u2260 2003 := by\n  intro h\n  have h\u2081 : (4 * x^3 - 7 * y^3) % 7 = 2003 % 7 := by\n  rw [h]\n  have h\u2082 : (4 * x^3 - 7 * y^3) % 7 \u2260 2003 % 7 := h_main\n  contradiction\n  \n  exact h_final",
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      },
+      "success": true,
+      "loss": null,
+      "reward": null,
+      "kl_div": null,
+      "entropy": null,
+      "grad_norm": null
+    }
+  ],
+  "start_time": "2026-02-25T07:15:46.675611",
+  "end_time": "2026-02-25T07:17:50.082938",
+  "success": true,
+  "best_proof": "have h_main : (4 * x^3 - 7 * y^3) % 7 \u2260 2003 % 7 := by\nhave h\u2081 : (4 * x^3 - 7 * y^3) % 7 = (4 * (x % 7)^3) % 7 := by\nhave h\u2082 : (4 * x^3 - 7 * y^3) % 7 = (4 * x^3) % 7 := by\nhave h\u2083 : (7 * y^3 : \u2124) % 7 = 0 := by\nsimp [Int.mul_emod, Int.pow_succ]\nomega\nhave h\u2084 : (4 * x^3 : \u2124) % 7 = (4 * (x % 7)^3) % 7 := by\nhave h\u2085 : (x : \u2124) % 7 = x % 7 := by simp\nhave h\u2086 : (x : \u2124) ^ 3 % 7 = (x % 7) ^ 3 % 7 := by\nhave h\u2087 : (x : \u2124) % 7 = x % 7 := by simp\nhave h\u2088 : (x : \u2124) ^ 3 % 7 = (x % 7) ^ 3 % 7 := by\ncalc\n(x : \u2124) ^ 3 % 7 = ((x % 7) ^ 3) % 7 := by\nsimp [pow_three, Int.mul_emod, Int.add_emod]\n_ = (x % 7) ^ 3 % 7 := by simp\nexact h\u2088\nhave h\u2089 : (4 * x ^ 3 : \u2124) % 7 = (4 * (x % 7) ^ 3) % 7 := by\ncalc\n(4 * x ^ 3 : \u2124) % 7 = (4 * (x ^ 3 % 7)) % 7 := by\nsimp [Int.mul_emod]\n_ = (4 * ((x % 7) ^ 3 % 7)) % 7 := by rw [h\u2086]\n_ = (4 * (x % 7) ^ 3) % 7 := by simp [Int.mul_emod]\nexact h\u2089\nomega\nhave h\u2082 : (4 * (x % 7)^3 : \u2124) % 7 = 0 \u2228 (4 * (x % 7)^3 : \u2124) % 7 = 3 \u2228 (4 * (x % 7)^3 : \u2124) % 7 = 4 := by\nhave h\u2083 : x % 7 = 0 \u2228 x % 7 = 1 \u2228 x % 7 = 2 \u2228 x % 7 = 3 \u2228 x % 7 = 4 \u2228 x % 7 = 5 \u2228 x % 7 = 6 := by\nomega\nrcases h\u2083 with (h\u2083 | h\u2083 | h\u2083 | h\u2083 | h\u2083 | h\u2083 | h\u2083) <;>\n(try omega) <;>\n(try {\nsimp [h\u2083, pow_three, Int.mul_emod, Int.add_emod]\n<;> norm_num <;> omega\n})\nhave h\u2083 : (4 * x ^ 3 - 7 * y ^ 3 : \u2124) % 7 \u2260 2003 % 7 := by\nhave h\u2084 : (4 * x ^ 3 - 7 * y ^ 3 : \u2124) % 7 = (4 * (x % 7) ^ 3 : \u2124) % 7 := by\nomega\nrw [h\u2084]\nhave h\u2085 : (2003 : \u2124) % 7 = 1 := by norm_num\nhave h\u2086 : (4 * (x % 7) ^ 3 : \u2124) % 7 = 0 \u2228 (4 * (x % 7) ^ 3 : \u2124) % 7 = 3 \u2228 (4 * (x % 7) ^ 3 : \u2124) % 7 = 4 := by\nexact h\u2082\nrcases h\u2086 with (h\u2086 | h\u2086 | h\u2086) <;>\n(try omega) <;>\n(try {\nomega\n})\nexact h\u2083\n\nhave h_final : 4 * x^3 - 7 * y^3 \u2260 2003 := by\nintro h\nhave h\u2081 : (4 * x^3 - 7 * y^3) % 7 = 2003 % 7 := by\nrw [h]\nhave h\u2082 : (4 * x^3 - 7 * y^3) % 7 \u2260 2003 % 7 := h_main\ncontradiction\n\nexact h_final",
+  "metrics": {
+    "iterations": [
+      1
+    ],
+    "losses": [
+      0.0
+    ],
+    "rewards": [
+      1.0
+    ],
+    "kl_divs": [
+      0.0
+    ],
+    "entropies": [
+      0.0
+    ],
+    "grad_norms": [
+      0.0
+    ],
+    "timestamps": [
+      123.39817833900452
+    ]
+  },
+  "model_save_path": "/output/goedel-sdpo-results/run_20260225_071750/final_lora"
+}

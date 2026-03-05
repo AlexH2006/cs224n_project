@@ -1,0 +1,108 @@
+{
+  "problem": {
+    "id": "mathd_algebra_487",
+    "split": "test",
+    "formal_statement": "theorem mathd_algebra_487\n  (a b c d : \u211d)\n  (h\u2080 : b = a^2)\n  (h\u2081 : a + b = 1)\n  (h\u2082 : d = c^2)\n  (h\u2083 : c + d = 1)\n  (h\u2084 : a \u2260 c) :\n  Real.sqrt ((a - c)^2 + (b - d)^2)= Real.sqrt 10 := sorry",
+    "header": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology",
+    "informal_stmt": "What is the distance between the two intersections of $y=x^2$ and $x+y=1$? Show that it is \\sqrt{10}.",
+    "informal_proof": "To find the $x$-coordinates of the intersections, substitute $x^2$ for $y$ in $x+y=1$ and solve for $x$, resulting in  \\begin{align*}\nx+x^2&=1 \\\\\n\\Rightarrow \\qquad x^2+x-1&=0 \\\\\n\\Rightarrow \\qquad x&=\\frac{-1\\pm\\sqrt{1+4}}2=\\frac{-1\\pm\\sqrt5}2\\\\\n\\end{align*}Using each of these coordinates to solve for $y$ gives us the intersections at $\\left(\\frac{-1+\\sqrt5}2,\\frac{3-\\sqrt5}2\\right)$ and $\\left(\\frac{-1-\\sqrt5}2,\\frac{3+\\sqrt5}2\\right)$.  Using the distance formula, we have \\begin{align*}\n&\\sqrt{ \\left(\\frac{-1+\\sqrt5}{2}-\\frac{-1-\\sqrt5}{2}\\right)^2 + \\left(\\frac{3-\\sqrt5}2-\\frac{3+\\sqrt5}2\\right)^2 }\\\\\n&\\qquad=\\sqrt{\\left(\\frac{2\\sqrt5}2\\right)^2 + \\left(-\\frac{2\\sqrt5}2\\right)^2}\\\\\n&\\qquad=\\sqrt{ 2\\sqrt5^2 }\\\\\n&\\qquad=\\sqrt{10}.\n\\end{align*}"
+  },
+  "config": {
+    "model_name": "AI-MO/Kimina-Prover-RL-1.7B",
+    "dataset_name": "cat-searcher/minif2f-lean4",
+    "dataset_subset": null,
+    "dataset_split": "test",
+    "problem_idx": 60,
+    "max_iterations": 1,
+    "learning_rate": 1e-05,
+    "temperature": 0.6,
+    "feedback_include_failed_proof": false,
+    "theorem_fields": [
+      "lean4_code",
+      "formal_statement",
+      "lean4_statement",
+      "statement",
+      "code",
+      "theorem",
+      "problem_statement"
+    ],
+    "informal_fields": [
+      "informal_prefix",
+      "informal_stmt",
+      "problem",
+      "informal_statement",
+      "natural_language",
+      "description",
+      "question",
+      "informal"
+    ],
+    "header_fields": [
+      "header",
+      "imports",
+      "preamble",
+      "prefix"
+    ],
+    "id_fields": [
+      "problem_id",
+      "name",
+      "id",
+      "idx",
+      "index"
+    ]
+  },
+  "iteration_logs": [
+    {
+      "iteration": 1,
+      "student_prompt": "<|im_start|>system\nYou are an expert in mathematics and proving theorems in Lean 4.<|im_end|>\n<|im_start|>user\nThink about and solve the following problem step by step in Lean 4.\n# Problem:What is the distance between the two intersections of $y=x^2$ and $x+y=1$? Show that it is \\sqrt{10}.\n# Formal statement:\n```lean4\ntheorem mathd_algebra_487\n  (a b c d : \u211d)\n  (h\u2080 : b = a^2)\n  (h\u2081 : a + b = 1)\n  (h\u2082 : d = c^2)\n  (h\u2083 : c + d = 1)\n  (h\u2084 : a \u2260 c) :\n  Real.sqrt ((a - c)^2 + (b - d)^2)= Real.sqrt 10 := sorry\n```\n<|im_end|>\n<|im_start|>assistant\n",
+      "teacher_prompt": null,
+      "raw_output": "<think>\n# Solving the Distance Between Intersections of $y=x^2$ and $x+y=1$\n\nTo find the distance between the intersections of $y=x^2$ and $x+y=1$, we need to determine the distance between points where these two equations intersect. Let's think through this algebraically first, then translate it to Lean 4.\n\nFirst, we solve the system of equations given by $y = x^2$ and $x + y = 1$. Substituting $y = x^2$ into the second equation gives:\n\n$x + x^2 = 1$\n\nRearranging:\n\n$x^2 + x - 1 = 0$\n\nThis is a quadratic equation in standard form. We can solve for $x$ using the quadratic formula:\n\n$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$\n\nwhere $a = 1$, $b = 1$, and $c = -1$.\n\nSubstituting these values in:\n\n$x = \\frac{-1 \\pm \\sqrt{1^2 - 4 \\cdot 1 \\cdot (-1)}}{2 \\cdot 1}$\n\n$x = \\frac{-1 \\pm \\sqrt{1 + 4}}{2}$\n\n$x = \\frac{-1 \\pm \\sqrt{5}}{2}$\n\nSo the two solutions for $x$ are $\\frac{-1 + \\sqrt{5}}{2}$ and $\\frac{-1 - \\sqrt{5}}{2}$. \n\nNow, to find the distance between these two points $(x_1, y_1)$ and $(x_2, y_2)$, we use the distance formula:\n\n$\\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$\n\nSince $y = x^2$, $y_1 = x_1^2$ and $y_2 = x_2^2$. Therefore, $y_2 - y_1 = x_2^2 - x_1^2$. \n\nSo the distance becomes:\n\n$\\sqrt{(x_2 - x_1)^2 + (x_2^2 - x_1^2)^2}$\n\nLet's compute $x_2^2 - x_1^2$. We know $x_1 + x_2 = 1$ (from $x + y = 1$ and $y = x^2$). \n\nWe can compute $(x_2 - x_1)^2$:\n\n$(x_2 - x_1)^2 = (x_2 + x_1)^2 - 4x_1x_2$\n\nSince $x_1 + x_2 = 1$ and $x_1x_2 = -1$ (from the quadratic $x^2 + x - 1 = 0$, we have $x_1 + x_2 = -1$ and $x_1x_2 = -1$).\n\nWait, actually for the quadratic $x^2 + x - 1 = 0$, we have $x_1 + x_2 = -1$ and $x_1x_2 = -1$.\n\nSo $(x_2 - x_1)^2 = (x_2 + x_1)^2 - 4x_1x_2 = (-1)^2 - 4(-1) = 1 + 4 = 5$.\n\nTherefore, $(x_2 - x_1)^2 = 5$.\n\nThen, $(x_2^2 - x_1^2)^2 = ((x_2 - x_1)(x_2 + x_1))^2 = (x_2 - x_1)^2 (x_2 + x_1)^2 = (5)(1) = 5$.\n\nTherefore, the distance squared is $(x_2 - x_1)^2 + (x_2^2 - x_1^2)^2 = 5 + 5 = 10$.\n\nTherefore, the distance is $\\sqrt{10}$.\n\nNow, to translate this into Lean 4. We need to prove that given two points $(a, a^2)$ and $(c, c^2)$ such that $a + b = 1$ and $c + d = 1$ where $b = a^2$ and $d = c^2$, and $a \\neq c$, then the distance between them is $\\sqrt{10}$.\n\nWait, actually, looking at the Lean 4 code structure, it's given four variables $a, b, c, d$ such that:\n\n- $b = a^2$ (h\u2080)\n- $a + b = 1$ (h\u2081)\n- $d = c^2$ (h\u2082)\n- $c + d = 1$ (h\u2083)\n- $a \\neq c$ (h\u2084)\n\nSo we need to show that $\\sqrt{(a - c)^2 + (b - d)^2} = \\sqrt{10}$.\n\nLet's derive the values of $a$ and $c$.\n\nFrom h\u2080: $b = a^2$\n\nFrom h\u2081: $a + b = 1$, so $a + a^2 = 1$, which gives $a^2 + a - 1 = 0$. The solutions are $a = \\frac{-1 \\pm \\sqrt{1 + 4}}{2} = \\frac{-1 \\pm \\sqrt{5}}{2}$.\n\nSimilarly, from h\u2082: $d = c^2$\n\nFrom h\u2083: $c + d = 1$, so $c + c^2 = 1$, which gives $c^2 + c - 1 = 0$. The solutions are $c = \\frac{-1 \\pm \\sqrt{1 + 4}}{2} = \\frac{-1 \\pm \\sqrt{5}}{2}$.\n\nSo $a$ and $c$ are both roots of the quadratic $x^2 + x - 1 = 0$. Since $a \\neq c$ (h\u2084), they must be the two distinct roots. Therefore, $a + c = -1$ and $ac = -1$.\n\nThen, $b - d = a^2 - c^2 = (a - c)(a + c) = (a - c)(-1) = - (a - c)$.\n\nTherefore, $(a - c)^2 + (b - d)^2 = (a - c)^2 + (- (a - c))^2 = 2(a - c)^2$.\n\nNow, we need to compute $(a - c)^2$.\n\nSince $a + c = -1$, $(a + c)^2 = 1 = a^2 + 2ac + c^2$.\n\nSince $ac = -1$, $a^2 + 2(-1) + c^2 = 1$, so $a^2 + c^2 = 1 + 2 = 3$.\n\nThen, $(a - c)^2 = a^2 - 2ac + c^2 = (a^2 + c^2) - 2ac = 3 - 2(-1) = 3 + 2 = 5$.\n\nTherefore, $(a - c)^2 + (b - d)^2 = 2 \\cdot 5 = 10$.\n\nTherefore, $\\sqrt{(a - c)^2 + (b - d)^2} = \\sqrt{10}$, which is what we need to prove.\n\nNow, let's translate this into Lean 4:\n\n```tactics\nimport Mathlib\n\ntheorem mathd_algebra_487\n  (a b c d : \u211d)\n  (h\u2080 : b = a^2)\n  (h\u2081 : a + b = 1)\n  (h\u2082 : d = c^2)\n  (h\u2083 : c + d = 1)\n  (h\u2084 : a \u2260 c) :\n  Real.sqrt ((a - c)^2 + (b - d)^2)= Real.sqrt 10 := by\n```\n\nNow we need to derive that $(a - c)^2 + (b - d)^2 = 10$.\n\nFirst, from h\u2080: $b = a^2$\n\nFrom h\u2081: $a + b = 1$, so $a + a^2 = 1$, which gives $a^2 + a - 1 = 0$. The solutions are $a = \\frac{-1 \\pm \\sqrt{5}}{2}$.\n\nSimilarly, from h\u2082: $d = c^2$\n\nFrom h\u2083: $c + d = 1$, so $c + c^2 = 1$, which gives $c^2 + c - 1 = 0$. The solutions are $c = \\frac{-1 \\pm \\sqrt{5}}{2}$.\n\nSo $a$ and $c$ are both roots of the quadratic $x^2 + x - 1 = 0$. Since $a \\neq c$ (h\u2084), they must be the two distinct roots. Therefore, $a + c = -1$ and $ac = -1$.\n\nThen, $b - d = a^2 - c^2 = (a - c)(a + c) = (a - c)(-1) = - (a - c)$.\n\nTherefore, $(a - c)^2 + (b - d)^2 = (a - c)^2 + (- (a - c))^2 = 2(a - c)^2$.\n\nNow, we need to compute $(a - c)^2$.\n\nSince $a + c = -1$, $(a + c)^2 = 1 = a^2 + 2ac + c^2$.\n\nSince $ac = -1$, $a^2 + 2(-1) + c^2 = 1$, so $a^2 + c^2 = 1 + 2 = 3$.\n\nThen, $(a - c)^2 = a^2 - 2ac + c^2 = (a^2 + c^2) - 2ac = 3 - 2(-1) = 3 + 2 = 5$.\n\nTherefore, $(a - c)^2 + (b - d)^2 = 2 \\cdot 5 = 10$.\n\nTherefore, $\\sqrt{(a - c)^2 + (b - d)^2} = \\sqrt{10}$, which is what we need to prove.\n\nNow, let's complete the Lean proof:\n\n```tactics\nhave eq1 : a^2 + a - 1 = 0 := by\n  rw [h\u2080] at h\u2081\n  linarith\n```\n\nNow we have that $a$ is a root of $x^2 + x - 1 = 0$.\n\nSimilarly for $c$:\n\n```tactics\nhave eq2 : c^2 + c - 1 = 0 := by\n  rw [h\u2082] at h\u2083\n  linarith\n```\n\nNow we have that $c$ is a root of $x^2 + x - 1 = 0$.\n\nSo $a$ and $c$ are both roots of the quadratic $x^2 + x - 1 = 0$. Since $a \\neq c$, they must be the two distinct roots. Therefore, $a + c = -1$ and $ac = -1$.\n\nLet's prove that $a + c = -1$ and $ac = -1$.\n\n```tactics\nhave h5 : a + c = -1 := by\n  have h6 : a^2 + a - 1 = 0 := eq1\n  have h7 : c^2 + c - 1 = 0 := eq2\n  have h8 : a^2 + a - 1 - (c^2 + c - 1) = 0 := by linarith\n```\n\nWait, this is not the right approach. Let's think. We have $a^2 + a - 1 = 0$ and $c^2 + c - 1 = 0$. Therefore, $a^2 + a - 1 = c^2 + c - 1$. Then $a^2 - c^2 + a - c = 0$. Then $(a - c)(a + c + 1) = 0$. Since $a \\neq c$, $a - c \\neq 0$, so $a + c + 1 = 0$, i.e., $a + c = -1$.\n\nSo the Lean proof would be:\n\n```tactics\nhave h6 : a^2 + a - 1 = 0 := eq1\nhave h7 : c^2 + c - 1 = 0 := eq2\nhave h8 : a^2 + a - 1 - (c^2 + c - 1) = 0 := by linarith\n```\n\nThen factor the expression:\n\n$a^2 + a - 1 - (c^2 + c - 1) = a^2 + a - 1 - c^2 - c + 1 = a^2 - c^2 + a - c = (a - c)(a + c + 1)$\n\nSo we have $(a - c)(a + c + 1) = 0$.\n\nSince $a \\neq c$, $a - c \\neq 0$, so $a + c + 1 = 0$, i.e., $a + c = -1$.\n\nSo the Lean proof would be:\n\n```tactics\nhave h9 : (a - c) * (a + c + 1) = 0 := by\n  nlinarith\n```\n\nThen, since $a \\neq c$, $a - c \\neq 0$, so $a + c + 1 = 0$.\n\n```tactics\ncases' (mul_eq_zero.mp h9) with h10 h11\n```\n\nNow $h10$ is $a - c = 0$, or $h11$ is $a + c + 1 = 0$.\n\nBut $a \\neq c$, so $a - c \\neq 0$, so $h10$ is a contradiction.\n\n```tactics\n\u00b7 -- Case $a - c = 0$\n  exfalso\n  apply h\u2084\n  linarith\n```\n\nNow $h11$ is $a + c + 1 = 0$, which is what we want.\n\n```tactics\n\u00b7 -- Case $a + c + 1 = 0$\n  linarith\n```\n\nNow we have $a + c = -1$.\n\nNext, we need to prove that $ac = -1$.\n\nFrom $a + c = -1$ and $a^2 + a - 1 = 0$, we can compute $ac$.\n\nWe know that $(a + c)^2 = a^2 + 2ac + c^2$.\n\nBut $a + c = -1$, so $(a + c)^2 = 1$.\n\nAlso, $a^2 + c^2 = (a + c)^2 - 2ac = 1 - 2ac$.\n\nBut from $a^2 + a - 1 = 0$, we have $a^2 = 1 - a$.\n\nFrom $c^2 + c - 1 = 0$, we have $c^2 = 1 - c$.\n\nThen $a^2 + c^2 = (1 - a) + (1 - c) = 2 - (a + c) = 2 - (-1) = 3$.\n\nSo $a^2 + c^2 = 3$.\n\nBut also $a^2 + c^2 = 1 - 2ac$ (from above).\n\nSo $1 - 2ac = 3$.\n\nThen $-2ac = 2$, so $ac = -1$.\n\nSo $ac = -1$.\n\nNow, let's prove it in Lean.\n\n```tactics\nhave h6 : a * c = -1 := by\n  have h5' : a + c = -1 := h5\n  have h7 : a^2 + a - 1 = 0 := eq1\n  have h8 : c^2 + c - 1 = 0 := eq2\n```\n\nNow we need to compute $ac$.\n\nWe can compute $ac$ from $a + c = -1$ and $a^2 + a - 1 = 0$, $c^2 + c - 1 = 0$.\n\nLet's multiply $a$ and $c$:\n\nWe have $a + c = -1$.\n\nThen $a^2 + c^2 = (a + c)^2 - 2ac = (-1)^2 - 2ac = 1 - 2ac$.\n\nBut from $a^2 + a - 1 = 0$, $a^2 = 1 - a$.\n\nFrom $c^2 + c - 1 = 0$, $c^2 = 1 - c$.\n\nThen $a^2 + c^2 = (1 - a) + (1 - c) = 2 - (a + c) = 2 - (-1) = 3$.\n\nSo $a^2 + c^2 = 3$.\n\nBut $a^2 + c^2 = 1 - 2ac$, so $3 = 1 - 2ac$, so $2ac = 1 - 3 = -2$, so $ac = -1$.\n\nSo in Lean:\n\n```tactics\nnlinarith [sq_pos_of_ne_zero (show (a - c) \u2260 0 by\n  intro h'\n  apply h\u2084\n  linarith\n), sq_nonneg (a - c)]\n```\n\nNow we have $",
+      "extracted_tactics": "import Mathlib\nrw [h\u2080] at h\u2081\nlinarith\nrw [h\u2082] at h\u2083\nlinarith\nnlinarith\ncases' (mul_eq_zero.mp h9) with h10 h11\n\u00b7 -- Case $a - c = 0$\nexfalso\napply h\u2084\nlinarith\n\u00b7 -- Case $a + c + 1 = 0$\nlinarith\nhave h5' : a + c = -1 := h5\nnlinarith [sq_pos_of_ne_zero (show (a - c) \u2260 0 by\nintro h'\napply h\u2084\nlinarith\n), sq_nonneg (a - c)]",
+      "full_code": "import Mathlib\n\ntheorem mathd_algebra_487\n  (a b c d : \u211d)\n  (h\u2080 : b = a^2)\n  (h\u2081 : a + b = 1)\n  (h\u2082 : d = c^2)\n  (h\u2083 : c + d = 1)\n  (h\u2084 : a \u2260 c) :\n  Real.sqrt ((a - c)^2 + (b - d)^2)= Real.sqrt 10 := rw [h\u2080] at h\u2081\n  linarith\n  rw [h\u2082] at h\u2083\n  linarith\n  nlinarith\n  cases' (mul_eq_zero.mp h9) with h10 h11\n  \u00b7 -- Case $a - c = 0$\n  exfalso\n  apply h\u2084\n  linarith\n  \u00b7 -- Case $a + c + 1 = 0$\n  linarith\n  have h5' : a + c = -1 := h5\n  nlinarith [sq_pos_of_ne_zero (show (a - c) \u2260 0 by\n  intro h'\n  apply h\u2084\n  linarith\n  ), sq_nonneg (a - c)]",
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      },
+      "success": true,
+      "loss": null,
+      "reward": null,
+      "kl_div": null,
+      "entropy": null,
+      "grad_norm": null
+    }
+  ],
+  "start_time": "2026-02-24T19:33:24.422751",
+  "end_time": "2026-02-24T19:34:23.262160",
+  "success": true,
+  "best_proof": "import Mathlib\nrw [h\u2080] at h\u2081\nlinarith\nrw [h\u2082] at h\u2083\nlinarith\nnlinarith\ncases' (mul_eq_zero.mp h9) with h10 h11\n\u00b7 -- Case $a - c = 0$\nexfalso\napply h\u2084\nlinarith\n\u00b7 -- Case $a + c + 1 = 0$\nlinarith\nhave h5' : a + c = -1 := h5\nnlinarith [sq_pos_of_ne_zero (show (a - c) \u2260 0 by\nintro h'\napply h\u2084\nlinarith\n), sq_nonneg (a - c)]",
+  "metrics": {
+    "iterations": [
+      1
+    ],
+    "losses": [
+      0.0
+    ],
+    "rewards": [
+      1.0
+    ],
+    "kl_divs": [
+      0.0
+    ],
+    "entropies": [
+      0.0
+    ],
+    "grad_norms": [
+      0.0
+    ],
+    "timestamps": [
+      58.81598234176636
+    ]
+  },
+  "model_save_path": "/output/test-time-SDPO/run_20260224_193423/final_model"
+}

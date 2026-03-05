@@ -1,0 +1,23 @@
+{
+  "iterations": [
+    1
+  ],
+  "losses": [
+    0.0
+  ],
+  "rewards": [
+    1.0
+  ],
+  "kl_divs": [
+    0.0
+  ],
+  "entropies": [
+    0.0
+  ],
+  "grad_norms": [
+    0.0
+  ],
+  "timestamps": [
+    43.54284381866455
+  ]
+}

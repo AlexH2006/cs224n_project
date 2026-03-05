@@ -4,8 +4,8 @@ Test-time reinforcement learning for Lean 4 theorem proving using **SDPO (Self-D
 
 ## Overview
 
-- **SDPO**: The model improves at a single problem by distilling from itself: it sees compiler feedback only when computing the teacher distribution; at test time it uses only the problem (no feedback). See [Algorithm details](docs/core_algo_explained.md). Modal pipelines: **Kimina 2B** (full fine-tune), **Kimina Distill 1.7B** (AI-MO/Kimina-Prover-Distill-1.7B), and **Goedel 8B** (LoRA with Unsloth).
-- **Lean verification**: Proofs are checked via [Kimina](https://projectnumina.ai) or a local Lean 4 toolchain.
+- **SDPO**: The model improves at a single problem by distilling from itself: it sees compiler feedback only when computing the teacher distribution; at test time it uses only the problem (no feedback). Algorithm and workflow: [docs/README_SDPO.md](docs/README_SDPO.md), [docs/SDPO_TRAINER_DEEP_DIVE.md](docs/SDPO_TRAINER_DEEP_DIVE.md). Modal pipelines: **Kimina 2B** (full fine-tune), **Kimina Distill 1.7B** (AI-MO/Kimina-Prover-Distill-1.7B), **Goedel 8B** (LoRA with Unsloth), **Qwen 3B** (optional LoRA), **DeepSeek 7B**, and **local Lean** (verify with local `lake exe repl`, no Kimina on Modal).
+- **Lean verification**: Proofs are checked via [Kimina](https://projectnumina.ai) (HTTP) or a **local** Lean 4 toolchain (`lake exe repl` in a mathlib4 workspace). Three local-verify packages exist: `sdpo_modal_local_verify` (Kimina-Prover base), `sdpo_modal_local_verify_goedel` (Goedel-Prover-V2-8B, last-lean4-block parsing, truncation detection), and `sdpo_modal_local_verify_kimina` (Kimina-Prover variant).
 - **MATH evaluation**: [eval/eval_nl_MATH.py](eval/eval_nl_MATH.py) runs few-shot MATH with local or [Modal](https://modal.com) inference.
 
 ## Setup
@@ -46,13 +46,12 @@ modal token new   # one-time auth
 ├── README.md
 ├── requirements.txt
 ├── requirements_conda.txt     # Optional Conda environment
-├── dataset/                   # Input datasets
+├── dataset/                   # Input datasets (e.g. minif2f.jsonl, ProofNet)
 ├── devlog/                    # Change logs and engineering notes (see devlog/README.md)
 │   ├── README.md                   # Naming convention and index
-│   └── YYYYMMDD_topic_slug.md      # Dated entries (e.g. 20260302_bugfixes_verification.md)
+│   └── YYYYMMDD_topic_slug.md      # Dated entries
 ├── docs/                      # Documentation
-│   ├── core_algo_explained.md
-│   ├── README_SDPO.md
+│   ├── README_SDPO.md              # SDPO overview, test-time vs full training
 │   ├── SDPO_TRAINER_DEEP_DIVE.md
 │   └── SDPO_WORKFLOW.md
 ├── eval/                      # Evaluation scripts
@@ -60,26 +59,48 @@ modal token new   # one-time auth
 │   ├── eval_nl_MATH/          # MATH eval outputs and sample solutions
 │   ├── eval_minif2f_kimina.py
 │   └── eval_minif2f_qwen.py
-├── training/                  # SDPO test-time RL
-│   ├── lean_sdpo_kimina_2b_modal.py           # SDPO on Modal: Kimina-Prover-RL-1.7B
-│   ├── lean_sdpo_kimina_distill_1_7b_modal.py # SDPO on Modal: Kimina-Prover-Distill-1.7B
-│   ├── lean_sdpo_goedel_8b_modal.py   # SDPO on Modal: Goedel-Prover-V2-8B (LoRA/Unsloth)
-│   └── lean_sdpo_ttt.py       # Local SDPO test-time RL
-├── verification/              # Proof verification utilities
+├── training/                  # SDPO test-time RL entrypoints
+│   ├── lean_sdpo_kimina_2b_modal.py              # Modal: Kimina-Prover-RL-1.7B (Kimina verify)
+│   ├── lean_sdpo_kimina_distill_1_7b_modal.py    # Modal: Kimina-Prover-Distill-1.7B
+│   ├── lean_sdpo_goedel_8b_modal.py              # Modal: Goedel-Prover-V2-8B (LoRA/Unsloth, Kimina verify)
+│   ├── lean_sdpo_goedel_local_verify_modal.py    # Modal: Goedel-Prover-V2-8B (local lake exe repl verify)
+│   ├── lean_sdpo_qwen_3b_modal.py                # Modal: Qwen 3B (full or LoRA)
+│   ├── lean_sdpo_qwen_3b_lora_modal.py           # Modal: Qwen 3B LoRA (Unsloth)
+│   ├── lean_sdpo_deepseek_7b_modal.py            # Modal: DeepSeek 7B
+│   ├── lean_sdpo_local_verify_modal.py           # Modal: Kimina-Prover; verify locally (lake exe repl)
+│   ├── run_local_verify_test_set.sh              # Shell: batch run local-verify pipeline over test set
+│   └── lean_sdpo_ttt.py                          # Local SDPO (no Modal)
+├── sdpo_modal/                         # Kimina-based SDPO pipeline (Modal generate + Kimina verify)
+├── sdpo_modal_local_verify/            # Local Lean verification pipeline — Kimina-Prover base
+├── sdpo_modal_local_verify_goedel/     # Local Lean verification pipeline — Goedel-Prover-V2-8B
+│                                       #   Parses last ```lean4 block only; detects truncated output;
+│                                       #   always prepends default header. See parsing.py.
+├── sdpo_modal_local_verify_kimina/     # Local Lean verification pipeline — Kimina-Prover variant
+├── verification/              # Standalone proof verification utilities
 │   ├── verify_proofs_kimina.py
 │   └── verify_single_proof.py
 ├── scripts/                   # Shell scripts and helpers
 │   ├── pipeline.sh            # Inference → compile → summarize pipeline
 │   ├── modal_test.py
-│   └── sort_kimina_2b_results.py   # Sort/inspect SDPO run results (e.g. kimina_2b)
+│   └── sort_kimina_2b_results.py   # Sort/inspect SDPO run results
 ├── setup/                     # Server and environment setup
 │   └── kimina-lean-server-setup/
 ├── src/                       # Pipeline utilities (compile, inference, summarize)
+├── baseline/                  # Minif2f-lean4 baseline eval (Modal vLLM + Kimina verify)
+├── debug/                     # Tests and one-offs (see debug/README.md)
 ├── SDPO/                      # SDPO/verl-related training utilities (submodule)
+├── Goedel-Prover-main/        # Goedel-Prover (mathlib4, REPL verifier reference)
 ├── sdpo_results/              # SDPO run outputs (gitignored)
-│   ├── kimina_2b/             # Kimina 2B (RL 1.7B) runs: run_{problem_idx}_{timestamp}/
-│   ├── kimina_distill_1_7b/   # Kimina Distill 1.7B runs: run_{problem_idx}_{timestamp}/
-│   └── goedel_8b/             # Goedel 8B runs: run_{problem_idx}_{timestamp}/
+│   ├── kimina_2b/
+│   ├── kimina_distill_1_7b/
+│   ├── goedel_8b/             # Goedel 8B runs (Kimina verify)
+│   ├── deepseek_7b/
+│   ├── qwen_3b/
+│   ├── qwen_3b_lora/
+│   └── local_verify/          # local-verify pipeline runs
+│       └── Goedel-Prover-V2-8B/
+│           └── minif2f-lean4/
+│               └── run_{idx}_{timestamp}/   # logs.json, metrics.json, kl/
 └── results/                   # Other run outputs (gitignored optional)
 ```
 
@@ -109,14 +130,37 @@ modal run training/lean_sdpo_kimina_distill_1_7b_modal.py --max-iterations 10 --
 
 Local results: `sdpo_results/kimina_distill_1_7b/run_{problem_idx}_{timestamp}/`.
 
-**Goedel 8B** (`lean_sdpo_goedel_8b_modal.py`) — Goedel-Prover-V2-8B with Unsloth LoRA, gradient accumulation (default 4), proof-plan prompt format. Requires A100-80GB.
+**Goedel 8B — Kimina verify** (`lean_sdpo_goedel_8b_modal.py`) — Goedel-Prover-V2-8B with Unsloth LoRA, gradient accumulation (default 4), proof-plan prompt format, Kimina verification. Requires A100-80GB.
 
 ```bash
 modal run training/lean_sdpo_goedel_8b_modal.py --problem-idx 1 --max-iterations 4
 modal run training/lean_sdpo_goedel_8b_modal.py --problem-idx 0 --lora-rank 32 --gradient-accumulation-steps 8
 ```
 
-Local results: `sdpo_results/goedel_8b/run_{problem_idx}_{timestamp}/`. For pipeline details and generation-speed notes, see [devlog/](devlog/) (index: [devlog/README.md](devlog/README.md)) — e.g. [20260224_sdpo_goedel_8b_modal.md](devlog/20260224_sdpo_goedel_8b_modal.md), [20260228_generation_speed_specs.md](devlog/20260228_generation_speed_specs.md).
+Local results: `sdpo_results/goedel_8b/run_{problem_idx}_{timestamp}/`. For pipeline details and generation-speed notes, see [devlog/](devlog/) — e.g. [20260224_sdpo_goedel_8b_modal.md](devlog/20260224_sdpo_goedel_8b_modal.md), [20260228_generation_speed_specs.md](devlog/20260228_generation_speed_specs.md).
+
+**Goedel 8B — local verify** (`lean_sdpo_goedel_local_verify_modal.py`) — Same model; verification runs **locally** via `lake exe repl` (no Kimina on Modal). Uses `sdpo_modal_local_verify_goedel`: extracts the last `lean4` block, detects truncated output, always prepends the default Mathlib header. Requires elan + mathlib4 built (e.g. `Goedel-Prover-main/mathlib4`).
+
+```bash
+modal run training/lean_sdpo_goedel_local_verify_modal.py --problem-idx 0
+modal run training/lean_sdpo_goedel_local_verify_modal.py --problem-idx 0 --max-iterations 5
+```
+
+Local results: `sdpo_results/local_verify/Goedel-Prover-V2-8B/minif2f-lean4/run_{idx}_{timestamp}/`. See [devlog/20260303_local_lean_verifier_setup.md](devlog/20260303_local_lean_verifier_setup.md), [devlog/20260304_parsing_central.md](devlog/20260304_parsing_central.md), and [devlog/20260304_kimina_server_vs_local_verify_comparison.md](devlog/20260304_kimina_server_vs_local_verify_comparison.md).
+
+**Kimina-Prover — local verify** (`lean_sdpo_local_verify_modal.py`) — Generate and train on Modal; verification runs **locally** via `lake exe repl`. Uses `sdpo_modal_local_verify` package.
+
+```bash
+modal run training/lean_sdpo_local_verify_modal.py --problem-idx 0
+```
+
+**Batch test-set run** (`run_local_verify_test_set.sh`) — Run the local-verify pipeline over multiple problem indices sequentially:
+
+```bash
+./training/run_local_verify_test_set.sh             # problems 0–4 (default)
+./training/run_local_verify_test_set.sh 0 1 2       # specific indices
+./training/run_local_verify_test_set.sh --count 10  # first 10 problems
+```
 
 ### 2. SDPO locally
 
@@ -146,14 +190,14 @@ Outputs (accuracy, sample solutions) are under `eval/eval_nl_MATH/`.
 
 ### 4. Proof verification
 
-Verify Lean proofs via Kimina (requires a running Kimina server, e.g. Docker):
+**Kimina (HTTP):** Verify Lean proofs via Kimina (requires a running Kimina server, e.g. Docker):
 
 ```bash
 python verification/verify_proofs_kimina.py --input results/minif2f_qwen3_8b_eval.json --output results/verified.json
 python verification/verify_proofs_kimina.py --server-url http://localhost:80  # optional: override server URL
 ```
 
-For single-proof or local REPL verification, see `verification/verify_single_proof.py` (requires `lean_compiler` if using local REPL).
+**Local Lean (lake exe repl):** Use `sdpo_modal_local_verify_goedel.local_lean_verifier.verify(lean_code)` (or the `_kimina` / base variants) from code, or run contract tests: `python debug/test_local_lean_verifier.py`. For single-proof or custom REPL scripts, see `verification/verify_single_proof.py`. Note: on recent macOS the REPL binary may fail with a `dyld __DATA_CONST` error — see [devlog/20260304_dyld_data_const_macos_repl.md](devlog/20260304_dyld_data_const_macos_repl.md); use Linux/Docker for reliable local verification.
 
 ### 5. Inference–compile–summarize pipeline
 
@@ -167,8 +211,10 @@ Configure paths and model in the CONFIGURATION section inside `scripts/pipeline.
 
 ## References
 
-- Algorithm and loss: [docs/core_algo_explained.md](docs/core_algo_explained.md)
-- **Devlog** (change logs and specs): [devlog/](devlog/) — index in [devlog/README.md](devlog/README.md); dated entries (YYYYMMDD_topic_slug.md) for pipeline summaries, bugfixes, GPU config, generation speed
+- Algorithm and workflow: [docs/README_SDPO.md](docs/README_SDPO.md), [docs/SDPO_TRAINER_DEEP_DIVE.md](docs/SDPO_TRAINER_DEEP_DIVE.md), [docs/SDPO_WORKFLOW.md](docs/SDPO_WORKFLOW.md)
+- **Devlog** (change logs and specs): [devlog/](devlog/) — index in [devlog/README.md](devlog/README.md); dated entries (YYYYMMDD_topic_slug.md) for pipeline summaries, bugfixes, GPU config, generation speed, local verification, parsing
+- **Parsing notes:** [devlog/20260304_parsing_central.md](devlog/20260304_parsing_central.md) — centralized notes on model output → Lean code extraction for all pipelines
+- **Local verify setup:** [devlog/20260303_local_lean_verifier_setup.md](devlog/20260303_local_lean_verifier_setup.md), [devlog/20260303_mathlib4_missing_file_not_found.md](devlog/20260303_mathlib4_missing_file_not_found.md), [devlog/20260304_dyld_data_const_macos_repl.md](devlog/20260304_dyld_data_const_macos_repl.md)
 - Kimina: [projectnumina.ai](https://projectnumina.ai)
 - Modal: [modal.com](https://modal.com)
 - MATH: [hendrycks/math](https://github.com/hendrycks/math)

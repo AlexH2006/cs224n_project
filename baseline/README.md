@@ -55,6 +55,7 @@ modal run baseline/lean_baseline_eval_modal.py --model AI-MO/Kimina-Prover-RL-1.
 ## Contents
 
 - **lean_baseline_eval_modal.py** — Modal app: parallel proof generation (vLLM), serial verification (Kimina), 30s timeout, retry/reset on server errors.
+- **scripts/inspect_baseline_summary.py** — Inspect a run’s `summary.json` (e.g. `python baseline/scripts/inspect_baseline_summary.py results/run_<timestamp>/summary.json`).
 - **run_goedel_8b_40_87p5/** — Goedel-Prover-V2-8B run: 40 problems, 87.5%, Pass@4 (proofs.jsonl, summary.json).
 - **run_kimina_1_7b_100_78/** — Kimina-Prover-RL-1.7B run: 100 problems, 78%, Pass@1 (proofs.jsonl, full_outputs.jsonl, summary.json).
 - **VERIFICATION_REPORT.md** — Verification checklist for MiniF2F-test alignment.

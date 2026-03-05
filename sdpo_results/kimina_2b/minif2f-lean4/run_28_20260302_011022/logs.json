@@ -1,0 +1,108 @@
+{
+  "problem": {
+    "id": "mathd_algebra_320",
+    "split": "test",
+    "formal_statement": "theorem mathd_algebra_320\n  (x : \u211d)\n  (a b c : \u2115)\n  (h\u2080 : 0 < a \u2227 0 < b \u2227 0 < c \u2227 0 \u2264 x)\n  (h\u2081 : 2 * x^2 = 4 * x + 9)\n  (h\u2082 : x = (a + Real.sqrt b) / c)\n  (h\u2083 : c = 2) :\n  a + b + c = 26 := sorry",
+    "header": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology",
+    "informal_stmt": "Let $x$ be a positive number such that $2x^2 = 4x + 9.$ If $x$ can be written in simplified form as $\\dfrac{a + \\sqrt{b}}{c}$ such that $a,$ $b,$ and $c$ are positive integers, what is $a + b + c$? Show that it is 26.",
+    "informal_proof": "First, we move all terms to one side to get $2x^2 - 4x - 9 = 0.$ Seeing that factoring will not work, we apply the Quadratic Formula: \\begin{align*}\nx &= \\frac{-(-4) \\pm \\sqrt{(-4)^2 - 4(2)(-9)}}{2 (2)}\\\\\n&= \\frac{4 \\pm \\sqrt{16 + 72}}{4} = \\frac{4 \\pm \\sqrt{88}}{4}\\\\\n&= \\frac{4 \\pm 2\\sqrt{22}}{4} = \\frac{2 \\pm \\sqrt{22}}{2}.\n\\end{align*}Since $x$ is positive, $x$ can be written as $\\dfrac{2 + \\sqrt{22}}{2},$ so our answer is $2 + 22 + 2 = 26.$"
+  },
+  "config": {
+    "model_name": "AI-MO/Kimina-Prover-RL-1.7B",
+    "dataset_name": "cat-searcher/minif2f-lean4",
+    "dataset_subset": null,
+    "dataset_split": "test",
+    "problem_idx": 28,
+    "max_iterations": 5,
+    "learning_rate": 1e-05,
+    "temperature": 0.6,
+    "feedback_include_failed_proof": false,
+    "theorem_fields": [
+      "lean4_code",
+      "formal_statement",
+      "lean4_statement",
+      "statement",
+      "code",
+      "theorem",
+      "problem_statement"
+    ],
+    "informal_fields": [
+      "informal_prefix",
+      "informal_stmt",
+      "problem",
+      "informal_statement",
+      "natural_language",
+      "description",
+      "question",
+      "informal"
+    ],
+    "header_fields": [
+      "header",
+      "imports",
+      "preamble",
+      "prefix"
+    ],
+    "id_fields": [
+      "problem_id",
+      "name",
+      "id",
+      "idx",
+      "index"
+    ]
+  },
+  "iteration_logs": [
+    {
+      "iteration": 1,
+      "student_prompt": "<|im_start|>system\nYou are an expert in mathematics and proving theorems in Lean 4.<|im_end|>\n<|im_start|>user\nThink about and solve the following problem step by step in Lean 4.\n# Problem:Let $x$ be a positive number such that $2x^2 = 4x + 9.$ If $x$ can be written in simplified form as $\\dfrac{a + \\sqrt{b}}{c}$ such that $a,$ $b,$ and $c$ are positive integers, what is $a + b + c$? Show that it is 26.\n# Formal statement:\n```lean4\ntheorem mathd_algebra_320\n  (x : \u211d)\n  (a b c : \u2115)\n  (h\u2080 : 0 < a \u2227 0 < b \u2227 0 < c \u2227 0 \u2264 x)\n  (h\u2081 : 2 * x^2 = 4 * x + 9)\n  (h\u2082 : x = (a + Real.sqrt b) / c)\n  (h\u2083 : c = 2) :\n  a + b + c = 26 := sorry\n```\n<|im_end|>\n<|im_start|>assistant\n",
+      "teacher_prompt": null,
+      "raw_output": "<think>\n# Solving the Algebra Problem in Lean 4\n\nWe need to solve for a positive real number $x$ that satisfies $2x^2 = 4x + 9$, and express it in the form $\\dfrac{a + \\sqrt{b}}{c}$ where $a$, $b$, and $c$ are positive integers, then find $a + b + c$.\n\nFirst, let's solve the quadratic equation $2x^2 = 4x + 9$ algebraically to find the roots. \n\nRewriting it: $2x^2 - 4x - 9 = 0$\n\nUsing the quadratic formula: $x = \\dfrac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$\n\nHere, $A = 2$, $B = -4$, $C = -9$.\n\nSo, $x = \\dfrac{-(-4) \\pm \\sqrt{(-4)^2 - 4 \\cdot 2 \\cdot (-9)}}{2 \\cdot 2}$\n\nSimplifying:\n\n$x = \\dfrac{4 \\pm \\sqrt{16 + 72}}{4}$\n\n$x = \\dfrac{4 \\pm \\sqrt{88}}{4}$\n\nSince $\\sqrt{88}$ can be simplified: $88 = 4 \\cdot 22$, so $\\sqrt{88} = 2\\sqrt{22}$.\n\nThus, $x = \\dfrac{4 \\pm 2\\sqrt{22}}{4}$.\n\nWe can simplify this: $x = \\dfrac{2 \\pm \\sqrt{22}}{2}$.\n\nSince we need the positive root, we take $x = \\dfrac{2 + \\sqrt{22}}{2}$.\n\nNow, comparing with $\\dfrac{a + \\sqrt{b}}{c}$:\n\n- $A = 2$\n- $B = 22$\n- $C = 2$\n\nCheck if these are positive integers: yes, they are.\n\nThen, $a + b + c = 2 + 22 + 2 = 26$.\n\nNow to formalize this in Lean 4:\n```tactics\nimport Mathlib\n\ntheorem mathd_algebra_320\n  (x : \u211d)\n  (a b c : \u2115)\n  (h\u2080 : 0 < a \u2227 0 < b \u2227 0 < c \u2227 0 \u2264 x)\n  (h\u2081 : 2 * x^2 = 4 * x + 9)\n  (h\u2082 : x = (a + Real.sqrt b) / c)\n  (h\u2083 : c = 2) :\n  a + b + c = 26 := by\n```\n\nNow we need to solve the equation $2x^2 = 4x + 9$ and express $x$ in the form $\\dfrac{a + \\sqrt{b}}{c}$.\n\nLet's rewrite the equation as $2x^2 - 4x - 9 = 0$.\n\nUsing the quadratic formula:\n\n$x = \\dfrac{-(-4) \\pm \\sqrt{(-4)^2 - 4 \\cdot 2 \\cdot (-9)}}{2 \\cdot 2}$\n\n$x = \\dfrac{4 \\pm \\sqrt{16 + 72}}{4}$\n\n$x = \\dfrac{4 \\pm \\sqrt{88}}{4}$\n\n$\\sqrt{88} = \\sqrt{4 \\cdot 22} = 2\\sqrt{22}$\n\nSo $x = \\dfrac{4 \\pm 2\\sqrt{22}}{4} = \\dfrac{2 \\pm \\sqrt{22}}{2}$\n\nSince we need the positive root, we take $x = \\dfrac{2 + \\sqrt{22}}{2}$\n\nComparing with $\\dfrac{a + \\sqrt{b}}{c}$:\n\n- $A = 2$\n- $B = 22$\n- $C = 2$\n\nCheck that they are positive integers: yes.\n\nThen $A + B + C = 2 + 22 + 2 = 26$\n\nNow to formalize this in Lean 4:\n\n```tactics\nhave h4 : (2 : \u211d) * x^2 - 4 * x - 9 = 0 := by\n  linarith\n```\n\nNow we have the quadratic equation in standard form.\n\nLet's solve it using the quadratic formula:\n\n$x = \\dfrac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$\n\nHere, $A = 2$, $B = -4$, $C = -9$.\n\nSo:\n\n$x = \\dfrac{-(-4) \\pm \\sqrt{(-4)^2 - 4 \\cdot 2 \\cdot (-9)}}{2 \\cdot 2}$\n\n$x = \\dfrac{4 \\pm \\sqrt{16 + 72}}{4}$\n\n$x = \\dfrac{4 \\pm \\sqrt{88}}{4}$\n\nNow $\\sqrt{88} = \\sqrt{4 \\cdot 22} = 2\\sqrt{22}$\n\nSo $x = \\dfrac{4 \\pm 2\\sqrt{22}}{4}$\n\nSimplify: $x = \\dfrac{2 \\pm \\sqrt{22}}{2}$\n\nWe need the positive root, so $x = \\dfrac{2 + \\sqrt{22}}{2}$\n\nNow to express $x$ in the form $\\dfrac{a + \\sqrt{b}}{c}$:\n\nComparing:\n\n- $A = 2$\n- $B = 22$\n- $C = 2$\n\nCheck that they are positive integers: yes.\n\nThen $A + B + C = 2 + 22 + 2 = 26$\n\nNow to complete the formal proof in Lean:\n\n```tactics\nhave h5 : (x - (2 + Real.sqrt 22) / 2) * (x - (2 - Real.sqrt 22) / 2) = 0 := by\n  nlinarith [Real.sqrt_nonneg 22, Real.sq_sqrt (show (0 : \u211d) \u2264 (22 : \u211d) by norm_num), sq_nonneg (x - 2), sq_nonneg (x * 2 - 4)]\n```\n\nNow we have factored the quadratic, so either root is a solution.\n\nNow we need to determine which root is positive, so we take the positive one.\n\n$x = \\dfrac{2 + \\sqrt{22}}{2}$ is positive, since $\\sqrt{22}$ is positive.\n\nNow to complete the proof:\n\n```tactics\ncases' (mul_eq_zero.mp h5) with h6 h7\n```\n\nNow either $x - \\dfrac{2 + \\sqrt{22}}{2} = 0$ or $x - \\dfrac{2 - \\sqrt{22}}{2} = 0$\n\nLet's consider the first case:\n\n```tactics\n\u00b7 -- Case where x = (2 + Real.sqrt 22) / 2\n  have hx : x = (2 + Real.sqrt 22) / 2 := by linarith\n```\n\nNow we need to rewrite this in the form $\\dfrac{a + \\sqrt{b}}{c}$\n\nComparing:\n\n$x = \\dfrac{2 + \\sqrt{22}}{2}$\n\nSo:\n\n$a = 2$\n\n$b = 22$\n\n$c = 2$\n\nCheck that they are positive integers: yes.\n\nThen $a + b + c = 2 + 22 + 2 = 26$\n\nNow to complete the formal proof:\n\n```tactics\nrw [hx] at h\u2082\n```\n\nNow we have $\\dfrac{2 + \\sqrt{22}}{2} = \\dfrac{a + \\sqrt{b}}{c}$\n\nComparing the two sides:\n\n$\\dfrac{2 + \\sqrt{22}}{2} = \\dfrac{a + \\sqrt{b}}{c}$\n\nTherefore:\n\n$2 = a$\n\n$\\sqrt{22} = \\sqrt{b}$\n\n$2 = c$\n\nCheck that they are positive integers: yes.\n\nThen $a + b + c = 2 + 22 + 2 = 26$\n\nNow to complete the formal proof:\n\n```tactics\nhave h7 : (a : \u211d) = (2 : \u211d) := by\n  field_simp at h\u2082 \u22a2\n  nlinarith [Real.sqrt_nonneg (22 : \u211d), Real.sq_sqrt (show (0 : \u211d) \u2264 (22 : \u211d) by norm_num)]\n```\n\nNow we have that $a = 2$ as a real number. But since $a$ is a natural number, we can conclude that $a = 2$ as a natural number.\n\n```tactics\nhave h8 : a = 2 := by\n  exact_mod_cast h7\n```\n\nNow we need to find $b$ and $c$.\n\nComparing the two sides of the equation:\n\n$\\dfrac{2 + \\sqrt{22}}{2} = \\dfrac{a + \\sqrt{b}}{c}$\n\nWe have $a = 2$, so:\n\n$\\dfrac{2 + \\sqrt{22}}{2} = \\dfrac{2 + \\sqrt{b}}{c}$\n\nComparing the two sides:\n\n$\\sqrt{22} = \\sqrt{b}$\n\nSo $b = 22$\n\nAlso, $c = 2$\n\nNow to complete the formal proof:\n\n```tactics\nhave h9 : (b : \u211d) = (22 : \u211d) := by\n  field_simp at h\u2082 \u22a2\n  nlinarith [Real.sqrt_nonneg (22 : \u211d), Real.sq_sqrt (show (0 : \u211d) \u2264 (22 : \u211d) by norm_num)]\n```\n\nNow we have that $b = 22$ as a real number. But since $b$ is a natural number, we can conclude that $b = 22$ as a natural number.\n\n```tactics\nhave h10 : b = 22 := by\n  exact_mod_cast h9\n```\n\nNow we have $a = 2$, $b = 22$, $c = 2$.\n\nCheck that they are positive integers: yes.\n\nThen $a + b + c = 2 + 22 + 2 = 26$\n\nNow to complete the formal proof:\n\n```tactics\nhave h11 : (c : \u211d) = (2 : \u211d) := by\n  exact_mod_cast h\u2083\n```\n\nNow we have that $c = 2$ as a real number. But since $c$ is a natural number, we can conclude that $c = 2$ as a natural number.\n\n```tactics\nhave h12 : c = 2 := by\n  exact_mod_cast h11\n```\n\nNow we can compute $a + b + c$:\n\n$a = 2$, $b = 22$, $c = 2$\n\nSo $a + b + c = 2 + 22 + 2 = 26$\n\nNow to complete the formal proof:\n\n```tactics\nomega\n```\n\nNow let's consider the second case:\n\n$x = \\dfrac{2 - \\sqrt{22}}{2}$\n\nBut since $\\sqrt{22}$ is positive, $2 - \\sqrt{22}$ is negative. So $x$ would be negative, which contradicts $0 \\leq x$ from h\u2080.\n\nLet's complete the formal proof for the second case:\n\n```tactics\n\u00b7 -- Case where x = (2 - Real.sqrt 22) / 2\n  have hx : x = (2 - Real.sqrt 22) / 2 := by linarith\n```\n\nNow we need to show that this contradicts $0 \\leq x$ from h\u2080.\n\n$x = \\dfrac{2 - \\sqrt{22}}{2}$\n\nSince $\\sqrt{22} \\approx 4.69$, so $2 - \\sqrt{22} \\approx -2.69$\n\nSo $x \\approx \\dfrac{-2.69}{2} \\approx -1.345$ which is negative.\n\nBut from h\u2080, we have $0 \\leq x$\n\nSo this is a contradiction.\n\nNow to complete the formal proof:\n\n```tactics\nhave h8 : Real.sqrt 22 > (0 : \u211d) := by\n  positivity\n```\n\nNow we can show that $2 - \\sqrt{22} < 0$\n\n$2 - \\sqrt{22} < 0$ because $\\sqrt{22} > 2$\n\nNow to show that $x$ is negative in this case.\n\n$x = \\dfrac{2 - \\sqrt{22}}{2}$\n\nSince $2 - \\sqrt{22}$ is negative, $x$ is negative.\n\nBut from h\u2080, we have $0 \\leq x$\n\nSo this is a contradiction.\n\nNow to complete the formal proof:\n\n```tactics\nhave h9 : x < (0 : \u211d) := by\n  rw [hx]\n  nlinarith [Real.sqrt_nonneg (22 : \u211d), Real.sq_sqrt (show (0 : \u211d) \u2264 (22 : \u211d) by norm_num)]\n```\n\nNow we have that $x < 0$, which contradicts $0 \\leq x$ from h\u2080.\n\n```tactics\nnlinarith [h\u2080.right.left, h9]\n```\n\nThis completes the proof.\n\nTherefore, $a + b + c = 26$.\n\nThe final answer is $ \\boxed{26} $\n</think>\n```lean4\nimport Mathlib\n\ntheorem mathd_algebra_320\n  (x : \u211d)\n  (a b c : \u2115)\n  (h\u2080 : 0 < a \u2227 0 < b \u2227 0 < c \u2227 0 \u2264 x)\n  (h\u2081 : 2 * x^2 = 4 * x + 9)\n  (h\u2082 : x = (a + Real.sqrt b) / c)\n  (h\u2083 : c = 2) :\n  a + b + c = 26 := by\n  have h4 : (2 : \u211d) * x^2 - 4 * x - 9 = 0 := by\n    linarith\n  have h5 : (x - (2 + Real.sqrt 22) / 2) * (x - (2 - Real.sqrt 22) / 2) = 0 := by\n    nlinarith [Real.sqrt_nonneg 22, Real.sq_sqrt (show (0 : \u211d) \u2264 (22 : \u211d) by norm_num), sq_nonneg (x - 2), sq_nonneg (x * 2 - 4)]\n  cases' (mul_eq_zero.mp h5) with h6 h7\n  \u00b7 -- Case where x = (2 + Real.sqrt 22) / 2\n    have hx : x = (2 + Real.sqrt 22) / 2 := by linarith\n    rw [hx] at h\u2082\n    have h7 : (a : \u211d) = (2 : \u211d) := by\n      field_simp at h\u2082 \u22a2\n      nlinarith [Real.sqrt_nonneg (22 : \u211d), Real.sq_sqrt (show (0 : \u211d) \u2264 (22 : \u211d) by norm_num)]\n    have h8 : a = 2 := by\n      exact_mod_cast h7\n    have h9 : (b : \u211d) = (22 : \u211d) := by\n      field_simp at h\u2082 \u22a2\n      nlinarith [Real.sqrt_nonneg (22 : \u211d), Real.sq_sqrt (show (0 : \u211d) \u2264 (22 : \u211d) by norm_num)]\n    have h10 : b = 22 := by\n      exact_mod_cast h9\n    have h11 : (c : \u211d) = (2 : \u211d) := by\n      exact_mod_cast h\u2083\n    have h12 : c = 2 := by\n      exact_mod_cast h11\n    omega\n  \u00b7 -- Case where x = (2 - Real.sqrt 22) / 2\n    have hx : x = (2 - Real.sqrt 22) / 2 := by linarith\n    have h8 : Real.sqrt 22 > (0 : \u211d) := by\n      positivity\n    have h9 : x < (0 : \u211d) := by\n      rw [hx]\n      nlinarith [Real.sqrt_nonneg (22 : \u211d), Real.sq_sqrt (show (0 : \u211d) \u2264 (22 : \u211d) by norm_num)]\n    nlinarith [h\u2080.right.left, h9]\n```\n",
+      "extracted_tactics": "import Mathlib\nlinarith\nnlinarith [Real.sqrt_nonneg 22, Real.sq_sqrt (show (0 : \u211d) \u2264 (22 : \u211d) by norm_num), sq_nonneg (x - 2), sq_nonneg (x * 2 - 4)]\ncases' (mul_eq_zero.mp h5) with h6 h7\n\u00b7 -- Case where x = (2 + Real.sqrt 22) / 2\nhave hx : x = (2 + Real.sqrt 22) / 2 := by linarith\nrw [hx] at h\u2082\nfield_simp at h\u2082 \u22a2\nnlinarith [Real.sqrt_nonneg (22 : \u211d), Real.sq_sqrt (show (0 : \u211d) \u2264 (22 : \u211d) by norm_num)]\nexact_mod_cast h7\nfield_simp at h\u2082 \u22a2\nnlinarith [Real.sqrt_nonneg (22 : \u211d), Real.sq_sqrt (show (0 : \u211d) \u2264 (22 : \u211d) by norm_num)]\nexact_mod_cast h9\nexact_mod_cast h\u2083\nexact_mod_cast h11\nomega\n\u00b7 -- Case where x = (2 - Real.sqrt 22) / 2\nhave hx : x = (2 - Real.sqrt 22) / 2 := by linarith\npositivity\nrw [hx]\nnlinarith [Real.sqrt_nonneg (22 : \u211d), Real.sq_sqrt (show (0 : \u211d) \u2264 (22 : \u211d) by norm_num)]\nnlinarith [h\u2080.right.left, h9]",
+      "full_code": "import Mathlib\n\ntheorem mathd_algebra_320\n  (x : \u211d)\n  (a b c : \u2115)\n  (h\u2080 : 0 < a \u2227 0 < b \u2227 0 < c \u2227 0 \u2264 x)\n  (h\u2081 : 2 * x^2 = 4 * x + 9)\n  (h\u2082 : x = (a + Real.sqrt b) / c)\n  (h\u2083 : c = 2) :\n  a + b + c = 26 := linarith\n  nlinarith [Real.sqrt_nonneg 22, Real.sq_sqrt (show (0 : \u211d) \u2264 (22 : \u211d) by norm_num), sq_nonneg (x - 2), sq_nonneg (x * 2 - 4)]\n  cases' (mul_eq_zero.mp h5) with h6 h7\n  \u00b7 -- Case where x = (2 + Real.sqrt 22) / 2\n  have hx : x = (2 + Real.sqrt 22) / 2 := by linarith\n  rw [hx] at h\u2082\n  field_simp at h\u2082 \u22a2\n  nlinarith [Real.sqrt_nonneg (22 : \u211d), Real.sq_sqrt (show (0 : \u211d) \u2264 (22 : \u211d) by norm_num)]\n  exact_mod_cast h7\n  field_simp at h\u2082 \u22a2\n  nlinarith [Real.sqrt_nonneg (22 : \u211d), Real.sq_sqrt (show (0 : \u211d) \u2264 (22 : \u211d) by norm_num)]\n  exact_mod_cast h9\n  exact_mod_cast h\u2083\n  exact_mod_cast h11\n  omega\n  \u00b7 -- Case where x = (2 - Real.sqrt 22) / 2\n  have hx : x = (2 - Real.sqrt 22) / 2 := by linarith\n  positivity\n  rw [hx]\n  nlinarith [Real.sqrt_nonneg (22 : \u211d), Real.sq_sqrt (show (0 : \u211d) \u2264 (22 : \u211d) by norm_num)]\n  nlinarith [h\u2080.right.left, h9]",
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      },
+      "success": true,
+      "loss": null,
+      "reward": null,
+      "kl_div": null,
+      "entropy": null,
+      "grad_norm": null
+    }
+  ],
+  "start_time": "2026-03-02T09:09:09.231551",
+  "end_time": "2026-03-02T09:10:07.034978",
+  "success": true,
+  "best_proof": "import Mathlib\nlinarith\nnlinarith [Real.sqrt_nonneg 22, Real.sq_sqrt (show (0 : \u211d) \u2264 (22 : \u211d) by norm_num), sq_nonneg (x - 2), sq_nonneg (x * 2 - 4)]\ncases' (mul_eq_zero.mp h5) with h6 h7\n\u00b7 -- Case where x = (2 + Real.sqrt 22) / 2\nhave hx : x = (2 + Real.sqrt 22) / 2 := by linarith\nrw [hx] at h\u2082\nfield_simp at h\u2082 \u22a2\nnlinarith [Real.sqrt_nonneg (22 : \u211d), Real.sq_sqrt (show (0 : \u211d) \u2264 (22 : \u211d) by norm_num)]\nexact_mod_cast h7\nfield_simp at h\u2082 \u22a2\nnlinarith [Real.sqrt_nonneg (22 : \u211d), Real.sq_sqrt (show (0 : \u211d) \u2264 (22 : \u211d) by norm_num)]\nexact_mod_cast h9\nexact_mod_cast h\u2083\nexact_mod_cast h11\nomega\n\u00b7 -- Case where x = (2 - Real.sqrt 22) / 2\nhave hx : x = (2 - Real.sqrt 22) / 2 := by linarith\npositivity\nrw [hx]\nnlinarith [Real.sqrt_nonneg (22 : \u211d), Real.sq_sqrt (show (0 : \u211d) \u2264 (22 : \u211d) by norm_num)]\nnlinarith [h\u2080.right.left, h9]",
+  "metrics": {
+    "iterations": [
+      1
+    ],
+    "losses": [
+      0.0
+    ],
+    "rewards": [
+      1.0
+    ],
+    "kl_divs": [
+      0.0
+    ],
+    "entropies": [
+      0.0
+    ],
+    "grad_norms": [
+      0.0
+    ],
+    "timestamps": [
+      57.770482778549194
+    ]
+  },
+  "model_save_path": "/output/kimina_2b/run_20260302_091007/final_model"
+}

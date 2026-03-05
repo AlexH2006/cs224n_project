@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "iteration_logs": [],
+  "best_proof": "sorry",
+  "metrics": {
+    "losses": [],
+    "entropies": [],
+    "grad_norms": [],
+    "iterations": []
+  }
+}

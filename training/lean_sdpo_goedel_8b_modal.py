@@ -60,7 +60,7 @@ class SDPOConfig:
     # Generation
     # Goedel-Prover-V2-8B (Qwen2Tokenizer): eos_token="<|im_end|>", pad_token="<|endoftext|>",
     # bos_token=null. Chat format: <|im_start|>role\ncontent<|im_end|>\n; generation prompt ends with <|im_start|>assistant\n
-    max_new_tokens: int = 32768
+    max_new_tokens: int = 8192  # Reduced from 32768 for faster iteration; increase if proofs need more length
     temperature: float = 0.6
     top_p: float = 0.95
     stop_tokens: list = field(default_factory=lambda: [
@@ -682,10 +682,10 @@ try:
 
     # ========================================================================
     # SDPO Training Service (GPU) - A100-80GB
-    # Memory budget (~80GB) with max_new_tokens=32768, max_model_len=35840:
+    # Memory budget (~80GB) with max_new_tokens=8192, max_model_len=10240:
     #   vLLM bf16 model + KV cache + CUDA graphs:
     #     - Model weights (bf16):         ~15.4 GB
-    #     - KV cache (35840 tokens):      ~4.7 GB
+    #     - KV cache (10240 tokens):      ~1.3 GB
     #     - CUDA graphs:                  ~1 GB
     #     - Total vLLM (gpu_memory_utilization=0.4): ~32 GB budget
     #   Unsloth 4-bit + LoRA:             ~6 GB
@@ -716,8 +716,8 @@ try:
 
         @modal.enter()
         def setup(self):
-            # max_model_len must fit prompt + max_new_tokens (32768). 35840 leaves room for prompts.
-            _setup_trainer(self, gpu_memory_utilization=0.4, max_model_len=35840, gpu_name="A100-80GB")
+            # max_model_len must fit prompt + max_new_tokens (8192). 10240 leaves room for prompts; faster than 35840.
+            _setup_trainer(self, gpu_memory_utilization=0.4, max_model_len=10240, gpu_name="A100-80GB")
         
         @staticmethod
         def _get_field(data: dict, field_names: list, default: str = "") -> str:

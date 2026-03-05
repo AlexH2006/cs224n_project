@@ -1,0 +1,120 @@
+{
+  "results": [
+    {
+      "custom_id": "1",
+      "response": {
+        "messages": [
+          {
+            "severity": "error",
+            "pos": {
+              "line": 2,
+              "column": 40
+            },
+            "endPos": {
+              "line": 2,
+              "column": 49
+            },
+            "data": "unknown namespace 'FiniteSet'"
+          },
+          {
+            "severity": "error",
+            "pos": {
+              "line": 10,
+              "column": 42
+            },
+            "endPos": {
+              "line": 10,
+              "column": 43
+            },
+            "data": "unexpected token ','; expected '\u21a6', '=>'"
+          },
+          {
+            "severity": "error",
+            "pos": {
+              "line": 7,
+              "column": 63
+            },
+            "endPos": {
+              "line": 7,
+              "column": 96
+            },
+            "data": "unknown constant 'Finset.cartesianPow'"
+          },
+          {
+            "severity": "error",
+            "pos": {
+              "line": 7,
+              "column": 35
+            },
+            "endPos": {
+              "line": 7,
+              "column": 48
+            },
+            "data": "function expected at\n  finset\nterm has type\n  ?m.3"
+          },
+          {
+            "severity": "error",
+            "pos": {
+              "line": 7,
+              "column": 98
+            },
+            "endPos": {
+              "line": 7,
+              "column": 106
+            },
+            "data": "invalid field notation, type is not of the form (C ...) where C is a constant\n  x\nhas type\n  ?m.2644"
+          },
+          {
+            "severity": "error",
+            "pos": {
+              "line": 8,
+              "column": 13
+            },
+            "endPos": {
+              "line": 8,
+              "column": 21
+            },
+            "data": "invalid field notation, type is not of the form (C ...) where C is a constant\n  x\nhas type\n  ?m.3633"
+          },
+          {
+            "severity": "error",
+            "pos": {
+              "line": 8,
+              "column": 26
+            },
+            "endPos": {
+              "line": 8,
+              "column": 31
+            },
+            "data": "invalid field notation, type is not of the form (C ...) where C is a constant\n  x\nhas type\n  ?m.3633"
+          },
+          {
+            "severity": "error",
+            "pos": {
+              "line": 8,
+              "column": 53
+            },
+            "endPos": {
+              "line": 8,
+              "column": 59
+            },
+            "data": "function expected at\n  last\nterm has type\n  ?m.1316"
+          },
+          {
+            "severity": "error",
+            "pos": {
+              "line": 8,
+              "column": 70
+            },
+            "endPos": {
+              "line": 8,
+              "column": 77
+            },
+            "data": "function expected at\n  first\nterm has type\n  ?m.2635"
+          }
+        ],
+        "time": 0.124803
+      }
+    }
+  ]
+}

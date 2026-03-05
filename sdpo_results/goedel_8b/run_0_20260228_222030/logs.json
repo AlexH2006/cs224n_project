@@ -1,0 +1,221 @@
+{
+  "problem": {
+    "id": "mathd_algebra_478",
+    "split": "test",
+    "formal_statement": "theorem mathd_algebra_478\n  (b h v : \u211d)\n  (h\u2080 : 0 < b \u2227 0 < h \u2227 0 < v)\n  (h\u2081 : v = 1 / 3 * (b * h))\n  (h\u2082 : b = 30)\n  (h\u2083 : h = 13 / 2) :\n  v = 65 := sorry",
+    "header": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology",
+    "informal_stmt": "The volume of a cone is given by the formula $V = \\frac{1}{3}Bh$, where $B$ is the area of the base and $h$ is the height. The area of the base of a cone is 30 square units, and its height is 6.5 units. What is the number of cubic units in its volume? Show that it is 65.",
+    "informal_proof": "We are given that $B = 30$ and $h = 6.5$ and asked to find $\\frac{1}{3}Bh$.  We find that \\[\\frac{1}{3}Bh = \\frac{1}{3}(30)(6.5) = (10)(6.5) = 65.\\]"
+  },
+  "config": {
+    "model_name": "Goedel-LM/Goedel-Prover-V2-8B",
+    "lora_rank": 16,
+    "lora_alpha": 32,
+    "gradient_accumulation_steps": 4,
+    "dataset_name": "cat-searcher/minif2f-lean4",
+    "dataset_subset": null,
+    "dataset_split": "test",
+    "problem_idx": 0,
+    "max_iterations": 1,
+    "learning_rate": 1e-05,
+    "temperature": 0.6,
+    "feedback_include_failed_proof": false,
+    "theorem_fields": [
+      "lean4_code",
+      "formal_statement",
+      "lean4_statement",
+      "statement",
+      "code",
+      "theorem",
+      "problem_statement"
+    ],
+    "informal_fields": [
+      "informal_prefix",
+      "informal_stmt",
+      "problem",
+      "informal_statement",
+      "natural_language",
+      "description",
+      "question",
+      "informal"
+    ],
+    "header_fields": [
+      "header",
+      "imports",
+      "preamble",
+      "prefix"
+    ],
+    "id_fields": [
+      "problem_id",
+      "name",
+      "id",
+      "idx",
+      "index"
+    ]
+  },
+  "iteration_logs": [
+    {
+      "iteration": 1,
+      "lora_version": 0,
+      "student_prompt": "<|im_start|>user\nComplete the following Lean 4 code:\n\n```lean4\nimport Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_algebra_478\n  (b h v : \u211d)\n  (h\u2080 : 0 < b \u2227 0 < h \u2227 0 < v)\n  (h\u2081 : v = 1 / 3 * (b * h))\n  (h\u2082 : b = 30)\n  (h\u2083 : h = 13 / 2) :\n  v = 65 := sorry\n```\n\nBefore producing the Lean 4 code to formally prove the given theorem, provide a detailed proof plan outlining the main proof steps and strategies.\nThe plan should highlight key ideas, intermediate lemmas, and proof structures that will guide the construction of the final formal proof.<|im_end|>\n<|im_start|>assistant\n",
+      "teacher_prompt": null,
+      "raw_output": "### Detailed Proof and Analysis\n\nFirst, let's carefully understand the problem and the given hypotheses:\n\n1. **Variables and Hypotheses**:\n   - `b`, `h`, `v` are real numbers.\n   - `b > 0`, `h > 0`, `v > 0`.\n   - `v = 1/3 * (b * h)`.\n   - `b = 30`.\n   - `h = 13 / 2`.\n\n2. **Goal**:\n   - Prove that `v = 65`.\n\n#### Step 1: Substitute `b` and `h` into the equation for `v`\n\nGiven `b = 30` and `h = 13 / 2`, substitute these values into the equation `v = 1/3 * (b * h)`:\n\n\\[\nv = \\frac{1}{3} \\cdot (30 \\cdot \\frac{13}{2})\n\\]\n\n#### Step 2: Simplify the expression for `v`\n\nFirst, compute `30 * 13 / 2`:\n\\[\n30 \\cdot \\frac{13}{2} = \\frac{30 \\cdot 13}{2} = \\frac{390}{2} = 195\n\\]\n\nThen, multiply by `1/3`:\n\\[\nv = \\frac{1}{3} \\cdot 195 = \\frac{195}{3} = 65\n\\]\n\nThus, `v = 65` as required.\n\n#### Verification\n\nAlternatively, we can directly compute:\n\\[\nv = \\frac{1}{3} \\cdot (30 \\cdot \\frac{13}{2}) = \\frac{30 \\cdot 13}{6} = \\frac{390}{6} = 65\n\\]\n\nThis confirms that `v = 65` is correct.\n\n### Step 3: Abstract Plan\n\n1. Substitute `b = 30` and `h = 13 / 2` into the equation `v = 1/3 * (b * h)`.\n2. Calculate `b * h`:\n   - `b * h = 30 * (13 / 2) = 195`.\n3. Multiply by `1/3`:\n   - `v = 1/3 * 195 = 65`.\n4. Conclude that `v = 65`.\n\n### Step 4: Lean 4 `have` Statements\n\n```lean4\ntheorem mathd_algebra_478\n  (b h v : \u211d)\n  (h\u2080 : 0 < b \u2227 0 < h \u2227 0 < v)\n  (h\u2081 : v = 1 / 3 * (b * h))\n  (h\u2082 : b = 30)\n  (h\u2083 : h = 13 / 2) :\n  v = 65 := by\n  have h_main : v = 65 := by sorry\n  sorry\n```\n\n### Explanation:\n- The `have` statement `h_main : v = 65` directly corresponds to the final goal. The intermediate steps are encapsulated in this single `have`, and we use `sorry` to skip the proof for now. The actual proof would fill in the `sorry` by substituting `b` and `h` and simplifying the arithmetic as shown in the detailed proof.\n\n### Complete Lean 4 Proof\n\n```lean4\ntheorem mathd_algebra_478\n  (b h v : \u211d)\n  (h\u2080 : 0 < b \u2227 0 < h \u2227 0 < v)\n  (h\u2081 : v = 1 / 3 * (b * h))\n  (h\u2082 : b = 30)\n  (h\u2083 : h = 13 / 2) :\n  v = 65 := by\n  have h_main : v = 65 := by\n    have h\u2084 : v = 1 / 3 * (b * h) := h\u2081\n    rw [h\u2084]\n    have h\u2085 : b = 30 := h\u2082\n    have h\u2086 : h = 13 / 2 := h\u2083\n    rw [h\u2085, h\u2086]\n    -- Substitute b = 30 and h = 13 / 2 into the equation\n    norm_num\n    <;>\n    ring_nf at *\n    <;>\n    nlinarith\n  exact h_main\n```",
+      "extracted_tactics": "theorem mathd_algebra_478\n(b h v : \u211d)\n(h\u2080 : 0 < b \u2227 0 < h \u2227 0 < v)\n(h\u2081 : v = 1 / 3 * (b * h))\n(h\u2082 : b = 30)\n(h\u2083 : h = 13 / 2) :\nv = 65 := by\nhave h_main : v = 65 := by\nhave h\u2084 : v = 1 / 3 * (b * h) := h\u2081\nrw [h\u2084]\nhave h\u2085 : b = 30 := h\u2082\nhave h\u2086 : h = 13 / 2 := h\u2083\nrw [h\u2085, h\u2086]\n-- Substitute b = 30 and h = 13 / 2 into the equation\nnorm_num\n<;>\nring_nf at *\n<;>\nnlinarith\nexact h_main",
+      "full_code": "import Mathlib\nimport Aesop\n\nset_option maxHeartbeats 400000\n\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_478\n  (b h v : \u211d)\n  (h\u2080 : 0 < b \u2227 0 < h \u2227 0 < v)\n  (h\u2081 : v = 1 / 3 * (b * h))\n  (h\u2082 : b = 30)\n  (h\u2083 : h = 13 / 2) :\n  v = 65 := theorem mathd_algebra_478\n  (b h v : \u211d)\n  (h\u2080 : 0 < b \u2227 0 < h \u2227 0 < v)\n  (h\u2081 : v = 1 / 3 * (b * h))\n  (h\u2082 : b = 30)\n  (h\u2083 : h = 13 / 2) :\n  v = 65 := by\n  have h_main : v = 65 := by\n  have h\u2084 : v = 1 / 3 * (b * h) := h\u2081\n  rw [h\u2084]\n  have h\u2085 : b = 30 := h\u2082\n  have h\u2086 : h = 13 / 2 := h\u2083\n  rw [h\u2085, h\u2086]\n  -- Substitute b = 30 and h = 13 / 2 into the equation\n  norm_num\n  <;>\n  ring_nf at *\n  <;>\n  nlinarith\n  exact h_main",
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false,
+        "kimina_metrics": {
+          "step_latencies_s": {
+            "verify_total": 17.895
+          },
+          "duration_s": 17.895,
+          "cpu_pct_avg": 0.0,
+          "cpu_pct_max": 0.0,
+          "cpu_sample_count": 36,
+          "processes": [
+            {
+              "pid": 1,
+              "name": "dumb-init",
+              "cpu_percent": 0,
+              "rss_mb": 1.22
+            },
+            {
+              "pid": 2,
+              "name": "python",
+              "cpu_percent": 0,
+              "rss_mb": 64.34
+            },
+            {
+              "pid": 4,
+              "name": "python",
+              "cpu_percent": 0,
+              "rss_mb": 118.68
+            },
+            {
+              "pid": 6,
+              "name": "lake",
+              "cpu_percent": 0,
+              "rss_mb": 456.66
+            },
+            {
+              "pid": 8,
+              "name": "repl",
+              "cpu_percent": 0,
+              "rss_mb": 258.77
+            },
+            {
+              "pid": 14,
+              "name": "lake",
+              "cpu_percent": 0,
+              "rss_mb": 457.38
+            },
+            {
+              "pid": 16,
+              "name": "repl",
+              "cpu_percent": 0,
+              "rss_mb": 4958.77
+            }
+          ]
+        }
+      },
+      "success": true,
+      "timing": {
+        "verify_wall_s": 41.061
+      },
+      "kimina_metrics": {
+        "step_latencies_s": {
+          "verify_total": 17.895
+        },
+        "duration_s": 17.895,
+        "cpu_pct_avg": 0.0,
+        "cpu_pct_max": 0.0,
+        "cpu_sample_count": 36,
+        "processes": [
+          {
+            "pid": 1,
+            "name": "dumb-init",
+            "cpu_percent": 0,
+            "rss_mb": 1.22
+          },
+          {
+            "pid": 2,
+            "name": "python",
+            "cpu_percent": 0,
+            "rss_mb": 64.34
+          },
+          {
+            "pid": 4,
+            "name": "python",
+            "cpu_percent": 0,
+            "rss_mb": 118.68
+          },
+          {
+            "pid": 6,
+            "name": "lake",
+            "cpu_percent": 0,
+            "rss_mb": 456.66
+          },
+          {
+            "pid": 8,
+            "name": "repl",
+            "cpu_percent": 0,
+            "rss_mb": 258.77
+          },
+          {
+            "pid": 14,
+            "name": "lake",
+            "cpu_percent": 0,
+            "rss_mb": 457.38
+          },
+          {
+            "pid": 16,
+            "name": "repl",
+            "cpu_percent": 0,
+            "rss_mb": 4958.77
+          }
+        ]
+      },
+      "loss": null,
+      "reward": null,
+      "kl_div": null,
+      "entropy": null,
+      "grad_norm": null
+    }
+  ],
+  "start_time": "2026-03-01T06:19:26.013855",
+  "end_time": "2026-03-01T06:20:20.546540",
+  "success": true,
+  "best_proof": "theorem mathd_algebra_478\n(b h v : \u211d)\n(h\u2080 : 0 < b \u2227 0 < h \u2227 0 < v)\n(h\u2081 : v = 1 / 3 * (b * h))\n(h\u2082 : b = 30)\n(h\u2083 : h = 13 / 2) :\nv = 65 := by\nhave h_main : v = 65 := by\nhave h\u2084 : v = 1 / 3 * (b * h) := h\u2081\nrw [h\u2084]\nhave h\u2085 : b = 30 := h\u2082\nhave h\u2086 : h = 13 / 2 := h\u2083\nrw [h\u2085, h\u2086]\n-- Substitute b = 30 and h = 13 / 2 into the equation\nnorm_num\n<;>\nring_nf at *\n<;>\nnlinarith\nexact h_main",
+  "metrics": {
+    "iterations": [
+      1
+    ],
+    "losses": [
+      0.0
+    ],
+    "rewards": [
+      1.0
+    ],
+    "kl_divs": [
+      0.0
+    ],
+    "entropies": [
+      0.0
+    ],
+    "grad_norms": [
+      0.0
+    ],
+    "timestamps": [
+      54.523839235305786
+    ]
+  },
+  "model_save_path": "/output/goedel-sdpo-results/run_20260301_062021/final_lora"
+}

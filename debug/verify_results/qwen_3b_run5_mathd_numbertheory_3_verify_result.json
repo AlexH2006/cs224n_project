@@ -1,0 +1,18 @@
+{
+  "success": false,
+  "complete": false,
+  "has_sorry": false,
+  "feedback": "expected token\nunknown identifier 'mathd_numbertheory_3'\nunknown constant 'sorryAx'",
+  "errors": [
+    "expected token",
+    "unknown identifier 'mathd_numbertheory_3'",
+    "unknown constant 'sorryAx'"
+  ],
+  "messages": [],
+  "sorries": [],
+  "source": "kimina",
+  "is_server_error": false,
+  "debug": {
+    "verifier_wall_s": 6.233
+  }
+}

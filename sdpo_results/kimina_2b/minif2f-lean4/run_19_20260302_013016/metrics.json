@@ -1,0 +1,9 @@
+{
+  "iterations": [],
+  "losses": [],
+  "rewards": [],
+  "kl_divs": [],
+  "entropies": [],
+  "grad_norms": [],
+  "timestamps": []
+}

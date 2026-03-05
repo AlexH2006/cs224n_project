@@ -1,0 +1,785 @@
+{
+  "summary": {
+    "root": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b",
+    "n_logs": 50,
+    "total_iterations": 111,
+    "ok": 111,
+    "errors": 0
+  },
+  "results": [
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_0_20260220_014219/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "empty_theorem_data": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_0_20260220_014720/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "empty_theorem_data": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_0_20260220_014720/logs.json",
+      "iteration": 2,
+      "ok": true,
+      "empty_theorem_data": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_0_20260220_015312/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 302,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_0_20260220_032035/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 302,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_0_20260220_032637/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 302,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_0_20260220_032637/logs.json",
+      "iteration": 2,
+      "ok": true,
+      "full_code_len": 302,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_0_20260220_032637/logs.json",
+      "iteration": 3,
+      "ok": true,
+      "full_code_len": 302,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_0_20260220_033415/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 302,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_0_20260220_033415/logs.json",
+      "iteration": 2,
+      "ok": true,
+      "full_code_len": 302,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_0_20260220_033415/logs.json",
+      "iteration": 3,
+      "ok": true,
+      "full_code_len": 302,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_0_20260220_033935/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 302,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_0_20260220_033935/logs.json",
+      "iteration": 2,
+      "ok": true,
+      "full_code_len": 302,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_0_20260220_033935/logs.json",
+      "iteration": 3,
+      "ok": true,
+      "full_code_len": 302,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_50_20260220_015400/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 398,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_5_20260220_034402/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 182,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_5_20260220_034402/logs.json",
+      "iteration": 2,
+      "ok": true,
+      "full_code_len": 182,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_5_20260220_034402/logs.json",
+      "iteration": 3,
+      "ok": true,
+      "full_code_len": 182,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_7_20260220_020604/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 354,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_7_20260220_020604/logs.json",
+      "iteration": 2,
+      "ok": true,
+      "full_code_len": 354,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_7_20260220_020604/logs.json",
+      "iteration": 3,
+      "ok": true,
+      "full_code_len": 354,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_7_20260220_020604/logs.json",
+      "iteration": 4,
+      "ok": true,
+      "full_code_len": 354,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_7_20260220_020604/logs.json",
+      "iteration": 5,
+      "ok": true,
+      "full_code_len": 354,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_7_20260220_021949/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 354,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_7_20260220_021949/logs.json",
+      "iteration": 2,
+      "ok": true,
+      "full_code_len": 354,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_7_20260220_021949/logs.json",
+      "iteration": 3,
+      "ok": true,
+      "full_code_len": 354,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_7_20260220_021949/logs.json",
+      "iteration": 4,
+      "ok": true,
+      "full_code_len": 354,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_7_20260220_021949/logs.json",
+      "iteration": 5,
+      "ok": true,
+      "full_code_len": 354,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_7_20260220_022709/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 354,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_7_20260220_022709/logs.json",
+      "iteration": 2,
+      "ok": true,
+      "full_code_len": 354,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_7_20260220_022709/logs.json",
+      "iteration": 3,
+      "ok": true,
+      "full_code_len": 354,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_7_20260220_022709/logs.json",
+      "iteration": 4,
+      "ok": true,
+      "full_code_len": 354,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/PutnamBench/run_7_20260220_022709/logs.json",
+      "iteration": 5,
+      "ok": true,
+      "full_code_len": 354,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_0_20260219_115025/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 200,
+      "is_sorry": false
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_0_20260219_115025/logs.json",
+      "iteration": 2,
+      "ok": true,
+      "full_code_len": 199,
+      "is_sorry": false
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_0_20260219_115025/logs.json",
+      "iteration": 3,
+      "ok": true,
+      "full_code_len": 268,
+      "is_sorry": false
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_0_20260220_000307/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 542,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_0_20260220_000307/logs.json",
+      "iteration": 2,
+      "ok": true,
+      "full_code_len": 656,
+      "is_sorry": false
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_0_20260220_000307/logs.json",
+      "iteration": 3,
+      "ok": true,
+      "full_code_len": 216,
+      "is_sorry": false
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_0_20260220_000307/logs.json",
+      "iteration": 4,
+      "ok": true,
+      "full_code_len": 279,
+      "is_sorry": false
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_0_20260220_010611/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 212,
+      "is_sorry": false
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_0_20260220_013000/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 542,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_0_20260225_002728/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 259,
+      "is_sorry": false
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_0_20260303_111919/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 210,
+      "is_sorry": false
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_0_20260303_112721/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 259,
+      "is_sorry": false
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_0_20260303_125521/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 259,
+      "is_sorry": false
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_100_20260224_114131/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 590,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_100_20260224_114131/logs.json",
+      "iteration": 2,
+      "ok": true,
+      "full_code_len": 590,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_100_20260224_114131/logs.json",
+      "iteration": 3,
+      "ok": true,
+      "full_code_len": 590,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_100_20260224_114131/logs.json",
+      "iteration": 4,
+      "ok": true,
+      "full_code_len": 590,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_100_20260224_114131/logs.json",
+      "iteration": 5,
+      "ok": true,
+      "full_code_len": 590,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_100_20260224_114928/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 590,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_100_20260224_114928/logs.json",
+      "iteration": 2,
+      "ok": true,
+      "full_code_len": 590,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_100_20260224_114928/logs.json",
+      "iteration": 3,
+      "ok": true,
+      "full_code_len": 590,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_100_20260224_114928/logs.json",
+      "iteration": 4,
+      "ok": true,
+      "full_code_len": 590,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_100_20260224_114928/logs.json",
+      "iteration": 5,
+      "ok": true,
+      "full_code_len": 590,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_100_20260224_115823/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 590,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_100_20260224_115823/logs.json",
+      "iteration": 2,
+      "ok": true,
+      "full_code_len": 590,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_100_20260224_115823/logs.json",
+      "iteration": 3,
+      "ok": true,
+      "full_code_len": 590,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_100_20260224_115823/logs.json",
+      "iteration": 4,
+      "ok": true,
+      "full_code_len": 590,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_100_20260224_115823/logs.json",
+      "iteration": 5,
+      "ok": true,
+      "full_code_len": 590,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_100_20260224_120514/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 590,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_10_20260220_013606/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 583,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_125_20260302_021210/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 606,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_125_20260302_021210/logs.json",
+      "iteration": 2,
+      "ok": true,
+      "full_code_len": 606,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_176_20260302_021041/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 528,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_176_20260302_022215/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 528,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_19_20260302_010844/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 577,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_19_20260302_013016/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 577,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_1_20260218_234917/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 472,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_1_20260219_010058/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 472,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_1_20260219_010813/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 472,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_1_20260219_013300/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 472,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_1_20260219_013300/logs.json",
+      "iteration": 2,
+      "ok": true,
+      "full_code_len": 619,
+      "is_sorry": false
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_1_20260219_013300/logs.json",
+      "iteration": 3,
+      "ok": true,
+      "full_code_len": 472,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_1_20260219_013300/logs.json",
+      "iteration": 4,
+      "ok": true,
+      "full_code_len": 572,
+      "is_sorry": false
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_1_20260219_013300/logs.json",
+      "iteration": 5,
+      "ok": true,
+      "full_code_len": 610,
+      "is_sorry": false
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_1_20260219_014419/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 472,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_1_20260220_011206/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 461,
+      "is_sorry": false
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_1_20260220_011206/logs.json",
+      "iteration": 2,
+      "ok": true,
+      "full_code_len": 461,
+      "is_sorry": false
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_1_20260220_012155/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 1226,
+      "is_sorry": false
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_28_20260302_011022/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 1523,
+      "is_sorry": false
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_2_20260302_005850/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 629,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_2_20260302_005850/logs.json",
+      "iteration": 2,
+      "ok": true,
+      "full_code_len": 2455,
+      "is_sorry": false
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_30_20260302_012337/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 531,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_30_20260302_012337/logs.json",
+      "iteration": 2,
+      "ok": true,
+      "full_code_len": 531,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_30_20260302_012337/logs.json",
+      "iteration": 3,
+      "ok": true,
+      "full_code_len": 531,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_30_20260302_012337/logs.json",
+      "iteration": 4,
+      "ok": true,
+      "full_code_len": 531,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_30_20260302_012337/logs.json",
+      "iteration": 5,
+      "ok": true,
+      "full_code_len": 531,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_30_20260302_024353/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 531,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_30_20260302_024353/logs.json",
+      "iteration": 2,
+      "ok": true,
+      "full_code_len": 531,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_60_20260221_124247/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 576,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_60_20260221_124247/logs.json",
+      "iteration": 2,
+      "ok": true,
+      "full_code_len": 576,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_60_20260221_124247/logs.json",
+      "iteration": 3,
+      "ok": true,
+      "full_code_len": 576,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_60_20260221_124247/logs.json",
+      "iteration": 4,
+      "ok": true,
+      "full_code_len": 576,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_60_20260221_124247/logs.json",
+      "iteration": 5,
+      "ok": true,
+      "full_code_len": 576,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_60_20260221_125638/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 576,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_60_20260221_125638/logs.json",
+      "iteration": 2,
+      "ok": true,
+      "full_code_len": 576,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_60_20260221_125638/logs.json",
+      "iteration": 3,
+      "ok": true,
+      "full_code_len": 576,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_60_20260221_125638/logs.json",
+      "iteration": 4,
+      "ok": true,
+      "full_code_len": 576,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_60_20260221_125638/logs.json",
+      "iteration": 5,
+      "ok": true,
+      "full_code_len": 576,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_60_20260224_110432/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 576,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_60_20260224_110432/logs.json",
+      "iteration": 2,
+      "ok": true,
+      "full_code_len": 576,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_60_20260224_110432/logs.json",
+      "iteration": 3,
+      "ok": true,
+      "full_code_len": 576,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_60_20260224_110432/logs.json",
+      "iteration": 4,
+      "ok": true,
+      "full_code_len": 576,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_60_20260224_110432/logs.json",
+      "iteration": 5,
+      "ok": true,
+      "full_code_len": 576,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_60_20260224_111555/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 576,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_60_20260224_112643/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 576,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_60_20260224_113437/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 576,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_6_20260302_010727/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 615,
+      "is_sorry": true
+    },
+    {
+      "logs_path": "/Users/selinawan/Desktop/224n_project/sdpo_results/kimina_2b/minif2f-lean4/run_9_20260220_013302/logs.json",
+      "iteration": 1,
+      "ok": true,
+      "full_code_len": 185,
+      "is_sorry": false
+    }
+  ]
+}

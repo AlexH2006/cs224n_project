@@ -1,0 +1,110 @@
+{
+  "problem": {
+    "id": "mathd_algebra_487",
+    "split": "test",
+    "formal_statement": "theorem mathd_algebra_487\n  (a b c d : \u211d)\n  (h\u2080 : b = a^2)\n  (h\u2081 : a + b = 1)\n  (h\u2082 : d = c^2)\n  (h\u2083 : c + d = 1)\n  (h\u2084 : a \u2260 c) :\n  Real.sqrt ((a - c)^2 + (b - d)^2)= Real.sqrt 10 := sorry",
+    "header": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology",
+    "informal_stmt": "What is the distance between the two intersections of $y=x^2$ and $x+y=1$? Show that it is \\sqrt{10}.",
+    "informal_proof": "To find the $x$-coordinates of the intersections, substitute $x^2$ for $y$ in $x+y=1$ and solve for $x$, resulting in  \\begin{align*}\nx+x^2&=1 \\\\\n\\Rightarrow \\qquad x^2+x-1&=0 \\\\\n\\Rightarrow \\qquad x&=\\frac{-1\\pm\\sqrt{1+4}}2=\\frac{-1\\pm\\sqrt5}2\\\\\n\\end{align*}Using each of these coordinates to solve for $y$ gives us the intersections at $\\left(\\frac{-1+\\sqrt5}2,\\frac{3-\\sqrt5}2\\right)$ and $\\left(\\frac{-1-\\sqrt5}2,\\frac{3+\\sqrt5}2\\right)$.  Using the distance formula, we have \\begin{align*}\n&\\sqrt{ \\left(\\frac{-1+\\sqrt5}{2}-\\frac{-1-\\sqrt5}{2}\\right)^2 + \\left(\\frac{3-\\sqrt5}2-\\frac{3+\\sqrt5}2\\right)^2 }\\\\\n&\\qquad=\\sqrt{\\left(\\frac{2\\sqrt5}2\\right)^2 + \\left(-\\frac{2\\sqrt5}2\\right)^2}\\\\\n&\\qquad=\\sqrt{ 2\\sqrt5^2 }\\\\\n&\\qquad=\\sqrt{10}.\n\\end{align*}"
+  },
+  "config": {
+    "model_name": "AI-MO/Kimina-Prover-RL-1.7B",
+    "dataset_name": "cat-searcher/minif2f-lean4",
+    "dataset_subset": null,
+    "dataset_split": "test",
+    "problem_idx": 60,
+    "max_iterations": 1,
+    "learning_rate": 1e-05,
+    "temperature": 0.6,
+    "feedback_include_failed_proof": false,
+    "theorem_fields": [
+      "lean4_code",
+      "formal_statement",
+      "lean4_statement",
+      "statement",
+      "code",
+      "theorem",
+      "problem_statement"
+    ],
+    "informal_fields": [
+      "informal_prefix",
+      "informal_stmt",
+      "problem",
+      "informal_statement",
+      "natural_language",
+      "description",
+      "question",
+      "informal"
+    ],
+    "header_fields": [
+      "header",
+      "imports",
+      "preamble",
+      "prefix"
+    ],
+    "id_fields": [
+      "problem_id",
+      "name",
+      "id",
+      "idx",
+      "index"
+    ]
+  },
+  "iteration_logs": [
+    {
+      "iteration": 1,
+      "student_prompt": "<|im_start|>system\nYou are an expert in mathematics and proving theorems in Lean 4.<|im_end|>\n<|im_start|>user\nThink about and solve the following problem step by step in Lean 4.\n# Problem:What is the distance between the two intersections of $y=x^2$ and $x+y=1$? Show that it is \\sqrt{10}.\n# Formal statement:\n```lean4\ntheorem mathd_algebra_487\n  (a b c d : \u211d)\n  (h\u2080 : b = a^2)\n  (h\u2081 : a + b = 1)\n  (h\u2082 : d = c^2)\n  (h\u2083 : c + d = 1)\n  (h\u2084 : a \u2260 c) :\n  Real.sqrt ((a - c)^2 + (b - d)^2)= Real.sqrt 10 := sorry\n```\n<|im_end|>\n<|im_start|>assistant\n",
+      "teacher_prompt": "<|im_start|>system\nYou are an expert Lean 4 theorem prover. Output proof tactics that can replace `sorry`. After reasoning, output the proof tactics in a ```lean4 code block.<|im_end|>\n<|im_start|>user\nProve the following Lean 4 theorem.\n\nProblem: What is the distance between the two intersections of $y=x^2$ and $x+y=1$? Show that it is \\sqrt{10}.\n\n```lean4\ntheorem mathd_algebra_487\n  (a b c d : \u211d)\n  (h\u2080 : b = a^2)\n  (h\u2081 : a + b = 1)\n  (h\u2082 : d = c^2)\n  (h\u2083 : c + d = 1)\n  (h\u2084 : a \u2260 c) :\n  Real.sqrt ((a - c)^2 + (b - d)^2)= Real.sqrt 10 := sorry\n```\n\nPrevious errors:\n- Output was truncated before completing. Be more concise in reasoning and output the proof tactics sooner.\n\nAvoid these errors.\n\nProvide corrected proof tactics:<|im_end|>\n<|im_start|>assistant\n",
+      "raw_output": "<think>\n# Solving the Distance Between Intersections of $y=x^2$ and $x+y=1$\n\nTo find the distance between the intersections of $y=x^2$ and $x+y=1$, we need to determine the distance between points where these two equations intersect. Let's think through this algebraically first, then translate it to Lean 4.\n\nFirst, we solve the system of equations given by $y = x^2$ and $x + y = 1$. Substituting $y = x^2$ into the second equation gives:\n\n$x + x^2 = 1$\n\nRearranging:\n\n$x^2 + x - 1 = 0$\n\nThis is a quadratic equation in standard form. We can solve for $x$ using the quadratic formula:\n\n$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$\n\nwhere $a = 1$, $b = 1$, and $c = -1$.\n\nSubstituting these values in:\n\n$x = \\frac{-1 \\pm \\sqrt{1^2 - 4 \\cdot 1 \\cdot (-1)}}{2 \\cdot 1}$\n\n$x = \\frac{-1 \\pm \\sqrt{1 + 4}}{2}$\n\n$x = \\frac{-1 \\pm \\sqrt{5}}{2}$\n\nSo the two solutions for $x$ are $\\frac{-1 + \\sqrt{5}}{2}$ and $\\frac{-1 - \\sqrt{5}}{2}$. \n\nNow, to find the distance between these two points $(x_1, y_1)$ and $(x_2, y_2)$, we use the distance formula:\n\n$\\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$\n\nSince $y = x^2$, $y_1 = x_1^2$ and $y_2 = x_2^2$. Therefore, $y_2 - y_1 = x_2^2 - x_1^2$. \n\nSo the distance is $\\sqrt{(x_2 - x_1)^2 + (x_2^2 - x_1^2)^2}$.\n\nLet's compute $x_2 - x_1$:\n\n$x_2 - x_1 = \\frac{-1 + \\sqrt{5}}{2} - \\frac{-1 - \\sqrt{5}}{2} = \\frac{-1 + \\sqrt{5} + 1 + \\sqrt{5}}{2} = \\frac{2\\sqrt{5}}{2} = \\sqrt{5}$\n\nNow, compute $x_2^2 - x_1^2$:\n\nWe have $x_1 = \\frac{-1 + \\sqrt{5}}{2}$ and $x_2 = \\frac{-1 - \\sqrt{5}}{2}$.\n\nCompute $x_1^2$:\n\n$\\left(\\frac{-1 + \\sqrt{5}}{2}\\right)^2 = \\frac{(-1 + \\sqrt{5})^2}{4} = \\frac{1 - 2\\sqrt{5} + 5}{4} = \\frac{6 - 2\\sqrt{5}}{4} = \\frac{3 - \\sqrt{5}}{2}$\n\nCompute $x_2^2$:\n\n$\\left(\\frac{-1 - \\sqrt{5}}{2}\\right)^2 = \\frac{(-1 - \\sqrt{5})^2}{4} = \\frac{1 + 2\\sqrt{5} + 5}{4} = \\frac{6 + 2\\sqrt{5}}{4} = \\frac{3 + \\sqrt{5}}{2}$\n\nNow compute $x_2^2 - x_1^2$:\n\n$\\frac{3 + \\sqrt{5}}{2} - \\frac{3 - \\sqrt{5}}{2} = \\frac{3 + \\sqrt{5} - 3 + \\sqrt{5}}{2} = \\frac{2\\sqrt{5}}{2} = \\sqrt{5}$\n\nTherefore, $x_2^2 - x_1^2 = \\sqrt{5}$.\n\nNow compute the distance:\n\n$\\sqrt{(x_2 - x_1)^2 + (x_2^2 - x_1^2)^2} = \\sqrt{(\\sqrt{5})^2 + (\\sqrt{5})^2}$\n\n$= \\sqrt{5 + 5} = \\sqrt{10}$\n\nSo the distance is $\\sqrt{10}$, which is the expected result. Now, to formalize this in Lean 4:\n\n```tactics\nimport Mathlib\n\ntheorem mathd_algebra_487\n  (a b c d : \u211d)\n  (h\u2080 : b = a^2)\n  (h\u2081 : a + b = 1)\n  (h\u2082 : d = c^2)\n  (h\u2083 : c + d = 1)\n  (h\u2084 : a \u2260 c) :\n  Real.sqrt ((a - c)^2 + (b - d)^2)= Real.sqrt 10 := sorry\n",
+      "extracted_tactics": "sorry",
+      "full_code": "import Mathlib\nimport Aesop\n\nset_option maxHeartbeats 400000\n\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_487\n  (a b c d : \u211d)\n  (h\u2080 : b = a^2)\n  (h\u2081 : a + b = 1)\n  (h\u2082 : d = c^2)\n  (h\u2083 : c + d = 1)\n  (h\u2084 : a \u2260 c) :\n  Real.sqrt ((a - c)^2 + (b - d)^2)= Real.sqrt 10 := sorry",
+      "verification": {
+        "success": true,
+        "complete": false,
+        "has_sorry": true,
+        "feedback": "Output was truncated before completing. Be more concise in reasoning and output the proof tactics sooner.",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false,
+        "is_truncated": true
+      },
+      "success": false,
+      "loss": 0.0177001953125,
+      "reward": 7.59375,
+      "kl_div": 0.0177001953125,
+      "entropy": 0.095703125,
+      "grad_norm": 5.893795629121246,
+      "feedback": "Output was truncated before completing. Be more concise in reasoning and output the proof tactics sooner."
+    }
+  ],
+  "start_time": "2026-02-24T19:25:37.809749",
+  "end_time": "2026-02-24T19:26:34.610406",
+  "success": false,
+  "best_proof": null,
+  "metrics": {
+    "iterations": [
+      1
+    ],
+    "losses": [
+      0.0177001953125
+    ],
+    "rewards": [
+      7.59375
+    ],
+    "kl_divs": [
+      0.0177001953125
+    ],
+    "entropies": [
+      0.095703125
+    ],
+    "grad_norms": [
+      5.893795629121246
+    ],
+    "timestamps": [
+      56.776716470718384
+    ]
+  },
+  "model_save_path": "/output/test-time-SDPO/run_20260224_192635/final_model"
+}

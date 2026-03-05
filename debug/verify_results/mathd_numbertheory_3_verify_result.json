@@ -1,0 +1,14 @@
+{
+  "success": true,
+  "complete": true,
+  "has_sorry": false,
+  "feedback": "",
+  "errors": [],
+  "messages": [],
+  "sorries": [],
+  "source": "kimina",
+  "is_server_error": false,
+  "debug": {
+    "verifier_wall_s": 0.113
+  }
+}

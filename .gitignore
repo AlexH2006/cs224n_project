@@ -38,6 +38,7 @@ build/
 Goedel-Prover-V2/
 SDPO/
 kimina-lean-server/
+jack_verification/
 
 # Project
 assets/
@@ -46,7 +47,6 @@ output.txt
 *.log
 
 # Generated / run outputs
-sdpo_results/
 logs/
 results/*
 !results/misc/

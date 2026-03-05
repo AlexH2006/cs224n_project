@@ -1,0 +1,75 @@
+{
+  "problem": {
+    "id": "numbertheory_4x3m7y3neq2003",
+    "split": "test",
+    "formal_statement": "theorem numbertheory_4x3m7y3neq2003\n  (x y : \u2124) :\n  4 * x^3 - 7 * y^3 \u2260 2003 := sorry",
+    "header": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology",
+    "informal_stmt": "Show that there are no integers $x$ and $y$ such that $4x^3 - 7y^3 = 2003$.",
+    "informal_proof": "We have that $2003 = 1 + 7 \\times 286$. So $4x^3 - 7y^3 = 2003 \\iff 4x^3-1=7(y^3+286)$.\nWe also observe that for every integer $x$, the rest of the division of $x^3$ by $7$ is $0$, $1$, or $6$. So the rest of the division of $4x^3-1$ by $7$ is $6$, $3$, or $2$.\nAs a result, $7$ does not divide $4x^3-1$, but since $7(y^3+286)$ is divisible by $7$, the equation cannot have integers solutions."
+  },
+  "config": {
+    "model_name": "AI-MO/Kimina-Prover-RL-1.7B",
+    "dataset_name": "cat-searcher/minif2f-lean4",
+    "dataset_subset": null,
+    "dataset_split": "test",
+    "problem_idx": 1,
+    "max_iterations": 5,
+    "learning_rate": 1e-05,
+    "temperature": 0.6,
+    "feedback_include_failed_proof": true
+  },
+  "iteration_logs": [
+    {
+      "iteration": 1,
+      "prompt": "<|im_start|>system\nYou are an expert Lean 4 theorem prover. Output proof tactics that can replace `sorry`.<|im_end|>\n<|im_start|>user\nProve the following Lean 4 theorem.\n\n```lean4\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : \u2124) :\n  4 * x^3 - 7 * y^3 \u2260 2003 := sorry\n```\n\nAfter your reasoning, output ONLY the proof tactics (not the full theorem) in a ```lean4 code block. The tactics should replace `sorry`. Do NOT include `import`, `theorem`, or `:= sorry` in your final answer.<|im_end|>\n<|im_start...",
+      "raw_output": "<think>\n# Solving the Number Theory Problem in Lean 4\n\nWe need to prove that the equation $4x^3 - 7y^3 \\neq 2003$ for any integers $x$ and $y$.\n\nFirst, let's think about how to approach this problem. To prove that $4x^3 - 7y^3 \\neq 2003$, we need to show that there are no integers $x$ and $y$ such that $4x^3 - 7y^3 = 2003$.\n\nOne approach is to consider the equation modulo 7. Let's see what happens when we do that:\n\n$4x^3 - 7y^3 \\equiv 4x^3 \\pmod{7}$\n\nSo we have $4x^3 \\equiv 2003 \\pmod{7}$\n\nNow let's compute $2003 \\pmod{7}$:\n\n$2003 \\div 7 = 286$ with a remainder of $1$, so $2003 \\equiv 1 \\pmod{7}$\n\nTherefore, $4x^3 \\equiv 1 \\pmod{7}$\n\nNow, let's check all possible residues of $x^3 \\pmod{7}$:\n\nFor $x \\in \\{0, 1, 2, 3, 4, 5, 6\\}$:\n\n- $0^3 \\equiv 0 \\pmod{7}$\n- $1^3 \\equiv 1 \\pmod{7}$\n- $2^3 \\equiv 8 \\equiv 1 \\pmod{7}$\n- $3^3 \\equiv 27 \\equiv 6 \\pmod{7}$\n- $4^3 \\equiv 64 \\equiv 1 \\pmod{7}$\n- $5^3 \\equiv 125 \\equiv 6 \\pmod{7}$\n- $6^3 \\equiv 216 \\equiv 6 \\pmod{7}$\n\nWait, let me compute these correctly:\n\nWait, $6^3 = 216$, $216 \\div 7 = 30$ with a remainder of 6, so $6^3 \\equiv 6 \\pmod{7}$.\n\nSimilarly, $5^3 = 125$, $125 \\div 7 = 17$ with a remainder of 6, so $5^3 \\equiv 6 \\pmod{7}$.\n\nWait, $4^3 = 64$, $64 \\div 7 = 9$ with a remainder of 1, so $4^3 \\equiv 1 \\pmod{7}$.\n\nSo the possible residues of $x^3 \\pmod{7}$ are 0, 1, 6, and 1 again. Wait, let's check each:\n\nWait:\n\n0^3 = 0, 0 mod 7\n\n1^3 = 1, 1 mod 7\n\n2^3 = 8, 8 mod 7 = 1\n\n3^3 = 27, 27 mod 7 = 6\n\n4^3 = 64, 64 mod 7 = 1\n\n5^3 = 125, 125 mod 7 = 6\n\n6^3 = 216, 216 mod 7 = 6\n\nWait, so the possible residues are 0, 1, and 6. So $x^3 \\pmod{7}$ can be 0, 1, or 6.\n\nThen $4x^3 \\pmod{7}$ would be:\n\nIf $x^3 \\equiv 0$, then $4 \\cdot 0 = 0$\n\nIf $x^3 \\equiv 1$, then $4 \\cdot 1 = 4$\n\nIf $x^3 \\equiv 6$, then $4 \\cdot 6 = 24 \\equiv 3 \\pmod{7}$\n\nSo $4x^3 \\pmod{7}$ can be 0, 4, or 3.\n\nBut we need $4x^3 \\equiv 1 \\pmod{7}$\n\nBut looking at the possible residues of $4x^3$, they are 0, 4, 3. None of these is 1.\n\nTherefore, it's impossible.\n\nSo this approach works.\n\nTherefore, in Lean, we can prove this by showing that $4x^3 - 7y^3 \\neq 2003$ by considering the equation modulo 7. Let's try to implement that.\n\n```tactics\nimport Mathlib\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : \u2124) :\n  4 * x^3 - 7 * y^3 \u2260 2003 := by\n```\n\nNow, we need to prove that $4x^3 - 7y^3 \\neq 2003$. Let's assume that $4x^3 - 7y^3 = 2003$ and derive a contradiction.\n\n```tactics\nintro h\n```\n\nNow we have $4x^3 - 7y^3 = 2003$.\n\nLet's take both sides modulo 7.\n\n$4x^3 - 7y^3 \\equiv 4x^3 \\pmod{7}$\n\n$2003 \\equiv 1 \\pmod{7}$\n\nTherefore, $4x^3 \\equiv 1 \\pmod{7}$\n\nLet's check all possible residues of $x^3 \\pmod{7}$.\n\nFor $x \\in \\{0, 1, 2, 3, 4, 5, 6\\}$:\n\n- $0^3 \\equiv 0$\n- $1^3 \\equiv 1$\n- $2^3 \\equiv 8 \\equiv 1$\n- $3^3 \\equiv 27 \\equiv 6$\n- $4^3 \\equiv 64 \\equiv 1$\n- $5^3 \\equiv 125 \\equiv 6$\n- $6^3 \\equiv 216 \\equiv 6$\n\nSo the possible residues of $x^3 \\pmod{7}$ are 0, 1, 6.\n\nThen $4x^3 \\pmod{7}$:\n\nIf $x^3 \\equiv 0$, then $4 \\cdot 0 = 0$\n\nIf $x^3 \\equiv 1$, then $4 \\cdot 1 = 4$\n\nIf $x^3 \\equiv 6$, then $4 \\cdot 6 = 24 \\equiv 3$\n\nSo $4x^3 \\pmod{7}$ can be 0, 4, or 3. But we need $4x^3 \\equiv 1 \\pmod{7}$, which is not possible.\n\nTherefore, a contradiction is obtained.\n\nIn Lean, we can do this as follows.\n\n```tactics\nhave h1 : (4 * x^3 - 7 * y^3) % 7 = 2003 % 7 := by\n  omega\n```\n\nNow compute $2003 \\pmod{7}$.\n\n$2003 \\div 7 = 286$ with a remainder of 1. Therefore $2003 \\equiv 1 \\pmod{7}$.\n\nSo we have $(4 * x^3 - 7 * y^3) \\equiv 1 \\pmod{7}$.\n\nBut $7y^3 \\equiv 0 \\pmod{7}$, so $4x^3 \\equiv 1 \\pmod{7}$.\n\nLet's compute $4x^3 \\pmod{7}$.\n\n$x^3 \\pmod{7}$ can be 0, 1, 6.\n\n$4 \\cdot 0 = 0$\n\n$4 \\cdot 1 = 4$\n\n$4 \\cdot 6 = 24 \\equiv 3$\n\nSo $4x^3 \\pmod{7}$ can be 0, 4, 3. But we need it to be 1. Contradiction.\n\nIn Lean:\n\n```tactics\nhave h2 : (4 * x^3) % 7 = 1 := by\n  omega\n```\n\nNow, we need to show that $4x^3 \\pmod{7}$ cannot be 1.\n\nTo do this, we can check all possible residues of $x \\pmod{7}$.\n\nIf $x \\equiv 0, 1, 2, 3, 4, 5, 6 \\pmod{7}$, then $x^3 \\pmod{7}$ is 0, 1, 1, 6, 1, 6, 6$ respectively. Therefore $4x^3 \\pmod{7}$ is 0, 4, 4, 3, 4, 3, 3$ respectively. So $4x^3 \\pmod{7}$ can be 0, 3, or 4. It can't be 1.\n\nSo in Lean, we can do the following:\n\n```tactics\nhave h3 : x % 7 = 0 \u2228 x % 7 = 1 \u2228 x % 7 = 2 \u2228 x % 7 = 3 \u2228 x % 7 = 4 \u2228 x % 7 = 5 \u2228 x % 7 = 6 := by\n  omega\n```\n\nNow, for each possible value of $x \\pmod{7}$, compute $x^3 \\pmod{7}$ and then $4x^3 \\pmod{7}$.\n\nLet's do this:\n\n```tactics\nrcases h3 with (h3 | h3 | h3 | h3 | h3 | h3 | h3)\n```\n\nFor each case, compute $x^3 \\pmod{7}$ and then $4 \\cdot (x^3 \\pmod{7}) \\pmod{7}$.\n\nLet's take the first case:\n\nIf $x \\equiv 0 \\pmod{7}$, then $x^3 \\equiv 0 \\pmod{7}$, so $4 \\cdot 0 \\equiv 0 \\pmod{7}$.\n\nSimilarly:\n\nIf $x \\equiv 1 \\pmod{7}$, $x^3 \\equiv 1$, $4 \\cdot 1 \\equiv 4 \\pmod{7}$\n\nIf $x \\equiv 2 \\pmod{7}$, $x^3 \\equiv 8 \\equiv 1$, $4 \\cdot 1 \\equiv 4 \\pmod{7}$\n\nIf $x \\equiv 3 \\pmod{7}$, $x^3 \\equiv 27 \\equiv 6$, $4 \\cdot 6 \\equiv 24 \\equiv 3 \\pmod{7}$\n\nIf $x \\equiv 4 \\pmod{7}$, $x^3 \\equiv 64 \\equiv 1$, $4 \\cdot 1 \\equiv 4 \\pmod{7}$\n\nIf $x \\equiv 5 \\pmod{7}$, $x^3 \\equiv 125 \\equiv 6$, $4 \\cdot 6 \\equiv 3 \\pmod{7}$\n\nIf $x \\equiv 6 \\pmod{7}$, $x^3 \\equiv 216 \\equiv 6$, $4 \\cdot 6 \\equiv 3 \\pmod{7}$\n\nSo in all cases, $4x^3 \\pmod{7}$ is 0, 4, or 3. It's never 1.\n\nSo in Lean:\n\n```tactics\n\u00b7 -- x \u2261 0\n  simp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\n  all_goals omega\n```\n\nSimilarly for the other cases:\n\n```tactics\n\u00b7 -- x \u2261 1\n  simp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\n  all_goals omega\n```\n\nSimilarly:\n\n```tactics\n\u00b7 -- x \u2261 2\n  simp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\n  all_goals omega\n```\n\nSimilarly:\n\n```tactics\n\u00b7 -- x \u2261 3\n  simp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\n  all_goals omega\n```\n\nSimilarly:\n\n```tactics\n\u00b7 -- x \u2261 4\n  simp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\n  all_goals omega\n```\n\nSimilarly:\n\n```tactics\n\u00b7 -- x \u2261 5\n  simp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\n  all_goals omega\n```\n\nSimilarly:\n\n```tactics\n\u00b7 -- x \u2261 6\n  simp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\n  all_goals omega\n```\n\nTherefore, this approach works. The key idea is that by considering the equation modulo 7, we can show that $4x^3 \\equiv 1 \\pmod{7}$ is impossible, since the left side can only be 0, 3, or 4 modulo 7.\n</think>\n```lean4\nimport Mathlib\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : \u2124) :\n  4 * x^3 - 7 * y^3 \u2260 2003 := by\n  intro h\n  have h1 : (4 * x^3 - 7 * y^3) % 7 = 2003 % 7 := by\n    omega\n  have h2 : (4 * x^3) % 7 = 1 := by\n    omega\n  have h3 : x % 7 = 0 \u2228 x % 7 = 1 \u2228 x % 7 = 2 \u2228 x % 7 = 3 \u2228 x % 7 = 4 \u2228 x % 7 = 5 \u2228 x % 7 = 6 := by\n    omega\n  rcases h3 with (h3 | h3 | h3 | h3 | h3 | h3 | h3)\n  \u00b7 -- x \u2261 0\n    simp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\n    all_goals omega\n  \u00b7 -- x \u2261 1\n    simp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\n    all_goals omega\n  \u00b7 -- x \u2261 2\n    simp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\n    all_goals omega\n  \u00b7 -- x \u2261 3\n    simp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\n    all_goals omega\n  \u00b7 -- x \u2261 4\n    simp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\n    all_goals omega\n  \u00b7 -- x \u2261 5\n    simp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\n    all_goals omega\n  \u00b7 -- x \u2261 6\n    simp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\n    all_goals omega\n```",
+      "extracted_tactics": "intro h\nomega\nomega\nomega\nrcases h3 with (h3 | h3 | h3 | h3 | h3 | h3 | h3)\n\u00b7 -- x \u2261 0\nsimp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\nall_goals omega\n\u00b7 -- x \u2261 1\nsimp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\nall_goals omega\n\u00b7 -- x \u2261 2\nsimp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\nall_goals omega\n\u00b7 -- x \u2261 3\nsimp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\nall_goals omega\n\u00b7 -- x \u2261 4\nsimp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\nall_goals omega\n\u00b7 -- x \u2261 5\nsimp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\nall_goals omega\n\u00b7 -- x \u2261 6\nsimp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\nall_goals omega",
+      "full_code": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : \u2124) :\n  4 * x^3 - 7 * y^3 \u2260 2003 := intro h\n  omega\n  omega\n  omega\n  rcases h3 with (h3 | h3 | h3 | h3 | h3 | h3 | h3)\n  \u00b7 -- x \u2261 0\n  simp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\n  all_goals omega\n  \u00b7 -- x \u2261 1\n  simp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\n  all_goals omega\n  \u00b7 -- x \u2261 2\n  simp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\n  all_goals omega\n  \u00b7 -- x \u2261 3\n  simp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\n  all_goals omega\n  \u00b7 -- x \u2261 4\n  simp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\n  all_goals omega\n  \u00b7 -- x \u2261 5\n  simp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\n  all_goals omega\n  \u00b7 -- x \u2261 6\n  simp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\n  all_goals omega",
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false
+      },
+      "success": true,
+      "loss": null,
+      "reward": null,
+      "kl_div": null,
+      "entropy": null,
+      "grad_norm": null
+    }
+  ],
+  "start_time": "2026-02-20T09:20:58.992303",
+  "end_time": "2026-02-20T09:21:47.691879",
+  "success": true,
+  "best_proof": "intro h\nomega\nomega\nomega\nrcases h3 with (h3 | h3 | h3 | h3 | h3 | h3 | h3)\n\u00b7 -- x \u2261 0\nsimp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\nall_goals omega\n\u00b7 -- x \u2261 1\nsimp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\nall_goals omega\n\u00b7 -- x \u2261 2\nsimp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\nall_goals omega\n\u00b7 -- x \u2261 3\nsimp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\nall_goals omega\n\u00b7 -- x \u2261 4\nsimp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\nall_goals omega\n\u00b7 -- x \u2261 5\nsimp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\nall_goals omega\n\u00b7 -- x \u2261 6\nsimp [h3, Int.add_emod, Int.sub_emod, Int.mul_emod, pow_succ, Int.mul_emod] at h2 \u22a2\nall_goals omega",
+  "metrics": {
+    "iterations": [
+      1
+    ],
+    "losses": [
+      0.0
+    ],
+    "rewards": [
+      1.0
+    ],
+    "kl_divs": [
+      0.0
+    ],
+    "entropies": [
+      0.0
+    ],
+    "grad_norms": [
+      0.0
+    ],
+    "timestamps": [
+      48.698604106903076
+    ]
+  },
+  "model_save_path": "/output/test-time-SDPO/run_20260220_092148/final_model"
+}
