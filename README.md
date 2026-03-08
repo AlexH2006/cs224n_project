@@ -2,6 +2,12 @@
 
 Test-time reinforcement learning for Lean 4 theorem proving using **SDPO (Self-Distilled Policy Optimization)**, plus model-agnostic evaluation on the MATH dataset.
 
+> **Note:** As of March 2026, the only SDPO training pipelines that **fully work** end-to-end are:
+> - **`sdpo_modal_local_verify_kimina/`** — Kimina-Prover-RL-1.7B, local/Kimina verification, online RL via LoRA→vLLM weight sync
+> - **`qwen_sdpo/`** — Qwen 3.5, Modal-based SDPO
+>
+> Other pipelines (Kimina 2B, Goedel 8B, etc.) may be incomplete or untested.
+
 ## Overview
 
 - **SDPO**: The model improves at a single problem by distilling from itself: it sees compiler feedback only when computing the teacher distribution; at test time it uses only the problem (no feedback). Algorithm and workflow: [docs/README_SDPO.md](docs/README_SDPO.md), [docs/SDPO_TRAINER_DEEP_DIVE.md](docs/SDPO_TRAINER_DEEP_DIVE.md). Modal pipelines: **Kimina 2B** (full fine-tune), **Kimina Distill 1.7B** (AI-MO/Kimina-Prover-Distill-1.7B), **Goedel 8B** (LoRA with Unsloth), **Qwen 3B** (optional LoRA), **DeepSeek 7B**, and **local Lean** (verify with local `lake exe repl`, no Kimina on Modal).
