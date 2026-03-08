@@ -76,6 +76,9 @@ modal token new   # one-time auth
 │                                       #   Parses last ```lean4 block only; detects truncated output;
 │                                       #   always prepends default header. See parsing.py.
 ├── sdpo_modal_local_verify_kimina/     # Local Lean verification pipeline — Kimina-Prover variant
+│                                       #   QLoRA + in-place weight sync to vLLM after each SDPO
+│                                       #   step; teacher uses current iteration's feedback. See
+│                                       #   sdpo_modal_local_verify_kimina/README.md
 ├── verification/              # Standalone proof verification utilities
 │   ├── verify_proofs_kimina.py
 │   └── verify_single_proof.py
@@ -98,9 +101,12 @@ modal token new   # one-time auth
 │   ├── qwen_3b/
 │   ├── qwen_3b_lora/
 │   └── local_verify/          # local-verify pipeline runs
-│       └── Goedel-Prover-V2-8B/
+│       ├── Goedel-Prover-V2-8B/
+│       │   └── minif2f-lean4/
+│       │       └── run_{idx}_{timestamp}/   # logs.json, metrics.json, kl/
+│       └── Kimina-Prover-RL-1.7B/
 │           └── minif2f-lean4/
-│               └── run_{idx}_{timestamp}/   # logs.json, metrics.json, kl/
+│               └── run_{idx}_{timestamp}/   # logs.json, metrics.json, kl/, training_curves.png
 └── results/                   # Other run outputs (gitignored optional)
 ```
 
@@ -148,11 +154,14 @@ modal run training/lean_sdpo_goedel_local_verify_modal.py --problem-idx 0 --max-
 
 Local results: `sdpo_results/local_verify/Goedel-Prover-V2-8B/minif2f-lean4/run_{idx}_{timestamp}/`. See [devlog/20260303_local_lean_verifier_setup.md](devlog/20260303_local_lean_verifier_setup.md), [devlog/20260304_parsing_central.md](devlog/20260304_parsing_central.md), and [devlog/20260304_kimina_server_vs_local_verify_comparison.md](devlog/20260304_kimina_server_vs_local_verify_comparison.md).
 
-**Kimina-Prover — local verify** (`lean_sdpo_local_verify_modal.py`) — Generate and train on Modal; verification runs **locally** via `lake exe repl`. Uses `sdpo_modal_local_verify` package.
+**Kimina-Prover — local verify** (`lean_sdpo_local_verify_modal.py`) — Generate and train on Modal; verification runs **locally** via `lake exe repl` (or Kimina Docker). Uses `sdpo_modal_local_verify_kimina`: QLoRA training with **in-place weight sync** to vLLM after each gradient step (via CUDA IPC), so the next generation uses the updated policy — true online RL. Teacher prompt uses the **current** iteration's compiler feedback (never stale). Requires transformers>=5.2.0. See [sdpo_modal_local_verify_kimina/README.md](sdpo_modal_local_verify_kimina/README.md).
 
 ```bash
 modal run training/lean_sdpo_local_verify_modal.py --problem-idx 0
+modal run training/lean_sdpo_local_verify_modal.py --problem-idx 0 --max-iterations 5
 ```
+
+Local results: `sdpo_results/local_verify/Kimina-Prover-RL-1.7B/minif2f-lean4/run_{idx}_{timestamp}/`.
 
 **Batch test-set run** (`run_local_verify_test_set.sh`) — Run the local-verify pipeline over multiple problem indices sequentially:
 

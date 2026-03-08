@@ -120,7 +120,6 @@ def run_main(
 
     metrics = {"iterations": [], "losses": [], "rewards": [], "kl_divs": [], "entropies": [], "grad_norms": [], "timestamps": []}
     logs = {"problem": problem, "config": config_dict, "iteration_logs": [], "start_time": datetime.now().isoformat()}
-    latest_feedback: tuple[str, str] | None = None
     best_proof = None
 
     for iteration in range(max_iterations):
@@ -214,28 +213,31 @@ def run_main(
             else:
                 print("  (no Lean feedback captured)", flush=True)
 
-        current_teacher_prompt = (
-            create_feedback_prompt(run_config, problem, latest_feedback, get_field, tokenizer)
-            if latest_feedback is not None else None
+        # Build teacher prompt from THIS iteration's verification result — always current, never stale.
+        # The teacher is the feedback-conditioned policy: same problem, but with the current
+        # compiler error appended. This is the core SDPO self-distillation signal.
+        feedback = verification.get("feedback") or "Proof verification failed."
+        teacher_prompt = create_feedback_prompt(
+            run_config, problem, (feedback, extracted_block), get_field, tokenizer
         )
 
         payload = {
             "iteration": iteration + 1,
             "base_prompt": base_prompt,
-            "teacher_prompt": current_teacher_prompt,
+            "teacher_prompt": teacher_prompt,
             "raw_output": raw_output,
             "generated_ids": generated_ids,
             "extracted_block": extracted_block,
             "full_code": full_code,
             "verification": verification,
             "num_tokens": num_tokens,
+            "feedback": feedback,
             "is_success": is_success,
             "is_server_error": is_server_error,
         }
 
         if is_success:
             best_proof = extracted_block
-            payload["teacher_prompt"] = current_teacher_prompt
             iter_log = trainer.run_sdpo_step.remote(config_dict, problem, payload)
             iter_log["loss"] = None
             iter_log["reward"] = None
@@ -258,15 +260,6 @@ def run_main(
             logs["iteration_logs"].append(iter_log)
             print("  Skipping SDPO update due to server error")
             continue
-
-        if verification.get("has_sorry"):
-            feedback = verification["feedback"] or "Forbidden to output `sorry` tactic."
-        else:
-            feedback = verification["feedback"] or "Proof verification failed"
-        latest_feedback = (feedback, extracted_block)
-        teacher_prompt = create_feedback_prompt(run_config, problem, latest_feedback, get_field, tokenizer)
-        payload["teacher_prompt"] = teacher_prompt
-        payload["feedback"] = feedback
 
         iter_log = trainer.run_sdpo_step.remote(config_dict, problem, payload)
         logs["iteration_logs"].append(iter_log)

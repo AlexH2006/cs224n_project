@@ -125,8 +125,8 @@ set_option maxHeartbeats 400000
 open BigOperators Real Nat Topology Rat
 """
 
-    # Generation (minif2f paper: temperature=0.6, top_p=0.95, max_tokens=8096)
-    max_new_tokens: int = 8096
+    # Generation (minif2f paper: temperature=0.6, top_p=0.95, max_tokens=8192)
+    max_new_tokens: int = 8192
     temperature: float = 0.6
     top_p: float = 0.95
     stop_tokens: list = field(default_factory=lambda: [
@@ -871,7 +871,7 @@ if modal is not None:
         model: str = "Goedel-LM/Goedel-Prover-V2-8B",
         temperature: float = 0.6,
         top_p: float = 0.95,
-        max_new_tokens: int = 8096,
+        max_new_tokens: int = 8192,
         out_dir: str = "results",
         out_name: str = "",
         verify_only: bool = False,

@@ -32,9 +32,12 @@ The pipeline works as follows:
 | Backend | Use case | Package / script |
 |--------|----------|-------------------|
 | **Kimina** (HTTP) | Cloud or local Docker Lean server | `sdpo_modal` (Modal), `verification/verify_proofs_kimina.py` |
-| **Local Lean** (`lake exe repl`) | No Kimina; verify in mathlib4 workspace | `sdpo_modal_local_verify`, `sdpo_modal.local_lean_verifier` |
+| **Local Lean** (`lake exe repl`) | No Kimina; verify in mathlib4 workspace | `sdpo_modal_local_verify`, `sdpo_modal_local_verify_goedel`, `sdpo_modal_local_verify_kimina` |
 
-Modal pipelines that use **Kimina** live in `sdpo_modal/` and are invoked by `training/lean_sdpo_*_modal.py` (e.g. Kimina 2B, Distill 1.7B, Goedel 8B). The **local verification** pipeline lives in `sdpo_modal_local_verify/` and is invoked by `training/lean_sdpo_local_verify_modal.py` (generate/train on Modal; verification runs on your machine via `lake exe repl`).
+Modal pipelines that use **Kimina** live in `sdpo_modal/` and are invoked by `training/lean_sdpo_*_modal.py` (e.g. Kimina 2B, Distill 1.7B, Goedel 8B). The **local verification** pipelines:
+- `sdpo_modal_local_verify/` — Kimina-Prover base (invoked by `lean_sdpo_local_verify_modal.py` in some configs)
+- `sdpo_modal_local_verify_goedel/` — Goedel-Prover-V2-8B; last lean4 block parsing, truncation detection
+- `sdpo_modal_local_verify_kimina/` — Kimina-Prover-RL-1.7B; **online RL** via in-place LoRA→vLLM weight sync after each gradient step (generation improves each iteration); teacher uses current iteration's feedback. Requires `transformers>=5.2.0`. See [sdpo_modal_local_verify_kimina/README.md](../sdpo_modal_local_verify_kimina/README.md)
 
 ## Requirements
 
@@ -51,7 +54,7 @@ docker run -d -p 80:80 projectnumina/kimina-lean-server:2.0.0
 # Or from source (see setup/kimina-lean-server-setup)
 ```
 
-**Local Lean verification** (for `sdpo_modal_local_verify` or `lean_sdpo_local_verify_modal.py`): install [elan](https://github.com/leanprover/elan) and build a mathlib4 workspace (e.g. `Goedel-Prover-main/mathlib4`). See `devlog/20260303_local_lean_verifier_setup.md`.
+**Local Lean verification** (for `sdpo_modal_local_verify*` or `lean_sdpo_local_verify_modal.py`): install [elan](https://github.com/leanprover/elan) and build a mathlib4 workspace (e.g. `Goedel-Prover-main/mathlib4`). See `devlog/20260303_local_lean_verifier_setup.md`. For Kimina-backed local verification (`sdpo_modal_local_verify_kimina`), you can use Kimina Docker instead.
 
 ## Usage
 
@@ -153,8 +156,9 @@ This is a **test-time** self-distillation implementation, which differs from ful
 - `training/lean_sdpo_qwen_3b_modal.py` / `lean_sdpo_qwen_3b_lora_modal.py` — Qwen 3B
 - `training/lean_sdpo_deepseek_7b_modal.py` — DeepSeek 7B
 
-**Local Lean verification** (no Kimina on Modal; verify on your machine):
-- `training/lean_sdpo_local_verify_modal.py` — uses `sdpo_modal_local_verify`; requires elan + mathlib4.
+**Local Lean verification** (no Kimina on Modal; verify on your machine or via Kimina Docker):
+- `training/lean_sdpo_local_verify_modal.py` — uses `sdpo_modal_local_verify_kimina`; Kimina-Prover-RL-1.7B with QLoRA and **in-place weight sync** to vLLM after each SDPO step (true online RL). Verification can use local `lake exe repl` (elan + mathlib4) or Kimina HTTP. Requires `transformers>=5.2.0`.
+- `training/lean_sdpo_goedel_local_verify_modal.py` — uses `sdpo_modal_local_verify_goedel`; Goedel-Prover-V2-8B, local verify only.
 
 The `SDPO/` directory contains the verl framework used for batch training.
 
