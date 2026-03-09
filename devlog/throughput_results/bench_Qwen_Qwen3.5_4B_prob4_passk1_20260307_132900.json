@@ -1,0 +1,33 @@
+{
+  "model_name": "Qwen/Qwen3.5-4B",
+  "problem_idx": 4,
+  "problem_id": "mathd_algebra_141",
+  "pass_k": 1,
+  "prompt_tokens": 337,
+  "total_output_tokens": 6724,
+  "avg_output_tokens_per_seq": 6724.0,
+  "gen_wall_clock_s": 31.644,
+  "tokens_per_sec_total": 212.49,
+  "tokens_per_sec_per_seq": 212.49,
+  "n_warmup_rounds": 2,
+  "max_new_tokens": 8192,
+  "gpu": "H100",
+  "vllm_config": {
+    "dtype": "bfloat16",
+    "gpu_memory_utilization": 0.9,
+    "max_model_len": 16384,
+    "enforce_eager": false,
+    "enable_prefix_caching": true
+  },
+  "sequences": [
+    {
+      "seq_idx": 0,
+      "output_tokens": 6724,
+      "finish_reason": "stop",
+      "truncated": false,
+      "output_preview": "The user wants me to prove a theorem in Lean 4. The theorem states that for real numbers $a$ and $b$, if their product is 180 and twice their sum is 54, then $a^2 + b^2 = 369$.  Let's analyze the math"
+    }
+  ],
+  "timestamp": "20260307_132900",
+  "dataset_split": "test"
+}

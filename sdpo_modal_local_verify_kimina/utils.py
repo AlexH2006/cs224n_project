@@ -277,7 +277,7 @@ def plot_token_kl_heatmap(
             brightness = 0.299 * color[0] + 0.587 * color[1] + 0.114 * color[2]
             text_color = "black" if brightness > 0.45 else "white"
             # Escape special chars for display
-            display = token_text.replace("\t", "→").replace("\r", "↵")
+            display = token_text.replace("\t", "→").replace("\r", "↵").replace("$", r"\$")
             ax.text(
                 x_center, y, display,
                 ha="center", va="center",

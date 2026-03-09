@@ -1,0 +1,181 @@
+[
+  {
+    "problem": {
+      "id": "mathd_algebra_478",
+      "problem_idx": 0,
+      "dataset": "cat-searcher/minif2f-lean4",
+      "split": "test",
+      "formal_statement": "theorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := sorry",
+      "header": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology",
+      "informal_stmt": "The volume of a cone is given by the formula $V = \\frac{1}{3}Bh$, where $B$ is the area of the base and $h$ is the height. The area of the base of a cone is 30 square units, and its height is 6.5 units. What is the number of cubic units in its volume? Show that it is 65."
+    },
+    "attempts": [
+      {
+        "attempt": 0,
+        "label": "correct_with_think_tags",
+        "prompt": "(simulated)",
+        "raw_output": "<think>\nThe theorem looks like it can be solved by norm_num.\nLet me write the complete proof.\n</think>\n```lean4\nimport Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := norm_num\n```",
+        "extracted_block": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := norm_num",
+        "full_code": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := norm_num",
+        "num_tokens": 97,
+        "parse_ok": true,
+        "verification": {
+          "success": false,
+          "complete": false,
+          "has_sorry": false,
+          "feedback": "type mismatch\n  norm_num\nhas type\n  Lean.ParserDescr : Type\nbut is expected to have type\n  v = 65 : Prop",
+          "errors": [
+            "type mismatch\n  norm_num\nhas type\n  Lean.ParserDescr : Type\nbut is expected to have type\n  v = 65 : Prop"
+          ],
+          "messages": [],
+          "sorries": [],
+          "source": "kimina",
+          "is_server_error": false,
+          "debug": {
+            "verifier_wall_s": 0.118
+          }
+        },
+        "success": false
+      },
+      {
+        "attempt": 1,
+        "label": "block_without_imports",
+        "prompt": "(simulated)",
+        "raw_output": "<think>\nI'll write the proof tactics.\n</think>\n```lean4\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := norm_num\n```",
+        "extracted_block": "theorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := norm_num",
+        "full_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := norm_num",
+        "num_tokens": 58,
+        "parse_ok": true,
+        "verification": {
+          "success": false,
+          "complete": false,
+          "has_sorry": false,
+          "feedback": "type mismatch\n  norm_num\nhas type\n  Lean.ParserDescr : Type\nbut is expected to have type\n  v = 65 : Prop",
+          "errors": [
+            "type mismatch\n  norm_num\nhas type\n  Lean.ParserDescr : Type\nbut is expected to have type\n  v = 65 : Prop"
+          ],
+          "messages": [],
+          "sorries": [],
+          "source": "kimina",
+          "is_server_error": false,
+          "debug": {
+            "verifier_wall_s": 0.043
+          }
+        },
+        "success": false
+      },
+      {
+        "attempt": 2,
+        "label": "incomplete_think_no_close",
+        "prompt": "(simulated)",
+        "raw_output": "<think>\nI'm thinking about this problem and...",
+        "extracted_block": "sorry",
+        "full_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := sorry",
+        "num_tokens": 7,
+        "parse_ok": true,
+        "verification": {
+          "success": true,
+          "complete": false,
+          "has_sorry": true,
+          "feedback": "",
+          "errors": [],
+          "messages": [],
+          "sorries": [
+            "{'pos': {'line': 10, 'column': 12}, 'endPos': {'line': 10, 'column': 17}, 'goal': 'b h v : ℝ\\nh₀ : 0 < b ∧ 0 < h ∧ 0 < v\\nh₁ : v = 1 / 3 * (b * h)\\nh₂ : b = 30\\nh₃ : h = 13 / 2\\n⊢ v = 65'}"
+          ],
+          "source": "kimina",
+          "is_server_error": false,
+          "debug": {
+            "verifier_wall_s": 0.032
+          }
+        },
+        "success": false
+      },
+      {
+        "attempt": 3,
+        "label": "multiple_blocks_takes_last",
+        "prompt": "(simulated)",
+        "raw_output": "<think>\nFirst attempt:\n```lean4\nimport Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := sorry\n```\nThat has sorry, let me fix it.\n</think>\n```lean4\nimport Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := norm_num\n```",
+        "extracted_block": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := norm_num",
+        "full_code": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := norm_num",
+        "num_tokens": 169,
+        "parse_ok": true,
+        "verification": {
+          "success": false,
+          "complete": false,
+          "has_sorry": false,
+          "feedback": "type mismatch\n  norm_num\nhas type\n  Lean.ParserDescr : Type\nbut is expected to have type\n  v = 65 : Prop",
+          "errors": [
+            "type mismatch\n  norm_num\nhas type\n  Lean.ParserDescr : Type\nbut is expected to have type\n  v = 65 : Prop"
+          ],
+          "messages": [],
+          "sorries": [],
+          "source": "kimina",
+          "is_server_error": false,
+          "debug": {
+            "verifier_wall_s": 0.033
+          }
+        },
+        "success": false
+      }
+    ],
+    "success": false,
+    "best_attempt": null,
+    "best_proof": null,
+    "config": {
+      "model_name": "Qwen/Qwen3.5-4B",
+      "dataset_name": "cat-searcher/minif2f-lean4",
+      "dataset_split": "test",
+      "theorem_fields": [
+        "lean4_code",
+        "formal_statement",
+        "lean4_statement",
+        "statement",
+        "code",
+        "theorem",
+        "problem_statement"
+      ],
+      "informal_fields": [
+        "informal_prefix",
+        "informal_stmt",
+        "problem",
+        "informal_statement",
+        "natural_language",
+        "description",
+        "question",
+        "informal"
+      ],
+      "header_fields": [
+        "header",
+        "imports",
+        "preamble",
+        "prefix"
+      ],
+      "id_fields": [
+        "problem_id",
+        "name",
+        "id",
+        "idx",
+        "index"
+      ],
+      "n_problems": 1,
+      "pass_k": 4,
+      "seed": 42,
+      "temperature": 0.6,
+      "top_p": 0.95,
+      "top_k": 20,
+      "min_p": 0.0,
+      "presence_penalty": 0.0,
+      "repetition_penalty": 1.0,
+      "max_new_tokens": 8192,
+      "default_header": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat",
+      "gpu": "H100",
+      "kimina_url": "http://localhost:8000",
+      "verify_timeout_s": 60,
+      "verify_retries": 3,
+      "verify_retry_wait_s": 3.0,
+      "results_base_dir": "baseline",
+      "problem_indices": null
+    }
+  }
+]
