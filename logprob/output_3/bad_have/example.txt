@@ -1,0 +1,9 @@
+=== CONTEXT ===
+import Mathlib
+
+theorem bad_have (P Q : Prop) (h : P) : P := by
+
+=== PROOF ===
+  have h2 : Q := by
+    exact h
+  exact h

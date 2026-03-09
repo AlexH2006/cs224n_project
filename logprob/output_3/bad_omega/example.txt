@@ -1,0 +1,7 @@
+=== CONTEXT ===
+import Mathlib
+
+theorem bad_omega (n : Nat) : n = n + 1 := by
+
+=== PROOF ===
+  omega

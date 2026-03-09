@@ -1,0 +1,12 @@
+=== CONTEXT ===
+import Mathlib
+
+theorem long_bad_apply_exact (P Q R : Prop) (hPQ : P → Q) (hQR : Q → R) (hP : P) : R := by
+
+=== PROOF ===
+  have hQ : Q := by
+    apply hPQ
+    exact hP
+  have hR : R := by
+    exact hQR
+  exact hR

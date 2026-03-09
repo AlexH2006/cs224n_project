@@ -1,0 +1,22 @@
+=== CONTEXT ===
+import Mathlib
+
+theorem and_comm (P Q : Prop) : P ∧ Q ↔ Q ∧ P := by
+
+=== PROOF ===
+  constructor
+  · intro h0
+    have h1 : P := by exact h0.left
+    have h2 : Q := by exact h0.right
+    have h3 : Q ∧ P := by
+      refine And.intro ?_ ?_
+      · exact h2
+      · exact h1
+    have h4 : (Q ∧ P) ↔ (Q ∧ P) := Iff.rfl
+    exact (Iff.mp h4 h3)
+  · intro h0
+    have h1 : Q := by exact h0.left
+    have h2 : P := by exact h0.right
+    refine And.intro ?_ ?_
+    · exact h1
+    · exact h2

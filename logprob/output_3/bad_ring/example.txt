@@ -1,0 +1,7 @@
+=== CONTEXT ===
+import Mathlib
+
+theorem bad_ring (x : Nat) : x + 1 = x := by
+
+=== PROOF ===
+  ring

@@ -1,0 +1,11 @@
+=== CONTEXT ===
+import Mathlib
+
+theorem long_bad_funext (f g : Nat → Nat) (h : ∀ n, f n = g n) : f = g := by
+
+=== PROOF ===
+  have h1 : f 0 = g 0 := by
+    exact h 0
+  have h2 : f = g := by
+    exact h1
+  exact h2

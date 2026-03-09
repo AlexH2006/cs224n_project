@@ -1,0 +1,7 @@
+=== CONTEXT ===
+import Mathlib
+
+theorem bad_exact (P Q : Prop) (h : P) : P := by
+
+=== PROOF ===
+  exact h.left

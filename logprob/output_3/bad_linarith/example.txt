@@ -1,0 +1,7 @@
+=== CONTEXT ===
+import Mathlib
+
+theorem bad_linarith (x : Int) : x < x := by
+
+=== PROOF ===
+  linarith

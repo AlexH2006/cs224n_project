@@ -1,0 +1,8 @@
+=== CONTEXT ===
+import Mathlib
+
+theorem and_comm (P Q : Prop) : P ∧ Q ↔ Q ∧ P := by
+
+=== PROOF ===
+  intro h
+  exact ⟨h.right, h.left⟩

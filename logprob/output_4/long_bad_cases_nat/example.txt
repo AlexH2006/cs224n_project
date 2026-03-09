@@ -1,0 +1,15 @@
+=== CONTEXT ===
+import Mathlib
+
+theorem long_bad_cases_nat (n : Nat) : n = n := by
+
+=== PROOF ===
+  cases n with
+  | zero =>
+      rfl
+  | succ k hk =>
+      have h1 : k = n := by
+        rfl
+      have h2 : Nat.succ k = Nat.succ n := by
+        simpa using congrArg Nat.succ h1
+      exact h2

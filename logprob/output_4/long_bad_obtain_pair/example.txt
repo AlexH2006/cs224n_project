@@ -1,0 +1,11 @@
+=== CONTEXT ===
+import Mathlib
+
+theorem long_bad_obtain_pair (P Q : Prop) (h : P) : P := by
+
+=== PROOF ===
+  have h1 : P := by exact h
+  obtain ⟨hp, hq⟩ := h1
+  have h2 : P := by
+    exact hp
+  exact h2

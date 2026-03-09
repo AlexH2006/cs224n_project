@@ -1,0 +1,2 @@
+id,num_proof_tokens,avg_logprob,min_logprob,max_logprob,csv,heatmap,barcode
+imo_1981_p6,423,-0.18000608108837615,-11.569864273071289,-1.6689286894688848e-06,logprob/output2/imo_1981_p6/token_scores.csv,logprob/output2/imo_1981_p6/heatmap.png,logprob/output2/imo_1981_p6/barcode.png

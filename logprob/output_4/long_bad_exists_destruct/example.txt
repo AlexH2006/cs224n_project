@@ -1,0 +1,14 @@
+=== CONTEXT ===
+import Mathlib
+
+theorem long_bad_exists_destruct (α : Type) (p : α → Prop) (h : ∃ x, p x) : True := by
+
+=== PROOF ===
+  rcases h with ⟨x, hx⟩
+  have h1 : p x := by
+    exact hx
+  have h2 : True := by
+    cases h1 with
+    | intro hp =>
+        trivial
+  exact h2

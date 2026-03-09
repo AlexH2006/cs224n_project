@@ -1,0 +1,7 @@
+=== CONTEXT ===
+import Mathlib
+
+theorem bad_assumption (P Q : Prop) (h : P) : Q := by
+
+=== PROOF ===
+  assumption

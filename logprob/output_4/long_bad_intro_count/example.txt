@@ -1,0 +1,12 @@
+=== CONTEXT ===
+import Mathlib
+
+theorem long_bad_intro_count (P Q R : Prop) : P → Q → R → P := by
+
+=== PROOF ===
+  intro hP hQ
+  have h1 : P := by
+    exact hP
+  have h2 : Q := by
+    exact hQ
+  exact h1

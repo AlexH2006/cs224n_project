@@ -1,0 +1,13 @@
+=== CONTEXT ===
+import Mathlib
+
+theorem long_bad_have_branch (P Q R : Prop) (hP : P) (hQR : Q → R) : P := by
+
+=== PROOF ===
+  have h1 : Q := by
+    have h2 : P := by exact hP
+    exact h2
+  have h3 : R := by
+    apply hQR
+    exact h1
+  exact hP

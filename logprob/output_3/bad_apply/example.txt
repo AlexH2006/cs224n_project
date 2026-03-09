@@ -1,0 +1,8 @@
+=== CONTEXT ===
+import Mathlib
+
+theorem bad_apply (P Q : Prop) (h : P) : Q → P := by
+
+=== PROOF ===
+  intro hQ
+  apply h

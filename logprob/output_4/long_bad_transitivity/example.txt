@@ -1,0 +1,9 @@
+=== CONTEXT ===
+import Mathlib
+
+theorem long_bad_transitivity (a b c : Nat) (hab : a = b) (hbc : b = c) : c = a := by
+
+=== PROOF ===
+  trans b
+  · exact hab
+  · exact hbc

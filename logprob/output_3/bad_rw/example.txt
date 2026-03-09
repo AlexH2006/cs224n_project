@@ -1,0 +1,7 @@
+=== CONTEXT ===
+import Mathlib
+
+theorem bad_rw (a b : Nat) (h : a = b) : a + 1 = b + 1 := by
+
+=== PROOF ===
+  rw [show a + 1 = a by rfl]

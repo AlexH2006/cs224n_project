@@ -1,0 +1,20 @@
+=== CONTEXT ===
+import Mathlib
+
+theorem and_comm (P Q : Prop) : P ∧ Q ↔ Q ∧ P := by
+
+=== PROOF ===
+  refine Iff.intro ?f ?g
+  · intro h
+    have a : P := h.1
+    have b : Q := h.2
+    have t : True := True.intro
+    have q : Q := by exact b
+    have p : P := by exact a
+    have r : Q ∧ P := by exact And.intro q p
+    exact r
+  · intro h
+    have a : Q := h.1
+    have b : P := h.2
+    have r : P ∧ Q := by exact And.intro a b
+    exact r
