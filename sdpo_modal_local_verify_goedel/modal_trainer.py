@@ -11,6 +11,10 @@ from pathlib import Path
 from sdpo_modal_local_verify_goedel.config import SDPOConfig
 from sdpo_modal_local_verify_goedel.sdpo_loss import compute_sdpo_loss
 from sdpo_modal_local_verify_goedel.utils import collect_per_token_kl, save_run
+from sdpo_modal_local_verify_goedel._weight_sync_goedel import (
+    GOEDEL_LORA_TARGET_MODULES,
+    sync_lora_weights_to_vllm_goedel,
+)
 
 try:
     import modal
@@ -45,17 +49,19 @@ if modal is not None and app is not None:
 
     @app.cls(
         image=inference_image,
-        gpu="A100-80GB",
+        gpu="H100",
         timeout=3600,
         scaledown_window=600,
         volumes={"/cache": hf_cache_volume, "/output": output_volume},
         secrets=[modal.Secret.from_name("huggingface")],
+        # In-process collective_rpc so weight dict is not serialized over ZMQ.
+        env={"VLLM_ENABLE_V1_MULTIPROCESSING": "0"},
     )
     class SDPOTrainer:
         """SDPO trainer on Modal GPU. Exposes generate_only and run_sdpo_step; verification is local."""
 
         model_name: str = modal.parameter(default="Goedel-LM/Goedel-Prover-V2-8B")
-        gpu: str = modal.parameter(default="A100-80GB")
+        gpu: str = modal.parameter(default="H100")
 
         @modal.enter()
         def setup(self):
@@ -140,6 +146,14 @@ if modal is not None and app is not None:
 
             torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
             self._optimizer.step()
+
+            # Tie vLLM to HF: push updated LoRA-merged weights into vLLM so next generate uses them.
+            if getattr(self, "_use_lora_sync", False):
+                sync_lora_weights_to_vllm_goedel(
+                    self.model,
+                    self.vllm_engine,
+                    GOEDEL_LORA_TARGET_MODULES,
+                )
 
             iter_log["loss"] = loss.item()
             iter_log["reward"] = reward

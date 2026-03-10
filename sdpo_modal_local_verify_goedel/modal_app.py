@@ -50,11 +50,15 @@ else:
     # leaving ~24GB; 0.25 = only 10GB for KV cache which is not enough after model load).
     GPU_VLLM_MEMORY = {"A100-40GB": 0.45, "A100-80GB": 0.4, "H100": 0.4}
     DEFAULT_GPU_MEMORY = 0.45
-    DEFAULT_MAX_MODEL_LEN = 8096
+    # Must be >= prompt length + max_new_tokens (8192); 16384 allows room for prompt.
+    DEFAULT_MAX_MODEL_LEN = 16384
 
     def _setup_trainer(trainer_self: Any, gpu_name: str) -> None:
-        """Shared setup: env, tokenizer, vLLM engine, HuggingFace model (with optional LoRA for 7B+).
-        vLLM gpu_memory_utilization is chosen by gpu_name (A100-80GB/H100 use 0.4, else 0.25)."""
+        """Shared setup: env, tokenizer, vLLM (with worker extension for weight sync), HF QLoRA model.
+
+        Only LoRA (8B/7B) models are supported; non-large models raise ValueError.
+        vLLM gpu_memory_utilization is chosen by gpu_name.
+        """
         os.environ["HF_HOME"] = "/cache"
         if os.environ.get("HF_TOKEN"):
             os.environ["HUGGING_FACE_HUB_TOKEN"] = os.environ["HF_TOKEN"]
@@ -86,6 +90,8 @@ else:
             download_dir="/cache",
             gpu_memory_utilization=gpu_memory_utilization,
             max_model_len=max_model_len,
+            # In-place weight updates after each SDPO step (see _weight_sync_goedel).
+            worker_extension_cls="sdpo_modal_local_verify_goedel._weight_sync_goedel.GoedelSDPOWorkerExtension",
         )
         print("vLLM engine initialized!")
 
@@ -93,41 +99,41 @@ else:
             ("8B" in trainer_self.model_name or "7B" in trainer_self.model_name)
             and "1.7B" not in trainer_self.model_name
         )
+        if not is_large_model:
+            raise ValueError(
+                "Goedel prover pipeline supports only LoRA (8B/7B) models. "
+                f"Model {trainer_self.model_name!r} is not in the large-model set. "
+                "Use Goedel-Prover-V2-8B or a 7B variant."
+            )
 
-        if is_large_model:
-            from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
+        trainer_self._use_lora_sync = True  # Always True: only LoRA path is supported.
 
-            print("Loading HuggingFace model with 4-bit quantization + LoRA for training...")
-            quantization_config = BitsAndBytesConfig(
-                load_in_4bit=True,
-                bnb_4bit_compute_dtype=torch.bfloat16,
-                bnb_4bit_use_double_quant=True,
-                bnb_4bit_quant_type="nf4",
-            )
-            trainer_self.model = AutoModelForCausalLM.from_pretrained(
-                trainer_self.model_name,
-                quantization_config=quantization_config,
-                device_map="auto",
-                trust_remote_code=True,
-            )
-            trainer_self.model = prepare_model_for_kbit_training(trainer_self.model)
-            lora_config = LoraConfig(
-                r=16,
-                lora_alpha=32,
-                target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"],
-                lora_dropout=0.05,
-                bias="none",
-                task_type="CAUSAL_LM",
-            )
-            trainer_self.model = get_peft_model(trainer_self.model, lora_config)
-            trainer_self.model.print_trainable_parameters()
-        else:
-            trainer_self.model = AutoModelForCausalLM.from_pretrained(
-                trainer_self.model_name,
-                torch_dtype=trainer_self.dtype,
-                device_map="auto",
-                trust_remote_code=True,
-            )
+        from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
+
+        print("Loading HuggingFace model with 4-bit quantization + LoRA for training...")
+        quantization_config = BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_compute_dtype=torch.bfloat16,
+            bnb_4bit_use_double_quant=True,
+            bnb_4bit_quant_type="nf4",
+        )
+        trainer_self.model = AutoModelForCausalLM.from_pretrained(
+            trainer_self.model_name,
+            quantization_config=quantization_config,
+            device_map="auto",
+            trust_remote_code=True,
+        )
+        trainer_self.model = prepare_model_for_kbit_training(trainer_self.model)
+        lora_config = LoraConfig(
+            r=16,
+            lora_alpha=32,
+            target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"],
+            lora_dropout=0.05,
+            bias="none",
+            task_type="CAUSAL_LM",
+        )
+        trainer_self.model = get_peft_model(trainer_self.model, lora_config)
+        trainer_self.model.print_trainable_parameters()
         trainer_self.model.train()
         if hasattr(trainer_self.model, "gradient_checkpointing_enable"):
             trainer_self.model.gradient_checkpointing_enable()

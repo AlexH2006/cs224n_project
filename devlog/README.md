@@ -57,6 +57,7 @@ Devlogs are grouped by primary focus:
 
 | Date       | File | Topics |
 |------------|------|--------|
+| 2026-03-09 | [20260309_goedel_prover_oom_investigation.md](20260309_goedel_prover_oom_investigation.md) | goedel, sdpo, oom, memory, modal, config, weight_sync, bugfixes |
 | 2026-03-03 | [20260303_qwen_3b_lora_adaptation_plan.md](20260303_qwen_3b_lora_adaptation_plan.md) | sdpo, qwen, lora, unsloth, modal, oom, memory, config |
 | 2026-03-03 | [20260303_sdpo_output_analysis.md](20260303_sdpo_output_analysis.md) | sdpo, reward, loss, distillation |
 | 2026-03-01 | [20260301_sdpo_deepseek_7b_modal.md](20260301_sdpo_deepseek_7b_modal.md) | sdpo, deepseek, modal |
@@ -72,6 +73,7 @@ Devlogs are grouped by primary focus:
 
 | Date       | File | Topics |
 |------------|------|--------|
+| 2026-03-09 | [20260309_goedel_prover_oom_investigation.md](20260309_goedel_prover_oom_investigation.md) | goedel, sdpo, oom, memory, modal, config, weight_sync, bugfixes |
 | 2026-03-03 | [20260303_lean3_syntax_logged_as_success.md](20260303_lean3_syntax_logged_as_success.md) | verification, kimina, lean3, lean4, sdpo, logs, bugfixes |
 | 2026-03-02 | [20260302_bugfixes_verification.md](20260302_bugfixes_verification.md) | bugfixes, verification, kimina, sdpo |
 | 2026-03-01 | [20260301_bugfixes_sdpo_modal.md](20260301_bugfixes_sdpo_modal.md) | bugfixes, sdpo, modal, timeouts, lora |
@@ -87,6 +89,7 @@ Devlogs are grouped by primary focus:
 
 | Date       | File | Topics |
 |------------|------|--------|
+| 2026-03-09 | [20260309_goedel_prover_oom_investigation.md](20260309_goedel_prover_oom_investigation.md) | goedel, sdpo, oom, memory, modal, config, weight_sync, bugfixes |
 | 2026-03-03 | [20260303_qwen_3b_lora_adaptation_plan.md](20260303_qwen_3b_lora_adaptation_plan.md) | sdpo, qwen, lora, unsloth, modal, oom, memory, config |
 | 2026-02-20 | [20260220_gpu_config_sdpo.md](20260220_gpu_config_sdpo.md) | gpu, config, sdpo |
 
@@ -104,6 +107,7 @@ Devlogs are grouped by primary focus:
 
 | Date       | File | Categories |
 |------------|------|------------|
+| 2026-03-09 | [20260309_goedel_prover_oom_investigation.md](20260309_goedel_prover_oom_investigation.md) | SDPO / training, Config, Bugfixes |
 | 2026-03-04 | [20260304_parsing_central.md](20260304_parsing_central.md) | Parsing |
 | 2026-03-04 | [20260304_kimina_server_vs_local_verify_comparison.md](20260304_kimina_server_vs_local_verify_comparison.md) | Verification |
 | 2026-03-04 | [20260304_dyld_data_const_macos_repl.md](20260304_dyld_data_const_macos_repl.md) | Setup |

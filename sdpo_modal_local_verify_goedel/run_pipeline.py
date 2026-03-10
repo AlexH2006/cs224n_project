@@ -33,9 +33,9 @@ if modal is not None:
         theorem_field: str = "",
         informal_field: str = "",
         header_field: str = "",
-        gpu: str = "A100-80GB",
+        gpu: str = "H100",
     ):
-        gpu_normalized = normalize_gpu(gpu)
+        gpu_normalized = normalize_gpu(gpu)  # defaults to H100; still accepts override
         trainer_cls = get_trainer_cls(gpu)
         return run_main(
             trainer_cls=trainer_cls,

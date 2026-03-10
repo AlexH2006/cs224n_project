@@ -1,18 +1,19 @@
 """
 Qwen MiniF2F Eval Pipeline (Modal)
 
-TLDR: Two-phase eval pipeline.
+TLDR: Two-phase eval pipeline. Phase 1 runs on a single Modal H100: one worker
+loads vLLM once and processes all problems in batched generate() calls.
+Phase 2 (parse + verify) runs locally; results are saved incrementally per problem.
 
-Phase 1 — Generation (Modal H100):
-    ProofGenerator loads the model via vLLM (bfloat16).
-    generate_batch() takes pass_k prompts for one problem → pass_k raw outputs.
-    All problems dispatched in parallel via .starmap() — one Modal worker per problem.
+Phase 1 — Generation (Modal H100, single GPU):
+    ProofGenerator loads the model via vLLM (bfloat16) once.
+    generate_all() builds prompts for all problems (each × pass_k), runs vLLM
+    generate() in one or more batches on that GPU, returns one result list.
 
 Phase 2 — Verification (local driver):
     extract_full_lean_block() + create_full_lean_code() parse each raw output.
     verify() calls the Kimina Lean Server on localhost.
-    Stop-early per problem: first verified attempt wins.
-    Results written to baseline/run_{model}_{timestamp}/.
+    Results written to baseline/run_{model}_{timestamp}/; saved after each problem.
 
 Usage:
     # Start Kimina first:
@@ -33,6 +34,7 @@ from typing import Optional
 
 import modal
 
+from qwen_eval.batch_generation import build_flat_prompts_and_meta, unflatten_results
 from qwen_eval.config import EvalConfig
 from qwen_eval.dataset import load_problems
 from qwen_eval.local_lean_verifier import verify
@@ -91,11 +93,8 @@ inference_image = (
 )
 class ProofGenerator:
     """
-    Runs vLLM on a Modal H100 and generates proof attempts.
-
-    Model name and all sampling params are passed explicitly to each method
-    (not via env vars) so the container is stateless and works correctly
-    across parallel .starmap() calls with different configurations.
+    Runs vLLM on a single Modal H100. One worker for the whole run: model is loaded
+    once; generate_all() processes all problems in one or more batched generate() calls.
     """
 
     @modal.enter()
@@ -147,47 +146,80 @@ class ProofGenerator:
         print("Model ready.")
 
     @modal.method()
-    def build_and_generate(
+    def generate_all(
         self,
-        problem: dict,
+        problems: list[dict],
         pass_k: int,
         model_name: str,
         sampling_cfg: dict,
-    ) -> list[str]:
+        inference_batch_size: Optional[int] = 128,
+    ) -> dict:
         """
-        Build pass_k prompts for one problem, then generate all pass_k outputs.
+        Build prompts for all problems (each × pass_k), run vLLM generate on one GPU
+        in one or more batches. Returns a dict with raw_results and generation_metrics
+        (throughput, wall time, token counts) for debugging.
 
-        Combining prompt-building and generation in one method avoids a separate
-        remote call for the tokenizer, keeping the interface clean.
-
-        Args:
-            problem:      Problem dict with formal_statement, informal_stmt, header.
-            pass_k:       Number of proof attempts to generate.
-            model_name:   HuggingFace model ID (e.g. "Qwen/Qwen3.5-9B").
-            sampling_cfg: Dict of sampling hyperparameters from EvalConfig.
-
-        Returns:
-            List of pass_k raw output strings (generated text only, no prompt).
+        Returned dict:
+            raw_results: list[list] — result[i] = [prompt_i, (raw_0, reason_0), ...].
+            generation_metrics: dict with generation_wall_s, total_output_tokens,
+                tokens_per_second, n_requests, avg_generation_s_per_problem.
         """
+        import time
         from qwen_eval.config import EvalConfig
         from qwen_eval.prompts import build_prompt
 
+        if not problems:
+            return {"raw_results": [], "generation_metrics": {}}
+
         self._load(model_name, sampling_cfg)
 
-        prompt = build_prompt(
-            theorem_code=problem["formal_statement"],
-            informal=problem["informal_stmt"],
-            header=problem["header"],
-            tokenizer=self._tokenizer,
-            cfg=EvalConfig(),  # only cfg.default_header used in build_prompt
-        )
-        prompts = [prompt] * pass_k
+        def prompt_builder(p: dict) -> str:
+            return build_prompt(
+                theorem_code=p["formal_statement"],
+                informal=p["informal_stmt"],
+                header=p["header"],
+                tokenizer=self._tokenizer,
+                cfg=EvalConfig(),
+            )
 
-        outputs = self._llm.generate(prompts, self._sampling_params)
-        # Returns: [prompt_str, (raw_text, finish_reason), ...]
-        # finish_reason is "stop" (EOS) or "length" (token limit hit) — the
-        # authoritative truncation signal from vLLM.
-        return [prompt] + [(o.outputs[0].text, o.outputs[0].finish_reason) for o in outputs]
+        flat_prompts, prompt_meta = build_flat_prompts_and_meta(
+            problems, pass_k, prompt_builder
+        )
+
+        batch_size = inference_batch_size or 0
+        if batch_size <= 0:
+            batch_size = len(flat_prompts)
+
+        all_outputs: list[tuple[str, str]] = []
+        total_output_tokens = 0
+        gen_start = time.perf_counter()
+
+        for start in range(0, len(flat_prompts), batch_size):
+            chunk = flat_prompts[start : start + batch_size]
+            chunk_out = self._llm.generate(chunk, self._sampling_params)
+            for o in chunk_out:
+                out = o.outputs[0]
+                all_outputs.append((out.text, out.finish_reason))
+                # vLLM CompletionOutput has token_ids; fallback to 0 if missing.
+                token_ids = getattr(out, "token_ids", None)
+                total_output_tokens += len(token_ids) if token_ids is not None else 0
+
+        generation_wall_s = time.perf_counter() - gen_start
+        n_requests = len(all_outputs)
+        tokens_per_second = total_output_tokens / generation_wall_s if generation_wall_s > 0 else 0.0
+        n_problems = len(problems)
+        avg_generation_s_per_problem = generation_wall_s / n_problems if n_problems > 0 else 0.0
+
+        generation_metrics = {
+            "generation_wall_s": round(generation_wall_s, 4),
+            "total_output_tokens": total_output_tokens,
+            "tokens_per_second": round(tokens_per_second, 2),
+            "n_requests": n_requests,
+            "avg_generation_s_per_problem": round(avg_generation_s_per_problem, 4),
+        }
+
+        raw_results = unflatten_results(prompt_meta, all_outputs, problems)
+        return {"raw_results": raw_results, "generation_metrics": generation_metrics}
 
 
 # ---------------------------------------------------------------------------
@@ -326,22 +358,29 @@ def run_eval(
     for p in problems:
         print(f"  [{p['problem_idx']}] {p['problem_id']}: {p['formal_statement'][:60]}...")
 
-    # ------------------------------------------------------------------
-    # Phase 1: Generate — one Modal worker per problem, all in parallel
-    # ------------------------------------------------------------------
-    print(f"\n[2/3] Generating {cfg.pass_k} proofs per problem on Modal H100...")
-    generator = ProofGenerator()
+    run_dir = make_run_dir(cfg)
 
-    # starmap args: (problem, pass_k, model_name, sampling_cfg) per problem
-    starmap_args = [
-        (p, cfg.pass_k, cfg.model_name, sampling_cfg)
-        for p in problems
-    ]
-    # Each result is [prompt] + [raw_output_0, ..., raw_output_{pass_k-1}]
-    raw_results: list[list[str]] = list(
-        generator.build_and_generate.starmap(starmap_args)
+    # ------------------------------------------------------------------
+    # Phase 1: Generate — single Modal worker, all problems batched on one GPU
+    # ------------------------------------------------------------------
+    print(f"\n[2/3] Generating {cfg.pass_k} proofs per problem on Modal H100 (single GPU)...")
+    generator = ProofGenerator()
+    gen_response = generator.generate_all.remote(
+        problems,
+        cfg.pass_k,
+        cfg.model_name,
+        sampling_cfg,
+        cfg.inference_batch_size,
     )
-    print(f"  Generation complete. {len(problems) * cfg.pass_k} total outputs.")
+    raw_results: list[list] = gen_response["raw_results"]
+    generation_metrics = gen_response.get("generation_metrics") or {}
+    if generation_metrics:
+        tps = generation_metrics.get("tokens_per_second", 0)
+        wall = generation_metrics.get("generation_wall_s", 0)
+        print(f"  Generation complete. {len(problems) * cfg.pass_k} total outputs.")
+        print(f"  Throughput: {tps:.1f} tokens/s  |  wall time: {wall:.1f}s")
+    else:
+        print(f"  Generation complete. {len(problems) * cfg.pass_k} total outputs.")
 
     # ------------------------------------------------------------------
     # Parse: extract lean4 blocks from raw outputs
@@ -384,19 +423,29 @@ def run_eval(
     # ------------------------------------------------------------------
     if generate_only:
         print("\n--generate-only: skipping verification, saving raw outputs.")
-        run_dir = make_run_dir(cfg)
-        problem_logs = [
-            build_problem_log(
+        problem_logs = []
+        avg_gen_s = generation_metrics.get("avg_generation_s_per_problem")
+        for problem, attempts in zip(problems, all_attempts):
+            problem_log = build_problem_log(
                 problem,
-                [{"attempt": a.attempt, "prompt": a.prompt, "raw_output": a.raw_output,
-                  "extracted_block": a.extracted_block, "full_code": a.full_code,
-                  "verification": None, "num_tokens": a.num_tokens}
-                 for a in attempts],
+                [
+                    {
+                        "attempt": a.attempt,
+                        "prompt": a.prompt,
+                        "raw_output": a.raw_output,
+                        "extracted_block": a.extracted_block,
+                        "full_code": a.full_code,
+                        "verification": None,
+                        "num_tokens": a.num_tokens,
+                    }
+                    for a in attempts
+                ],
                 cfg,
+                generation_time_s=avg_gen_s,
             )
-            for problem, attempts in zip(problems, all_attempts)
-        ]
-        save_results(run_dir, cfg, problem_logs)
+            problem_logs.append(problem_log)
+            save_results(run_dir, cfg, problem_logs, generation_metrics=generation_metrics)
+        print(f"\nDone. Results in: {run_dir}")
         return
 
     # ------------------------------------------------------------------
@@ -406,16 +455,25 @@ def run_eval(
     problem_logs = []
     for prob_num, (problem, attempts) in enumerate(zip(problems, all_attempts), 1):
         print(f"  [{prob_num}/{len(problems)}] {problem['problem_id']}")
+        verify_start = time.perf_counter()
         attempt_logs = _verify_problem(problem, attempts, cfg)
-        problem_log = build_problem_log(problem, attempt_logs, cfg)
+        verification_time_s = time.perf_counter() - verify_start
+        avg_gen_s = generation_metrics.get("avg_generation_s_per_problem")
+        problem_log = build_problem_log(
+            problem,
+            attempt_logs,
+            cfg,
+            verification_time_s=verification_time_s,
+            generation_time_s=avg_gen_s,
+        )
         problem_logs.append(problem_log)
         status = "SOLVED" if problem_log["success"] else "failed"
         best = problem_log.get("best_attempt")
-        print(f"    → {status}" + (f" (attempt {best})" if best is not None else ""))
+        print(f"    → {status}" + (f" (attempt {best})" if best is not None else "") + f"  [{verification_time_s:.1f}s]")
+        save_results(run_dir, cfg, problem_logs, generation_metrics=generation_metrics)
 
     # ------------------------------------------------------------------
-    # Save results
+    # Save results (final write; incremental saves already done in loop)
     # ------------------------------------------------------------------
-    run_dir = make_run_dir(cfg)
-    save_results(run_dir, cfg, problem_logs)
+    save_results(run_dir, cfg, problem_logs, generation_metrics=generation_metrics)
     print(f"\nDone. Results in: {run_dir}")

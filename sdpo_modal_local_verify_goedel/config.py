@@ -40,7 +40,7 @@ class SDPOConfig:
     ])
 
     # Generation settings
-    max_new_tokens: int = 8096
+    max_new_tokens: int = 8192
     temperature: float = 0.6
     top_p: float = 0.95
     stop_tokens: list = field(default_factory=lambda: [
@@ -73,7 +73,7 @@ open BigOperators Real Nat Topology Rat"""
 
     # Output / infra (Goedel pipeline: separate dir so Kimina results are not overwritten)
     output_dir: str = "local_verify/Goedel-Prover-V2-8B/minif2f-lean4"
-    gpu: str = "A100-80GB"
+    gpu: str = "H100"
 
     # Optional overrides for dataset field names (prepended to theorem_fields, etc.)
     theorem_field_override: Optional[str] = None

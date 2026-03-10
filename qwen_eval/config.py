@@ -57,6 +57,10 @@ class EvalConfig:
     repetition_penalty: float = 1.0
     max_new_tokens: int = 8192
 
+    # Chunk size for vLLM generate() when processing many problems on one GPU.
+    # None or 0 = pass all prompts in one call. Reduces peak memory for large runs.
+    inference_batch_size: Optional[int] = 128
+
     # -------------------------------------------------------------------------
     # Lean header fallback
     # Used only when the model's extracted block contains no `import` lines.

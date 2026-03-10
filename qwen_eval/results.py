@@ -43,6 +43,7 @@ def save_results(
     run_dir: Path,
     cfg: EvalConfig,
     problem_logs: list[dict[str, Any]],
+    generation_metrics: dict[str, Any] | None = None,
 ) -> None:
     """
     Write logs.json and summary.json to run_dir.
@@ -54,12 +55,16 @@ def save_results(
             {
               "problem":      {id, split, formal_statement, header, informal_stmt},
               "config":       EvalConfig as dict,
-              "attempts":     [{attempt, prompt, raw_output, extracted_block,
-                                full_code, verification, success, num_tokens}, ...],
+              "attempts":     [...],
               "success":      bool,
               "best_attempt": int | null,
               "best_proof":   str | null,
+              "verification_time_s": float | null (optional),
+              "generation_time_s": float | null (optional, avg share per problem),
             }
+        generation_metrics: Optional dict from ProofGenerator.generate_all for summary:
+            generation_wall_s, total_output_tokens, tokens_per_second,
+            n_requests, avg_generation_s_per_problem.
     """
     cfg_dict = dataclasses.asdict(cfg)
 
@@ -104,6 +109,8 @@ def save_results(
             "seed": cfg.seed,
         },
     }
+    if generation_metrics:
+        summary["generation_metrics"] = generation_metrics
 
     summary_path = run_dir / "summary.json"
     with open(summary_path, "w", encoding="utf-8") as f:
@@ -116,6 +123,8 @@ def build_problem_log(
     problem: dict[str, Any],
     attempts: list[dict[str, Any]],
     cfg: EvalConfig,
+    verification_time_s: float | None = None,
+    generation_time_s: float | None = None,
 ) -> dict[str, Any]:
     """
     Build a single problem log entry from generation + verification results.
@@ -126,6 +135,8 @@ def build_problem_log(
                     attempt, prompt, raw_output, extracted_block,
                     full_code, verification, num_tokens
         cfg:      EvalConfig (used for dataset split label).
+        verification_time_s: Optional wall time in seconds for verifying this problem (debugging).
+        generation_time_s: Optional avg generation time per problem in seconds (debugging).
 
     Returns:
         A problem log dict ready to be included in problem_logs for save_results().
@@ -145,7 +156,7 @@ def build_problem_log(
         v = att.get("verification", {})
         att["success"] = bool(v.get("success") and v.get("complete") and not v.get("has_sorry"))
 
-    return {
+    log: dict[str, Any] = {
         "problem": {
             "id": problem["problem_id"],
             "problem_idx": problem["problem_idx"],
@@ -160,3 +171,8 @@ def build_problem_log(
         "best_attempt": best_attempt,
         "best_proof": best_proof,
     }
+    if verification_time_s is not None:
+        log["verification_time_s"] = round(verification_time_s, 4)
+    if generation_time_s is not None:
+        log["generation_time_s"] = round(generation_time_s, 4)
+    return log

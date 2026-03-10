@@ -31,7 +31,11 @@ def compute_sdpo_loss(
     teacher_prompt: str,
     generated_ids: "torch.Tensor",
 ) -> tuple["torch.Tensor", float, float, float]:
-    """Compute SDPO loss: KL(student || teacher) on top-K tokens; return per_token_kl, reward, avg_kl, entropy."""
+    """Compute SDPO loss: KL(student || teacher) on top-K tokens; return per_token_kl, reward, avg_kl, entropy.
+
+    Gradient update is with respect to the student model only: teacher logits are
+    computed under torch.no_grad(), and F.kl_div backprops only into the student input.
+    """
     import torch
     import torch.nn.functional as F
 
