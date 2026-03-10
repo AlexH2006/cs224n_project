@@ -1,0 +1,11 @@
+# Kimina Lean 4 verifier server for v2-baseline.
+# Run: docker compose up -d
+# Then use: --verifier kimina (and optionally KIMINA_VERIFY_URL=http://localhost:8000)
+# Stop: docker compose down
+services:
+  kimina-lean:
+    image: projectnumina/kimina-lean-server:2.0.0
+    container_name: v2-baseline-kimina-verifier
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
