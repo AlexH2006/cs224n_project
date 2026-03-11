@@ -17,7 +17,7 @@ from qwen_eval.config import EvalConfig
 _SYSTEM_PROMPT = "You are an expert in mathematics and Lean 4 theorem proving."
 
 _USER_TEMPLATE = """\
-Reason step-by-step to prove the following Lean 4 theorem.
+Prove the following Lean 4 theorem without using `sorry`. At the very end of your response, output your complete, final solution as exactly one ```lean4``` code block.
 
 # Informal problem:
 {informal}
@@ -26,11 +26,6 @@ Reason step-by-step to prove the following Lean 4 theorem.
 ```lean4
 {header_and_theorem}
 ```
-
-Instructions:
-- Do NOT use `sorry`
-- At the very end of your response, output your final answer as exactly one lean4 code block that is complete and self-contained: all imports, set_option lines, and the full theorem with proof
-- Do not output any text after the closing ```\
 """
 
 
@@ -50,7 +45,7 @@ def build_prompt(
         header:       Dataset-provided header (imports + set_option). May be empty;
                       falls back to cfg.default_header so the model sees correct imports.
         tokenizer:    HuggingFace tokenizer with apply_chat_template.
-        cfg:          EvalConfig (unused currently but kept for future prompt variants).
+        cfg:          EvalConfig (use_think_mode passed to tokenizer as enable_thinking).
 
     Returns:
         A fully formatted string ready to pass to vLLM as a prompt.
@@ -70,8 +65,10 @@ def build_prompt(
         {"role": "user", "content": user_content},
     ]
 
+    # Qwen3.5: enable_thinking controls whether the model emits <think>...</think> blocks.
     return tokenizer.apply_chat_template(
         messages,
         tokenize=False,
         add_generation_prompt=True,
+        enable_thinking=cfg.use_think_mode,
     )

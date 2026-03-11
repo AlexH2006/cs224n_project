@@ -401,7 +401,11 @@ def save_local_run(
     Returns:
         Local run_dir Path.
     """
-    model_tag, run_dir = make_run_dir(cfg, problem_idx)
+    if cfg.batch_run_dir:
+        run_dir = Path(cfg.batch_run_dir) / "runs" / f"problem_{problem_idx}"
+        model_tag = cfg.model_name.split("/")[-1]
+    else:
+        model_tag, run_dir = make_run_dir(cfg, problem_idx)
     run_dir.mkdir(parents=True, exist_ok=True)
 
     metrics = results.get("metrics", {})

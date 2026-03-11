@@ -24,6 +24,7 @@ Usage:
     python3 -m modal run qwen_eval/modal_app.py --n-problems 20 --pass-k 4
     python3 -m modal run qwen_eval/modal_app.py --generation-save-batch-size 50   # save after each 50 problems
     python3 -m modal run qwen_eval/modal_app.py --generate-only
+    python3 -m modal run qwen_eval/modal_app.py --no-think-mode   # disable <think>...</think> via tokenizer enable_thinking=False
 """
 
 from __future__ import annotations
@@ -153,6 +154,7 @@ class ProofGenerator:
         pass_k: int,
         model_name: str,
         sampling_cfg: dict,
+        config_dict: dict,
         inference_batch_size: Optional[int] = 128,
     ) -> dict:
         """
@@ -173,6 +175,7 @@ class ProofGenerator:
             return {"raw_results": [], "generation_metrics": {}}
 
         self._load(model_name, sampling_cfg)
+        cfg = EvalConfig(**config_dict)
 
         def prompt_builder(p: dict) -> str:
             return build_prompt(
@@ -180,7 +183,7 @@ class ProofGenerator:
                 informal=p["informal_stmt"],
                 header=p["header"],
                 tokenizer=self._tokenizer,
-                cfg=EvalConfig(),
+                cfg=cfg,
             )
 
         flat_prompts, prompt_meta = build_flat_prompts_and_meta(
@@ -299,6 +302,7 @@ def run_eval(
     problem_idx: int = -1,         # -1 = first n_problems; >=0 = single problem at that index
     pass_k: int = 4,
     model: str = "Qwen/Qwen3.5-4B",
+    no_think_mode: bool = False,   # Pass --no-think-mode to disable Qwen3.5 <think>...</think> (tokenizer enable_thinking=False)
     temperature: float = 0.6,
     top_p: float = 0.95,
     top_k: int = 20,
@@ -325,6 +329,7 @@ def run_eval(
         model_name=model,
         n_problems=1 if problem_idx >= 0 else n_problems,
         pass_k=pass_k,
+        use_think_mode=not no_think_mode,
         temperature=temperature,
         top_p=top_p,
         top_k=top_k,
@@ -356,6 +361,7 @@ def run_eval(
     print(f"Qwen MiniF2F Eval  |  model={cfg.model_name}")
     print(f"  dataset={cfg.dataset_name}, split={cfg.dataset_split}")
     print(f"  n_problems={cfg.n_problems}, pass@{cfg.pass_k}")
+    print(f"  use_think_mode={cfg.use_think_mode}")
     print(f"  kimina={cfg.kimina_url}")
     print("=" * 60)
 
@@ -370,6 +376,8 @@ def run_eval(
     run_dir = make_run_dir(cfg)
 
     # Problem batches: save results after each batch of N problems (None = one batch = all).
+    # With default (None), nothing is written until the entire run finishes. Use
+    # --generation-save-batch-size N to get incremental saves every N problems.
     batch_size = cfg.generation_save_batch_size or 0
     if batch_size <= 0:
         batch_size = len(problems)
@@ -400,6 +408,7 @@ def run_eval(
             cfg.pass_k,
             cfg.model_name,
             sampling_cfg,
+            dataclasses.asdict(cfg),
             cfg.inference_batch_size,
         )
         raw_results_chunk: list[list] = gen_response["raw_results"]

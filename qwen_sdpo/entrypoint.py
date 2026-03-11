@@ -40,10 +40,23 @@ Used by: modal_app.py (@app.local_entrypoint run_sdpo).
 """
 
 import time
+from dataclasses import replace
 from datetime import datetime
+from pathlib import Path
 from typing import Any, Optional
 
 from qwen_sdpo._dataset import get_field
+from qwen_sdpo.checkpoint_manifest import (
+    append_checkpoint_entry,
+    init_manifest,
+    ENTRY_BASE_MODEL,
+    ENTRY_LOCAL_RUN_DIR,
+    ENTRY_MAX_ITERATIONS,
+    ENTRY_MODAL_RUN_DIR,
+    ENTRY_PROBLEM_ID,
+    ENTRY_PROBLEM_IDX,
+    ENTRY_SUCCESS,
+)
 from qwen_sdpo._verifier import verify as kimina_verify
 from qwen_sdpo.parsing import (
     create_full_lean_code,
@@ -52,7 +65,11 @@ from qwen_sdpo.parsing import (
     get_code_token_slice,
 )
 from qwen_sdpo.config import SDPOConfig
-from qwen_sdpo.prompts import build_student_prompt, build_teacher_prompt
+from qwen_sdpo.prompts import (
+    build_student_prompt,
+    build_teacher_prompt,
+    build_teacher_prompt_with_full_generation,
+)
 from qwen_sdpo.results import plot_training_curves, save_local_run
 
 
@@ -81,6 +98,38 @@ def _load_problem(cfg: SDPOConfig) -> dict:
     return problem
 
 
+def _build_cfg_dict(cfg: SDPOConfig) -> dict:
+    """Build the serialisable config dict sent to Modal methods. Used by run_main and tests."""
+    return {
+        "model_name": cfg.model_name,
+        "dataset_name": cfg.dataset_name,
+        "dataset_split": cfg.dataset_split,
+        "problem_idx": cfg.problem_idx,
+        "max_new_tokens": cfg.max_new_tokens,
+        "temperature": cfg.temperature,
+        "top_p": cfg.top_p,
+        "top_k": cfg.top_k,
+        "min_p": cfg.min_p,
+        "repetition_penalty": cfg.repetition_penalty,
+        "max_iterations": cfg.max_iterations,
+        "learning_rate": cfg.learning_rate,
+        "distillation_topk": cfg.distillation_topk,
+        "feedback_errors_only": cfg.feedback_errors_only,
+        "use_think_mode": cfg.use_think_mode,
+        "teacher_response_mode": cfg.teacher_response_mode,
+        "default_header": cfg.default_header,
+        "use_lora": cfg.use_lora,
+        "lora_r": cfg.lora_r,
+        "lora_alpha": cfg.lora_alpha,
+        "kimina_url": cfg.kimina_url,
+        "verify_timeout_s": cfg.verify_timeout_s,
+        "verify_retries": cfg.verify_retries,
+        "verify_retry_wait_s": cfg.verify_retry_wait_s,
+        "results_base_dir": cfg.results_base_dir,
+        "gpu": cfg.gpu,
+    }
+
+
 def _print_banner(cfg: SDPOConfig) -> None:
     print("=" * 60)
     print("SDPO Qwen3.5 — Test-Time RL on Modal")
@@ -91,6 +140,7 @@ def _print_banner(cfg: SDPOConfig) -> None:
     print(f"Problem index:   {cfg.problem_idx}")
     print(f"Max iterations:  {cfg.max_iterations}")
     print(f"Feedback mode:   {'errors only' if cfg.feedback_errors_only else 'errors + failed proof'}")
+    print(f"Think mode:      {'on' if cfg.use_think_mode else 'off (non-thinking)'}")
     print(f"Teacher COT:     {cfg.teacher_response_mode}")
     print(f"Kimina URL:      {cfg.kimina_url}")
     print("=" * 60)
@@ -150,33 +200,7 @@ def run_main(
     student_prompt = build_student_prompt(theorem_code, informal, header, tokenizer, cfg)
 
     # Serialisable config dict sent to Modal methods.
-    cfg_dict = {
-        "model_name": cfg.model_name,
-        "dataset_name": cfg.dataset_name,
-        "dataset_split": cfg.dataset_split,
-        "problem_idx": cfg.problem_idx,
-        "max_new_tokens": cfg.max_new_tokens,
-        "temperature": cfg.temperature,
-        "top_p": cfg.top_p,
-        "top_k": cfg.top_k,
-        "min_p": cfg.min_p,
-        "repetition_penalty": cfg.repetition_penalty,
-        "max_iterations": cfg.max_iterations,
-        "learning_rate": cfg.learning_rate,
-        "distillation_topk": cfg.distillation_topk,
-        "feedback_errors_only": cfg.feedback_errors_only,
-        "teacher_response_mode": cfg.teacher_response_mode,
-        "default_header": cfg.default_header,
-        "use_lora": cfg.use_lora,
-        "lora_r": cfg.lora_r,
-        "lora_alpha": cfg.lora_alpha,
-        "kimina_url": cfg.kimina_url,
-        "verify_timeout_s": cfg.verify_timeout_s,
-        "verify_retries": cfg.verify_retries,
-        "verify_retry_wait_s": cfg.verify_retry_wait_s,
-        "results_base_dir": cfg.results_base_dir,
-        "gpu": cfg.gpu,
-    }
+    cfg_dict = _build_cfg_dict(cfg)
 
     metrics = {
         "iterations": [], "losses": [], "rewards": [],
@@ -223,8 +247,7 @@ def run_main(
             if is_truncated:
                 verification["truncated"] = True
                 verification["feedback"] = (
-                    "FATAL ERROR: Generation truncated due to excessively lengthy reasoning. "
-                    "The attempt is severely flawed because it repeatedly second-guesses itself."
+                    "Generation was truncated; no complete proof was produced."
                 )
             else:
                 verification["no_block"] = True
@@ -272,13 +295,19 @@ def run_main(
         # This is the core of SDPO self-distillation — the teacher signal is always
         # derived from the immediately preceding generation, never from a prior step.
         feedback = verification.get("feedback") or "Proof verification failed."
-        # Disable Qwen3.5 thinking for answer_only/code_only unless truncated.
-        # When truncated, re-enable thinking so model learns shorter reasoning.
-        teacher_enable_thinking = is_truncated or cfg.teacher_response_mode == "full_output"
-        teacher_prompt: Optional[str] = build_teacher_prompt(
-            theorem_code, informal, header, feedback, tokenizer, cfg,
-            enable_thinking=teacher_enable_thinking,
-        )
+        if cfg.use_think_mode:
+            # Thinking mode: teacher prompt = problem + feedback; enable_thinking
+            # depends on teacher_response_mode and truncation.
+            teacher_enable_thinking = is_truncated or cfg.teacher_response_mode == "full_output"
+            teacher_prompt = build_teacher_prompt(
+                theorem_code, informal, header, feedback, tokenizer, cfg,
+                enable_thinking=teacher_enable_thinking,
+            )
+        else:
+            # Non-thinking mode: teacher sees full generation in the prompt; always disable thinking.
+            teacher_prompt = build_teacher_prompt_with_full_generation(
+                theorem_code, informal, header, feedback, raw_output, tokenizer, cfg,
+            )
 
         # --- Build payload: teacher_response_ids and teacher_response_mode ---
         # Apply mode-specific slice logic. Truncation: answer_only still uses get_answer_token_slice;
@@ -422,4 +451,74 @@ def run_main(
         )
         print(f"Training curves:  {local_run_dir / 'training_curves.png'}")
 
-    return results
+    # Include local_run_dir so batch driver can record it in the manifest without
+    # duplicating make_run_dir / save_local_run logic.
+    return {**results, "local_run_dir": str(local_run_dir)}
+
+
+def run_main_batch(
+    trainer: Any,
+    cfg: SDPOConfig,
+    problem_indices: list[int],
+    problem_id_by_idx: dict[int, str],
+    manifest_path: Path,
+) -> dict:
+    """Run SDPO for multiple problems: each from base HF model, persist after each, reset between.
+
+    Iterates over problem_indices. For each problem: runs run_main (same as single-problem
+    pipeline), appends one entry to the manifest, then calls reset_to_base.remote() so the
+    next problem trains from base on the same GPU (no cold start). Results are saved
+    after each problem (incremental persistence).
+
+    Args:
+        trainer: Modal QwenSDPOTrainer instance.
+        cfg: Base SDPOConfig; problem_idx is overridden per problem.
+        problem_indices: List of dataset indices to train on (order preserved).
+        problem_id_by_idx: Map problem_idx -> problem_id (from sampled_problems JSON).
+        manifest_path: Path to the local manifest JSON file.
+
+    Returns:
+        Summary dict with "results" (list of run_main return dicts), "manifest_path", "success_count".
+    """
+    manifest_path = Path(manifest_path)
+    init_manifest(manifest_path, base_model=cfg.model_name, max_iterations=cfg.max_iterations)
+    cfg_dict = _build_cfg_dict(cfg)
+    results_list: list[dict] = []
+
+    for i, problem_idx in enumerate(problem_indices):
+        problem_cfg = replace(cfg, problem_idx=problem_idx)
+        print(f"\n{'='*60}\nBatch problem {i+1}/{len(problem_indices)}: index {problem_idx}\n{'='*60}")
+        run_result = run_main(trainer=trainer, cfg=problem_cfg)
+        results_list.append(run_result)
+
+        problem_id = (
+            problem_id_by_idx.get(problem_idx)
+            or run_result.get("problem_id")
+            or str(problem_idx)
+        )
+        modal_run_dir = run_result.get("run_dir", "")
+        local_run_dir = run_result.get("local_run_dir", "")
+        success = run_result.get("success", False)
+
+        entry = {
+            ENTRY_PROBLEM_IDX: problem_idx,
+            ENTRY_PROBLEM_ID: problem_id,
+            ENTRY_BASE_MODEL: cfg.model_name,
+            ENTRY_MAX_ITERATIONS: cfg.max_iterations,
+            ENTRY_MODAL_RUN_DIR: modal_run_dir,
+            ENTRY_LOCAL_RUN_DIR: local_run_dir,
+            ENTRY_SUCCESS: success,
+        }
+        append_checkpoint_entry(manifest_path, entry)
+
+        if i < len(problem_indices) - 1:
+            print("Resetting to base model for next problem...")
+            trainer.reset_to_base.remote(cfg_dict)
+
+    success_count = sum(1 for r in results_list if r.get("success"))
+    return {
+        "results": results_list,
+        "manifest_path": str(manifest_path),
+        "success_count": success_count,
+        "total": len(problem_indices),
+    }

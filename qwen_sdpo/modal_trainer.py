@@ -30,6 +30,9 @@ Methods (exposed via Modal):
   generate_only(config_dict, prompt) → (raw_text, generated_ids as list)
   run_sdpo_step(config_dict, payload) → iter_log dict
   finalize_run(config_dict, logs) → logs with model_save_path
+  reset_to_base(config_dict) → {"status": "ok", "model_name": ...} — reload base HF LoRA,
+    sync into vLLM; used between problems in a batch so the next problem trains from
+    base on the same GPU without cold start (same container when within scaledown_window).
 
 Used by: modal_app.py (instantiates QwenSDPOTrainer at module level, passes to run_main).
 """
@@ -72,6 +75,47 @@ _QWEN35_LORA_TARGET_MODULES = [
 ]
 
 
+def _load_hf_lora_model(model_name: str):
+    """Load base HuggingFace model with 4-bit QLoRA for training.
+
+    Used by _setup_trainer (initial load) and reset_to_base (reload between
+    batch problems). Returns the PEFT model; caller attaches optimizer and
+    syncs to vLLM as needed.
+    """
+    import torch
+    from transformers import AutoModelForCausalLM, BitsAndBytesConfig
+    from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
+
+    quantization_config = BitsAndBytesConfig(
+        load_in_4bit=True,
+        bnb_4bit_compute_dtype=torch.bfloat16,
+        bnb_4bit_use_double_quant=True,
+        bnb_4bit_quant_type="nf4",
+    )
+    model = AutoModelForCausalLM.from_pretrained(
+        model_name,
+        quantization_config=quantization_config,
+        device_map="auto",
+        trust_remote_code=True,
+    )
+    model = prepare_model_for_kbit_training(model)
+    lora_config = LoraConfig(
+        r=16,
+        lora_alpha=32,
+        target_modules=_QWEN35_LORA_TARGET_MODULES,
+        lora_dropout=0.05,
+        bias="none",
+        task_type="CAUSAL_LM",
+    )
+    model = get_peft_model(model, lora_config)
+    model.print_trainable_parameters()
+    model.train()
+    if hasattr(model, "gradient_checkpointing_enable"):
+        model.gradient_checkpointing_enable()
+        print("Gradient checkpointing enabled.")
+    return model
+
+
 def _setup_trainer(trainer_self) -> None:
     """Load tokenizer, vLLM engine, and QLoRA HuggingFace model on the Modal GPU.
 
@@ -79,8 +123,7 @@ def _setup_trainer(trainer_self) -> None:
     Sets trainer_self.{tokenizer, vllm_engine, model}.
     """
     import os
-    import torch
-    from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+    from transformers import AutoTokenizer
     from vllm import LLM
 
     os.environ["HF_HOME"] = "/hf_cache"
@@ -129,38 +172,8 @@ def _setup_trainer(trainer_self) -> None:
     )
     print("vLLM engine ready.")
 
-    # --- HuggingFace QLoRA model ---
-    # QLoRA: 4-bit NF4 base with bfloat16 compute + LoRA on all linear layers.
-    print("Loading HuggingFace model with 4-bit QLoRA for training...")
-    from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
-
-    quantization_config = BitsAndBytesConfig(
-        load_in_4bit=True,
-        bnb_4bit_compute_dtype=torch.bfloat16,
-        bnb_4bit_use_double_quant=True,
-        bnb_4bit_quant_type="nf4",
-    )
-    trainer_self.model = AutoModelForCausalLM.from_pretrained(
-        model_name,
-        quantization_config=quantization_config,
-        device_map="auto",
-        trust_remote_code=True,
-    )
-    trainer_self.model = prepare_model_for_kbit_training(trainer_self.model)
-    lora_config = LoraConfig(
-        r=16,
-        lora_alpha=32,
-        target_modules=_QWEN35_LORA_TARGET_MODULES,
-        lora_dropout=0.05,
-        bias="none",
-        task_type="CAUSAL_LM",
-    )
-    trainer_self.model = get_peft_model(trainer_self.model, lora_config)
-    trainer_self.model.print_trainable_parameters()
-    trainer_self.model.train()
-    if hasattr(trainer_self.model, "gradient_checkpointing_enable"):
-        trainer_self.model.gradient_checkpointing_enable()
-        print("Gradient checkpointing enabled.")
+    # --- HuggingFace QLoRA model (shared path for setup and reset_to_base) ---
+    trainer_self.model = _load_hf_lora_model(model_name)
     print("HuggingFace model ready.")
 
 
@@ -169,7 +182,7 @@ if modal is not None and app is not None:
     @app.cls(
         image=inference_image,
         gpu="H100",
-        timeout=7200,
+        timeout=21600,  # 6 hours (multi-problem batches need longer runs)
         scaledown_window=600,
         volumes={
             "/hf_cache": hf_cache_volume,
@@ -392,3 +405,26 @@ if modal is not None and app is not None:
             logs["model_save_path"] = str(run_dir / "final_model")
             logs["run_dir"] = str(run_dir)
             return logs
+
+        @modal.method()
+        def reset_to_base(self, config_dict: dict) -> dict:
+            """Reload base HuggingFace QLoRA and sync into vLLM for the next problem.
+
+            Used between problems in a batch so each problem trains from the same
+            base model on the same GPU (no cold start). Does not tear down or
+            recreate the tokenizer or vLLM engine; only the HF model and in-engine
+            weights are replaced. After this call, vLLM is effectively a clean
+            base HF model for the next run_main.
+            """
+            config = SDPOConfig(**config_dict)
+            model_name = config.model_name
+            print(f"reset_to_base: reloading base HF LoRA for {model_name}...")
+            self.model = _load_hf_lora_model(model_name)
+            self._optimizer = None
+            sync_lora_weights_to_vllm(
+                self.model,
+                self.vllm_engine,
+                _QWEN35_LORA_TARGET_MODULES,
+            )
+            print("reset_to_base: vLLM synced with base weights.")
+            return {"status": "ok", "model_name": model_name}

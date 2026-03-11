@@ -20,7 +20,15 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 from qwen_sdpo.config import SDPOConfig
-from qwen_sdpo.prompts import build_student_prompt, build_teacher_prompt
+from qwen_sdpo.prompts import (
+    _STUDENT_PROMPT_NO_THINKING,
+    _STUDENT_PROMPT_THINKING,
+    _TEACHER_PROMPT_NO_THINKING,
+    _TEACHER_PROMPT_THINKING,
+    build_student_prompt,
+    build_teacher_prompt,
+    build_teacher_prompt_with_full_generation,
+)
 
 
 class _MockTokenizer:
@@ -60,8 +68,33 @@ def test_student_prompt_no_feedback():
     assert "compiler returned" not in prompt, "Student prompt must not contain error block"
 
 
+def test_student_prompt_with_use_think_mode_false():
+    """build_student_prompt with use_think_mode=False still produces a valid prompt."""
+    cfg = SDPOConfig(use_think_mode=False)
+    tok = _MockTokenizer()
+    prompt = build_student_prompt(_THEOREM_CODE, _INFORMAL, _HEADER, tok, cfg)
+    assert "mathd_algebra_001" in prompt
+    assert "sorry" in prompt
+    assert "step-by-step" in prompt or "Reason" in prompt
+    assert "[ASSISTANT]" in prompt, "Should end with generation prompt"
+
+
+def test_teacher_prompt_with_full_generation_contains_generation_and_feedback():
+    """build_teacher_prompt_with_full_generation embeds full_generation and feedback."""
+    cfg = SDPOConfig()
+    tok = _MockTokenizer()
+    full_gen = "First I tried X. Then ```lean4\n  sorry\n```"
+    prompt = build_teacher_prompt_with_full_generation(
+        _THEOREM_CODE, _INFORMAL, _HEADER, _ERROR, full_gen, tok, cfg
+    )
+    assert full_gen in prompt, "Full generation must appear in teacher prompt"
+    assert _ERROR in prompt, "Feedback must appear in teacher prompt"
+    assert "mathd_algebra_001" in prompt
+    assert "Your previous attempt" in prompt or "full_generation" in prompt or "Errors to avoid" in prompt
+
+
 def test_teacher_prompt_structure():
-    """New teacher format: Solve + informal + theorem + feedback + closing instruction."""
+    """Teacher format: Solve + informal + theorem + feedback + closing instruction."""
     cfg = SDPOConfig()
     tok = _MockTokenizer()
     prompt = build_teacher_prompt(
@@ -70,7 +103,7 @@ def test_teacher_prompt_structure():
     )
     assert "Solve the following Lean 4 problem" in prompt
     assert "You MUST avoid the following errors" in prompt or "feedback" in prompt.lower()
-    assert "Correctly solve the original Lean 4 problem" in prompt
+    assert "Do NOT use" in prompt or "lean4 code block" in prompt, "Closing instruction present"
 
 
 def test_teacher_prompt_contains_error():
@@ -93,7 +126,7 @@ def test_teacher_prompt_contains_required_sections():
     )
     assert "Solve the following Lean 4 problem" in teacher
     assert "You MUST avoid the following errors" in teacher or "feedback" in teacher.lower()
-    assert "Correctly solve the original Lean 4 problem" in teacher
+    assert "Do NOT use" in teacher or "lean4" in teacher, "Closing instruction present"
     assert "mathd_algebra_001" in teacher
 
 
@@ -120,6 +153,26 @@ def test_config_teacher_response_mode():
     for mode in ("full_output", "answer_only", "code_only"):
         c = SDPOConfig(teacher_response_mode=mode)
         assert c.teacher_response_mode == mode
+
+
+def test_config_use_think_mode():
+    """use_think_mode defaults to True; accepts True/False for non-thinking mode."""
+    cfg = SDPOConfig()
+    assert cfg.use_think_mode is True
+    cfg_no_think = SDPOConfig(use_think_mode=False)
+    assert cfg_no_think.use_think_mode is False
+    cfg_think = SDPOConfig(use_think_mode=True)
+    assert cfg_think.use_think_mode is True
+
+
+def test_four_templates_exist_with_expected_placeholders():
+    """The four prompt templates exist and contain required format keys."""
+    assert "{informal}" in _STUDENT_PROMPT_THINKING and "{header_and_theorem}" in _STUDENT_PROMPT_THINKING
+    assert "{informal}" in _STUDENT_PROMPT_NO_THINKING and "{header_and_theorem}" in _STUDENT_PROMPT_NO_THINKING
+    assert "{informal}" in _TEACHER_PROMPT_THINKING and "{header_and_theorem}" in _TEACHER_PROMPT_THINKING
+    assert "{feedback}" in _TEACHER_PROMPT_THINKING
+    assert "{informal}" in _TEACHER_PROMPT_NO_THINKING and "{header_and_theorem}" in _TEACHER_PROMPT_NO_THINKING
+    assert "{feedback}" in _TEACHER_PROMPT_NO_THINKING and "{full_generation}" in _TEACHER_PROMPT_NO_THINKING
 
 
 def test_teacher_prompt_enable_thinking_param():
@@ -149,6 +202,8 @@ if __name__ == "__main__":
     tests = [
         test_student_prompt_contains_theorem,
         test_student_prompt_no_feedback,
+        test_student_prompt_with_use_think_mode_false,
+        test_teacher_prompt_with_full_generation_contains_generation_and_feedback,
         test_teacher_prompt_structure,
         test_teacher_prompt_contains_error,
         test_teacher_prompt_contains_required_sections,
@@ -156,6 +211,8 @@ if __name__ == "__main__":
         test_informal_fallback,
         test_teacher_prompt_enable_thinking_param,
         test_config_teacher_response_mode,
+        test_config_use_think_mode,
+        test_four_templates_exist_with_expected_placeholders,
         test_make_run_dir_uses_teacher_response_mode,
     ]
     passed = 0

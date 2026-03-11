@@ -16,6 +16,10 @@ class EvalConfig:
     # -------------------------------------------------------------------------
     model_name: str = "Qwen/Qwen3.5-4B"
 
+    # When True, Qwen3.5 may emit <think>...</think> reasoning (via tokenizer enable_thinking).
+    # When False, tokenizer.apply_chat_template(..., enable_thinking=False) disables it.
+    use_think_mode: bool = True
+
     # -------------------------------------------------------------------------
     # Dataset
     # -------------------------------------------------------------------------

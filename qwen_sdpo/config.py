@@ -26,6 +26,11 @@ class SDPOConfig:
     # -------------------------------------------------------------------------
     model_name: str = "Qwen/Qwen3.5-4B"    # or "Qwen/Qwen3.5-9B"
 
+    # When True, Qwen3.5 may emit <think>...</think> reasoning (tokenizer enable_thinking).
+    # When False, student and teacher use enable_thinking=False for non-thinking mode.
+    # Mirrors qwen_eval.EvalConfig.use_think_mode.
+    use_think_mode: bool = True
+
     # LoRA: always enabled (QLoRA via bitsandbytes + peft).
     # target_modules covers both Qwen3_5GatedDeltaNet (24 linear_attention layers)
     # and Qwen3_5Attention (8 full_attention layers) and Qwen3_5MLP (all 32 layers).
@@ -111,3 +116,6 @@ class SDPOConfig:
     # Model tag is appended at runtime:
     #   sdpo_results/Qwen3.5-9B/run_Qwen3.5-9B_{problem_idx}_{timestamp}/
     results_base_dir: str = "sdpo_results"
+    # When set (by run_sdpo_batch), per-problem output goes under batch_run_dir/runs/problem_{idx}/
+    # and manifest under batch_run_dir/manifest/. Single-problem runs ignore this.
+    batch_run_dir: Optional[str] = None
