@@ -3,8 +3,9 @@ TLDR: Persist eval results to disk in a structured, human-readable format.
 
 Output layout:
     baseline/run_{model_safe}_{YYYYMMDD_HHMMSS}/
-        logs.json     — per-problem detail (problem metadata, all attempts, verification)
-        summary.json  — top-level accuracy stats and run metadata
+        logs.json               — per-problem detail (problem metadata, all attempts, verification)
+        summary.json            — top-level accuracy stats and run metadata
+        success_rate_summary.json — per-problem problem_id and success_rate (fraction of attempts that passed verification)
 
 The logs.json format matches the sdpo_results/local_verify convention so results
 are comparable across pipelines.
@@ -37,6 +38,43 @@ def make_run_dir(cfg: EvalConfig) -> Path:
     run_dir = Path(cfg.results_base_dir) / f"run_{model_tag}_{ts}"
     run_dir.mkdir(parents=True, exist_ok=True)
     return run_dir
+
+
+def save_success_rate_summary(
+    run_dir: Path,
+    problem_logs: list[dict[str, Any]],
+    pass_k: int,
+) -> None:
+    """
+    Write success_rate_summary.json: per-problem problem_id, problem_idx, and
+    success_rate (fraction of attempts that passed verification).
+    """
+    problems = []
+    for log in problem_logs:
+        problem = log.get("problem", {}) or {}
+        problem_id = problem.get("id", "")
+        problem_idx = problem.get("problem_idx")
+        attempts = log.get("attempts", [])
+        total = len(attempts)
+        n_ok = sum(1 for a in attempts if a.get("success"))
+        success_rate = round(n_ok / total, 4) if total else 0.0
+        entry: dict[str, Any] = {
+            "problem_id": problem_id,
+            "success_rate": success_rate,
+        }
+        if problem_idx is not None:
+            entry["problem_idx"] = problem_idx
+        problems.append(entry)
+
+    out = {
+        "pass_k": pass_k,
+        "n_problems": len(problem_logs),
+        "problems": problems,
+    }
+    path = run_dir / "success_rate_summary.json"
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(out, f, indent=2, ensure_ascii=False)
+    print(f"Saved success rate summary → {path}")
 
 
 def save_results(
@@ -117,6 +155,8 @@ def save_results(
         json.dump(summary, f, indent=2, ensure_ascii=False)
     print(f"Saved summary → {summary_path}")
     print(f"\npass@{cfg.pass_k}: {n_success}/{n_problems} = {pass_at_k:.1%}")
+
+    save_success_rate_summary(run_dir, problem_logs, cfg.pass_k)
 
 
 def build_problem_log(

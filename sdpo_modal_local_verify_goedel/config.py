@@ -40,7 +40,7 @@ class SDPOConfig:
     ])
 
     # Generation settings
-    max_new_tokens: int = 8192
+    max_new_tokens: int = 16384
     temperature: float = 0.6
     top_p: float = 0.95
     stop_tokens: list = field(default_factory=lambda: [

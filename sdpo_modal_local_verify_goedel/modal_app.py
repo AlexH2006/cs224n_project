@@ -48,10 +48,10 @@ else:
 
     # Per-GPU vLLM settings: A100-40GB needs 0.45+ for the 8B model (weights ~16GB,
     # leaving ~24GB; 0.25 = only 10GB for KV cache which is not enough after model load).
-    GPU_VLLM_MEMORY = {"A100-40GB": 0.45, "A100-80GB": 0.4, "H100": 0.4}
+    GPU_VLLM_MEMORY = {"A100-40GB": 0.45, "A100-80GB": 0.4, "H100": 0.35}
     DEFAULT_GPU_MEMORY = 0.45
-    # Must be >= prompt length + max_new_tokens (8192); 16384 allows room for prompt.
-    DEFAULT_MAX_MODEL_LEN = 16384
+    # Must be >= prompt length + max_new_tokens (16384); 24576 allows room for prompt.
+    DEFAULT_MAX_MODEL_LEN = 24576
 
     def _setup_trainer(trainer_self: Any, gpu_name: str) -> None:
         """Shared setup: env, tokenizer, vLLM (with worker extension for weight sync), HF QLoRA model.

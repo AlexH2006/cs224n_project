@@ -108,16 +108,16 @@ def _setup_trainer(trainer_self) -> None:
     #   In-place weight updates via load_weights() preserve tensor addresses, so
     #   graphs remain valid after each sync (no recapture).
     # enable_prefix_caching=True: cache the shared problem prefix across generations.
-    # 0.65 × 80GB (H100) = 52GB for vLLM KV cache.
+    # 0.4 × 80GB (H100) = 32GB for vLLM KV cache.
     # The QLoRA training model (4-bit 4B) peaks at ~10GB (weights + activations +
-    # AdamW optimizer state on LoRA params only). The remaining ~18GB is headroom.
-    print("Initializing vLLM (gpu_memory_utilization=0.65)...")
+    # AdamW optimizer state on LoRA params only). The remaining ~38GB is headroom.
+    print("Initializing vLLM (gpu_memory_utilization=0.4)...")
     trainer_self.vllm_engine = LLM(
         model=model_name,
         dtype="bfloat16",
         trust_remote_code=True,
         download_dir="/hf_cache",
-        gpu_memory_utilization=0.65,
+        gpu_memory_utilization=0.4,
         max_model_len=16384,
         language_model_only=True,
         enforce_eager=False,

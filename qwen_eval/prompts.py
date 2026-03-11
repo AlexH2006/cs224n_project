@@ -17,7 +17,7 @@ from qwen_eval.config import EvalConfig
 _SYSTEM_PROMPT = "You are an expert in mathematics and Lean 4 theorem proving."
 
 _USER_TEMPLATE = """\
-Think step-by-step to prove the following Lean 4 theorem.
+Reason step-by-step to prove the following Lean 4 theorem.
 
 # Informal problem:
 {informal}

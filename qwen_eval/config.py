@@ -59,7 +59,11 @@ class EvalConfig:
 
     # Chunk size for vLLM generate() when processing many problems on one GPU.
     # None or 0 = pass all prompts in one call. Reduces peak memory for large runs.
-    inference_batch_size: Optional[int] = 128
+    inference_batch_size: Optional[int] = 256
+
+    # Save results after each batch of this many problems (generate -> parse -> verify -> save).
+    # None or 0 = run all problems in one go (current behavior).
+    generation_save_batch_size: Optional[int] = None
 
     # -------------------------------------------------------------------------
     # Lean header fallback

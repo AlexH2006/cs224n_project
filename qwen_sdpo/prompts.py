@@ -48,7 +48,10 @@ Solve the following Lean 4 problem
 You MUST avoid the following errors of earlier attempts:
 {feedback}
 
-Correctly solve the original Lean 4 problem.
+Instructions:
+- Do NOT use `sorry`. 
+- At the very end of your response, output your final answer as exactly one lean4 code block that is complete and self-contained: all imports, set_option lines, and the full theorem with proof
+-Do NOT output any text after the closing ```\
 """
 
 

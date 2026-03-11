@@ -22,6 +22,7 @@ Usage:
     python3 -m modal run qwen_eval/modal_app.py
     python3 -m modal run qwen_eval/modal_app.py --model "Qwen/Qwen3.5-9B" --problem-idx 0 --pass-k 4
     python3 -m modal run qwen_eval/modal_app.py --n-problems 20 --pass-k 4
+    python3 -m modal run qwen_eval/modal_app.py --generation-save-batch-size 50   # save after each 50 problems
     python3 -m modal run qwen_eval/modal_app.py --generate-only
 """
 
@@ -88,7 +89,7 @@ inference_image = (
 @app.cls(
     image=inference_image,
     gpu="H100",
-    timeout=1800,
+    timeout=7200,  # 2 hours
     volumes={"/hf_cache": hf_cache_volume},
 )
 class ProofGenerator:
@@ -308,12 +309,16 @@ def run_eval(
     seed: int = 42,
     kimina_url: str = "http://localhost:8000",
     generate_only: bool = False,
+    inference_batch_size: Optional[int] = None,
+    generation_save_batch_size: Optional[int] = None,
 ):
     """
     Orchestrate the full eval: generate → parse → verify → save.
 
     --problem-idx N  Run on a single problem at dataset index N (overrides --n-problems).
     --generate-only  Skip verification (useful for testing generation + parsing).
+    --inference-batch-size N  Max prompts per vLLM generate() call (default: 256).
+    --generation-save-batch-size N  Save results after each batch of N problems (default: all at once).
     """
     problem_indices = [problem_idx] if problem_idx >= 0 else None
     cfg = EvalConfig(
@@ -331,6 +336,10 @@ def run_eval(
         kimina_url=kimina_url,
         problem_indices=problem_indices,
     )
+    if inference_batch_size is not None:
+        cfg.inference_batch_size = inference_batch_size
+    if generation_save_batch_size is not None:
+        cfg.generation_save_batch_size = generation_save_batch_size
 
     # Sampling config dict passed explicitly to Modal workers (avoids env var hack).
     sampling_cfg = {
@@ -360,120 +369,159 @@ def run_eval(
 
     run_dir = make_run_dir(cfg)
 
-    # ------------------------------------------------------------------
-    # Phase 1: Generate — single Modal worker, all problems batched on one GPU
-    # ------------------------------------------------------------------
-    print(f"\n[2/3] Generating {cfg.pass_k} proofs per problem on Modal H100 (single GPU)...")
+    # Problem batches: save results after each batch of N problems (None = one batch = all).
+    batch_size = cfg.generation_save_batch_size or 0
+    if batch_size <= 0:
+        batch_size = len(problems)
+    chunks = [
+        problems[i : i + batch_size]
+        for i in range(0, len(problems), batch_size)
+    ]
+    n_chunks = len(chunks)
+
     generator = ProofGenerator()
-    gen_response = generator.generate_all.remote(
-        problems,
-        cfg.pass_k,
-        cfg.model_name,
-        sampling_cfg,
-        cfg.inference_batch_size,
-    )
-    raw_results: list[list] = gen_response["raw_results"]
-    generation_metrics = gen_response.get("generation_metrics") or {}
-    if generation_metrics:
-        tps = generation_metrics.get("tokens_per_second", 0)
-        wall = generation_metrics.get("generation_wall_s", 0)
-        print(f"  Generation complete. {len(problems) * cfg.pass_k} total outputs.")
-        print(f"  Throughput: {tps:.1f} tokens/s  |  wall time: {wall:.1f}s")
-    else:
-        print(f"  Generation complete. {len(problems) * cfg.pass_k} total outputs.")
+    aggregated_metrics: dict[str, float | int] = {
+        "generation_wall_s": 0.0,
+        "total_output_tokens": 0,
+        "n_requests": 0,
+    }
+    problem_logs: list[dict] = []
 
-    # ------------------------------------------------------------------
-    # Parse: extract lean4 blocks from raw outputs
-    # ------------------------------------------------------------------
-    all_attempts: list[list[AttemptResult]] = []
-    for problem, result in zip(problems, raw_results):
-        prompt = result[0]
-        raw_pairs = result[1:]  # pass_k (raw_text, finish_reason) tuples
-        problem_attempts = []
-        for attempt_idx, (raw_output, finish_reason) in enumerate(raw_pairs):
-            parse_result = extract_full_lean_block_parsed(
-                raw_output,
-                finish_reason=finish_reason,
-            )
-            extracted_block = parse_result.block
-            if parse_result.truncated:
-                print(f"    [attempt {attempt_idx}] TRUNCATED (finish_reason={finish_reason!r}) — no code block reached")
-            elif parse_result.no_block:
-                print(f"    [attempt {attempt_idx}] PARSE FAILED — no lean4 block found in output")
-            full_code = create_full_lean_code(
-                theorem_code=problem["formal_statement"],
-                extracted_block=extracted_block,
-                default_header=cfg.default_header,
-            )
-            problem_attempts.append(AttemptResult(
-                problem_idx=problem["problem_idx"],
-                attempt=attempt_idx,
-                prompt=prompt,
-                raw_output=raw_output,
-                extracted_block=extracted_block,
-                full_code=full_code,
-                num_tokens=len(raw_output.split()),
-                truncated=parse_result.truncated,
-                finish_reason=finish_reason,
-            ))
-        all_attempts.append(problem_attempts)
+    if not generate_only:
+        print(f"\n[3/3] Verifying with Kimina at {cfg.kimina_url}...")
 
-    # ------------------------------------------------------------------
-    # Optionally skip verification
-    # ------------------------------------------------------------------
-    if generate_only:
-        print("\n--generate-only: skipping verification, saving raw outputs.")
-        problem_logs = []
-        avg_gen_s = generation_metrics.get("avg_generation_s_per_problem")
-        for problem, attempts in zip(problems, all_attempts):
-            problem_log = build_problem_log(
-                problem,
-                [
-                    {
-                        "attempt": a.attempt,
-                        "prompt": a.prompt,
-                        "raw_output": a.raw_output,
-                        "extracted_block": a.extracted_block,
-                        "full_code": a.full_code,
-                        "verification": None,
-                        "num_tokens": a.num_tokens,
-                    }
-                    for a in attempts
-                ],
-                cfg,
-                generation_time_s=avg_gen_s,
-            )
-            problem_logs.append(problem_log)
-            save_results(run_dir, cfg, problem_logs, generation_metrics=generation_metrics)
-        print(f"\nDone. Results in: {run_dir}")
-        return
-
-    # ------------------------------------------------------------------
-    # Phase 2: Verify locally — Kimina Docker on localhost
-    # ------------------------------------------------------------------
-    print(f"\n[3/3] Verifying with Kimina at {cfg.kimina_url}...")
-    problem_logs = []
-    for prob_num, (problem, attempts) in enumerate(zip(problems, all_attempts), 1):
-        print(f"  [{prob_num}/{len(problems)}] {problem['problem_id']}")
-        verify_start = time.perf_counter()
-        attempt_logs = _verify_problem(problem, attempts, cfg)
-        verification_time_s = time.perf_counter() - verify_start
-        avg_gen_s = generation_metrics.get("avg_generation_s_per_problem")
-        problem_log = build_problem_log(
-            problem,
-            attempt_logs,
-            cfg,
-            verification_time_s=verification_time_s,
-            generation_time_s=avg_gen_s,
+    for chunk_idx, problem_chunk in enumerate(chunks):
+        # ------------------------------------------------------------------
+        # Phase 1 (this chunk): Generate on Modal
+        # ------------------------------------------------------------------
+        print(f"\n[2/3] Generating chunk {chunk_idx + 1}/{n_chunks} ({len(problem_chunk)} problems, {len(problem_chunk) * cfg.pass_k} outputs)...")
+        gen_response = generator.generate_all.remote(
+            problem_chunk,
+            cfg.pass_k,
+            cfg.model_name,
+            sampling_cfg,
+            cfg.inference_batch_size,
         )
-        problem_logs.append(problem_log)
-        status = "SOLVED" if problem_log["success"] else "failed"
-        best = problem_log.get("best_attempt")
-        print(f"    → {status}" + (f" (attempt {best})" if best is not None else "") + f"  [{verification_time_s:.1f}s]")
-        save_results(run_dir, cfg, problem_logs, generation_metrics=generation_metrics)
+        raw_results_chunk: list[list] = gen_response["raw_results"]
+        metrics = gen_response.get("generation_metrics") or {}
+        aggregated_metrics["generation_wall_s"] += metrics.get("generation_wall_s", 0)
+        aggregated_metrics["total_output_tokens"] += metrics.get("total_output_tokens", 0)
+        aggregated_metrics["n_requests"] += metrics.get("n_requests", 0)
+        if metrics:
+            tps = metrics.get("tokens_per_second", 0)
+            wall = metrics.get("generation_wall_s", 0)
+            print(f"  Chunk done: {wall:.1f}s, {tps:.1f} tok/s")
 
-    # ------------------------------------------------------------------
-    # Save results (final write; incremental saves already done in loop)
-    # ------------------------------------------------------------------
-    save_results(run_dir, cfg, problem_logs, generation_metrics=generation_metrics)
+        # ------------------------------------------------------------------
+        # Parse: extract lean4 blocks from raw outputs (this chunk)
+        # ------------------------------------------------------------------
+        all_attempts_chunk: list[list[AttemptResult]] = []
+        for problem, result in zip(problem_chunk, raw_results_chunk):
+            prompt = result[0]
+            raw_pairs = result[1:]
+            problem_attempts = []
+            for attempt_idx, (raw_output, finish_reason) in enumerate(raw_pairs):
+                parse_result = extract_full_lean_block_parsed(
+                    raw_output,
+                    finish_reason=finish_reason,
+                )
+                extracted_block = parse_result.block
+                if parse_result.truncated:
+                    print(f"    [attempt {attempt_idx}] TRUNCATED (finish_reason={finish_reason!r}) — no code block reached")
+                elif parse_result.no_block:
+                    print(f"    [attempt {attempt_idx}] PARSE FAILED — no lean4 block found in output")
+                full_code = create_full_lean_code(
+                    theorem_code=problem["formal_statement"],
+                    extracted_block=extracted_block,
+                    default_header=cfg.default_header,
+                )
+                problem_attempts.append(AttemptResult(
+                    problem_idx=problem["problem_idx"],
+                    attempt=attempt_idx,
+                    prompt=prompt,
+                    raw_output=raw_output,
+                    extracted_block=extracted_block,
+                    full_code=full_code,
+                    num_tokens=len(raw_output.split()),
+                    truncated=parse_result.truncated,
+                    finish_reason=finish_reason,
+                ))
+            all_attempts_chunk.append(problem_attempts)
+
+        # ------------------------------------------------------------------
+        # Verify (or build logs without verification) and append to problem_logs
+        # ------------------------------------------------------------------
+        if generate_only:
+            print("  --generate-only: skipping verification.")
+            total_wall = aggregated_metrics["generation_wall_s"]
+            n_after = len(problem_logs) + len(problem_chunk)
+            avg_gen_s = (total_wall / n_after) if n_after > 0 else 0.0
+            for problem, attempts in zip(problem_chunk, all_attempts_chunk):
+                problem_log = build_problem_log(
+                    problem,
+                    [
+                        {
+                            "attempt": a.attempt,
+                            "prompt": a.prompt,
+                            "raw_output": a.raw_output,
+                            "extracted_block": a.extracted_block,
+                            "full_code": a.full_code,
+                            "verification": None,
+                            "num_tokens": a.num_tokens,
+                        }
+                        for a in attempts
+                    ],
+                    cfg,
+                    generation_time_s=avg_gen_s,
+                )
+                problem_logs.append(problem_log)
+        else:
+            for prob_num, (problem, attempts) in enumerate(zip(problem_chunk, all_attempts_chunk), len(problem_logs) + 1):
+                print(f"  [{prob_num}/{len(problems)}] {problem['problem_id']}")
+                verify_start = time.perf_counter()
+                attempt_logs = _verify_problem(problem, attempts, cfg)
+                verification_time_s = time.perf_counter() - verify_start
+                total_wall = aggregated_metrics["generation_wall_s"]
+                n_so_far = len(problem_logs) + 1
+                avg_gen_s = (total_wall / n_so_far) if n_so_far > 0 else 0.0
+                problem_log = build_problem_log(
+                    problem,
+                    attempt_logs,
+                    cfg,
+                    verification_time_s=verification_time_s,
+                    generation_time_s=avg_gen_s,
+                )
+                problem_logs.append(problem_log)
+                status = "SOLVED" if problem_log["success"] else "failed"
+                best = problem_log.get("best_attempt")
+                print(f"    → {status}" + (f" (attempt {best})" if best is not None else "") + f"  [{verification_time_s:.1f}s]")
+
+        # Derived metrics for summary (so far)
+        total_wall = aggregated_metrics["generation_wall_s"]
+        n_done = len(problem_logs)
+        save_metrics = {
+            "generation_wall_s": round(total_wall, 4),
+            "total_output_tokens": aggregated_metrics["total_output_tokens"],
+            "tokens_per_second": round(
+                aggregated_metrics["total_output_tokens"] / total_wall, 2
+            ) if total_wall > 0 else 0.0,
+            "n_requests": aggregated_metrics["n_requests"],
+            "avg_generation_s_per_problem": round(total_wall / n_done, 4) if n_done > 0 else 0.0,
+        }
+        save_results(run_dir, cfg, problem_logs, generation_metrics=save_metrics)
+        print(f"  Saved results ({n_done}/{len(problems)} problems).")
+
+    if problem_logs:
+        total_wall = aggregated_metrics["generation_wall_s"]
+        n_done = len(problem_logs)
+        final_metrics = {
+            "generation_wall_s": round(total_wall, 4),
+            "total_output_tokens": aggregated_metrics["total_output_tokens"],
+            "tokens_per_second": round(
+                aggregated_metrics["total_output_tokens"] / total_wall, 2
+            ) if total_wall > 0 else 0.0,
+            "n_requests": aggregated_metrics["n_requests"],
+            "avg_generation_s_per_problem": round(total_wall / n_done, 4),
+        }
+        save_results(run_dir, cfg, problem_logs, generation_metrics=final_metrics)
     print(f"\nDone. Results in: {run_dir}")

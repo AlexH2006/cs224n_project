@@ -1,0 +1,70 @@
+{
+  "pass_k": 16,
+  "n_problems": 16,
+  "problems": [
+    {
+      "problem_id": "mathd_algebra_478",
+      "success_rate": 0.8125
+    },
+    {
+      "problem_id": "numbertheory_4x3m7y3neq2003",
+      "success_rate": 0.0
+    },
+    {
+      "problem_id": "aime_1983_p1",
+      "success_rate": 0.0
+    },
+    {
+      "problem_id": "amc12_2001_p5",
+      "success_rate": 0.0
+    },
+    {
+      "problem_id": "mathd_algebra_141",
+      "success_rate": 0.25
+    },
+    {
+      "problem_id": "mathd_numbertheory_3",
+      "success_rate": 0.5
+    },
+    {
+      "problem_id": "imo_1969_p2",
+      "success_rate": 0.0
+    },
+    {
+      "problem_id": "mathd_algebra_44",
+      "success_rate": 0.75
+    },
+    {
+      "problem_id": "mathd_algebra_209",
+      "success_rate": 0.0
+    },
+    {
+      "problem_id": "mathd_numbertheory_1124",
+      "success_rate": 0.0625
+    },
+    {
+      "problem_id": "imo_1983_p6",
+      "success_rate": 0.0
+    },
+    {
+      "problem_id": "mathd_numbertheory_237",
+      "success_rate": 0.0
+    },
+    {
+      "problem_id": "mathd_algebra_33",
+      "success_rate": 0.4375
+    },
+    {
+      "problem_id": "amc12b_2021_p3",
+      "success_rate": 0.0
+    },
+    {
+      "problem_id": "mathd_numbertheory_299",
+      "success_rate": 0.875
+    },
+    {
+      "problem_id": "amc12b_2020_p2",
+      "success_rate": 0.375
+    }
+  ]
+}

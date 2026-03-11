@@ -1,0 +1,21 @@
+{
+  "model": "Qwen/Qwen3.5-9B",
+  "dataset": "cat-searcher/minif2f-lean4",
+  "split": "test",
+  "n_problems": 1,
+  "pass_k": 4,
+  "n_success": 0,
+  "pass_at_k": 0.0,
+  "timestamp": "2026-03-06T22:40:12.596880",
+  "run_dir": "baseline/run_Qwen3.5-9B_20260306_224012",
+  "sampling": {
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 0.0,
+    "repetition_penalty": 1.0,
+    "max_new_tokens": 8192,
+    "seed": 42
+  }
+}

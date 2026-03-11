@@ -14,15 +14,47 @@ The codebase explicitly documents OOM **during the optimizer step** for 8B model
 
 So the failure is in the **training step** on Modal, not at vLLM init or at verification time.
 
+---
+
+## Observed OOM (Modal run 2026-03-10)
+
+A run with **problem 30, max_iterations 4** confirmed the exact failure point:
+
+### Exact location
+
+- **File:** [sdpo_modal_local_verify_goedel/sdpo_loss.py](sdpo_modal_local_verify_goedel/sdpo_loss.py)  
+- **Line:** 70  
+- **Code:** `entropy = -(log_probs.exp() * log_probs).sum(dim=-1).mean().item()`  
+- **Call path:** `run_sdpo_step` (modal_trainer.py:134) → `compute_sdpo_loss` (sdpo_loss.py) → OOM at the entropy computation (line 70), during the **student forward** phase (after `student_logits` is computed, before backward).
+
+So the OOM occurs **inside `compute_sdpo_loss`**, while building the student log-probs and entropy from the full sequence. The backward pass is never reached when the response is long enough.
+
+### Specific trigger
+
+- **Iteration 1:** Completed successfully (shorter generation; loss/reward/grad_norm logged; weight sync ran).
+- **Iteration 2:** vLLM generated **16,384 tokens** (hit `max_new_tokens`). On the subsequent `run_sdpo_step`, `compute_sdpo_loss` was called with `generated_ids` of length 16,384. The student forward therefore had **prompt (≤2048) + 16,384 response tokens** → total sequence length ~18k. The entropy line (which uses `student_logits` over the full response length) triggered:
+
+```
+OutOfMemoryError: CUDA out of memory. Tried to allocate 9.27 GiB. GPU 0 has a total capacity of 79.44 GiB of which 5.38 GiB is free. Process has 74.05 GiB memory in use. Of the allocated memory 68.78 GiB is allocated by PyTorch, with 330.00 MiB allocated in private pools (e.g., CUDA Graphs), and 4.16 GiB is reserved by PyTorch but unallocated.
+```
+
+- **Requested allocation:** 9.27 GiB (consistent with activations or large tensors for an 18k-token sequence).  
+- **Already in use:** 74.05 GiB (vLLM at 0.35 util + HF model + iteration-1 state and long-sequence activations).  
+- **Free:** 5.38 GiB — insufficient for the 9.27 GiB request.
+
+### Takeaway
+
+The OOM is **not** in weight sync or optimizer.step; it is in the **SDPO loss computation** when the **response length is 16,384 tokens**. With `max_new_tokens=16384`, any iteration that hits the token limit will pass a 16k-token response into `compute_sdpo_loss`, causing activation memory to exceed H100 80GB. Capping the response length used in the loss (or lowering `max_new_tokens`) is required to avoid this OOM.
+
 ## Where exactly OOM can happen (same GPU, one process)
 
 Everything runs on one GPU in this order inside `run_sdpo_step`:
 
-1. **`compute_sdpo_loss(...)`**  
-   - **Student forward** (with grad): `student_input_ids` = prompt (≤2048) + response (≤8192) → up to **~10,240 tokens**.  
+1. **`compute_sdpo_loss(...)`** — **confirmed OOM site (see above)**  
+   - **Student forward** (with grad): `student_input_ids` = prompt (≤2048) + response (≤max_new_tokens, e.g. 8192 or 16384) → up to **~10,240 tokens** (8k cap) or **~18,432 tokens** (16k cap).  
    - **Teacher forward** (no_grad): same length.  
    - **Backward** through the student forward only.  
-   - **Peak here:** Activations for the student forward (with gradient checkpointing) plus gradients and optimizer state. For an 8B model and 10k tokens, this is the **most likely OOM point**.
+   - **Peak here:** Activations for the student forward (with gradient checkpointing) plus gradients and optimizer state. With **16,384-token response**, the entropy computation (line 70) or the preceding student forward OOMs; 74 GB in use + 9.27 GB request exceeds 80 GB.
 
 2. **`optimizer.step()`**  
    - Updates LoRA parameters; Adam state is already allocated.  
@@ -46,18 +78,18 @@ Everything runs on one GPU in this order inside `run_sdpo_step`:
 
 | Component | Size (GB) |
 |-----------|-----------|
-| vLLM (0.4 util, max_model_len=16384) | ~18–20 (weights + KV) |
+| vLLM (0.35 util, max_model_len=24576) | ~28 (35% of 80GB; weights + KV) |
 | HF 4-bit base + LoRA + Adam state | ~5–6 |
-| **HF activations (forward + backward, 10k seq)** | **~15–25** (dominant) |
+| **HF activations (forward + backward, 18k seq)** | **~25–35** (dominant; observed ~74 GB total − vLLM − HF ≈ 40+ GB for long seq) |
 | Weight-sync peak (merged tensors on GPU) | ~7 |
-| **Total peak** | **~45–58** (best case) to **~55–58** (long seq + sync) |
+| **Total peak** | **~65–75** (long 16k response) → OOM when next 9+ GB allocation requested |
 
-With long generations (e.g. 8k-token responses), activation memory for the **student forward + backward** dominates and can push you over 80GB, especially if vLLM has already reserved a large chunk.
+With **16k-token responses**, activation memory for the student forward (and entropy/log_probs over 16k positions) dominates; the run hit 74.05 GiB in use then failed allocating 9.27 GiB.
 
 ## Root cause summary
 
-- **Primary:** **SDPO forward/backward** in `compute_sdpo_loss` with **long sequences** (prompt ≤2048 + response ≤8192). Gradient checkpointing is on but 8B × 10k tokens still needs a lot of activation memory.
-- **Secondary:** **Weight-sync** temporarily materializing all merged LoRA weights on GPU in `update_weights_from_numpy` adds ~7 GB peak and can tip an already tight run over.
+- **Primary (confirmed):** **SDPO forward** in `compute_sdpo_loss` with **16,384-token response** (prompt ≤2048 + response = 16384). OOM at **sdpo_loss.py:70** (entropy computation). Gradient checkpointing is on but 8B × ~18k tokens produces activations and intermediates that exceed free GPU memory (74 GB used, 9.27 GB requested).
+- **Secondary:** **Weight-sync** temporarily materializing all merged LoRA weights on GPU in `update_weights_from_numpy` adds ~7 GB peak and can tip an already tight run over (not observed in this run; failure occurred before sync on iter 2).
 
 ## Mitigation strategies
 
@@ -100,11 +132,8 @@ With long generations (e.g. 8k-token responses), activation memory for the **stu
 
 ### 6. Confirm exact OOM site (optional)
 
-- Add **`torch.cuda.synchronize()`** and **`torch.cuda.memory_allocated()` / `torch.cuda.max_memory_allocated()`** around:
-  - end of `compute_sdpo_loss` (after backward),
-  - after `optimizer.step()`,
-  - after `sync_lora_weights_to_vllm_goedel`.  
-  Log these in Modal; the last successful print before the crash is right before the OOM.
+- **Done:** Modal run confirmed OOM at **sdpo_loss.py:70** (entropy line) when response length = 16,384.  
+- For future runs, optional: add **`torch.cuda.memory_allocated()`** / **`max_memory_allocated()`** around end of `compute_sdpo_loss`, after `optimizer.step()`, and after `sync_lora_weights_to_vllm_goedel` to log peak usage.
 
 ---
 
