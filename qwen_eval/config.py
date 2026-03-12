@@ -16,6 +16,10 @@ class EvalConfig:
     # -------------------------------------------------------------------------
     model_name: str = "Qwen/Qwen3.5-4B"
 
+    # When True, Qwen3.5 may emit <think>...</think> reasoning (via tokenizer enable_thinking).
+    # When False, tokenizer.apply_chat_template(..., enable_thinking=False) disables it.
+    use_think_mode: bool = False
+
     # -------------------------------------------------------------------------
     # Dataset
     # -------------------------------------------------------------------------
@@ -46,6 +50,9 @@ class EvalConfig:
     pass_k: int = 4
     seed: int = 42
 
+    # Multi-turn correction: 0 = one-shot only; N = up to N+1 generations per attempt.
+    num_correction_rounds: int = 0
+
     # -------------------------------------------------------------------------
     # Sampling parameters (passed directly to vLLM SamplingParams)
     # -------------------------------------------------------------------------
@@ -59,7 +66,11 @@ class EvalConfig:
 
     # Chunk size for vLLM generate() when processing many problems on one GPU.
     # None or 0 = pass all prompts in one call. Reduces peak memory for large runs.
-    inference_batch_size: Optional[int] = 128
+    inference_batch_size: Optional[int] = 256
+
+    # Save results after each batch of this many problems (generate -> parse -> verify -> save).
+    # None or 0 = run all problems in one go (current behavior).
+    generation_save_batch_size: Optional[int] = None
 
     # -------------------------------------------------------------------------
     # Lean header fallback

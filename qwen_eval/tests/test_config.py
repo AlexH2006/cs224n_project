@@ -22,7 +22,7 @@ class TestEvalConfig:
     def test_inference_batch_size_default(self):
         cfg = EvalConfig()
         assert hasattr(cfg, "inference_batch_size")
-        assert cfg.inference_batch_size == 128
+        assert cfg.inference_batch_size == 256
 
     def test_inference_batch_size_override(self):
         cfg = EvalConfig(inference_batch_size=64)
