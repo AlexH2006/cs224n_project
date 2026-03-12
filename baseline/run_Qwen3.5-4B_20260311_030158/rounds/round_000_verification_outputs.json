@@ -1,0 +1,1688 @@
+[
+  {
+    "item_id": "mathd_algebra_478__r0_g0",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.105
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g1",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.05
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g2",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.058
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g3",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.049
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g4",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.064
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g5",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.049
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g6",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.059
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g7",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.076
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478",
+    "round_idx": 0
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g0",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.564
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003",
+    "round_idx": 0
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g1",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 1.336
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003",
+    "round_idx": 0
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g2",
+    "passed": false,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": false,
+      "complete": false,
+      "has_sorry": false,
+      "feedback": "omega could not prove the goal:\nNo usable constraints found. You may need to unfold definitions so `omega` can see linear arithmetic facts about `Nat` and `Int`, which may also involve multiplication, division, and modular remainder by constants.\nomega could not prove the goal:\nNo usable constraints found. You may need to unfold definitions so `omega` can see linear arithmetic facts about `Nat` and `Int`, which may also involve multiplication, division, and modular remainder by constants.",
+      "errors": [
+        "omega could not prove the goal:\nNo usable constraints found. You may need to unfold definitions so `omega` can see linear arithmetic facts about `Nat` and `Int`, which may also involve multiplication, division, and modular remainder by constants.",
+        "omega could not prove the goal:\nNo usable constraints found. You may need to unfold definitions so `omega` can see linear arithmetic facts about `Nat` and `Int`, which may also involve multiplication, division, and modular remainder by constants."
+      ],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.938
+      }
+    },
+    "extracted_error_messages": [
+      "omega could not prove the goal:\nNo usable constraints found. You may need to unfold definitions so `omega` can see linear arithmetic facts about `Nat` and `Int`, which may also involve multiplication, division, and modular remainder by constants.",
+      "omega could not prove the goal:\nNo usable constraints found. You may need to unfold definitions so `omega` can see linear arithmetic facts about `Nat` and `Int`, which may also involve multiplication, division, and modular remainder by constants."
+    ],
+    "structured_errors": [
+      "omega could not prove the goal:\nNo usable constraints found. You may need to unfold definitions so `omega` can see linear arithmetic facts about `Nat` and `Int`, which may also involve multiplication, division, and modular remainder by constants.",
+      "omega could not prove the goal:\nNo usable constraints found. You may need to unfold definitions so `omega` can see linear arithmetic facts about `Nat` and `Int`, which may also involve multiplication, division, and modular remainder by constants."
+    ],
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003",
+    "round_idx": 0
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g3",
+    "passed": false,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": false,
+      "complete": false,
+      "has_sorry": false,
+      "feedback": "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  7 * y ^ 3 % 7\nx y : ℤ\nh : 4 * x ^ 3 - 7 * y ^ 3 = 2003\nh₁ : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 2003 % 7\nh₂ : 2003 % 7 = 1\nh₄ : 7 * y ^ 3 % 7 = 0\n⊢ (4 * x ^ 3 - 7 * y ^ 3) % 7 = (4 * x ^ 3 - 0) % 7\nunsolved goals\ncase inr.inr.inl\nx y : ℤ\nh✝ : 4 * x ^ 3 - 7 * y ^ 3 = 2003\nh₁ : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 2003 % 7\nh₂ : 2003 % 7 = 1\nh₃ : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 4 * x ^ 3 % 7\nh₆ : 4 * x ^ 3 % 7 = 1\nh₇ h : x ^ 3 % 7 = 2\n⊢ x ^ 3 % 7 ≠ 2",
+      "errors": [
+        "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  7 * y ^ 3 % 7\nx y : ℤ\nh : 4 * x ^ 3 - 7 * y ^ 3 = 2003\nh₁ : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 2003 % 7\nh₂ : 2003 % 7 = 1\nh₄ : 7 * y ^ 3 % 7 = 0\n⊢ (4 * x ^ 3 - 7 * y ^ 3) % 7 = (4 * x ^ 3 - 0) % 7",
+        "unsolved goals\ncase inr.inr.inl\nx y : ℤ\nh✝ : 4 * x ^ 3 - 7 * y ^ 3 = 2003\nh₁ : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 2003 % 7\nh₂ : 2003 % 7 = 1\nh₃ : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 4 * x ^ 3 % 7\nh₆ : 4 * x ^ 3 % 7 = 1\nh₇ h : x ^ 3 % 7 = 2\n⊢ x ^ 3 % 7 ≠ 2"
+      ],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.718
+      }
+    },
+    "extracted_error_messages": [
+      "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  7 * y ^ 3 % 7\nx y : ℤ\nh : 4 * x ^ 3 - 7 * y ^ 3 = 2003\nh₁ : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 2003 % 7\nh₂ : 2003 % 7 = 1\nh₄ : 7 * y ^ 3 % 7 = 0\n⊢ (4 * x ^ 3 - 7 * y ^ 3) % 7 = (4 * x ^ 3 - 0) % 7",
+      "unsolved goals\ncase inr.inr.inl\nx y : ℤ\nh✝ : 4 * x ^ 3 - 7 * y ^ 3 = 2003\nh₁ : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 2003 % 7\nh₂ : 2003 % 7 = 1\nh₃ : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 4 * x ^ 3 % 7\nh₆ : 4 * x ^ 3 % 7 = 1\nh₇ h : x ^ 3 % 7 = 2\n⊢ x ^ 3 % 7 ≠ 2"
+    ],
+    "structured_errors": [
+      "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  7 * y ^ 3 % 7\nx y : ℤ\nh : 4 * x ^ 3 - 7 * y ^ 3 = 2003\nh₁ : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 2003 % 7\nh₂ : 2003 % 7 = 1\nh₄ : 7 * y ^ 3 % 7 = 0\n⊢ (4 * x ^ 3 - 7 * y ^ 3) % 7 = (4 * x ^ 3 - 0) % 7",
+      "unsolved goals\ncase inr.inr.inl\nx y : ℤ\nh✝ : 4 * x ^ 3 - 7 * y ^ 3 = 2003\nh₁ : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 2003 % 7\nh₂ : 2003 % 7 = 1\nh₃ : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 4 * x ^ 3 % 7\nh₆ : 4 * x ^ 3 % 7 = 1\nh₇ h : x ^ 3 % 7 = 2\n⊢ x ^ 3 % 7 ≠ 2"
+    ],
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003",
+    "round_idx": 0
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g4",
+    "passed": false,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": false,
+      "complete": false,
+      "has_sorry": false,
+      "feedback": "application type mismatch\n  Int.sub_emod this\nargument\n  this\nhas type\n  7 * y ^ 3 % 7 = 0 : Prop\nbut is expected to have type\n  ℤ : Type\nlinarith failed to find a contradiction\ncase h1.h\nx y : ℤ\nh : 4 * x ^ 3 - 7 * y ^ 3 = 2003\nh_mod : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 2003 % 7\nh_left : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 4 * x ^ 3 % 7\nh_right : 2003 % 7 = 1\na✝ : 4 * x ^ 3 % 7 < 1\n⊢ False failed\ntype mismatch\n  this\nhas type\n  4 * (x ^ 3 % 7) % 7 = 4 * (x ^ 3 % 7) % 7 : Prop\nbut is expected to have type\n  4 * (x ^ 3 % 7) % 7 = 1 : Prop",
+      "errors": [
+        "application type mismatch\n  Int.sub_emod this\nargument\n  this\nhas type\n  7 * y ^ 3 % 7 = 0 : Prop\nbut is expected to have type\n  ℤ : Type",
+        "linarith failed to find a contradiction\ncase h1.h\nx y : ℤ\nh : 4 * x ^ 3 - 7 * y ^ 3 = 2003\nh_mod : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 2003 % 7\nh_left : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 4 * x ^ 3 % 7\nh_right : 2003 % 7 = 1\na✝ : 4 * x ^ 3 % 7 < 1\n⊢ False failed",
+        "type mismatch\n  this\nhas type\n  4 * (x ^ 3 % 7) % 7 = 4 * (x ^ 3 % 7) % 7 : Prop\nbut is expected to have type\n  4 * (x ^ 3 % 7) % 7 = 1 : Prop"
+      ],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.593
+      }
+    },
+    "extracted_error_messages": [
+      "application type mismatch\n  Int.sub_emod this\nargument\n  this\nhas type\n  7 * y ^ 3 % 7 = 0 : Prop\nbut is expected to have type\n  ℤ : Type",
+      "linarith failed to find a contradiction\ncase h1.h\nx y : ℤ\nh : 4 * x ^ 3 - 7 * y ^ 3 = 2003\nh_mod : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 2003 % 7\nh_left : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 4 * x ^ 3 % 7\nh_right : 2003 % 7 = 1\na✝ : 4 * x ^ 3 % 7 < 1\n⊢ False failed",
+      "type mismatch\n  this\nhas type\n  4 * (x ^ 3 % 7) % 7 = 4 * (x ^ 3 % 7) % 7 : Prop\nbut is expected to have type\n  4 * (x ^ 3 % 7) % 7 = 1 : Prop"
+    ],
+    "structured_errors": [
+      "application type mismatch\n  Int.sub_emod this\nargument\n  this\nhas type\n  7 * y ^ 3 % 7 = 0 : Prop\nbut is expected to have type\n  ℤ : Type",
+      "linarith failed to find a contradiction\ncase h1.h\nx y : ℤ\nh : 4 * x ^ 3 - 7 * y ^ 3 = 2003\nh_mod : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 2003 % 7\nh_left : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 4 * x ^ 3 % 7\nh_right : 2003 % 7 = 1\na✝ : 4 * x ^ 3 % 7 < 1\n⊢ False failed",
+      "type mismatch\n  this\nhas type\n  4 * (x ^ 3 % 7) % 7 = 4 * (x ^ 3 % 7) % 7 : Prop\nbut is expected to have type\n  4 * (x ^ 3 % 7) % 7 = 1 : Prop"
+    ],
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003",
+    "round_idx": 0
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g5",
+    "passed": false,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": false,
+      "complete": false,
+      "has_sorry": false,
+      "feedback": "type mismatch\n  ModEq.mul_right 2 h3'\nhas type\n  4 * x ^ 3 * 2 ≡ 1 * 2 [ZMOD 7] : Prop\nbut is expected to have type\n  2 * (4 * x ^ 3) ≡ 2 * 1 [ZMOD 7] : Prop\ntype mismatch, term\n  h3'''\nafter simplification has type\n  2 * (4 * x ^ 3) % 7 = 2 : Prop\nbut is expected to have type\n  8 * x ^ 3 % 7 = 2 : Prop\ntype mismatch, term\n  h3''''''\nafter simplification has type\n  True : Prop\nbut is expected to have type\n  7 ∣ 8 * x ^ 3 - x ^ 3 : Prop\ntype mismatch, term\n  h3''''''\nafter simplification has type\n  True : Prop\nbut is expected to have type\n  7 ∣ x ^ 3 - 8 * x ^ 3 : Prop\ntype mismatch, term\n  h3''''''\nafter simplification has type\n  True : Prop\nbut is expected to have type\n  2 = x ^ 3 % 7 : Prop\nunsolved goals\ncase calc.step\nx y : ℤ\nh : 4 * x ^ 3 - 7 * y ^ 3 = 2003\nh1 : 4 * x ^ 3 - 7 * y ^ 3 ≡ 2003 [ZMOD 7]\nh2 h3' : 4 * x ^ 3 ≡ 1 [ZMOD 7]\nh3''' : 2 * (4 * x ^ 3) ≡ 2 * 1 [ZMOD 7]\nh3'''' : 8 * x ^ 3 ≡ 2 [ZMOD 7]\nh3'''''' : 8 ≡ 1 [ZMOD 7]\nh3''''''' : 8 * x ^ 3 ≡ 1 * x ^ 3 [ZMOD 7]\n⊢ 1 * x ^ 3 ≡ 2 [ZMOD 7]",
+      "errors": [
+        "type mismatch\n  ModEq.mul_right 2 h3'\nhas type\n  4 * x ^ 3 * 2 ≡ 1 * 2 [ZMOD 7] : Prop\nbut is expected to have type\n  2 * (4 * x ^ 3) ≡ 2 * 1 [ZMOD 7] : Prop",
+        "type mismatch, term\n  h3'''\nafter simplification has type\n  2 * (4 * x ^ 3) % 7 = 2 : Prop\nbut is expected to have type\n  8 * x ^ 3 % 7 = 2 : Prop",
+        "type mismatch, term\n  h3''''''\nafter simplification has type\n  True : Prop\nbut is expected to have type\n  7 ∣ 8 * x ^ 3 - x ^ 3 : Prop",
+        "type mismatch, term\n  h3''''''\nafter simplification has type\n  True : Prop\nbut is expected to have type\n  7 ∣ x ^ 3 - 8 * x ^ 3 : Prop",
+        "type mismatch, term\n  h3''''''\nafter simplification has type\n  True : Prop\nbut is expected to have type\n  2 = x ^ 3 % 7 : Prop",
+        "unsolved goals\ncase calc.step\nx y : ℤ\nh : 4 * x ^ 3 - 7 * y ^ 3 = 2003\nh1 : 4 * x ^ 3 - 7 * y ^ 3 ≡ 2003 [ZMOD 7]\nh2 h3' : 4 * x ^ 3 ≡ 1 [ZMOD 7]\nh3''' : 2 * (4 * x ^ 3) ≡ 2 * 1 [ZMOD 7]\nh3'''' : 8 * x ^ 3 ≡ 2 [ZMOD 7]\nh3'''''' : 8 ≡ 1 [ZMOD 7]\nh3''''''' : 8 * x ^ 3 ≡ 1 * x ^ 3 [ZMOD 7]\n⊢ 1 * x ^ 3 ≡ 2 [ZMOD 7]"
+      ],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.479
+      }
+    },
+    "extracted_error_messages": [
+      "type mismatch\n  ModEq.mul_right 2 h3'\nhas type\n  4 * x ^ 3 * 2 ≡ 1 * 2 [ZMOD 7] : Prop\nbut is expected to have type\n  2 * (4 * x ^ 3) ≡ 2 * 1 [ZMOD 7] : Prop",
+      "type mismatch, term\n  h3'''\nafter simplification has type\n  2 * (4 * x ^ 3) % 7 = 2 : Prop\nbut is expected to have type\n  8 * x ^ 3 % 7 = 2 : Prop",
+      "type mismatch, term\n  h3''''''\nafter simplification has type\n  True : Prop\nbut is expected to have type\n  7 ∣ 8 * x ^ 3 - x ^ 3 : Prop",
+      "type mismatch, term\n  h3''''''\nafter simplification has type\n  True : Prop\nbut is expected to have type\n  7 ∣ x ^ 3 - 8 * x ^ 3 : Prop",
+      "type mismatch, term\n  h3''''''\nafter simplification has type\n  True : Prop\nbut is expected to have type\n  2 = x ^ 3 % 7 : Prop",
+      "unsolved goals\ncase calc.step\nx y : ℤ\nh : 4 * x ^ 3 - 7 * y ^ 3 = 2003\nh1 : 4 * x ^ 3 - 7 * y ^ 3 ≡ 2003 [ZMOD 7]\nh2 h3' : 4 * x ^ 3 ≡ 1 [ZMOD 7]\nh3''' : 2 * (4 * x ^ 3) ≡ 2 * 1 [ZMOD 7]\nh3'''' : 8 * x ^ 3 ≡ 2 [ZMOD 7]\nh3'''''' : 8 ≡ 1 [ZMOD 7]\nh3''''''' : 8 * x ^ 3 ≡ 1 * x ^ 3 [ZMOD 7]\n⊢ 1 * x ^ 3 ≡ 2 [ZMOD 7]"
+    ],
+    "structured_errors": [
+      "type mismatch\n  ModEq.mul_right 2 h3'\nhas type\n  4 * x ^ 3 * 2 ≡ 1 * 2 [ZMOD 7] : Prop\nbut is expected to have type\n  2 * (4 * x ^ 3) ≡ 2 * 1 [ZMOD 7] : Prop",
+      "type mismatch, term\n  h3'''\nafter simplification has type\n  2 * (4 * x ^ 3) % 7 = 2 : Prop\nbut is expected to have type\n  8 * x ^ 3 % 7 = 2 : Prop",
+      "type mismatch, term\n  h3''''''\nafter simplification has type\n  True : Prop\nbut is expected to have type\n  7 ∣ 8 * x ^ 3 - x ^ 3 : Prop",
+      "type mismatch, term\n  h3''''''\nafter simplification has type\n  True : Prop\nbut is expected to have type\n  7 ∣ x ^ 3 - 8 * x ^ 3 : Prop",
+      "type mismatch, term\n  h3''''''\nafter simplification has type\n  True : Prop\nbut is expected to have type\n  2 = x ^ 3 % 7 : Prop",
+      "unsolved goals\ncase calc.step\nx y : ℤ\nh : 4 * x ^ 3 - 7 * y ^ 3 = 2003\nh1 : 4 * x ^ 3 - 7 * y ^ 3 ≡ 2003 [ZMOD 7]\nh2 h3' : 4 * x ^ 3 ≡ 1 [ZMOD 7]\nh3''' : 2 * (4 * x ^ 3) ≡ 2 * 1 [ZMOD 7]\nh3'''' : 8 * x ^ 3 ≡ 2 [ZMOD 7]\nh3'''''' : 8 ≡ 1 [ZMOD 7]\nh3''''''' : 8 * x ^ 3 ≡ 1 * x ^ 3 [ZMOD 7]\n⊢ 1 * x ^ 3 ≡ 2 [ZMOD 7]"
+    ],
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003",
+    "round_idx": 0
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g6",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 6, 'column': 30}, 'endPos': {'line': 6, 'column': 35}, 'goal': 'x y : ℤ\\n⊢ 4 * x ^ 3 - 7 * y ^ 3 ≠ 2003'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.023
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003",
+    "round_idx": 0
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g7",
+    "passed": false,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": false,
+      "complete": false,
+      "has_sorry": false,
+      "feedback": "unsolved goals\nx y : ℤ\nh : 4 * x ^ 3 - 7 * y ^ 3 = 2003\nh₁ : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 1\nh₂ : 4 * x ^ 3 % 7 = 1\nh₃ : x % 7 = 0 ∨ x % 7 = 1 ∨ x % 7 = 2 ∨ x % 7 = 3 ∨ x % 7 = 4 ∨ x % 7 = 5 ∨ x % 7 = 6\nh₅ h₇ : x % 7 = 0\nh₈ : 7 ∣ x\n⊢ 7 ∣ 4 * (x % 7 * (x % 7 * (x % 7) % 7) % 7)\nunsolved goals\nx y : ℤ\nh : 4 * x ^ 3 - 7 * y ^ 3 = 2003\nh₁ : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 1\nh₂ : 4 * x ^ 3 % 7 = 1\nh₃ : x % 7 = 0 ∨ x % 7 = 1 ∨ x % 7 = 2 ∨ x % 7 = 3 ∨ x % 7 = 4 ∨ x % 7 = 5 ∨ x % 7 = 6\nh₅ h₇ h₈ : x % 7 = 2\n⊢ False",
+      "errors": [
+        "unsolved goals\nx y : ℤ\nh : 4 * x ^ 3 - 7 * y ^ 3 = 2003\nh₁ : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 1\nh₂ : 4 * x ^ 3 % 7 = 1\nh₃ : x % 7 = 0 ∨ x % 7 = 1 ∨ x % 7 = 2 ∨ x % 7 = 3 ∨ x % 7 = 4 ∨ x % 7 = 5 ∨ x % 7 = 6\nh₅ h₇ : x % 7 = 0\nh₈ : 7 ∣ x\n⊢ 7 ∣ 4 * (x % 7 * (x % 7 * (x % 7) % 7) % 7)",
+        "unsolved goals\nx y : ℤ\nh : 4 * x ^ 3 - 7 * y ^ 3 = 2003\nh₁ : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 1\nh₂ : 4 * x ^ 3 % 7 = 1\nh₃ : x % 7 = 0 ∨ x % 7 = 1 ∨ x % 7 = 2 ∨ x % 7 = 3 ∨ x % 7 = 4 ∨ x % 7 = 5 ∨ x % 7 = 6\nh₅ h₇ h₈ : x % 7 = 2\n⊢ False"
+      ],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 1.0
+      }
+    },
+    "extracted_error_messages": [
+      "unsolved goals\nx y : ℤ\nh : 4 * x ^ 3 - 7 * y ^ 3 = 2003\nh₁ : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 1\nh₂ : 4 * x ^ 3 % 7 = 1\nh₃ : x % 7 = 0 ∨ x % 7 = 1 ∨ x % 7 = 2 ∨ x % 7 = 3 ∨ x % 7 = 4 ∨ x % 7 = 5 ∨ x % 7 = 6\nh₅ h₇ : x % 7 = 0\nh₈ : 7 ∣ x\n⊢ 7 ∣ 4 * (x % 7 * (x % 7 * (x % 7) % 7) % 7)",
+      "unsolved goals\nx y : ℤ\nh : 4 * x ^ 3 - 7 * y ^ 3 = 2003\nh₁ : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 1\nh₂ : 4 * x ^ 3 % 7 = 1\nh₃ : x % 7 = 0 ∨ x % 7 = 1 ∨ x % 7 = 2 ∨ x % 7 = 3 ∨ x % 7 = 4 ∨ x % 7 = 5 ∨ x % 7 = 6\nh₅ h₇ h₈ : x % 7 = 2\n⊢ False"
+    ],
+    "structured_errors": [
+      "unsolved goals\nx y : ℤ\nh : 4 * x ^ 3 - 7 * y ^ 3 = 2003\nh₁ : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 1\nh₂ : 4 * x ^ 3 % 7 = 1\nh₃ : x % 7 = 0 ∨ x % 7 = 1 ∨ x % 7 = 2 ∨ x % 7 = 3 ∨ x % 7 = 4 ∨ x % 7 = 5 ∨ x % 7 = 6\nh₅ h₇ : x % 7 = 0\nh₈ : 7 ∣ x\n⊢ 7 ∣ 4 * (x % 7 * (x % 7 * (x % 7) % 7) % 7)",
+      "unsolved goals\nx y : ℤ\nh : 4 * x ^ 3 - 7 * y ^ 3 = 2003\nh₁ : (4 * x ^ 3 - 7 * y ^ 3) % 7 = 1\nh₂ : 4 * x ^ 3 % 7 = 1\nh₃ : x % 7 = 0 ∨ x % 7 = 1 ∨ x % 7 = 2 ∨ x % 7 = 3 ∨ x % 7 = 4 ∨ x % 7 = 5 ∨ x % 7 = 6\nh₅ h₇ h₈ : x % 7 = 2\n⊢ False"
+    ],
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003",
+    "round_idx": 0
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g0",
+    "passed": false,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": false,
+      "complete": false,
+      "has_sorry": false,
+      "feedback": "type mismatch\n  h₃\nhas type\n  Real.log 0 = 0 : Prop\nbut is expected to have type\n  Real.log ↑0 = 0 : Prop\nunknown identifier 'h₁'\nlinarith failed to find a contradiction\ncase h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh_w_pos : w > 0\nh_x_log_pos : Real.log ↑x > 0\nh_y_log_pos : Real.log ↑y > 0\nh_z_log_pos : Real.log ↑z > 0\nh₂ : w ≥ 1\nh₃ : w ≠ 1\nh₄ : w ≥ 2\na✝ : 1 ≥ ↑w\n⊢ False failed\nfailed to prove nonzeroness, but it would be possible to prove nonnegativity if desired\nfailed to prove nonzeroness, but it would be possible to prove nonnegativity if desired\nfailed to prove nonzeroness, but it would be possible to prove nonnegativity if desired\nfailed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+      "errors": [
+        "type mismatch\n  h₃\nhas type\n  Real.log 0 = 0 : Prop\nbut is expected to have type\n  Real.log ↑0 = 0 : Prop",
+        "unknown identifier 'h₁'",
+        "linarith failed to find a contradiction\ncase h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh_w_pos : w > 0\nh_x_log_pos : Real.log ↑x > 0\nh_y_log_pos : Real.log ↑y > 0\nh_z_log_pos : Real.log ↑z > 0\nh₂ : w ≥ 1\nh₃ : w ≠ 1\nh₄ : w ≥ 2\na✝ : 1 ≥ ↑w\n⊢ False failed",
+        "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+        "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+        "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+        "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired"
+      ],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 6.735
+      }
+    },
+    "extracted_error_messages": [
+      "type mismatch\n  h₃\nhas type\n  Real.log 0 = 0 : Prop\nbut is expected to have type\n  Real.log ↑0 = 0 : Prop",
+      "unknown identifier 'h₁'",
+      "linarith failed to find a contradiction\ncase h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh_w_pos : w > 0\nh_x_log_pos : Real.log ↑x > 0\nh_y_log_pos : Real.log ↑y > 0\nh_z_log_pos : Real.log ↑z > 0\nh₂ : w ≥ 1\nh₃ : w ≠ 1\nh₄ : w ≥ 2\na✝ : 1 ≥ ↑w\n⊢ False failed",
+      "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+      "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+      "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+      "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired"
+    ],
+    "structured_errors": [
+      "type mismatch\n  h₃\nhas type\n  Real.log 0 = 0 : Prop\nbut is expected to have type\n  Real.log ↑0 = 0 : Prop",
+      "unknown identifier 'h₁'",
+      "linarith failed to find a contradiction\ncase h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh_w_pos : w > 0\nh_x_log_pos : Real.log ↑x > 0\nh_y_log_pos : Real.log ↑y > 0\nh_z_log_pos : Real.log ↑z > 0\nh₂ : w ≥ 1\nh₃ : w ≠ 1\nh₄ : w ≥ 2\na✝ : 1 ≥ ↑w\n⊢ False failed",
+      "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+      "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+      "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+      "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired"
+    ],
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1",
+    "round_idx": 0
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g1",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 6, 'column': 84}, 'endPos': {'line': 6, 'column': 89}, 'goal': 'x y z w : ℕ\\nht : 1 < x ∧ 1 < y ∧ 1 < z\\nhw : 0 ≤ w\\nh0 : Real.log ↑w / Real.log ↑x = 24\\nh1 : Real.log ↑w / Real.log ↑y = 40\\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\\n⊢ Real.log ↑w / Real.log ↑z = 60'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.031
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1",
+    "round_idx": 0
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g2",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 6, 'column': 84}, 'endPos': {'line': 6, 'column': 89}, 'goal': 'x y z w : ℕ\\nht : 1 < x ∧ 1 < y ∧ 1 < z\\nhw : 0 ≤ w\\nh0 : Real.log ↑w / Real.log ↑x = 24\\nh1 : Real.log ↑w / Real.log ↑y = 40\\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\\n⊢ Real.log ↑w / Real.log ↑z = 60'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.029
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1",
+    "round_idx": 0
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g3",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 6, 'column': 84}, 'endPos': {'line': 6, 'column': 89}, 'goal': 'x y z w : ℕ\\nht : 1 < x ∧ 1 < y ∧ 1 < z\\nhw : 0 ≤ w\\nh0 : Real.log ↑w / Real.log ↑x = 24\\nh1 : Real.log ↑w / Real.log ↑y = 40\\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\\n⊢ Real.log ↑w / Real.log ↑z = 60'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.029
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1",
+    "round_idx": 0
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g4",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 6, 'column': 84}, 'endPos': {'line': 6, 'column': 89}, 'goal': 'x y z w : ℕ\\nht : 1 < x ∧ 1 < y ∧ 1 < z\\nhw : 0 ≤ w\\nh0 : Real.log ↑w / Real.log ↑x = 24\\nh1 : Real.log ↑w / Real.log ↑y = 40\\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\\n⊢ Real.log ↑w / Real.log ↑z = 60'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.03
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1",
+    "round_idx": 0
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g5",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 6, 'column': 84}, 'endPos': {'line': 6, 'column': 89}, 'goal': 'x y z w : ℕ\\nht : 1 < x ∧ 1 < y ∧ 1 < z\\nhw : 0 ≤ w\\nh0 : Real.log ↑w / Real.log ↑x = 24\\nh1 : Real.log ↑w / Real.log ↑y = 40\\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\\n⊢ Real.log ↑w / Real.log ↑z = 60'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.03
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1",
+    "round_idx": 0
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g6",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 6, 'column': 84}, 'endPos': {'line': 6, 'column': 89}, 'goal': 'x y z w : ℕ\\nht : 1 < x ∧ 1 < y ∧ 1 < z\\nhw : 0 ≤ w\\nh0 : Real.log ↑w / Real.log ↑x = 24\\nh1 : Real.log ↑w / Real.log ↑y = 40\\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\\n⊢ Real.log ↑w / Real.log ↑z = 60'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.029
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1",
+    "round_idx": 0
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g7",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 6, 'column': 84}, 'endPos': {'line': 6, 'column': 89}, 'goal': 'x y z w : ℕ\\nht : 1 < x ∧ 1 < y ∧ 1 < z\\nhw : 0 ≤ w\\nh0 : Real.log ↑w / Real.log ↑x = 24\\nh1 : Real.log ↑w / Real.log ↑y = 40\\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\\n⊢ Real.log ↑w / Real.log ↑z = 60'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.029
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1",
+    "round_idx": 0
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g0",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 5, 'column': 117}, 'endPos': {'line': 5, 'column': 122}, 'goal': '⊢ (Finset.filter (fun x => ¬Even x) (Finset.range 10000)).prod id = factorial 10000 / (2 ^ 5000 * factorial 5000)'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.024
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5",
+    "round_idx": 0
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g1",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 5, 'column': 117}, 'endPos': {'line': 5, 'column': 122}, 'goal': '⊢ (Finset.filter (fun x => ¬Even x) (Finset.range 10000)).prod id = factorial 10000 / (2 ^ 5000 * factorial 5000)'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.023
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5",
+    "round_idx": 0
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g2",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 5, 'column': 117}, 'endPos': {'line': 5, 'column': 122}, 'goal': '⊢ (Finset.filter (fun x => ¬Even x) (Finset.range 10000)).prod id = factorial 10000 / (2 ^ 5000 * factorial 5000)'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.023
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5",
+    "round_idx": 0
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g3",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 5, 'column': 117}, 'endPos': {'line': 5, 'column': 122}, 'goal': '⊢ (Finset.filter (fun x => ¬Even x) (Finset.range 10000)).prod id = factorial 10000 / (2 ^ 5000 * factorial 5000)'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.023
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5",
+    "round_idx": 0
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g4",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 5, 'column': 117}, 'endPos': {'line': 5, 'column': 122}, 'goal': '⊢ (Finset.filter (fun x => ¬Even x) (Finset.range 10000)).prod id = factorial 10000 / (2 ^ 5000 * factorial 5000)'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.024
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5",
+    "round_idx": 0
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g5",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 5, 'column': 117}, 'endPos': {'line': 5, 'column': 122}, 'goal': '⊢ (Finset.filter (fun x => ¬Even x) (Finset.range 10000)).prod id = factorial 10000 / (2 ^ 5000 * factorial 5000)'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.058
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5",
+    "round_idx": 0
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g6",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 5, 'column': 117}, 'endPos': {'line': 5, 'column': 122}, 'goal': '⊢ (Finset.filter (fun x => ¬Even x) (Finset.range 10000)).prod id = factorial 10000 / (2 ^ 5000 * factorial 5000)'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.024
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5",
+    "round_idx": 0
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g7",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 5, 'column': 117}, 'endPos': {'line': 5, 'column': 122}, 'goal': '⊢ (Finset.filter (fun x => ¬Even x) (Finset.range 10000)).prod id = factorial 10000 / (2 ^ 5000 * factorial 5000)'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.024
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g0",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.255
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g1",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.124
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g2",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.32
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g3",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.279
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g4",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.187
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g5",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.145
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g6",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.319
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g7",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.348
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g0",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.05
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g1",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.063
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g2",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.056
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g3",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.053
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g4",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.062
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g5",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.05
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g6",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.051
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g7",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.05
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3",
+    "round_idx": 0
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g0",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 13, 'column': 28}, 'endPos': {'line': 13, 'column': 33}, 'goal': 'm n : ℝ\\nk : ℕ\\na : ℕ → ℝ\\ny : ℝ → ℝ\\nh₀ : 0 < k\\nh₁ : ∀ (x : ℝ), y x = ∑ i ∈ Finset.range k, cos (a i + x) / 2 ^ i\\nh₂ : y m = 0\\nh₃ : y n = 0\\n⊢ ∃ t, m - n = ↑t * Real.pi'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.029
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2",
+    "round_idx": 0
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g1",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 13, 'column': 28}, 'endPos': {'line': 13, 'column': 33}, 'goal': 'm n : ℝ\\nk : ℕ\\na : ℕ → ℝ\\ny : ℝ → ℝ\\nh₀ : 0 < k\\nh₁ : ∀ (x : ℝ), y x = ∑ i ∈ Finset.range k, cos (a i + x) / 2 ^ i\\nh₂ : y m = 0\\nh₃ : y n = 0\\n⊢ ∃ t, m - n = ↑t * Real.pi'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.029
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2",
+    "round_idx": 0
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g2",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 13, 'column': 28}, 'endPos': {'line': 13, 'column': 33}, 'goal': 'm n : ℝ\\nk : ℕ\\na : ℕ → ℝ\\ny : ℝ → ℝ\\nh₀ : 0 < k\\nh₁ : ∀ (x : ℝ), y x = ∑ i ∈ Finset.range k, cos (a i + x) / 2 ^ i\\nh₂ : y m = 0\\nh₃ : y n = 0\\n⊢ ∃ t, m - n = ↑t * Real.pi'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.029
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2",
+    "round_idx": 0
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g3",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 13, 'column': 28}, 'endPos': {'line': 13, 'column': 33}, 'goal': 'm n : ℝ\\nk : ℕ\\na : ℕ → ℝ\\ny : ℝ → ℝ\\nh₀ : 0 < k\\nh₁ : ∀ (x : ℝ), y x = ∑ i ∈ Finset.range k, cos (a i + x) / 2 ^ i\\nh₂ : y m = 0\\nh₃ : y n = 0\\n⊢ ∃ t, m - n = ↑t * Real.pi'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.03
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2",
+    "round_idx": 0
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g4",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 13, 'column': 28}, 'endPos': {'line': 13, 'column': 33}, 'goal': 'm n : ℝ\\nk : ℕ\\na : ℕ → ℝ\\ny : ℝ → ℝ\\nh₀ : 0 < k\\nh₁ : ∀ (x : ℝ), y x = ∑ i ∈ Finset.range k, cos (a i + x) / 2 ^ i\\nh₂ : y m = 0\\nh₃ : y n = 0\\n⊢ ∃ t, m - n = ↑t * Real.pi'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.029
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2",
+    "round_idx": 0
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g5",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 13, 'column': 28}, 'endPos': {'line': 13, 'column': 33}, 'goal': 'm n : ℝ\\nk : ℕ\\na : ℕ → ℝ\\ny : ℝ → ℝ\\nh₀ : 0 < k\\nh₁ : ∀ (x : ℝ), y x = ∑ i ∈ Finset.range k, cos (a i + x) / 2 ^ i\\nh₂ : y m = 0\\nh₃ : y n = 0\\n⊢ ∃ t, m - n = ↑t * Real.pi'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.03
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2",
+    "round_idx": 0
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g6",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 13, 'column': 28}, 'endPos': {'line': 13, 'column': 33}, 'goal': 'm n : ℝ\\nk : ℕ\\na : ℕ → ℝ\\ny : ℝ → ℝ\\nh₀ : 0 < k\\nh₁ : ∀ (x : ℝ), y x = ∑ i ∈ Finset.range k, cos (a i + x) / 2 ^ i\\nh₂ : y m = 0\\nh₃ : y n = 0\\n⊢ ∃ t, m - n = ↑t * Real.pi'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.028
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2",
+    "round_idx": 0
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g7",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 13, 'column': 28}, 'endPos': {'line': 13, 'column': 33}, 'goal': 'm n : ℝ\\nk : ℕ\\na : ℕ → ℝ\\ny : ℝ → ℝ\\nh₀ : 0 < k\\nh₁ : ∀ (x : ℝ), y x = ∑ i ∈ Finset.range k, cos (a i + x) / 2 ^ i\\nh₂ : y m = 0\\nh₃ : y n = 0\\n⊢ ∃ t, m - n = ↑t * Real.pi'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.029
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g0",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.435
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g1",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.203
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g2",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.257
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g3",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.264
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g4",
+    "passed": false,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": false,
+      "complete": false,
+      "has_sorry": false,
+      "feedback": "unsolved goals\ns t : ℝ\nh₀ : s = 9 - 2 * t\nh₁ : t = 3 * s + 1\nh₂₁ : s = 9 - 2 * t\nh₂₂ : t = 3 * s + 1\n⊢ 7 - s * 6 = -35 + s * 36",
+      "errors": [
+        "unsolved goals\ns t : ℝ\nh₀ : s = 9 - 2 * t\nh₁ : t = 3 * s + 1\nh₂₁ : s = 9 - 2 * t\nh₂₂ : t = 3 * s + 1\n⊢ 7 - s * 6 = -35 + s * 36"
+      ],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.248
+      }
+    },
+    "extracted_error_messages": [
+      "unsolved goals\ns t : ℝ\nh₀ : s = 9 - 2 * t\nh₁ : t = 3 * s + 1\nh₂₁ : s = 9 - 2 * t\nh₂₂ : t = 3 * s + 1\n⊢ 7 - s * 6 = -35 + s * 36"
+    ],
+    "structured_errors": [
+      "unsolved goals\ns t : ℝ\nh₀ : s = 9 - 2 * t\nh₁ : t = 3 * s + 1\nh₂₁ : s = 9 - 2 * t\nh₂₂ : t = 3 * s + 1\n⊢ 7 - s * 6 = -35 + s * 36"
+    ],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g5",
+    "passed": false,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": false,
+      "complete": false,
+      "has_sorry": false,
+      "feedback": "unsolved goals\ns t : ℝ\nh₀ : s = 9 - 2 * t\nh₁ h₂₁ : t = 3 * s + 1\nh₂₂ : s = 9 - 2 * t\n⊢ 28 - t * 6 = -140 + t * 36",
+      "errors": [
+        "unsolved goals\ns t : ℝ\nh₀ : s = 9 - 2 * t\nh₁ h₂₁ : t = 3 * s + 1\nh₂₂ : s = 9 - 2 * t\n⊢ 28 - t * 6 = -140 + t * 36"
+      ],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.253
+      }
+    },
+    "extracted_error_messages": [
+      "unsolved goals\ns t : ℝ\nh₀ : s = 9 - 2 * t\nh₁ h₂₁ : t = 3 * s + 1\nh₂₂ : s = 9 - 2 * t\n⊢ 28 - t * 6 = -140 + t * 36"
+    ],
+    "structured_errors": [
+      "unsolved goals\ns t : ℝ\nh₀ : s = 9 - 2 * t\nh₁ h₂₁ : t = 3 * s + 1\nh₂₂ : s = 9 - 2 * t\n⊢ 28 - t * 6 = -140 + t * 36"
+    ],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g6",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.257
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g7",
+    "passed": false,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": false,
+      "complete": false,
+      "has_sorry": false,
+      "feedback": "unsolved goals\ns t : ℝ\nh₀ : s = 9 - 2 * t\nh₁ : t = 3 * s + 1\nh₂₁ : s = 9 - 2 * t\nh₂₂ : t = 3 * s + 1\n⊢ 7 - s * 6 = -35 + s * 36",
+      "errors": [
+        "unsolved goals\ns t : ℝ\nh₀ : s = 9 - 2 * t\nh₁ : t = 3 * s + 1\nh₂₁ : s = 9 - 2 * t\nh₂₂ : t = 3 * s + 1\n⊢ 7 - s * 6 = -35 + s * 36"
+      ],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.249
+      }
+    },
+    "extracted_error_messages": [
+      "unsolved goals\ns t : ℝ\nh₀ : s = 9 - 2 * t\nh₁ : t = 3 * s + 1\nh₂₁ : s = 9 - 2 * t\nh₂₂ : t = 3 * s + 1\n⊢ 7 - s * 6 = -35 + s * 36"
+    ],
+    "structured_errors": [
+      "unsolved goals\ns t : ℝ\nh₀ : s = 9 - 2 * t\nh₁ : t = 3 * s + 1\nh₂₁ : s = 9 - 2 * t\nh₂₂ : t = 3 * s + 1\n⊢ 7 - s * 6 = -35 + s * 36"
+    ],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44",
+    "round_idx": 0
+  }
+]

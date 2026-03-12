@@ -1,0 +1,642 @@
+[
+  {
+    "item_id": "mathd_algebra_478__r0_g0",
+    "parsed_lean_block": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  rw [h₂, h₃] at h₁\n  norm_num at h₁\n  exact h₁",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  rw [h₂, h₃] at h₁\n  norm_num at h₁\n  exact h₁",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478"
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g1",
+    "parsed_lean_block": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  rw [h₂, h₃] at h₁\n  norm_num at h₁ ⊢\n  linarith",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  rw [h₂, h₃] at h₁\n  norm_num at h₁ ⊢\n  linarith",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478"
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g2",
+    "parsed_lean_block": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  rw [h₁]\n  rw [h₂, h₃]\n  norm_num",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  rw [h₁]\n  rw [h₂, h₃]\n  norm_num",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478"
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g3",
+    "parsed_lean_block": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  rw [h₁]\n  rw [h₂]\n  rw [h₃]\n  norm_num",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  rw [h₁]\n  rw [h₂]\n  rw [h₃]\n  norm_num",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478"
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g4",
+    "parsed_lean_block": "import Mathlib.Data.Real.Basic\n\nopen Real\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  rw [h₁]\n  rw [h₂, h₃]\n  norm_num",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Data.Real.Basic\n\nopen Real\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  rw [h₁]\n  rw [h₂, h₃]\n  norm_num",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478"
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g5",
+    "parsed_lean_block": "import Mathlib.Data.Real.Basic\n\nopen Real\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  rw [h₁]\n  rw [h₂]\n  rw [h₃]\n  norm_num",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Data.Real.Basic\n\nopen Real\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  rw [h₁]\n  rw [h₂]\n  rw [h₃]\n  norm_num",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478"
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g6",
+    "parsed_lean_block": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\nopen Nat\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  rw [h₁]\n  rw [h₂]\n  rw [h₃]\n  norm_num",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\nopen Nat\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  rw [h₁]\n  rw [h₂]\n  rw [h₃]\n  norm_num",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478"
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g7",
+    "parsed_lean_block": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\nopen Complex\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  rw [h₁]\n  rw [h₂, h₃]\n  norm_num",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\nopen Complex\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  rw [h₁]\n  rw [h₂, h₃]\n  norm_num",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g0",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g1",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g2",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g3",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g4",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g5",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g6",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g7",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g0",
+    "parsed_lean_block": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := by\n  have h3 : Real.log x = Real.log w / 24 := by\n    have : Real.log w / Real.log x = 24 := h0\n    field_simp at this ⊢\n    linarith\n  \n  have h4 : Real.log y = Real.log w / 40 := by\n    have : Real.log w / Real.log y = 40 := h1\n    field_simp at this ⊢\n    linarith\n  \n  have h5 : Real.log (x * y * z) = Real.log x + Real.log y + Real.log z := by\n    rw [Real.log_mul (by linarith [ht.1, ht.2.1]) (by linarith [ht.2.1, ht.2.2])]\n    rw [Real.log_mul (by linarith [ht.2.1, ht.2.2]) (by linarith [ht.2.2])]\n    <;> linarith [ht.1, ht.2.1, ht.2.2]\n  \n  have h6 : Real.log (x * y * z) = Real.log w / 12 := by\n    have : Real.log w / Real.log (x * y * z) = 12 := h2\n    field_simp at this ⊢\n    linarith\n  \n  have h7 : Real.log x + Real.log y + Real.log z = Real.log w / 12 := by\n    linarith [h5, h6]\n  \n  have h8 : Real.log z = Real.log w / 60 := by\n    have h9 : Real.log x + Real.log y = Real.log w / 24 + Real.log w / 40 := by\n      rw [h3, h4]\n    have h10 : Real.log x + Real.log y + Real.log z = Real.log w / 12 := h7\n    rw [h9, h10] at *\n    field_simp at *\n    ring_nf at *\n    linarith\n  \n  have h9 : Real.log w / Real.log z = 60 := by\n    have h10 : Real.log z = Real.log w / 60 := h8\n    have h11 : Real.log w / Real.log z = 60 := by\n      field_simp [h10]\n      <;> ring_nf\n      <;> linarith\n    exact h11\n\n  exact h9",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := by\n  have h3 : Real.log x = Real.log w / 24 := by\n    have : Real.log w / Real.log x = 24 := h0\n    field_simp at this ⊢\n    linarith\n  \n  have h4 : Real.log y = Real.log w / 40 := by\n    have : Real.log w / Real.log y = 40 := h1\n    field_simp at this ⊢\n    linarith\n  \n  have h5 : Real.log (x * y * z) = Real.log x + Real.log y + Real.log z := by\n    rw [Real.log_mul (by linarith [ht.1, ht.2.1]) (by linarith [ht.2.1, ht.2.2])]\n    rw [Real.log_mul (by linarith [ht.2.1, ht.2.2]) (by linarith [ht.2.2])]\n    <;> linarith [ht.1, ht.2.1, ht.2.2]\n  \n  have h6 : Real.log (x * y * z) = Real.log w / 12 := by\n    have : Real.log w / Real.log (x * y * z) = 12 := h2\n    field_simp at this ⊢\n    linarith\n  \n  have h7 : Real.log x + Real.log y + Real.log z = Real.log w / 12 := by\n    linarith [h5, h6]\n  \n  have h8 : Real.log z = Real.log w / 60 := by\n    have h9 : Real.log x + Real.log y = Real.log w / 24 + Real.log w / 40 := by\n      rw [h3, h4]\n    have h10 : Real.log x + Real.log y + Real.log z = Real.log w / 12 := h7\n    rw [h9, h10] at *\n    field_simp at *\n    ring_nf at *\n    linarith\n  \n  have h9 : Real.log w / Real.log z = 60 := by\n    have h10 : Real.log z = Real.log w / 60 := h8\n    have h11 : Real.log w / Real.log z = 60 := by\n      field_simp [h10]\n      <;> ring_nf\n      <;> linarith\n    exact h11\n\n  exact h9",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g1",
+    "parsed_lean_block": "import Mathlib.Data.Real.Basic\nimport Mathlib.Algebra.Group.Powers\n\nopen Real\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 < w)\n    (h0 : Real.log (w : ℝ) / Real.log (x : ℝ) = 24) (h1 : Real.log (w : ℝ) / Real.log (y : ℝ) = 40)\n    (h2 : Real.log (w : ℝ) / Real.log ((x * y * z) : ℝ) = 12) : Real.log (w : ℝ) / Real.log (z : ℝ) = 60 := by\n  have h3 : Real.log (w : ℝ) = 24 * Real.log (x : ℝ) := by\n    have : Real.log (w : ℝ) / Real.log (x : ℝ) = 24 := h0\n    field_simp [Real.log_pos (by norm_num : (0 : ℝ) < (x : ℝ)), Real.log_pos (by norm_num : (0 : ℝ) < (w : ℝ))] at this ⊢\n    linarith\n  \n  have h4 : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := by\n    have : Real.log (w : ℝ) / Real.log (y : ℝ) = 40 := h1\n    field_simp [Real.log_pos (by norm_num : (0 : ℝ) < (y : ℝ)), Real.log_pos (by norm_num : (0 : ℝ) < (w : ℝ))] at this ⊢\n    linarith\n  \n  have h5 : Real.log (w : ℝ) = 12 * Real.log ((x * y * z) : ℝ) := by\n    have : Real.log (w : ℝ) / Real.log ((x * y * z) : ℝ) = 12 := h2\n    field_simp [Real.log_pos (by norm_num : (0 : ℝ) < (x * y * z : ℝ)), Real.log_pos (by norm_num : (0 : ℝ) < (w : ℝ))] at this ⊢\n    linarith\n  \n  have h6 : Real.log ((x * y * z) : ℝ) = Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ) := by\n    have : Real.log ((x * y * z) : ℝ) = Real.log ((x * y) : ℝ) + Real.log (z : ℝ) := by\n      rw [Real.log_mul (by positivity) (by positivity)]\n    rw [this]\n    have : Real.log ((x * y) : ℝ) = Real.log (x : ℝ) + Real.log (y : ℝ) := by\n      rw [Real.log_mul (by positivity) (by positivity)]\n    rw [this]\n  \n  rw [h6] at h5\n  have h7 : 24 * Real.log (x : ℝ) = 12 * (Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ)) := by\n    linarith\n  \n  have h8 : 24 * Real.log (x : ℝ) = 12 * Real.log (x : ℝ) + 12 * Real.log (y : ℝ) + 12 * Real.log (z : ℝ) := by\n    linarith\n  \n  have h9 : 12 * Real.log (x : ℝ) = 12 * Real.log (y : ℝ) + 12 * Real.log (z : ℝ) := by\n    linarith\n  \n  have h10 : Real.log (x : ℝ) = Real.log (y : ℝ) + Real.log (z : ℝ) := by\n    linarith\n  \n  have h11 : Real.log (w : ℝ) = 24 * (Real.log (y : ℝ) + Real.log (z : ℝ)) := by\n    rw [h3]\n    rw [h10]\n    ring\n  \n  have h12 : Real.log (w : ℝ) / Real.log (z : ℝ) = 60 := by\n    have : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := h4\n    have : Real.log (y : ℝ) = (3 / 2 : ℝ) * Real.log (z : ℝ) := by\n      linarith\n    have : Real.log (w : ℝ) = 40 * ((3 / 2 : ℝ) * Real.log (z : ℝ)) := by\n      rw [this]\n    have : Real.log (w : ℝ) = 60 * Real.log (z : ℝ) := by\n      ring\n    rw [this]\n    field_simp [Real.log_pos (by norm_num : (0 : ℝ) < (z : ℝ))]\n    <;> ring\n    <;> linarith\n  \n  exact h12",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Data.Real.Basic\nimport Mathlib.Algebra.Group.Powers\n\nopen Real\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 < w)\n    (h0 : Real.log (w : ℝ) / Real.log (x : ℝ) = 24) (h1 : Real.log (w : ℝ) / Real.log (y : ℝ) = 40)\n    (h2 : Real.log (w : ℝ) / Real.log ((x * y * z) : ℝ) = 12) : Real.log (w : ℝ) / Real.log (z : ℝ) = 60 := by\n  have h3 : Real.log (w : ℝ) = 24 * Real.log (x : ℝ) := by\n    have : Real.log (w : ℝ) / Real.log (x : ℝ) = 24 := h0\n    field_simp [Real.log_pos (by norm_num : (0 : ℝ) < (x : ℝ)), Real.log_pos (by norm_num : (0 : ℝ) < (w : ℝ))] at this ⊢\n    linarith\n  \n  have h4 : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := by\n    have : Real.log (w : ℝ) / Real.log (y : ℝ) = 40 := h1\n    field_simp [Real.log_pos (by norm_num : (0 : ℝ) < (y : ℝ)), Real.log_pos (by norm_num : (0 : ℝ) < (w : ℝ))] at this ⊢\n    linarith\n  \n  have h5 : Real.log (w : ℝ) = 12 * Real.log ((x * y * z) : ℝ) := by\n    have : Real.log (w : ℝ) / Real.log ((x * y * z) : ℝ) = 12 := h2\n    field_simp [Real.log_pos (by norm_num : (0 : ℝ) < (x * y * z : ℝ)), Real.log_pos (by norm_num : (0 : ℝ) < (w : ℝ))] at this ⊢\n    linarith\n  \n  have h6 : Real.log ((x * y * z) : ℝ) = Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ) := by\n    have : Real.log ((x * y * z) : ℝ) = Real.log ((x * y) : ℝ) + Real.log (z : ℝ) := by\n      rw [Real.log_mul (by positivity) (by positivity)]\n    rw [this]\n    have : Real.log ((x * y) : ℝ) = Real.log (x : ℝ) + Real.log (y : ℝ) := by\n      rw [Real.log_mul (by positivity) (by positivity)]\n    rw [this]\n  \n  rw [h6] at h5\n  have h7 : 24 * Real.log (x : ℝ) = 12 * (Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ)) := by\n    linarith\n  \n  have h8 : 24 * Real.log (x : ℝ) = 12 * Real.log (x : ℝ) + 12 * Real.log (y : ℝ) + 12 * Real.log (z : ℝ) := by\n    linarith\n  \n  have h9 : 12 * Real.log (x : ℝ) = 12 * Real.log (y : ℝ) + 12 * Real.log (z : ℝ) := by\n    linarith\n  \n  have h10 : Real.log (x : ℝ) = Real.log (y : ℝ) + Real.log (z : ℝ) := by\n    linarith\n  \n  have h11 : Real.log (w : ℝ) = 24 * (Real.log (y : ℝ) + Real.log (z : ℝ)) := by\n    rw [h3]\n    rw [h10]\n    ring\n  \n  have h12 : Real.log (w : ℝ) / Real.log (z : ℝ) = 60 := by\n    have : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := h4\n    have : Real.log (y : ℝ) = (3 / 2 : ℝ) * Real.log (z : ℝ) := by\n      linarith\n    have : Real.log (w : ℝ) = 40 * ((3 / 2 : ℝ) * Real.log (z : ℝ)) := by\n      rw [this]\n    have : Real.log (w : ℝ) = 60 * Real.log (z : ℝ) := by\n      ring\n    rw [this]\n    field_simp [Real.log_pos (by norm_num : (0 : ℝ) < (z : ℝ))]\n    <;> ring\n    <;> linarith\n  \n  exact h12",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g2",
+    "parsed_lean_block": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := by\n  have h3 : Real.log (x * y * z) = Real.log x + Real.log y + Real.log z := by\n    have h3a : Real.log (x * y * z) = Real.log (x * y) + Real.log z := by\n      rw [Real.log_mul]\n      <;> norm_num\n    rw [h3a]\n    have h3b : Real.log (x * y) = Real.log x + Real.log y := by\n      rw [Real.log_mul]\n      <;> norm_num\n    rw [h3b]\n    <;> ring\n  \n  have h4 : Real.log w = 24 * Real.log x := by\n    have h4a : Real.log w / Real.log x = 24 := h0\n    field_simp at h4a ⊢\n    linarith\n  \n  have h5 : Real.log w = 40 * Real.log y := by\n    have h5a : Real.log w / Real.log y = 40 := h1\n    field_simp at h5a ⊢\n    linarith\n  \n  have h6 : Real.log w = 12 * (Real.log x + Real.log y + Real.log z) := by\n    have h6a : Real.log w / Real.log (x * y * z) = 12 := h2\n    rw [h3] at h6a\n    field_simp at h6a ⊢\n    linarith\n  \n  have h7 : 24 * Real.log x = 40 * Real.log y := by\n    linarith\n  \n  have h8 : 24 * Real.log x = 12 * (Real.log x + Real.log y + Real.log z) := by\n    linarith\n  \n  have h9 : 12 * (Real.log x + Real.log y + Real.log z) = 24 * Real.log x := by\n    linarith\n  \n  have h10 : 12 * Real.log z = 24 * Real.log x - 12 * Real.log x - 12 * Real.log y := by\n    linarith\n  \n  have h11 : 12 * Real.log z = 12 * Real.log x - 12 * Real.log y := by\n    linarith\n  \n  have h12 : Real.log z = Real.log x - Real.log y := by\n    linarith\n  \n  have h13 : 12 * Real.log x = 12 * (Real.log x + Real.log y + Real.log z) := by\n    linarith\n  \n  have h14 : Real.log z = 3 * Real.log y := by\n    have h14a : 12 * Real.log z = 12 * Real.log x - 12 * Real.log y := by linarith\n    have h14b : Real.log x = 5/3 * Real.log y := by\n      field_simp at h7\n      ring_nf at h7 ⊢\n      nlinarith\n    linarith\n  \n  have h15 : Real.log w / Real.log z = 60 := by\n    have h15a : Real.log w = 40 * Real.log y := h5\n    have h15b : Real.log z = 3 * Real.log y := h14\n    field_simp [h15b]\n    ring_nf\n    <;> field_simp\n    <;> linarith\n  \n  exact h15",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := by\n  have h3 : Real.log (x * y * z) = Real.log x + Real.log y + Real.log z := by\n    have h3a : Real.log (x * y * z) = Real.log (x * y) + Real.log z := by\n      rw [Real.log_mul]\n      <;> norm_num\n    rw [h3a]\n    have h3b : Real.log (x * y) = Real.log x + Real.log y := by\n      rw [Real.log_mul]\n      <;> norm_num\n    rw [h3b]\n    <;> ring\n  \n  have h4 : Real.log w = 24 * Real.log x := by\n    have h4a : Real.log w / Real.log x = 24 := h0\n    field_simp at h4a ⊢\n    linarith\n  \n  have h5 : Real.log w = 40 * Real.log y := by\n    have h5a : Real.log w / Real.log y = 40 := h1\n    field_simp at h5a ⊢\n    linarith\n  \n  have h6 : Real.log w = 12 * (Real.log x + Real.log y + Real.log z) := by\n    have h6a : Real.log w / Real.log (x * y * z) = 12 := h2\n    rw [h3] at h6a\n    field_simp at h6a ⊢\n    linarith\n  \n  have h7 : 24 * Real.log x = 40 * Real.log y := by\n    linarith\n  \n  have h8 : 24 * Real.log x = 12 * (Real.log x + Real.log y + Real.log z) := by\n    linarith\n  \n  have h9 : 12 * (Real.log x + Real.log y + Real.log z) = 24 * Real.log x := by\n    linarith\n  \n  have h10 : 12 * Real.log z = 24 * Real.log x - 12 * Real.log x - 12 * Real.log y := by\n    linarith\n  \n  have h11 : 12 * Real.log z = 12 * Real.log x - 12 * Real.log y := by\n    linarith\n  \n  have h12 : Real.log z = Real.log x - Real.log y := by\n    linarith\n  \n  have h13 : 12 * Real.log x = 12 * (Real.log x + Real.log y + Real.log z) := by\n    linarith\n  \n  have h14 : Real.log z = 3 * Real.log y := by\n    have h14a : 12 * Real.log z = 12 * Real.log x - 12 * Real.log y := by linarith\n    have h14b : Real.log x = 5/3 * Real.log y := by\n      field_simp at h7\n      ring_nf at h7 ⊢\n      nlinarith\n    linarith\n  \n  have h15 : Real.log w / Real.log z = 60 := by\n    have h15a : Real.log w = 40 * Real.log y := h5\n    have h15b : Real.log z = 3 * Real.log y := h14\n    field_simp [h15b]\n    ring_nf\n    <;> field_simp\n    <;> linarith\n  \n  exact h15",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g3",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g4",
+    "parsed_lean_block": "import Mathlib.Data.Real.Basic\nimport Mathlib.Algebra.Order.Group.Defs\nimport Mathlib.Data.Nat.Cast\n\nopen Real\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := by\n  have hx : 0 < x := by linarith [ht.1]\n  have hy : 0 < y := by linarith [ht.2.1]\n  have hz : 0 < z := by linarith [ht.2.2]\n  have hxy : 0 < x * y := by positivity\n  have hxyz : 0 < x * y * z := by positivity\n  have hwx : 0 < Real.log x := by\n    apply Real.log_pos.mpr\n    exact mod_cast hx\n  have hyx : 0 < Real.log y := by\n    apply Real.log_pos.mpr\n    exact mod_cast hy\n  have hxyz_log : 0 < Real.log (x * y * z) := by\n    apply Real.log_pos.mpr\n    exact mod_cast hxyz\n  have h0' : Real.log w = 24 * Real.log x := by\n    field_simp [hwx.ne'] at h0 ⊢\n    linarith\n  have h1' : Real.log w = 40 * Real.log y := by\n    field_simp [hyx.ne'] at h1 ⊢\n    linarith\n  have h2' : Real.log w = 12 * Real.log (x * y * z) := by\n    field_simp [hxyz_log.ne'] at h2 ⊢\n    linarith\n  have h3 : Real.log (x * y * z) = Real.log x + Real.log y + Real.log z := by\n    rw [Real.log_mul (by positivity) (by positivity)]\n    rw [Real.log_mul (by positivity) (by positivity)]\n    <;> ring\n  rw [h3] at h2'\n  have h4 : 24 * Real.log x = 40 * Real.log y := by\n    linarith\n  have h5 : 24 * Real.log x = 12 * (Real.log x + Real.log y + Real.log z) := by\n    linarith\n  have h6 : Real.log z = Real.log w / 60 := by\n    have h6a : Real.log x = Real.log w / 24 := by\n      field_simp [hwx.ne'] at h0 ⊢\n      linarith\n    have h6b : Real.log y = Real.log w / 40 := by\n      field_simp [hyx.ne'] at h1 ⊢\n      linarith\n    have h6c : Real.log x + Real.log y + Real.log z = Real.log w / 12 := by\n      field_simp [hxyz_log.ne'] at h2 ⊢\n      linarith\n    rw [h6a, h6b] at h6c\n    linarith\n  have h7 : Real.log w / Real.log z = 60 := by\n    have h7a : Real.log z ≠ 0 := by\n      by_contra h\n      have h7b : Real.log z = 0 := h\n      have h7c : Real.log w = 0 := by\n        rw [h6] at h7b\n        linarith\n      have h7d : Real.log w / Real.log x = 0 := by\n        rw [h7c]\n        field_simp [hwx.ne']\n        <;> norm_num\n      linarith [h0]\n    field_simp [h7a] at *\n    rw [h6]\n    ring_nf\n    <;> field_simp\n    <;> linarith\n  exact h7",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Data.Real.Basic\nimport Mathlib.Algebra.Order.Group.Defs\nimport Mathlib.Data.Nat.Cast\n\nopen Real\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := by\n  have hx : 0 < x := by linarith [ht.1]\n  have hy : 0 < y := by linarith [ht.2.1]\n  have hz : 0 < z := by linarith [ht.2.2]\n  have hxy : 0 < x * y := by positivity\n  have hxyz : 0 < x * y * z := by positivity\n  have hwx : 0 < Real.log x := by\n    apply Real.log_pos.mpr\n    exact mod_cast hx\n  have hyx : 0 < Real.log y := by\n    apply Real.log_pos.mpr\n    exact mod_cast hy\n  have hxyz_log : 0 < Real.log (x * y * z) := by\n    apply Real.log_pos.mpr\n    exact mod_cast hxyz\n  have h0' : Real.log w = 24 * Real.log x := by\n    field_simp [hwx.ne'] at h0 ⊢\n    linarith\n  have h1' : Real.log w = 40 * Real.log y := by\n    field_simp [hyx.ne'] at h1 ⊢\n    linarith\n  have h2' : Real.log w = 12 * Real.log (x * y * z) := by\n    field_simp [hxyz_log.ne'] at h2 ⊢\n    linarith\n  have h3 : Real.log (x * y * z) = Real.log x + Real.log y + Real.log z := by\n    rw [Real.log_mul (by positivity) (by positivity)]\n    rw [Real.log_mul (by positivity) (by positivity)]\n    <;> ring\n  rw [h3] at h2'\n  have h4 : 24 * Real.log x = 40 * Real.log y := by\n    linarith\n  have h5 : 24 * Real.log x = 12 * (Real.log x + Real.log y + Real.log z) := by\n    linarith\n  have h6 : Real.log z = Real.log w / 60 := by\n    have h6a : Real.log x = Real.log w / 24 := by\n      field_simp [hwx.ne'] at h0 ⊢\n      linarith\n    have h6b : Real.log y = Real.log w / 40 := by\n      field_simp [hyx.ne'] at h1 ⊢\n      linarith\n    have h6c : Real.log x + Real.log y + Real.log z = Real.log w / 12 := by\n      field_simp [hxyz_log.ne'] at h2 ⊢\n      linarith\n    rw [h6a, h6b] at h6c\n    linarith\n  have h7 : Real.log w / Real.log z = 60 := by\n    have h7a : Real.log z ≠ 0 := by\n      by_contra h\n      have h7b : Real.log z = 0 := h\n      have h7c : Real.log w = 0 := by\n        rw [h6] at h7b\n        linarith\n      have h7d : Real.log w / Real.log x = 0 := by\n        rw [h7c]\n        field_simp [hwx.ne']\n        <;> norm_num\n      linarith [h0]\n    field_simp [h7a] at *\n    rw [h6]\n    ring_nf\n    <;> field_simp\n    <;> linarith\n  exact h7",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g5",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g6",
+    "parsed_lean_block": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log (w : ℝ) / Real.log (x : ℝ) = 24) (h1 : Real.log (w : ℝ) / Real.log (y : ℝ) = 40)\n    (h2 : Real.log (w : ℝ) / Real.log ((x * y * z : ℝ)) = 12) : Real.log (w : ℝ) / Real.log (z : ℝ) = 60 := by\n  have hwx : Real.log (w : ℝ) = 24 * Real.log (x : ℝ) := by\n    have hwx' : Real.log (w : ℝ) / Real.log (x : ℝ) = 24 := h0\n    field_simp [Real.log_ne_zero] at hwx' ⊢\n    linarith\n  \n  have hwy : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := by\n    have hwy' : Real.log (w : ℝ) / Real.log (y : ℝ) = 40 := h1\n    field_simp [Real.log_ne_zero] at hwy' ⊢\n    linarith\n  \n  have hx : Real.log (x : ℝ) = (5 : ℝ) / 3 * Real.log (y : ℝ) := by\n    have hx' : Real.log (x : ℝ) = (40 : ℝ) / 24 * Real.log (y : ℝ) := by\n      have hxy : Real.log (w : ℝ) = 24 * Real.log (x : ℝ) := hwx\n      have hxy' : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := hwy\n      linarith\n    field_simp at hx' ⊢\n    linarith\n  \n  have hxyz : Real.log ((x * y * z : ℝ)) = Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ) := by\n    have hxyz' : Real.log ((x * y * z : ℝ)) = Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ) := by\n      rw [Real.log_mul, Real.log_mul]\n      <;> positivity\n    exact hxyz'\n  \n  have h3 : Real.log (w : ℝ) = 12 * (Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ)) := by\n    have h3' : Real.log (w : ℝ) / Real.log ((x * y * z : ℝ)) = 12 := h2\n    field_simp [Real.log_ne_zero] at h3' ⊢\n    linarith\n  \n  have h4 : Real.log (z : ℝ) = (2 : ℝ) / 3 * Real.log (y : ℝ) := by\n    have h4' : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := hwy\n    have h4'' : Real.log (w : ℝ) = 12 * (Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ)) := h3\n    rw [h4''] at h4'\n    rw [h4'] at h4''\n    have h4''' : 40 * Real.log (y : ℝ) = 12 * (Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ)) := by linarith\n    rw [hx] at h4'''\n    have h4'''' : 40 * Real.log (y : ℝ) = 12 * ((5 : ℝ) / 3 * Real.log (y : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ)) := by linarith\n    have h4''''' : 40 * Real.log (y : ℝ) = 12 * ((5 : ℝ) / 3 + 1) * Real.log (y : ℝ) + 12 * Real.log (z : ℝ) := by linarith\n    have h4'''''' : 40 * Real.log (y : ℝ) = 32 * Real.log (y : ℝ) + 12 * Real.log (z : ℝ) := by linarith\n    have h4''''''' : 8 * Real.log (y : ℝ) = 12 * Real.log (z : ℝ) := by linarith\n    field_simp at h4''''''' ⊢\n    linarith\n  \n  have h5 : Real.log (w : ℝ) / Real.log (z : ℝ) = 60 := by\n    have h5' : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := hwy\n    have h5'' : Real.log (z : ℝ) = (2 : ℝ) / 3 * Real.log (y : ℝ) := h4\n    rw [h5', h5'']\n    field_simp\n    <;> ring_nf\n    <;> field_simp\n    <;> linarith\n  \n  exact h5",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log (w : ℝ) / Real.log (x : ℝ) = 24) (h1 : Real.log (w : ℝ) / Real.log (y : ℝ) = 40)\n    (h2 : Real.log (w : ℝ) / Real.log ((x * y * z : ℝ)) = 12) : Real.log (w : ℝ) / Real.log (z : ℝ) = 60 := by\n  have hwx : Real.log (w : ℝ) = 24 * Real.log (x : ℝ) := by\n    have hwx' : Real.log (w : ℝ) / Real.log (x : ℝ) = 24 := h0\n    field_simp [Real.log_ne_zero] at hwx' ⊢\n    linarith\n  \n  have hwy : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := by\n    have hwy' : Real.log (w : ℝ) / Real.log (y : ℝ) = 40 := h1\n    field_simp [Real.log_ne_zero] at hwy' ⊢\n    linarith\n  \n  have hx : Real.log (x : ℝ) = (5 : ℝ) / 3 * Real.log (y : ℝ) := by\n    have hx' : Real.log (x : ℝ) = (40 : ℝ) / 24 * Real.log (y : ℝ) := by\n      have hxy : Real.log (w : ℝ) = 24 * Real.log (x : ℝ) := hwx\n      have hxy' : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := hwy\n      linarith\n    field_simp at hx' ⊢\n    linarith\n  \n  have hxyz : Real.log ((x * y * z : ℝ)) = Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ) := by\n    have hxyz' : Real.log ((x * y * z : ℝ)) = Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ) := by\n      rw [Real.log_mul, Real.log_mul]\n      <;> positivity\n    exact hxyz'\n  \n  have h3 : Real.log (w : ℝ) = 12 * (Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ)) := by\n    have h3' : Real.log (w : ℝ) / Real.log ((x * y * z : ℝ)) = 12 := h2\n    field_simp [Real.log_ne_zero] at h3' ⊢\n    linarith\n  \n  have h4 : Real.log (z : ℝ) = (2 : ℝ) / 3 * Real.log (y : ℝ) := by\n    have h4' : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := hwy\n    have h4'' : Real.log (w : ℝ) = 12 * (Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ)) := h3\n    rw [h4''] at h4'\n    rw [h4'] at h4''\n    have h4''' : 40 * Real.log (y : ℝ) = 12 * (Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ)) := by linarith\n    rw [hx] at h4'''\n    have h4'''' : 40 * Real.log (y : ℝ) = 12 * ((5 : ℝ) / 3 * Real.log (y : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ)) := by linarith\n    have h4''''' : 40 * Real.log (y : ℝ) = 12 * ((5 : ℝ) / 3 + 1) * Real.log (y : ℝ) + 12 * Real.log (z : ℝ) := by linarith\n    have h4'''''' : 40 * Real.log (y : ℝ) = 32 * Real.log (y : ℝ) + 12 * Real.log (z : ℝ) := by linarith\n    have h4''''''' : 8 * Real.log (y : ℝ) = 12 * Real.log (z : ℝ) := by linarith\n    field_simp at h4''''''' ⊢\n    linarith\n  \n  have h5 : Real.log (w : ℝ) / Real.log (z : ℝ) = 60 := by\n    have h5' : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := hwy\n    have h5'' : Real.log (z : ℝ) = (2 : ℝ) / 3 * Real.log (y : ℝ) := h4\n    rw [h5', h5'']\n    field_simp\n    <;> ring_nf\n    <;> field_simp\n    <;> linarith\n  \n  exact h5",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g7",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g0",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g1",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g2",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g3",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g4",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g5",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g6",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g7",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g0",
+    "parsed_lean_block": "import Mathlib.Data.Real.Basic\nimport Mathlib.Tactic\n\ntheorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : a * b = 180)\n  (h₂ : 2 * (a + b) = 54) :\n  a^2 + b^2 = 369 := by\n  have h₃ : a + b = 27 := by linarith\n  have h₄ : a^2 + b^2 = (a + b)^2 - 2 * a * b := by ring\n  rw [h₃, h₁] at h₄\n  norm_num at h₄\n  linarith",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Data.Real.Basic\nimport Mathlib.Tactic\n\ntheorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : a * b = 180)\n  (h₂ : 2 * (a + b) = 54) :\n  a^2 + b^2 = 369 := by\n  have h₃ : a + b = 27 := by linarith\n  have h₄ : a^2 + b^2 = (a + b)^2 - 2 * a * b := by ring\n  rw [h₃, h₁] at h₄\n  norm_num at h₄\n  linarith",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141"
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g1",
+    "parsed_lean_block": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\nimport Mathlib.Tactic\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : (a * b)=180)\n  (h₂ : 2 * (a + b)=54) :\n  (a^2 + b^2) = 369 := by\n  have h₃ : a + b = 27 := by linarith\n  have h₄ : (a + b)^2 = 729 := by rw [h₃]; norm_num\n  have h₅ : (a + b)^2 = a^2 + b^2 + 2 * (a * b) := by ring\n  rw [h₅] at h₄\n  rw [h₁] at h₄\n  norm_num at h₄ ⊢\n  linarith",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\nimport Mathlib.Tactic\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : (a * b)=180)\n  (h₂ : 2 * (a + b)=54) :\n  (a^2 + b^2) = 369 := by\n  have h₃ : a + b = 27 := by linarith\n  have h₄ : (a + b)^2 = 729 := by rw [h₃]; norm_num\n  have h₅ : (a + b)^2 = a^2 + b^2 + 2 * (a * b) := by ring\n  rw [h₅] at h₄\n  rw [h₁] at h₄\n  norm_num at h₄ ⊢\n  linarith",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141"
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g2",
+    "parsed_lean_block": "import Mathlib\nimport Mathlib.Tactic.Ring\nimport Mathlib.Tactic.Linarith\n\ntheorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : a * b = 180)\n  (h₂ : 2 * (a + b) = 54) :\n  a^2 + b^2 = 369 := by\n  have h₃ : a + b = 27 := by linarith\n  have h₄ : a^2 + b^2 = (a + b)^2 - 2 * a * b := by ring\n  rw [h₄]\n  rw [h₃]\n  rw [h₁]\n  norm_num",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nimport Mathlib.Tactic.Ring\nimport Mathlib.Tactic.Linarith\n\ntheorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : a * b = 180)\n  (h₂ : 2 * (a + b) = 54) :\n  a^2 + b^2 = 369 := by\n  have h₃ : a + b = 27 := by linarith\n  have h₄ : a^2 + b^2 = (a + b)^2 - 2 * a * b := by ring\n  rw [h₄]\n  rw [h₃]\n  rw [h₁]\n  norm_num",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141"
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g3",
+    "parsed_lean_block": "import Mathlib.Data.Real.Basic\nimport Mathlib.Tactic.Ring\nimport Mathlib.Tactic.NormNum\nimport Mathlib.Tactic.Linarith\n\nopen Real\n\ntheorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : a * b = 180)\n  (h₂ : 2 * (a + b) = 54) :\n  a^2 + b^2 = 369 := by\n  have h₃ : a + b = 27 := by linarith\n  calc\n    a^2 + b^2 = (a + b)^2 - 2 * a * b := by ring\n    _ = 27^2 - 2 * 180 := by rw [h₃, h₁]\n    _ = 369 := by norm_num",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Data.Real.Basic\nimport Mathlib.Tactic.Ring\nimport Mathlib.Tactic.NormNum\nimport Mathlib.Tactic.Linarith\n\nopen Real\n\ntheorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : a * b = 180)\n  (h₂ : 2 * (a + b) = 54) :\n  a^2 + b^2 = 369 := by\n  have h₃ : a + b = 27 := by linarith\n  calc\n    a^2 + b^2 = (a + b)^2 - 2 * a * b := by ring\n    _ = 27^2 - 2 * 180 := by rw [h₃, h₁]\n    _ = 369 := by norm_num",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141"
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g4",
+    "parsed_lean_block": "import Mathlib.Data.Real.Basic\nimport Mathlib.Tactic.Linarith\nimport Mathlib.Tactic.NormNum\n\ntheorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : a * b = 180)\n  (h₂ : 2 * (a + b) = 54) :\n  a^2 + b^2 = 369 := by\n  have h₃ : a + b = 27 := by linarith\n  have h₄ : a^2 + b^2 = (a + b)^2 - 2 * (a * b) := by ring\n  rw [h₃, h₁, h₄]\n  norm_num",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Data.Real.Basic\nimport Mathlib.Tactic.Linarith\nimport Mathlib.Tactic.NormNum\n\ntheorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : a * b = 180)\n  (h₂ : 2 * (a + b) = 54) :\n  a^2 + b^2 = 369 := by\n  have h₃ : a + b = 27 := by linarith\n  have h₄ : a^2 + b^2 = (a + b)^2 - 2 * (a * b) := by ring\n  rw [h₃, h₁, h₄]\n  norm_num",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141"
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g5",
+    "parsed_lean_block": "import Mathlib.Data.Real.Basic\nimport Mathlib.Tactic\nimport Mathlib.Algebra.Ring.Basic\n\ntheorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : a * b = 180)\n  (h₂ : 2 * (a + b) = 54) :\n  a^2 + b^2 = 369 := by\n  have h_sum : a + b = 27 := by linarith\n  calc\n    a^2 + b^2 = (a + b)^2 - 2 * a * b := by ring\n    _ = 27^2 - 2 * 180 := by rw [h_sum, h₁]\n    _ = 369 := by norm_num",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Data.Real.Basic\nimport Mathlib.Tactic\nimport Mathlib.Algebra.Ring.Basic\n\ntheorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : a * b = 180)\n  (h₂ : 2 * (a + b) = 54) :\n  a^2 + b^2 = 369 := by\n  have h_sum : a + b = 27 := by linarith\n  calc\n    a^2 + b^2 = (a + b)^2 - 2 * a * b := by ring\n    _ = 27^2 - 2 * 180 := by rw [h_sum, h₁]\n    _ = 369 := by norm_num",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141"
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g6",
+    "parsed_lean_block": "import Mathlib.Data.Real.Basic\nimport Mathlib.Tactic.Ring\nimport Mathlib.Tactic.Linarith\n\ntheorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : a * b = 180)\n  (h₂ : 2 * (a + b) = 54) :\n  a^2 + b^2 = 369 := by\n  have h_sum : a + b = 27 := by linarith\n  have h_sq_sum : (a + b)^2 = a^2 + b^2 + 2 * (a * b) := by ring\n  rw [h_sum] at h_sq_sum\n  rw [h₁] at h_sq_sum\n  linarith",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Data.Real.Basic\nimport Mathlib.Tactic.Ring\nimport Mathlib.Tactic.Linarith\n\ntheorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : a * b = 180)\n  (h₂ : 2 * (a + b) = 54) :\n  a^2 + b^2 = 369 := by\n  have h_sum : a + b = 27 := by linarith\n  have h_sq_sum : (a + b)^2 = a^2 + b^2 + 2 * (a * b) := by ring\n  rw [h_sum] at h_sq_sum\n  rw [h₁] at h_sq_sum\n  linarith",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141"
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g7",
+    "parsed_lean_block": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\n\nopen Real\n\ntheorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : (a * b) = 180)\n  (h₂ : 2 * (a + b) = 54) :\n  (a^2 + b^2) = 369 := by\n  have h₃ : a + b = 27 := by\n    linarith\n  \n  have h₄ : (a + b)^2 = a^2 + 2 * (a * b) + b^2 := by\n    ring\n  \n  rw [h₃] at h₄\n  rw [h₁] at h₄\n  -- Now h₄ is: 27^2 = a^2 + 360 + b^2\n  -- So: a^2 + b^2 = 729 - 360 = 369\n  linarith",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\n\nopen Real\n\ntheorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : (a * b) = 180)\n  (h₂ : 2 * (a + b) = 54) :\n  (a^2 + b^2) = 369 := by\n  have h₃ : a + b = 27 := by\n    linarith\n  \n  have h₄ : (a + b)^2 = a^2 + 2 * (a * b) + b^2 := by\n    ring\n  \n  rw [h₃] at h₄\n  rw [h₁] at h₄\n  -- Now h₄ is: 27^2 = a^2 + 360 + b^2\n  -- So: a^2 + b^2 = 729 - 360 = 369\n  linarith",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141"
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g0",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3"
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g1",
+    "parsed_lean_block": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\nimport Mathlib.Tactic.NormNum\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n  norm_num",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\nimport Mathlib.Tactic.NormNum\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n  norm_num",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3"
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g2",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3"
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g3",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3"
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g4",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3"
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g5",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3"
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g6",
+    "parsed_lean_block": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\nimport Mathlib.Tactic.NormNum\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n  norm_num",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\nimport Mathlib.Tactic.NormNum\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n  norm_num",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3"
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g7",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3"
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g0",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g1",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g2",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g3",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g4",
+    "parsed_lean_block": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := by\n  have h₄ : y m = ∑ i in Finset.range k, ((Real.cos (a i + m)) / (2^i)) := by\n    apply h₁ m\n  have h₅ : y n = ∑ i in Finset.range k, ((Real.cos (a i + n)) / (2^i)) := by\n    apply h₁ n\n  rw [h₄] at h₂\n  rw [h₅] at h₃\n  \n  -- Using the identity cos(A) - cos(B) = -2*sin((A+B)/2)*sin((A-B)/2)\n  -- The difference of zeros must be a multiple of π\n  have h₆ : ∑ i in Finset.range k, ((Real.cos (a i + m)) - Real.cos (a i + n)) / (2^i) = 0 := by\n    calc\n      ∑ i in Finset.range k, ((Real.cos (a i + m)) - Real.cos (a i + n)) / (2^i) =\n        ∑ i in Finset.range k, (Real.cos (a i + m)) / (2^i) - ∑ i in Finset.range k, (Real.cos (a i + n)) / (2^i) := by\n        simp [Finset.sum_sub_distrib]\n      _ = 0 - 0 := by rw [h₂, h₃]\n      _ = 0 := by ring\n  \n  -- The difference between any two zeros is a multiple of π\n  -- This follows from the structure of the trigonometric sum\n  use 0\n  simp [h₆]\n  <;> ring_nf\n  <;> simp_all\n  <;> linarith",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := by\n  have h₄ : y m = ∑ i in Finset.range k, ((Real.cos (a i + m)) / (2^i)) := by\n    apply h₁ m\n  have h₅ : y n = ∑ i in Finset.range k, ((Real.cos (a i + n)) / (2^i)) := by\n    apply h₁ n\n  rw [h₄] at h₂\n  rw [h₅] at h₃\n  \n  -- Using the identity cos(A) - cos(B) = -2*sin((A+B)/2)*sin((A-B)/2)\n  -- The difference of zeros must be a multiple of π\n  have h₆ : ∑ i in Finset.range k, ((Real.cos (a i + m)) - Real.cos (a i + n)) / (2^i) = 0 := by\n    calc\n      ∑ i in Finset.range k, ((Real.cos (a i + m)) - Real.cos (a i + n)) / (2^i) =\n        ∑ i in Finset.range k, (Real.cos (a i + m)) / (2^i) - ∑ i in Finset.range k, (Real.cos (a i + n)) / (2^i) := by\n        simp [Finset.sum_sub_distrib]\n      _ = 0 - 0 := by rw [h₂, h₃]\n      _ = 0 := by ring\n  \n  -- The difference between any two zeros is a multiple of π\n  -- This follows from the structure of the trigonometric sum\n  use 0\n  simp [h₆]\n  <;> ring_nf\n  <;> simp_all\n  <;> linarith",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g5",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g6",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g7",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g0",
+    "parsed_lean_block": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : t = 4 := by\n    rw [h₀] at h₁\n    ring_nf at h₁ ⊢\n    linarith\n  have h₃ : s = 1 := by\n    rw [h₂] at h₀\n    ring_nf at h₀ ⊢\n    linarith\n  exact ⟨h₃, h₂⟩",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : t = 4 := by\n    rw [h₀] at h₁\n    ring_nf at h₁ ⊢\n    linarith\n  have h₃ : s = 1 := by\n    rw [h₂] at h₀\n    ring_nf at h₀ ⊢\n    linarith\n  exact ⟨h₃, h₂⟩",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44"
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g1",
+    "parsed_lean_block": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : s = 1 := by\n    rw [h₁] at h₀\n    linarith\n  have h₃ : t = 4 := by\n    rw [h₂] at h₁\n    linarith\n  exact ⟨h₂, h₃⟩",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : s = 1 := by\n    rw [h₁] at h₀\n    linarith\n  have h₃ : t = 4 := by\n    rw [h₂] at h₁\n    linarith\n  exact ⟨h₂, h₃⟩",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44"
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g2",
+    "parsed_lean_block": "import Mathlib.Data.Real.Basic\nimport Mathlib.Tactic\n\nopen Real\n\ntheorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : s = 1 := by\n    rw [h₁] at h₀\n    ring_nf at h₀ ⊢\n    linarith\n  have h₃ : t = 4 := by\n    rw [h₂] at h₁\n    ring_nf at h₁ ⊢\n    linarith\n  exact ⟨h₂, h₃⟩",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Data.Real.Basic\nimport Mathlib.Tactic\n\nopen Real\n\ntheorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : s = 1 := by\n    rw [h₁] at h₀\n    ring_nf at h₀ ⊢\n    linarith\n  have h₃ : t = 4 := by\n    rw [h₂] at h₁\n    ring_nf at h₁ ⊢\n    linarith\n  exact ⟨h₂, h₃⟩",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44"
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g3",
+    "parsed_lean_block": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : s = 1 := by\n    rw [h₀, h₁]\n    linarith\n  have h₃ : t = 4 := by\n    rw [h₁, h₂]\n    linarith\n  exact ⟨h₂, h₃⟩",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : s = 1 := by\n    rw [h₀, h₁]\n    linarith\n  have h₃ : t = 4 := by\n    rw [h₁, h₂]\n    linarith\n  exact ⟨h₂, h₃⟩",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44"
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g4",
+    "parsed_lean_block": "import Mathlib.Data.Real.Basic\nimport Mathlib.Tactic\n\ntheorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : s = 1 := by\n    rw [h₁] at h₀\n    linarith\n  have h₃ : t = 4 := by\n    rw [h₂] at h₁\n    linarith\n  exact ⟨h₂, h₃⟩",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Data.Real.Basic\nimport Mathlib.Tactic\n\ntheorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : s = 1 := by\n    rw [h₁] at h₀\n    linarith\n  have h₃ : t = 4 := by\n    rw [h₂] at h₁\n    linarith\n  exact ⟨h₂, h₃⟩",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44"
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g5",
+    "parsed_lean_block": "import Mathlib.Data.Real.Basic\n\nopen Real\n\ntheorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : s = 1 := by\n    rw [h₀] at *\n    have h₃ : s = 9 - 2 * (3 * s + 1) := by linarith\n    linarith\n  have h₃ : t = 4 := by\n    rw [h₁]\n    rw [h₂]\n    norm_num\n  exact ⟨h₂, h₃⟩",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Data.Real.Basic\n\nopen Real\n\ntheorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : s = 1 := by\n    rw [h₀] at *\n    have h₃ : s = 9 - 2 * (3 * s + 1) := by linarith\n    linarith\n  have h₃ : t = 4 := by\n    rw [h₁]\n    rw [h₂]\n    norm_num\n  exact ⟨h₂, h₃⟩",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44"
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g6",
+    "parsed_lean_block": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  rw [h₀] at h₁\n  have h₂ : t = 4 := by linarith\n  have h₃ : s = 1 := by linarith\n  exact ⟨h₃, h₂⟩",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  rw [h₀] at h₁\n  have h₂ : t = 4 := by linarith\n  have h₃ : s = 1 := by linarith\n  exact ⟨h₃, h₂⟩",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44"
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g7",
+    "parsed_lean_block": "import Mathlib.Data.Real.Basic\nimport Mathlib.Tactic\n\ntheorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : t = 4 := by\n    rw [h₀] at h₁\n    linarith\n  have h₃ : s = 1 := by\n    rw [h₀]\n    rw [h₂]\n    norm_num\n  exact ⟨h₃, h₂⟩",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Data.Real.Basic\nimport Mathlib.Tactic\n\ntheorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : t = 4 := by\n    rw [h₀] at h₁\n    linarith\n  have h₃ : s = 1 := by\n    rw [h₀]\n    rw [h₂]\n    norm_num\n  exact ⟨h₃, h₂⟩",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44"
+  }
+]

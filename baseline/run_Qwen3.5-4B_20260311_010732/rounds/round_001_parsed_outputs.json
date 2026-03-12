@@ -1,0 +1,642 @@
+[
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r1_g0",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "numbertheory_4x3m7y3neq2003__r0_g0",
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r1_g1",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "numbertheory_4x3m7y3neq2003__r0_g0",
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r1_g2",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "numbertheory_4x3m7y3neq2003__r0_g1",
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r1_g3",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "numbertheory_4x3m7y3neq2003__r0_g1",
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r1_g4",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "numbertheory_4x3m7y3neq2003__r0_g2",
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r1_g5",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "numbertheory_4x3m7y3neq2003__r0_g2",
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r1_g6",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "numbertheory_4x3m7y3neq2003__r0_g3",
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r1_g7",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "numbertheory_4x3m7y3neq2003__r0_g3",
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r1_g8",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "numbertheory_4x3m7y3neq2003__r0_g4",
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r1_g9",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "numbertheory_4x3m7y3neq2003__r0_g4",
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r1_g10",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "numbertheory_4x3m7y3neq2003__r0_g5",
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r1_g11",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "numbertheory_4x3m7y3neq2003__r0_g5",
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r1_g12",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "numbertheory_4x3m7y3neq2003__r0_g6",
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r1_g13",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "numbertheory_4x3m7y3neq2003__r0_g6",
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r1_g14",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "numbertheory_4x3m7y3neq2003__r0_g7",
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r1_g15",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "numbertheory_4x3m7y3neq2003__r0_g7",
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "aime_1983_p1__r1_g16",
+    "parsed_lean_block": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Nat.CoeReal\n\nopen Real\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 < w)\n    (h0 : Real.log ↑w / Real.log ↑x = 24) (h1 : Real.log ↑w / Real.log ↑y = 40)\n    (h2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12) : Real.log ↑w / Real.log ↑z = 60 := by\n  have h3 : Real.log ↑x = Real.log ↑w / 24 := by\n    have : Real.log ↑w / Real.log ↑x = 24 := h0\n    field_simp at this ⊢\n    linarith\n  \n  have h4 : Real.log ↑y = Real.log ↑w / 40 := by\n    have : Real.log ↑w / Real.log ↑y = 40 := h1\n    field_simp at this ⊢\n    linarith\n  \n  have h5 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z := by\n    rw [Real.log_mul (by linarith [ht.1, ht.2.1]) (by linarith [ht.2.1, ht.2.2])]\n    rw [Real.log_mul (by linarith [ht.2.1, ht.2.2]) (by linarith [ht.2.2])]\n    <;> linarith [ht.1, ht.2.1, ht.2.2]\n  \n  have h6 : Real.log (↑x * ↑y * ↑z) = Real.log ↑w / 12 := by\n    have : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12 := h2\n    field_simp at this ⊢\n    linarith\n  \n  have h7 : Real.log ↑x + Real.log ↑y + Real.log ↑z = Real.log ↑w / 12 := by\n    linarith [h5, h6]\n  \n  have h8 : Real.log ↑z = Real.log ↑w / 60 := by\n    have h9 : Real.log ↑x + Real.log ↑y = Real.log ↑w / 24 + Real.log ↑w / 40 := by\n      rw [h3, h4]\n    have h10 : Real.log ↑x + Real.log ↑y + Real.log ↑z = Real.log ↑w / 12 := h7\n    rw [h9] at h10\n    have h11 : Real.log ↑w / 24 + Real.log ↑w / 40 + Real.log ↑z = Real.log ↑w / 12 := by\n      linarith\n    field_simp at h11 ⊢\n    ring_nf at h11 ⊢\n    linarith\n  \n  have h9 : Real.log ↑w / Real.log ↑z = 60 := by\n    have h10 : Real.log ↑z = Real.log ↑w / 60 := h8\n    have h11 : Real.log ↑w ≠ 0 := by\n      have : Real.log ↑w > 0 := Real.log_pos (by norm_num [hw])\n      linarith\n    have h12 : Real.log ↑z ≠ 0 := by\n      have : Real.log ↑z > 0 := Real.log_pos (by\n        have h : ↑z > 1 := by linarith [ht.2.2]\n        linarith)\n      linarith\n    calc\n      Real.log ↑w / Real.log ↑z = Real.log ↑w / (Real.log ↑w / 60) := by rw [h10]\n      _ = 60 := by\n        field_simp [h11]\n        <;> ring_nf\n        <;> linarith\n  \n  exact h9",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Nat.CoeReal\n\nopen Real\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 < w)\n    (h0 : Real.log ↑w / Real.log ↑x = 24) (h1 : Real.log ↑w / Real.log ↑y = 40)\n    (h2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12) : Real.log ↑w / Real.log ↑z = 60 := by\n  have h3 : Real.log ↑x = Real.log ↑w / 24 := by\n    have : Real.log ↑w / Real.log ↑x = 24 := h0\n    field_simp at this ⊢\n    linarith\n  \n  have h4 : Real.log ↑y = Real.log ↑w / 40 := by\n    have : Real.log ↑w / Real.log ↑y = 40 := h1\n    field_simp at this ⊢\n    linarith\n  \n  have h5 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z := by\n    rw [Real.log_mul (by linarith [ht.1, ht.2.1]) (by linarith [ht.2.1, ht.2.2])]\n    rw [Real.log_mul (by linarith [ht.2.1, ht.2.2]) (by linarith [ht.2.2])]\n    <;> linarith [ht.1, ht.2.1, ht.2.2]\n  \n  have h6 : Real.log (↑x * ↑y * ↑z) = Real.log ↑w / 12 := by\n    have : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12 := h2\n    field_simp at this ⊢\n    linarith\n  \n  have h7 : Real.log ↑x + Real.log ↑y + Real.log ↑z = Real.log ↑w / 12 := by\n    linarith [h5, h6]\n  \n  have h8 : Real.log ↑z = Real.log ↑w / 60 := by\n    have h9 : Real.log ↑x + Real.log ↑y = Real.log ↑w / 24 + Real.log ↑w / 40 := by\n      rw [h3, h4]\n    have h10 : Real.log ↑x + Real.log ↑y + Real.log ↑z = Real.log ↑w / 12 := h7\n    rw [h9] at h10\n    have h11 : Real.log ↑w / 24 + Real.log ↑w / 40 + Real.log ↑z = Real.log ↑w / 12 := by\n      linarith\n    field_simp at h11 ⊢\n    ring_nf at h11 ⊢\n    linarith\n  \n  have h9 : Real.log ↑w / Real.log ↑z = 60 := by\n    have h10 : Real.log ↑z = Real.log ↑w / 60 := h8\n    have h11 : Real.log ↑w ≠ 0 := by\n      have : Real.log ↑w > 0 := Real.log_pos (by norm_num [hw])\n      linarith\n    have h12 : Real.log ↑z ≠ 0 := by\n      have : Real.log ↑z > 0 := Real.log_pos (by\n        have h : ↑z > 1 := by linarith [ht.2.2]\n        linarith)\n      linarith\n    calc\n      Real.log ↑w / Real.log ↑z = Real.log ↑w / (Real.log ↑w / 60) := by rw [h10]\n      _ = 60 := by\n        field_simp [h11]\n        <;> ring_nf\n        <;> linarith\n  \n  exact h9",
+    "parsing_notes": "last_block",
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g0",
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r1_g17",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g0",
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r1_g18",
+    "parsed_lean_block": "import Mathlib.Data.Real.Basic\nimport Mathlib.Algebra.Group.Powers\n\nopen Real\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 < w)\n    (h0 : Real.log (w : ℝ) / Real.log (x : ℝ) = 24) (h1 : Real.log (w : ℝ) / Real.log (y : ℝ) = 40)\n    (h2 : Real.log (w : ℝ) / Real.log ((x * y * z) : ℝ) = 12) : Real.log (w : ℝ) / Real.log (z : ℝ) = 60 := by\n  have hx : 0 < (x : ℝ) := by positivity\n  have hy : 0 < (y : ℝ) := by positivity\n  have hz : 0 < (z : ℝ) := by positivity\n  have hw' : 0 < (w : ℝ) := by positivity\n  \n  have h3 : Real.log (w : ℝ) = 24 * Real.log (x : ℝ) := by\n    field_simp [Real.log_pos hx, Real.log_pos hw'] at h0 ⊢\n    linarith\n  \n  have h4 : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := by\n    field_simp [Real.log_pos hy, Real.log_pos hw'] at h1 ⊢\n    linarith\n  \n  have h5 : Real.log (w : ℝ) = 12 * Real.log ((x * y * z) : ℝ) := by\n    field_simp [Real.log_pos (by positivity : 0 < (x * y * z : ℝ)), Real.log_pos hw'] at h2 ⊢\n    linarith\n  \n  have h6 : Real.log ((x * y * z) : ℝ) = Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ) := by\n    rw [Real.log_mul (by positivity) (by positivity)]\n    rw [Real.log_mul (by positivity) (by positivity)]\n    <;> ring\n  \n  rw [h6] at h5\n  have h7 : 24 * Real.log (x : ℝ) = 12 * (Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ)) := by\n    linarith\n  \n  have h8 : 12 * Real.log (x : ℝ) = 12 * Real.log (y : ℝ) + 12 * Real.log (z : ℝ) := by\n    linarith\n  \n  have h9 : Real.log (x : ℝ) = Real.log (y : ℝ) + Real.log (z : ℝ) := by\n    linarith\n  \n  have h10 : 3 * Real.log (x : ℝ) = 5 * Real.log (y : ℝ) := by\n    linarith\n  \n  have h11 : 3 * (Real.log (y : ℝ) + Real.log (z : ℝ)) = 5 * Real.log (y : ℝ) := by\n    rw [h9]\n    ring\n  \n  have h12 : 3 * Real.log (z : ℝ) = 2 * Real.log (y : ℝ) := by\n    linarith\n  \n  have h13 : Real.log (y : ℝ) = (3 / 2 : ℝ) * Real.log (z : ℝ) := by\n    linarith\n  \n  have h14 : Real.log (w : ℝ) = 40 * ((3 / 2 : ℝ) * Real.log (z : ℝ)) := by\n    rw [h4, h13]\n    ring\n  \n  have h15 : Real.log (w : ℝ) = 60 * Real.log (z : ℝ) := by\n    linarith\n  \n  have h16 : Real.log (z : ℝ) ≠ 0 := by\n    have : Real.log (z : ℝ) > 0 := Real.log_pos hz\n    linarith\n  \n  have h17 : Real.log (w : ℝ) / Real.log (z : ℝ) = 60 := by\n    rw [h15]\n    field_simp [h16]\n    <;> ring\n    <;> linarith\n  \n  exact h17",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Data.Real.Basic\nimport Mathlib.Algebra.Group.Powers\n\nopen Real\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 < w)\n    (h0 : Real.log (w : ℝ) / Real.log (x : ℝ) = 24) (h1 : Real.log (w : ℝ) / Real.log (y : ℝ) = 40)\n    (h2 : Real.log (w : ℝ) / Real.log ((x * y * z) : ℝ) = 12) : Real.log (w : ℝ) / Real.log (z : ℝ) = 60 := by\n  have hx : 0 < (x : ℝ) := by positivity\n  have hy : 0 < (y : ℝ) := by positivity\n  have hz : 0 < (z : ℝ) := by positivity\n  have hw' : 0 < (w : ℝ) := by positivity\n  \n  have h3 : Real.log (w : ℝ) = 24 * Real.log (x : ℝ) := by\n    field_simp [Real.log_pos hx, Real.log_pos hw'] at h0 ⊢\n    linarith\n  \n  have h4 : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := by\n    field_simp [Real.log_pos hy, Real.log_pos hw'] at h1 ⊢\n    linarith\n  \n  have h5 : Real.log (w : ℝ) = 12 * Real.log ((x * y * z) : ℝ) := by\n    field_simp [Real.log_pos (by positivity : 0 < (x * y * z : ℝ)), Real.log_pos hw'] at h2 ⊢\n    linarith\n  \n  have h6 : Real.log ((x * y * z) : ℝ) = Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ) := by\n    rw [Real.log_mul (by positivity) (by positivity)]\n    rw [Real.log_mul (by positivity) (by positivity)]\n    <;> ring\n  \n  rw [h6] at h5\n  have h7 : 24 * Real.log (x : ℝ) = 12 * (Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ)) := by\n    linarith\n  \n  have h8 : 12 * Real.log (x : ℝ) = 12 * Real.log (y : ℝ) + 12 * Real.log (z : ℝ) := by\n    linarith\n  \n  have h9 : Real.log (x : ℝ) = Real.log (y : ℝ) + Real.log (z : ℝ) := by\n    linarith\n  \n  have h10 : 3 * Real.log (x : ℝ) = 5 * Real.log (y : ℝ) := by\n    linarith\n  \n  have h11 : 3 * (Real.log (y : ℝ) + Real.log (z : ℝ)) = 5 * Real.log (y : ℝ) := by\n    rw [h9]\n    ring\n  \n  have h12 : 3 * Real.log (z : ℝ) = 2 * Real.log (y : ℝ) := by\n    linarith\n  \n  have h13 : Real.log (y : ℝ) = (3 / 2 : ℝ) * Real.log (z : ℝ) := by\n    linarith\n  \n  have h14 : Real.log (w : ℝ) = 40 * ((3 / 2 : ℝ) * Real.log (z : ℝ)) := by\n    rw [h4, h13]\n    ring\n  \n  have h15 : Real.log (w : ℝ) = 60 * Real.log (z : ℝ) := by\n    linarith\n  \n  have h16 : Real.log (z : ℝ) ≠ 0 := by\n    have : Real.log (z : ℝ) > 0 := Real.log_pos hz\n    linarith\n  \n  have h17 : Real.log (w : ℝ) / Real.log (z : ℝ) = 60 := by\n    rw [h15]\n    field_simp [h16]\n    <;> ring\n    <;> linarith\n  \n  exact h17",
+    "parsing_notes": "last_block",
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g1",
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r1_g19",
+    "parsed_lean_block": "import Mathlib.Data.Real.Basic\nimport Mathlib.Algebra.Group.Powers\nimport Mathlib.Data.Nat.Cast.Basic\n\nopen Real\nopen Nat\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 < w)\n    (h0 : Real.log (w : ℝ) / Real.log (x : ℝ) = 24) (h1 : Real.log (w : ℝ) / Real.log (y : ℝ) = 40)\n    (h2 : Real.log (w : ℝ) / Real.log ((x * y * z) : ℝ) = 12) : Real.log (w : ℝ) / Real.log (z : ℝ) = 60 := by\n  have hx : 0 < (x : ℝ) := by positivity\n  have hy : 0 < (y : ℝ) := by positivity\n  have hz : 0 < (z : ℝ) := by positivity\n  have hw_pos : 0 < (w : ℝ) := by positivity\n  \n  have h3 : Real.log (w : ℝ) = 24 * Real.log (x : ℝ) := by\n    have : Real.log (w : ℝ) / Real.log (x : ℝ) = 24 := h0\n    field_simp [Real.log_pos hx, Real.log_pos (by positivity : (0 : ℝ) < (w : ℝ))] at this ⊢\n    linarith\n  \n  have h4 : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := by\n    have : Real.log (w : ℝ) / Real.log (y : ℝ) = 40 := h1\n    field_simp [Real.log_pos hy, Real.log_pos (by positivity : (0 : ℝ) < (w : ℝ))] at this ⊢\n    linarith\n  \n  have h5 : Real.log (w : ℝ) = 12 * Real.log ((x * y * z) : ℝ) := by\n    have : Real.log (w : ℝ) / Real.log ((x * y * z) : ℝ) = 12 := h2\n    field_simp [Real.log_pos (by positivity : (0 : ℝ) < (x * y * z : ℝ)), Real.log_pos (by positivity : (0 : ℝ) < (w : ℝ))] at this ⊢\n    linarith\n  \n  have h6 : Real.log ((x * y * z) : ℝ) = Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ) := by\n    calc\n      Real.log ((x * y * z) : ℝ) = Real.log ((x * y) * z : ℝ) := by norm_cast\n      _ = Real.log ((x * y) : ℝ) + Real.log (z : ℝ) := by rw [Real.log_mul (by positivity) (by positivity)]\n      _ = Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ) := by\n        rw [Real.log_mul (by positivity) (by positivity)]\n  \n  rw [h6] at h5\n  have h7 : 24 * Real.log (x : ℝ) = 12 * (Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ)) := by\n    linarith\n  \n  have h8 : 24 * Real.log (x : ℝ) = 12 * Real.log (x : ℝ) + 12 * Real.log (y : ℝ) + 12 * Real.log (z : ℝ) := by\n    linarith\n  \n  have h9 : 12 * Real.log (x : ℝ) = 12 * Real.log (y : ℝ) + 12 * Real.log (z : ℝ) := by\n    linarith\n  \n  have h10 : Real.log (x : ℝ) = Real.log (y : ℝ) + Real.log (z : ℝ) := by\n    linarith\n  \n  have h11 : Real.log (w : ℝ) = 24 * (Real.log (y : ℝ) + Real.log (z : ℝ)) := by\n    rw [h3]\n    rw [h10]\n    ring\n  \n  have h12 : Real.log (w : ℝ) / Real.log (z : ℝ) = 60 := by\n    have : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := h4\n    have : Real.log (y : ℝ) = (3 / 2 : ℝ) * Real.log (z : ℝ) := by\n      have : Real.log (x : ℝ) = (5 / 3 : ℝ) * Real.log (y : ℝ) := by\n        linarith\n      have : Real.log (x : ℝ) = Real.log (y : ℝ) + Real.log (z : ℝ) := h10\n      linarith\n    rw [this] at h11\n    have : Real.log (w : ℝ) = 40 * ((3 / 2 : ℝ) * Real.log (z : ℝ)) := by\n      rw [h11]\n      ring\n    have : Real.log (w : ℝ) = 60 * Real.log (z : ℝ) := by\n      rw [this]\n      ring\n    rw [this]\n    field_simp [Real.log_pos hz]\n    <;> ring\n    <;> linarith\n  \n  exact h12",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Data.Real.Basic\nimport Mathlib.Algebra.Group.Powers\nimport Mathlib.Data.Nat.Cast.Basic\n\nopen Real\nopen Nat\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 < w)\n    (h0 : Real.log (w : ℝ) / Real.log (x : ℝ) = 24) (h1 : Real.log (w : ℝ) / Real.log (y : ℝ) = 40)\n    (h2 : Real.log (w : ℝ) / Real.log ((x * y * z) : ℝ) = 12) : Real.log (w : ℝ) / Real.log (z : ℝ) = 60 := by\n  have hx : 0 < (x : ℝ) := by positivity\n  have hy : 0 < (y : ℝ) := by positivity\n  have hz : 0 < (z : ℝ) := by positivity\n  have hw_pos : 0 < (w : ℝ) := by positivity\n  \n  have h3 : Real.log (w : ℝ) = 24 * Real.log (x : ℝ) := by\n    have : Real.log (w : ℝ) / Real.log (x : ℝ) = 24 := h0\n    field_simp [Real.log_pos hx, Real.log_pos (by positivity : (0 : ℝ) < (w : ℝ))] at this ⊢\n    linarith\n  \n  have h4 : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := by\n    have : Real.log (w : ℝ) / Real.log (y : ℝ) = 40 := h1\n    field_simp [Real.log_pos hy, Real.log_pos (by positivity : (0 : ℝ) < (w : ℝ))] at this ⊢\n    linarith\n  \n  have h5 : Real.log (w : ℝ) = 12 * Real.log ((x * y * z) : ℝ) := by\n    have : Real.log (w : ℝ) / Real.log ((x * y * z) : ℝ) = 12 := h2\n    field_simp [Real.log_pos (by positivity : (0 : ℝ) < (x * y * z : ℝ)), Real.log_pos (by positivity : (0 : ℝ) < (w : ℝ))] at this ⊢\n    linarith\n  \n  have h6 : Real.log ((x * y * z) : ℝ) = Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ) := by\n    calc\n      Real.log ((x * y * z) : ℝ) = Real.log ((x * y) * z : ℝ) := by norm_cast\n      _ = Real.log ((x * y) : ℝ) + Real.log (z : ℝ) := by rw [Real.log_mul (by positivity) (by positivity)]\n      _ = Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ) := by\n        rw [Real.log_mul (by positivity) (by positivity)]\n  \n  rw [h6] at h5\n  have h7 : 24 * Real.log (x : ℝ) = 12 * (Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ)) := by\n    linarith\n  \n  have h8 : 24 * Real.log (x : ℝ) = 12 * Real.log (x : ℝ) + 12 * Real.log (y : ℝ) + 12 * Real.log (z : ℝ) := by\n    linarith\n  \n  have h9 : 12 * Real.log (x : ℝ) = 12 * Real.log (y : ℝ) + 12 * Real.log (z : ℝ) := by\n    linarith\n  \n  have h10 : Real.log (x : ℝ) = Real.log (y : ℝ) + Real.log (z : ℝ) := by\n    linarith\n  \n  have h11 : Real.log (w : ℝ) = 24 * (Real.log (y : ℝ) + Real.log (z : ℝ)) := by\n    rw [h3]\n    rw [h10]\n    ring\n  \n  have h12 : Real.log (w : ℝ) / Real.log (z : ℝ) = 60 := by\n    have : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := h4\n    have : Real.log (y : ℝ) = (3 / 2 : ℝ) * Real.log (z : ℝ) := by\n      have : Real.log (x : ℝ) = (5 / 3 : ℝ) * Real.log (y : ℝ) := by\n        linarith\n      have : Real.log (x : ℝ) = Real.log (y : ℝ) + Real.log (z : ℝ) := h10\n      linarith\n    rw [this] at h11\n    have : Real.log (w : ℝ) = 40 * ((3 / 2 : ℝ) * Real.log (z : ℝ)) := by\n      rw [h11]\n      ring\n    have : Real.log (w : ℝ) = 60 * Real.log (z : ℝ) := by\n      rw [this]\n      ring\n    rw [this]\n    field_simp [Real.log_pos hz]\n    <;> ring\n    <;> linarith\n  \n  exact h12",
+    "parsing_notes": "last_block",
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g1",
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r1_g20",
+    "parsed_lean_block": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 < w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := by\n  have h3 : Real.log w = 24 * Real.log x := by\n    have h3a : Real.log w / Real.log x = 24 := h0\n    field_simp [Real.log_ne_zero_of_pos_of_ne_one (by linarith [ht.1]), \n                Real.log_ne_zero_of_pos_of_ne_one (by norm_num : w ≠ 1)] at h3a ⊢\n    linarith\n  \n  have h4 : Real.log w = 40 * Real.log y := by\n    have h4a : Real.log w / Real.log y = 40 := h1\n    field_simp [Real.log_ne_zero_of_pos_of_ne_one (by linarith [ht.2.1]), \n                Real.log_ne_zero_of_pos_of_ne_one (by norm_num : w ≠ 1)] at h4a ⊢\n    linarith\n  \n  have h5 : Real.log w = 12 * (Real.log x + Real.log y + Real.log z) := by\n    have h5a : Real.log w / Real.log (x * y * z) = 12 := h2\n    have h5b : Real.log (x * y * z) = Real.log x + Real.log y + Real.log z := by\n      rw [Real.log_mul (by linarith [ht.1]) (by linarith [ht.2.1]), \n          Real.log_mul (by linarith [ht.2.1]) (by linarith [ht.2.2])]\n    field_simp [h5b, Real.log_ne_zero_of_pos_of_ne_one (by linarith [ht.1]), \n                Real.log_ne_zero_of_pos_of_ne_one (by linarith [ht.2.1]), \n                Real.log_ne_zero_of_pos_of_ne_one (by linarith [ht.2.2])] at h5a ⊢\n    linarith\n  \n  have h6 : 24 * Real.log x = 40 * Real.log y := by\n    linarith [h3, h4]\n  \n  have h7 : 24 * Real.log x = 12 * (Real.log x + Real.log y + Real.log z) := by\n    linarith [h3, h5]\n  \n  have h8 : 12 * Real.log z = 12 * Real.log x - 12 * Real.log y := by\n    linarith [h7]\n  \n  have h9 : Real.log z = Real.log x - Real.log y := by\n    linarith [h8]\n  \n  have h10 : Real.log x = 5/3 * Real.log y := by\n    have h10a : 24 * Real.log x = 40 * Real.log y := h6\n    field_simp at h10a ⊢\n    ring_nf at h10a ⊢\n    linarith\n  \n  have h11 : Real.log z = 3 * Real.log y := by\n    have h11a : Real.log x = 5/3 * Real.log y := h10\n    have h11b : Real.log z = Real.log x - Real.log y := h9\n    rw [h11b]\n    ring_nf\n    <;> linarith\n  \n  have h12 : Real.log w / Real.log z = 60 := by\n    have h12a : Real.log w = 40 * Real.log y := h4\n    have h12b : Real.log z = 3 * Real.log y := h11\n    field_simp [h12b, Real.log_ne_zero_of_pos_of_ne_one (by linarith [ht.2.2])]\n    ring_nf\n    <;> field_simp\n    <;> linarith\n  \n  exact h12",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 < w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := by\n  have h3 : Real.log w = 24 * Real.log x := by\n    have h3a : Real.log w / Real.log x = 24 := h0\n    field_simp [Real.log_ne_zero_of_pos_of_ne_one (by linarith [ht.1]), \n                Real.log_ne_zero_of_pos_of_ne_one (by norm_num : w ≠ 1)] at h3a ⊢\n    linarith\n  \n  have h4 : Real.log w = 40 * Real.log y := by\n    have h4a : Real.log w / Real.log y = 40 := h1\n    field_simp [Real.log_ne_zero_of_pos_of_ne_one (by linarith [ht.2.1]), \n                Real.log_ne_zero_of_pos_of_ne_one (by norm_num : w ≠ 1)] at h4a ⊢\n    linarith\n  \n  have h5 : Real.log w = 12 * (Real.log x + Real.log y + Real.log z) := by\n    have h5a : Real.log w / Real.log (x * y * z) = 12 := h2\n    have h5b : Real.log (x * y * z) = Real.log x + Real.log y + Real.log z := by\n      rw [Real.log_mul (by linarith [ht.1]) (by linarith [ht.2.1]), \n          Real.log_mul (by linarith [ht.2.1]) (by linarith [ht.2.2])]\n    field_simp [h5b, Real.log_ne_zero_of_pos_of_ne_one (by linarith [ht.1]), \n                Real.log_ne_zero_of_pos_of_ne_one (by linarith [ht.2.1]), \n                Real.log_ne_zero_of_pos_of_ne_one (by linarith [ht.2.2])] at h5a ⊢\n    linarith\n  \n  have h6 : 24 * Real.log x = 40 * Real.log y := by\n    linarith [h3, h4]\n  \n  have h7 : 24 * Real.log x = 12 * (Real.log x + Real.log y + Real.log z) := by\n    linarith [h3, h5]\n  \n  have h8 : 12 * Real.log z = 12 * Real.log x - 12 * Real.log y := by\n    linarith [h7]\n  \n  have h9 : Real.log z = Real.log x - Real.log y := by\n    linarith [h8]\n  \n  have h10 : Real.log x = 5/3 * Real.log y := by\n    have h10a : 24 * Real.log x = 40 * Real.log y := h6\n    field_simp at h10a ⊢\n    ring_nf at h10a ⊢\n    linarith\n  \n  have h11 : Real.log z = 3 * Real.log y := by\n    have h11a : Real.log x = 5/3 * Real.log y := h10\n    have h11b : Real.log z = Real.log x - Real.log y := h9\n    rw [h11b]\n    ring_nf\n    <;> linarith\n  \n  have h12 : Real.log w / Real.log z = 60 := by\n    have h12a : Real.log w = 40 * Real.log y := h4\n    have h12b : Real.log z = 3 * Real.log y := h11\n    field_simp [h12b, Real.log_ne_zero_of_pos_of_ne_one (by linarith [ht.2.2])]\n    ring_nf\n    <;> field_simp\n    <;> linarith\n  \n  exact h12",
+    "parsing_notes": "last_block",
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g2",
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r1_g21",
+    "parsed_lean_block": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log ↑w / Real.log ↑x = 24) (h1 : Real.log ↑w / Real.log ↑y = 40)\n    (h2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12) : Real.log ↑w / Real.log ↑z = 60 := by\n  have hx_pos : 0 < x := by linarith\n  have hy_pos : 0 < y := by linarith\n  have hz_pos : 0 < z := by linarith\n  have hw_pos : 0 < w := by\n    have : w ≥ 1 := by\n      by_contra h\n      have : w = 0 := by omega\n      have : Real.log ↑w = -∞ := by\n        rw [← Real.log_zero]\n        simp [h]\n      linarith\n    linarith\n  \n  have h_log_mul : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z := by\n    have h1 : Real.log (↑x * ↑y * ↑z) = Real.log (↑x * ↑y) + Real.log ↑z := by\n      rw [Real.log_mul]\n      <;> positivity\n    have h2 : Real.log (↑x * ↑y) = Real.log ↑x + Real.log ↑y := by\n      rw [Real.log_mul]\n      <;> positivity\n    linarith\n  \n  have h4 : Real.log ↑w = 24 * Real.log ↑x := by\n    have h4a : Real.log ↑w / Real.log ↑x = 24 := h0\n    field_simp at h4a ⊢\n    linarith\n  \n  have h5 : Real.log ↑w = 40 * Real.log ↑y := by\n    have h5a : Real.log ↑w / Real.log ↑y = 40 := h1\n    field_simp at h5a ⊢\n    linarith\n  \n  have h6 : Real.log ↑w = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z) := by\n    have h6a : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12 := h2\n    rw [h_log_mul] at h6a\n    field_simp at h6a ⊢\n    linarith\n  \n  have h7 : 24 * Real.log ↑x = 40 * Real.log ↑y := by\n    linarith\n  \n  have h8 : 24 * Real.log ↑x = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z) := by\n    linarith\n  \n  have h9 : 12 * Real.log ↑z = 12 * Real.log ↑x - 12 * Real.log ↑y := by\n    linarith\n  \n  have h10 : Real.log ↑z = Real.log ↑x - Real.log ↑y := by\n    linarith\n  \n  have h11 : 12 * Real.log ↑x = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z) := by\n    linarith\n  \n  have h12 : 24 * Real.log ↑x = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z) := by\n    linarith\n  \n  have h13 : Real.log ↑x = 5/3 * Real.log ↑y := by\n    have h13a : 24 * Real.log ↑x = 40 * Real.log ↑y := h7\n    field_simp at h13a ⊢\n    ring_nf at h13a ⊢\n    linarith\n  \n  have h14 : Real.log ↑z = 3 * Real.log ↑y := by\n    have h14a : 24 * Real.log ↑x = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z) := h8\n    have h14b : 24 * Real.log ↑x = 40 * Real.log ↑y := h7\n    have h14c : Real.log ↑x = 5/3 * Real.log ↑y := h13\n    rw [h14c] at h14a\n    ring_nf at h14a ⊢\n    linarith\n  \n  have h15 : Real.log ↑w / Real.log ↑z = 60 := by\n    have h15a : Real.log ↑w = 40 * Real.log ↑y := h5\n    have h15b : Real.log ↑z = 3 * Real.log ↑y := h14\n    have h15c : Real.log ↑y > 0 := by\n      have : Real.log ↑y > 0 := Real.log_pos (by linarith)\n      exact this\n    have h15d : Real.log ↑z > 0 := by\n      have : Real.log ↑z > 0 := Real.log_pos (by\n        have : ↑z > 1 := by linarith\n        linarith)\n      exact this\n    field_simp [h15b, h15c, h15d]\n    ring_nf\n    <;> field_simp\n    <;> linarith\n  \n  exact h15",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log ↑w / Real.log ↑x = 24) (h1 : Real.log ↑w / Real.log ↑y = 40)\n    (h2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12) : Real.log ↑w / Real.log ↑z = 60 := by\n  have hx_pos : 0 < x := by linarith\n  have hy_pos : 0 < y := by linarith\n  have hz_pos : 0 < z := by linarith\n  have hw_pos : 0 < w := by\n    have : w ≥ 1 := by\n      by_contra h\n      have : w = 0 := by omega\n      have : Real.log ↑w = -∞ := by\n        rw [← Real.log_zero]\n        simp [h]\n      linarith\n    linarith\n  \n  have h_log_mul : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z := by\n    have h1 : Real.log (↑x * ↑y * ↑z) = Real.log (↑x * ↑y) + Real.log ↑z := by\n      rw [Real.log_mul]\n      <;> positivity\n    have h2 : Real.log (↑x * ↑y) = Real.log ↑x + Real.log ↑y := by\n      rw [Real.log_mul]\n      <;> positivity\n    linarith\n  \n  have h4 : Real.log ↑w = 24 * Real.log ↑x := by\n    have h4a : Real.log ↑w / Real.log ↑x = 24 := h0\n    field_simp at h4a ⊢\n    linarith\n  \n  have h5 : Real.log ↑w = 40 * Real.log ↑y := by\n    have h5a : Real.log ↑w / Real.log ↑y = 40 := h1\n    field_simp at h5a ⊢\n    linarith\n  \n  have h6 : Real.log ↑w = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z) := by\n    have h6a : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12 := h2\n    rw [h_log_mul] at h6a\n    field_simp at h6a ⊢\n    linarith\n  \n  have h7 : 24 * Real.log ↑x = 40 * Real.log ↑y := by\n    linarith\n  \n  have h8 : 24 * Real.log ↑x = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z) := by\n    linarith\n  \n  have h9 : 12 * Real.log ↑z = 12 * Real.log ↑x - 12 * Real.log ↑y := by\n    linarith\n  \n  have h10 : Real.log ↑z = Real.log ↑x - Real.log ↑y := by\n    linarith\n  \n  have h11 : 12 * Real.log ↑x = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z) := by\n    linarith\n  \n  have h12 : 24 * Real.log ↑x = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z) := by\n    linarith\n  \n  have h13 : Real.log ↑x = 5/3 * Real.log ↑y := by\n    have h13a : 24 * Real.log ↑x = 40 * Real.log ↑y := h7\n    field_simp at h13a ⊢\n    ring_nf at h13a ⊢\n    linarith\n  \n  have h14 : Real.log ↑z = 3 * Real.log ↑y := by\n    have h14a : 24 * Real.log ↑x = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z) := h8\n    have h14b : 24 * Real.log ↑x = 40 * Real.log ↑y := h7\n    have h14c : Real.log ↑x = 5/3 * Real.log ↑y := h13\n    rw [h14c] at h14a\n    ring_nf at h14a ⊢\n    linarith\n  \n  have h15 : Real.log ↑w / Real.log ↑z = 60 := by\n    have h15a : Real.log ↑w = 40 * Real.log ↑y := h5\n    have h15b : Real.log ↑z = 3 * Real.log ↑y := h14\n    have h15c : Real.log ↑y > 0 := by\n      have : Real.log ↑y > 0 := Real.log_pos (by linarith)\n      exact this\n    have h15d : Real.log ↑z > 0 := by\n      have : Real.log ↑z > 0 := Real.log_pos (by\n        have : ↑z > 1 := by linarith\n        linarith)\n      exact this\n    field_simp [h15b, h15c, h15d]\n    ring_nf\n    <;> field_simp\n    <;> linarith\n  \n  exact h15",
+    "parsing_notes": "last_block",
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g2",
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r1_g22",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g3",
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r1_g23",
+    "parsed_lean_block": "import Mathlib.Data.Real.Basic\nimport Mathlib.Algebra.Order.Ring.Defs\n\nopen Real\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 < w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := by\n  have hx : Real.log x > 0 := Real.log_pos.mpr ht.1\n  have hy : Real.log y > 0 := Real.log_pos.mpr ht.2.1\n  have hz : Real.log z > 0 := Real.log_pos.mpr ht.2.2\n  have hw_pos : Real.log w > 0 := Real.log_pos.mpr (by norm_num [Nat.cast_pos, hw])\n  \n  have h3 : Real.log w = 24 * Real.log x := by\n    have : Real.log w / Real.log x = 24 := h0\n    field_simp [hx.ne'] at this ⊢\n    linarith\n  \n  have h4 : Real.log w = 40 * Real.log y := by\n    have : Real.log w / Real.log y = 40 := h1\n    field_simp [hy.ne'] at this ⊢\n    linarith\n  \n  have h5 : Real.log w = 12 * (Real.log x + Real.log y + Real.log z) := by\n    have : Real.log w / Real.log (x * y * z) = 12 := h2\n    have : Real.log (x * y * z) = Real.log x + Real.log y + Real.log z := by\n      rw [Real.log_mul, Real.log_mul]\n      <;> positivity\n    field_simp [hx.ne', hy.ne', hz.ne'] at this ⊢\n    linarith\n  \n  have h6 : 24 * Real.log x = 12 * (Real.log x + Real.log y + Real.log z) := by\n    linarith [h3, h5]\n  \n  have h7 : Real.log x = Real.log y + Real.log z := by\n    linarith\n  \n  have h8 : Real.log z = (2 : ℝ) / 3 * Real.log y := by\n    have : 24 * Real.log x = 40 * Real.log y := by linarith [h3, h4]\n    have : Real.log x = (5 : ℝ) / 3 * Real.log y := by\n      field_simp [hy.ne'] at this ⊢\n      linarith\n    rw [this] at h7\n    linarith\n  \n  have h9 : Real.log w / Real.log z = 60 := by\n    have : Real.log w = 40 * Real.log y := h4\n    have : Real.log z = (2 : ℝ) / 3 * Real.log y := h8\n    rw [this, this]\n    field_simp [hy.ne']\n    <;> ring_nf\n    <;> linarith\n  \n  linarith",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Data.Real.Basic\nimport Mathlib.Algebra.Order.Ring.Defs\n\nopen Real\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 < w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := by\n  have hx : Real.log x > 0 := Real.log_pos.mpr ht.1\n  have hy : Real.log y > 0 := Real.log_pos.mpr ht.2.1\n  have hz : Real.log z > 0 := Real.log_pos.mpr ht.2.2\n  have hw_pos : Real.log w > 0 := Real.log_pos.mpr (by norm_num [Nat.cast_pos, hw])\n  \n  have h3 : Real.log w = 24 * Real.log x := by\n    have : Real.log w / Real.log x = 24 := h0\n    field_simp [hx.ne'] at this ⊢\n    linarith\n  \n  have h4 : Real.log w = 40 * Real.log y := by\n    have : Real.log w / Real.log y = 40 := h1\n    field_simp [hy.ne'] at this ⊢\n    linarith\n  \n  have h5 : Real.log w = 12 * (Real.log x + Real.log y + Real.log z) := by\n    have : Real.log w / Real.log (x * y * z) = 12 := h2\n    have : Real.log (x * y * z) = Real.log x + Real.log y + Real.log z := by\n      rw [Real.log_mul, Real.log_mul]\n      <;> positivity\n    field_simp [hx.ne', hy.ne', hz.ne'] at this ⊢\n    linarith\n  \n  have h6 : 24 * Real.log x = 12 * (Real.log x + Real.log y + Real.log z) := by\n    linarith [h3, h5]\n  \n  have h7 : Real.log x = Real.log y + Real.log z := by\n    linarith\n  \n  have h8 : Real.log z = (2 : ℝ) / 3 * Real.log y := by\n    have : 24 * Real.log x = 40 * Real.log y := by linarith [h3, h4]\n    have : Real.log x = (5 : ℝ) / 3 * Real.log y := by\n      field_simp [hy.ne'] at this ⊢\n      linarith\n    rw [this] at h7\n    linarith\n  \n  have h9 : Real.log w / Real.log z = 60 := by\n    have : Real.log w = 40 * Real.log y := h4\n    have : Real.log z = (2 : ℝ) / 3 * Real.log y := h8\n    rw [this, this]\n    field_simp [hy.ne']\n    <;> ring_nf\n    <;> linarith\n  \n  linarith",
+    "parsing_notes": "last_block",
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g3",
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r1_g24",
+    "parsed_lean_block": "import Mathlib.Data.Real.Basic\nimport Mathlib.Algebra.Order.Group.Defs\n\nopen Real\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 < w)\n    (h0 : Real.log (↑w) / Real.log (↑x) = 24) (h1 : Real.log (↑w) / Real.log (↑y) = 40)\n    (h2 : Real.log (↑w) / Real.log (↑x * ↑y * ↑z) = 12) : Real.log (↑w) / Real.log (↑z) = 60 := by\n  have hx : 1 < (↑x : ℝ) := by exact_mod_cast ht.1\n  have hy : 1 < (↑y : ℝ) := by exact_mod_cast ht.2.1\n  have hz : 1 < (↑z : ℝ) := by exact_mod_cast ht.2.2\n  have hw_pos : 0 < (↑w : ℝ) := by exact_mod_cast hw\n  \n  have hwx : 0 < Real.log (↑x : ℝ) := Real.log_pos hx\n  have hyx : 0 < Real.log (↑y : ℝ) := Real.log_pos hy\n  have hxyz : 0 < (↑x * ↑y * ↑z : ℝ) := by positivity\n  have hxyz_log : 0 < Real.log (↑x * ↑y * ↑z : ℝ) := Real.log_pos (by positivity)\n  \n  have h0' : Real.log (↑w) = 24 * Real.log (↑x) := by\n    field_simp [hwx.ne'] at h0 ⊢\n    linarith\n  \n  have h1' : Real.log (↑w) = 40 * Real.log (↑y) := by\n    field_simp [hyx.ne'] at h1 ⊢\n    linarith\n  \n  have h2' : Real.log (↑w) = 12 * Real.log (↑x * ↑y * ↑z) := by\n    field_simp [hxyz_log.ne'] at h2 ⊢\n    linarith\n  \n  have h3 : Real.log (↑x * ↑y * ↑z) = Real.log (↑x) + Real.log (↑y) + Real.log (↑z) := by\n    rw [Real.log_mul (by positivity) (by positivity)]\n    rw [Real.log_mul (by positivity) (by positivity)]\n    <;> ring\n    <;> norm_num\n  \n  rw [h3] at h2'\n  \n  have h4 : 24 * Real.log (↑x) = 40 * Real.log (↑y) := by\n    linarith\n  \n  have h5 : 24 * Real.log (↑x) = 12 * (Real.log (↑x) + Real.log (↑y) + Real.log (↑z)) := by\n    linarith\n  \n  have h6 : Real.log (↑z) = Real.log (↑w) / 60 := by\n    have h6a : Real.log (↑x) = Real.log (↑w) / 24 := by\n      field_simp [hwx.ne'] at h0 ⊢\n      linarith\n    have h6b : Real.log (↑y) = Real.log (↑w) / 40 := by\n      field_simp [hyx.ne'] at h1 ⊢\n      linarith\n    have h6c : Real.log (↑x) + Real.log (↑y) + Real.log (↑z) = Real.log (↑w) / 12 := by\n      field_simp [hxyz_log.ne'] at h2 ⊢\n      linarith\n    rw [h6a, h6b] at h6c\n    linarith\n  \n  have h7 : Real.log (↑w) / Real.log (↑z) = 60 := by\n    have h7a : Real.log (↑z) ≠ 0 := by\n      intro h\n      have h7b : Real.log (↑z) = 0 := h\n      have h7c : Real.log (↑w) = 0 := by\n        rw [h6] at h7b\n        linarith\n      have h7d : Real.log (↑w) / Real.log (↑x) = 0 := by\n        rw [h7c]\n        field_simp [hwx.ne']\n        <;> norm_num\n      linarith [h0]\n    field_simp [h7a]\n    rw [h6]\n    ring_nf\n    <;> field_simp\n    <;> linarith\n  \n  exact h7",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Data.Real.Basic\nimport Mathlib.Algebra.Order.Group.Defs\n\nopen Real\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 < w)\n    (h0 : Real.log (↑w) / Real.log (↑x) = 24) (h1 : Real.log (↑w) / Real.log (↑y) = 40)\n    (h2 : Real.log (↑w) / Real.log (↑x * ↑y * ↑z) = 12) : Real.log (↑w) / Real.log (↑z) = 60 := by\n  have hx : 1 < (↑x : ℝ) := by exact_mod_cast ht.1\n  have hy : 1 < (↑y : ℝ) := by exact_mod_cast ht.2.1\n  have hz : 1 < (↑z : ℝ) := by exact_mod_cast ht.2.2\n  have hw_pos : 0 < (↑w : ℝ) := by exact_mod_cast hw\n  \n  have hwx : 0 < Real.log (↑x : ℝ) := Real.log_pos hx\n  have hyx : 0 < Real.log (↑y : ℝ) := Real.log_pos hy\n  have hxyz : 0 < (↑x * ↑y * ↑z : ℝ) := by positivity\n  have hxyz_log : 0 < Real.log (↑x * ↑y * ↑z : ℝ) := Real.log_pos (by positivity)\n  \n  have h0' : Real.log (↑w) = 24 * Real.log (↑x) := by\n    field_simp [hwx.ne'] at h0 ⊢\n    linarith\n  \n  have h1' : Real.log (↑w) = 40 * Real.log (↑y) := by\n    field_simp [hyx.ne'] at h1 ⊢\n    linarith\n  \n  have h2' : Real.log (↑w) = 12 * Real.log (↑x * ↑y * ↑z) := by\n    field_simp [hxyz_log.ne'] at h2 ⊢\n    linarith\n  \n  have h3 : Real.log (↑x * ↑y * ↑z) = Real.log (↑x) + Real.log (↑y) + Real.log (↑z) := by\n    rw [Real.log_mul (by positivity) (by positivity)]\n    rw [Real.log_mul (by positivity) (by positivity)]\n    <;> ring\n    <;> norm_num\n  \n  rw [h3] at h2'\n  \n  have h4 : 24 * Real.log (↑x) = 40 * Real.log (↑y) := by\n    linarith\n  \n  have h5 : 24 * Real.log (↑x) = 12 * (Real.log (↑x) + Real.log (↑y) + Real.log (↑z)) := by\n    linarith\n  \n  have h6 : Real.log (↑z) = Real.log (↑w) / 60 := by\n    have h6a : Real.log (↑x) = Real.log (↑w) / 24 := by\n      field_simp [hwx.ne'] at h0 ⊢\n      linarith\n    have h6b : Real.log (↑y) = Real.log (↑w) / 40 := by\n      field_simp [hyx.ne'] at h1 ⊢\n      linarith\n    have h6c : Real.log (↑x) + Real.log (↑y) + Real.log (↑z) = Real.log (↑w) / 12 := by\n      field_simp [hxyz_log.ne'] at h2 ⊢\n      linarith\n    rw [h6a, h6b] at h6c\n    linarith\n  \n  have h7 : Real.log (↑w) / Real.log (↑z) = 60 := by\n    have h7a : Real.log (↑z) ≠ 0 := by\n      intro h\n      have h7b : Real.log (↑z) = 0 := h\n      have h7c : Real.log (↑w) = 0 := by\n        rw [h6] at h7b\n        linarith\n      have h7d : Real.log (↑w) / Real.log (↑x) = 0 := by\n        rw [h7c]\n        field_simp [hwx.ne']\n        <;> norm_num\n      linarith [h0]\n    field_simp [h7a]\n    rw [h6]\n    ring_nf\n    <;> field_simp\n    <;> linarith\n  \n  exact h7",
+    "parsing_notes": "last_block",
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g4",
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r1_g25",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g4",
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r1_g26",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g5",
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r1_g27",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g5",
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r1_g28",
+    "parsed_lean_block": "import Mathlib.Data.Real.Basic\nimport Mathlib.Algebra.Group.Powers.Basic\n\nopen Real\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 < w)\n    (h0 : Real.log (w : ℝ) / Real.log (x : ℝ) = 24) (h1 : Real.log (w : ℝ) / Real.log (y : ℝ) = 40)\n    (h2 : Real.log (w : ℝ) / Real.log ((x * y * z : ℝ)) = 12) : Real.log (w : ℝ) / Real.log (z : ℝ) = 60 := by\n  have h0' : Real.log (w : ℝ) = 24 * Real.log (x : ℝ) := by\n    have hx_pos : (x : ℝ) > 0 := by positivity\n    have hx_ne_one : (x : ℝ) ≠ 1 := by linarith\n    have h0'' : Real.log (x : ℝ) ≠ 0 := Real.log_ne_zero_of_pos_of_ne_one hx_pos hx_ne_one\n    field_simp [h0''] at h0 ⊢\n    linarith\n  \n  have h1' : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := by\n    have hy_pos : (y : ℝ) > 0 := by positivity\n    have hy_ne_one : (y : ℝ) ≠ 1 := by linarith\n    have h1'' : Real.log (y : ℝ) ≠ 0 := Real.log_ne_zero_of_pos_of_ne_one hy_pos hy_ne_one\n    field_simp [h1''] at h1 ⊢\n    linarith\n  \n  have h2' : Real.log (w : ℝ) = 12 * (Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ)) := by\n    have hxyz : Real.log ((x * y * z : ℝ)) = Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ) := by\n      rw [Real.log_mul, Real.log_mul]\n      <;> positivity\n    have hx_pos : (x : ℝ) > 0 := by positivity\n    have hy_pos : (y : ℝ) > 0 := by positivity\n    have hz_pos : (z : ℝ) > 0 := by positivity\n    have hx_ne_one : (x : ℝ) ≠ 1 := by linarith\n    have hy_ne_one : (y : ℝ) ≠ 1 := by linarith\n    have hz_ne_one : (z : ℝ) ≠ 1 := by linarith\n    have hxyz_ne_zero : Real.log ((x * y * z : ℝ)) ≠ 0 := Real.log_ne_zero_of_pos_of_ne_one (by positivity : (0 : ℝ) < x * y * z) (by\n      intro h\n      have h' : (x : ℝ) * (y : ℝ) * (z : ℝ) = 1 := by linarith\n      have h'' : (x : ℝ) = 1 := by\n        have h''' : (x : ℝ) > 0 := by positivity\n        nlinarith\n      have h''' : (y : ℝ) = 1 := by\n        have h'''' : (y : ℝ) > 0 := by positivity\n        nlinarith\n      have h'''' : (z : ℝ) = 1 := by\n        have h''''' : (z : ℝ) > 0 := by positivity\n        nlinarith\n      contradiction\n    )\n    field_simp [hxyz_ne_zero] at h2 ⊢\n    linarith\n  \n  have h3 : Real.log (x : ℝ) = (5 : ℝ) / 3 * Real.log (y : ℝ) := by\n    have h3' : Real.log (w : ℝ) = 24 * Real.log (x : ℝ) := h0'\n    have h3'' : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := h1'\n    linarith\n  \n  have h4 : Real.log (z : ℝ) = (2 : ℝ) / 3 * Real.log (y : ℝ) := by\n    have h4' : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := h1'\n    have h4'' : Real.log (w : ℝ) = 12 * (Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ)) := h2'\n    have h4''' : Real.log (x : ℝ) = (5 : ℝ) / 3 * Real.log (y : ℝ) := h3\n    rw [h4'''] at h4''\n    have h4'''' : 40 * Real.log (y : ℝ) = 12 * ((5 : ℝ) / 3 * Real.log (y : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ)) := by linarith\n    have h4''''' : 40 * Real.log (y : ℝ) = 12 * ((5 : ℝ) / 3 + 1) * Real.log (y : ℝ) + 12 * Real.log (z : ℝ) := by linarith\n    have h4'''''' : 40 * Real.log (y : ℝ) = 32 * Real.log (y : ℝ) + 12 * Real.log (z : ℝ) := by linarith\n    have h4''''''' : 8 * Real.log (y : ℝ) = 12 * Real.log (z : ℝ) := by linarith\n    field_simp at h4''''''' ⊢\n    linarith\n  \n  have h5 : Real.log (w : ℝ) / Real.log (z : ℝ) = 60 := by\n    have h5' : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := h1'\n    have h5'' : Real.log (z : ℝ) = (2 : ℝ) / 3 * Real.log (y : ℝ) := h4\n    rw [h5', h5'']\n    field_simp\n    <;> ring_nf\n    <;> field_simp\n    <;> linarith\n  \n  exact h5",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Data.Real.Basic\nimport Mathlib.Algebra.Group.Powers.Basic\n\nopen Real\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 < w)\n    (h0 : Real.log (w : ℝ) / Real.log (x : ℝ) = 24) (h1 : Real.log (w : ℝ) / Real.log (y : ℝ) = 40)\n    (h2 : Real.log (w : ℝ) / Real.log ((x * y * z : ℝ)) = 12) : Real.log (w : ℝ) / Real.log (z : ℝ) = 60 := by\n  have h0' : Real.log (w : ℝ) = 24 * Real.log (x : ℝ) := by\n    have hx_pos : (x : ℝ) > 0 := by positivity\n    have hx_ne_one : (x : ℝ) ≠ 1 := by linarith\n    have h0'' : Real.log (x : ℝ) ≠ 0 := Real.log_ne_zero_of_pos_of_ne_one hx_pos hx_ne_one\n    field_simp [h0''] at h0 ⊢\n    linarith\n  \n  have h1' : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := by\n    have hy_pos : (y : ℝ) > 0 := by positivity\n    have hy_ne_one : (y : ℝ) ≠ 1 := by linarith\n    have h1'' : Real.log (y : ℝ) ≠ 0 := Real.log_ne_zero_of_pos_of_ne_one hy_pos hy_ne_one\n    field_simp [h1''] at h1 ⊢\n    linarith\n  \n  have h2' : Real.log (w : ℝ) = 12 * (Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ)) := by\n    have hxyz : Real.log ((x * y * z : ℝ)) = Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ) := by\n      rw [Real.log_mul, Real.log_mul]\n      <;> positivity\n    have hx_pos : (x : ℝ) > 0 := by positivity\n    have hy_pos : (y : ℝ) > 0 := by positivity\n    have hz_pos : (z : ℝ) > 0 := by positivity\n    have hx_ne_one : (x : ℝ) ≠ 1 := by linarith\n    have hy_ne_one : (y : ℝ) ≠ 1 := by linarith\n    have hz_ne_one : (z : ℝ) ≠ 1 := by linarith\n    have hxyz_ne_zero : Real.log ((x * y * z : ℝ)) ≠ 0 := Real.log_ne_zero_of_pos_of_ne_one (by positivity : (0 : ℝ) < x * y * z) (by\n      intro h\n      have h' : (x : ℝ) * (y : ℝ) * (z : ℝ) = 1 := by linarith\n      have h'' : (x : ℝ) = 1 := by\n        have h''' : (x : ℝ) > 0 := by positivity\n        nlinarith\n      have h''' : (y : ℝ) = 1 := by\n        have h'''' : (y : ℝ) > 0 := by positivity\n        nlinarith\n      have h'''' : (z : ℝ) = 1 := by\n        have h''''' : (z : ℝ) > 0 := by positivity\n        nlinarith\n      contradiction\n    )\n    field_simp [hxyz_ne_zero] at h2 ⊢\n    linarith\n  \n  have h3 : Real.log (x : ℝ) = (5 : ℝ) / 3 * Real.log (y : ℝ) := by\n    have h3' : Real.log (w : ℝ) = 24 * Real.log (x : ℝ) := h0'\n    have h3'' : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := h1'\n    linarith\n  \n  have h4 : Real.log (z : ℝ) = (2 : ℝ) / 3 * Real.log (y : ℝ) := by\n    have h4' : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := h1'\n    have h4'' : Real.log (w : ℝ) = 12 * (Real.log (x : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ)) := h2'\n    have h4''' : Real.log (x : ℝ) = (5 : ℝ) / 3 * Real.log (y : ℝ) := h3\n    rw [h4'''] at h4''\n    have h4'''' : 40 * Real.log (y : ℝ) = 12 * ((5 : ℝ) / 3 * Real.log (y : ℝ) + Real.log (y : ℝ) + Real.log (z : ℝ)) := by linarith\n    have h4''''' : 40 * Real.log (y : ℝ) = 12 * ((5 : ℝ) / 3 + 1) * Real.log (y : ℝ) + 12 * Real.log (z : ℝ) := by linarith\n    have h4'''''' : 40 * Real.log (y : ℝ) = 32 * Real.log (y : ℝ) + 12 * Real.log (z : ℝ) := by linarith\n    have h4''''''' : 8 * Real.log (y : ℝ) = 12 * Real.log (z : ℝ) := by linarith\n    field_simp at h4''''''' ⊢\n    linarith\n  \n  have h5 : Real.log (w : ℝ) / Real.log (z : ℝ) = 60 := by\n    have h5' : Real.log (w : ℝ) = 40 * Real.log (y : ℝ) := h1'\n    have h5'' : Real.log (z : ℝ) = (2 : ℝ) / 3 * Real.log (y : ℝ) := h4\n    rw [h5', h5'']\n    field_simp\n    <;> ring_nf\n    <;> field_simp\n    <;> linarith\n  \n  exact h5",
+    "parsing_notes": "last_block",
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g6",
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r1_g29",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g6",
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r1_g30",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g7",
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r1_g31",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g7",
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "amc12_2001_p5__r1_g32",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g0",
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r1_g33",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g0",
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r1_g34",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g1",
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r1_g35",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g1",
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r1_g36",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g2",
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r1_g37",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g2",
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r1_g38",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g3",
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r1_g39",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g3",
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r1_g40",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g4",
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r1_g41",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g4",
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r1_g42",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g5",
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r1_g43",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g5",
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r1_g44",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g6",
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r1_g45",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g6",
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r1_g46",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g7",
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r1_g47",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g7",
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "imo_1969_p2__r1_g48",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g0",
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r1_g49",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g0",
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r1_g50",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g1",
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r1_g51",
+    "parsed_lean_block": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := by\n  have h₄ : ∃ A B : ℂ, ∀ x, y x = (1/2 : ℝ) * (A * Complex.exp (I * x) + B * Complex.exp (-I * x)) := by\n    use ∑ i in Finset.range k, (Complex.exp (I * a i) / (2^i : ℂ)), ∑ i in Finset.range k, (Complex.exp (-I * a i) / (2^i : ℂ))\n    intro x\n    have h₅ : y x = ∑ i in Finset.range k, (Real.cos (a i + x) / (2^i : ℝ)) := by\n      rw [h₁ x]\n      simp [div_eq_mul_inv]\n    rw [h₅]\n    have h₆ : Real.cos (a i + x) = (Complex.exp (I * (a i + x)) + Complex.exp (-I * (a i + x))) / 2 := by\n      rw [Complex.cos]\n      simp [Complex.exp_re, Complex.exp_im]\n    calc\n      ∑ i in Finset.range k, (Real.cos (a i + x) / (2^i : ℝ)) = \n        ∑ i in Finset.range k, ((Complex.exp (I * (a i + x)) + Complex.exp (-I * (a i + x))) / 2 / (2^i : ℝ)) := by\n        rw [h₆]\n        simp [div_eq_mul_inv]\n      _ = ∑ i in Finset.range k, ((Complex.exp (I * a i) * Complex.exp (I * x) + Complex.exp (-I * a i) * Complex.exp (-I * x)) / (2^(i + 1) : ℂ)) := by\n        simp [Complex.exp_add, Complex.exp_neg]\n        <;> ring_nf\n        <;> simp [pow_succ]\n      _ = (1/2 : ℝ) * (Complex.exp (I * x) * ∑ i in Finset.range k, (Complex.exp (I * a i) / (2^i : ℂ)) + \n                         Complex.exp (-I * x) * ∑ i in Finset.range k, (Complex.exp (-I * a i) / (2^i : ℂ))) := by\n        simp [Finset.sum_add_distrib, mul_assoc, mul_comm, mul_left_comm]\n        <;> ring_nf\n        <;> simp [pow_succ]\n        <;> norm_cast\n  \n  rcases h₄ with ⟨A, B, h₄⟩\n  have h₅ : A * Complex.exp (I * m) + B * Complex.exp (-I * m) = 0 := by\n    have h₅₁ : y m = 0 := h₂\n    have h₅₂ : (1/2 : ℝ) * (A * Complex.exp (I * m) + B * Complex.exp (-I * m)) = 0 := by\n      rw [h₄ m]\n      simp [h₅₁]\n    norm_num at h₅₂ ⊢\n    exact h₅₂\n  \n  have h₆ : A * Complex.exp (I * n) + B * Complex.exp (-I * n) = 0 := by\n    have h₆₁ : y n = 0 := h₃\n    have h₆₂ : (1/2 : ℝ) * (A * Complex.exp (I * n) + B * Complex.exp (-I * n)) = 0 := by\n      rw [h₄ n]\n      simp [h₆₁]\n    norm_num at h₆₂ ⊢\n    exact h₆₂\n  \n  have h₇ : B ≠ 0 := by\n    by_contra h₇\n    have h₇₁ : B = 0 := h₇\n    have h₇₂ : A = 0 := by\n      have h₇₃ : A * Complex.exp (I * m) = 0 := by\n        rw [h₇₁] at h₅\n        simp at h₅ ⊢\n      have h₇₄ : Complex.exp (I * m) ≠ 0 := Complex.exp_ne_zero\n      simp [h₇₄] at h₇₃ ⊢\n      exact h₇₃\n    have h₇₅ : A * Complex.exp (I * n) = 0 := by\n      rw [h₇₁] at h₆\n      simp at h₆ ⊢\n    have h₇₆ : Complex.exp (I * n) ≠ 0 := Complex.exp_ne_zero\n    simp [h₇₆] at h₇₅ ⊢\n    exact h₇₅\n  \n  have h₈ : A * Complex.exp (I * m) / B = -Complex.exp (-I * m) := by\n    field_simp [h₇] at h₅ ⊢\n    linarith\n  \n  have h₉ : A * Complex.exp (I * n) / B = -Complex.exp (-I * n) := by\n    field_simp [h₇] at h₆ ⊢\n    linarith\n  \n  have h₁₀ : Complex.exp (I * (m - n)) = 1 := by\n    calc\n      Complex.exp (I * (m - n)) = Complex.exp (I * m) / Complex.exp (I * n) := by\n        rw [Complex.exp_sub]\n      _ = (-Complex.exp (-I * m)) / (-Complex.exp (-I * n)) := by\n        rw [h₈, h₉]\n        <;> field_simp\n      _ = Complex.exp (I * n) / Complex.exp (I * m) := by\n        field_simp [Complex.exp_neg]\n        <;> ring_nf\n      _ = 1 := by\n        have h₁₀₁ : Complex.exp (I * m) ≠ 0 := Complex.exp_ne_zero\n        have h₁₀₂ : Complex.exp (I * n) ≠ 0 := Complex.exp_ne_zero\n        field_simp [h₁₀₁, h₁₀₂]\n        <;> ring_nf\n        <;> simp [Complex.exp_eq_one_iff]\n        <;>\n        (try norm_num) <;>\n        (try ring_nf) <;>\n        (try simp_all [Complex.exp_eq_one_iff]) <;>\n        (try omega)\n  \n  have h₁₁ : ∃ t : ℤ, m - n = t * π := by\n    have h₁₁₁ : Complex.exp (I * (m - n)) = 1 := h₁₀\n    rw [Complex.exp_eq_one_iff] at h₁₁₁\n    obtain ⟨t, ht⟩ := h₁₁₁\n    refine' ⟨t, _⟩\n    have h₁₁₂ : m - n = t * π := by\n      have h₁₁₃ : I * (m - n) = I * (t * π) := by\n        rw [ht]\n      have h₁₁₄ : m - n = t * π := by\n        apply Complex.ext_iff.mp h₁₁₃\n        simp [Complex.ext_iff, Real.exp_re, Real.exp_im, Real.pi_pos]\n        <;>\n        (try norm_num) <;>\n        (try ring_nf) <;>\n        (try simp_all [Complex.exp_eq_one_iff]) <;>\n        (try omega)\n      exact h₁₁₄\n    exact h₁₁₂\n  \n  obtain ⟨t, ht⟩ := h₁₁\n  exact ⟨t, by\n    have h₁₂ : m - n = t * π := ht\n    simp [h₁₂]\n  ⟩",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := by\n  have h₄ : ∃ A B : ℂ, ∀ x, y x = (1/2 : ℝ) * (A * Complex.exp (I * x) + B * Complex.exp (-I * x)) := by\n    use ∑ i in Finset.range k, (Complex.exp (I * a i) / (2^i : ℂ)), ∑ i in Finset.range k, (Complex.exp (-I * a i) / (2^i : ℂ))\n    intro x\n    have h₅ : y x = ∑ i in Finset.range k, (Real.cos (a i + x) / (2^i : ℝ)) := by\n      rw [h₁ x]\n      simp [div_eq_mul_inv]\n    rw [h₅]\n    have h₆ : Real.cos (a i + x) = (Complex.exp (I * (a i + x)) + Complex.exp (-I * (a i + x))) / 2 := by\n      rw [Complex.cos]\n      simp [Complex.exp_re, Complex.exp_im]\n    calc\n      ∑ i in Finset.range k, (Real.cos (a i + x) / (2^i : ℝ)) = \n        ∑ i in Finset.range k, ((Complex.exp (I * (a i + x)) + Complex.exp (-I * (a i + x))) / 2 / (2^i : ℝ)) := by\n        rw [h₆]\n        simp [div_eq_mul_inv]\n      _ = ∑ i in Finset.range k, ((Complex.exp (I * a i) * Complex.exp (I * x) + Complex.exp (-I * a i) * Complex.exp (-I * x)) / (2^(i + 1) : ℂ)) := by\n        simp [Complex.exp_add, Complex.exp_neg]\n        <;> ring_nf\n        <;> simp [pow_succ]\n      _ = (1/2 : ℝ) * (Complex.exp (I * x) * ∑ i in Finset.range k, (Complex.exp (I * a i) / (2^i : ℂ)) + \n                         Complex.exp (-I * x) * ∑ i in Finset.range k, (Complex.exp (-I * a i) / (2^i : ℂ))) := by\n        simp [Finset.sum_add_distrib, mul_assoc, mul_comm, mul_left_comm]\n        <;> ring_nf\n        <;> simp [pow_succ]\n        <;> norm_cast\n  \n  rcases h₄ with ⟨A, B, h₄⟩\n  have h₅ : A * Complex.exp (I * m) + B * Complex.exp (-I * m) = 0 := by\n    have h₅₁ : y m = 0 := h₂\n    have h₅₂ : (1/2 : ℝ) * (A * Complex.exp (I * m) + B * Complex.exp (-I * m)) = 0 := by\n      rw [h₄ m]\n      simp [h₅₁]\n    norm_num at h₅₂ ⊢\n    exact h₅₂\n  \n  have h₆ : A * Complex.exp (I * n) + B * Complex.exp (-I * n) = 0 := by\n    have h₆₁ : y n = 0 := h₃\n    have h₆₂ : (1/2 : ℝ) * (A * Complex.exp (I * n) + B * Complex.exp (-I * n)) = 0 := by\n      rw [h₄ n]\n      simp [h₆₁]\n    norm_num at h₆₂ ⊢\n    exact h₆₂\n  \n  have h₇ : B ≠ 0 := by\n    by_contra h₇\n    have h₇₁ : B = 0 := h₇\n    have h₇₂ : A = 0 := by\n      have h₇₃ : A * Complex.exp (I * m) = 0 := by\n        rw [h₇₁] at h₅\n        simp at h₅ ⊢\n      have h₇₄ : Complex.exp (I * m) ≠ 0 := Complex.exp_ne_zero\n      simp [h₇₄] at h₇₃ ⊢\n      exact h₇₃\n    have h₇₅ : A * Complex.exp (I * n) = 0 := by\n      rw [h₇₁] at h₆\n      simp at h₆ ⊢\n    have h₇₆ : Complex.exp (I * n) ≠ 0 := Complex.exp_ne_zero\n    simp [h₇₆] at h₇₅ ⊢\n    exact h₇₅\n  \n  have h₈ : A * Complex.exp (I * m) / B = -Complex.exp (-I * m) := by\n    field_simp [h₇] at h₅ ⊢\n    linarith\n  \n  have h₉ : A * Complex.exp (I * n) / B = -Complex.exp (-I * n) := by\n    field_simp [h₇] at h₆ ⊢\n    linarith\n  \n  have h₁₀ : Complex.exp (I * (m - n)) = 1 := by\n    calc\n      Complex.exp (I * (m - n)) = Complex.exp (I * m) / Complex.exp (I * n) := by\n        rw [Complex.exp_sub]\n      _ = (-Complex.exp (-I * m)) / (-Complex.exp (-I * n)) := by\n        rw [h₈, h₉]\n        <;> field_simp\n      _ = Complex.exp (I * n) / Complex.exp (I * m) := by\n        field_simp [Complex.exp_neg]\n        <;> ring_nf\n      _ = 1 := by\n        have h₁₀₁ : Complex.exp (I * m) ≠ 0 := Complex.exp_ne_zero\n        have h₁₀₂ : Complex.exp (I * n) ≠ 0 := Complex.exp_ne_zero\n        field_simp [h₁₀₁, h₁₀₂]\n        <;> ring_nf\n        <;> simp [Complex.exp_eq_one_iff]\n        <;>\n        (try norm_num) <;>\n        (try ring_nf) <;>\n        (try simp_all [Complex.exp_eq_one_iff]) <;>\n        (try omega)\n  \n  have h₁₁ : ∃ t : ℤ, m - n = t * π := by\n    have h₁₁₁ : Complex.exp (I * (m - n)) = 1 := h₁₀\n    rw [Complex.exp_eq_one_iff] at h₁₁₁\n    obtain ⟨t, ht⟩ := h₁₁₁\n    refine' ⟨t, _⟩\n    have h₁₁₂ : m - n = t * π := by\n      have h₁₁₃ : I * (m - n) = I * (t * π) := by\n        rw [ht]\n      have h₁₁₄ : m - n = t * π := by\n        apply Complex.ext_iff.mp h₁₁₃\n        simp [Complex.ext_iff, Real.exp_re, Real.exp_im, Real.pi_pos]\n        <;>\n        (try norm_num) <;>\n        (try ring_nf) <;>\n        (try simp_all [Complex.exp_eq_one_iff]) <;>\n        (try omega)\n      exact h₁₁₄\n    exact h₁₁₂\n  \n  obtain ⟨t, ht⟩ := h₁₁\n  exact ⟨t, by\n    have h₁₂ : m - n = t * π := ht\n    simp [h₁₂]\n  ⟩",
+    "parsing_notes": "last_block",
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g1",
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r1_g52",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g2",
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r1_g53",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g2",
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r1_g54",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g3",
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r1_g55",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g3",
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r1_g56",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g4",
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r1_g57",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g4",
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r1_g58",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g5",
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r1_g59",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g5",
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r1_g60",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g6",
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r1_g61",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g6",
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r1_g62",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g7",
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r1_g63",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g7",
+    "original_problem_id": "imo_1969_p2"
+  }
+]

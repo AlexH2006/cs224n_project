@@ -1,0 +1,386 @@
+[
+  {
+    "item_id": "",
+    "original_problem_id": "aime_1983_p1",
+    "problem_idx": 2,
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g0",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "aime_1983_p1",
+    "problem_idx": 2,
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g0",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "aime_1983_p1",
+    "problem_idx": 2,
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g1",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "aime_1983_p1",
+    "problem_idx": 2,
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g1",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "aime_1983_p1",
+    "problem_idx": 2,
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g2",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "aime_1983_p1",
+    "problem_idx": 2,
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g2",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "aime_1983_p1",
+    "problem_idx": 2,
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g3",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "aime_1983_p1",
+    "problem_idx": 2,
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g3",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "aime_1983_p1",
+    "problem_idx": 2,
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g4",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "aime_1983_p1",
+    "problem_idx": 2,
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g4",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "aime_1983_p1",
+    "problem_idx": 2,
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g5",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "aime_1983_p1",
+    "problem_idx": 2,
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g5",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "aime_1983_p1",
+    "problem_idx": 2,
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g6",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "aime_1983_p1",
+    "problem_idx": 2,
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g6",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "aime_1983_p1",
+    "problem_idx": 2,
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g7",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "aime_1983_p1",
+    "problem_idx": 2,
+    "round_idx": 1,
+    "parent_attempt_id": "aime_1983_p1__r0_g7",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "amc12_2001_p5",
+    "problem_idx": 3,
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g0",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "amc12_2001_p5",
+    "problem_idx": 3,
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g0",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "amc12_2001_p5",
+    "problem_idx": 3,
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g1",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "amc12_2001_p5",
+    "problem_idx": 3,
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g1",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "amc12_2001_p5",
+    "problem_idx": 3,
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g2",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "amc12_2001_p5",
+    "problem_idx": 3,
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g2",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "amc12_2001_p5",
+    "problem_idx": 3,
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g3",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "amc12_2001_p5",
+    "problem_idx": 3,
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g3",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "amc12_2001_p5",
+    "problem_idx": 3,
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g4",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "amc12_2001_p5",
+    "problem_idx": 3,
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g4",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "amc12_2001_p5",
+    "problem_idx": 3,
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g5",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "amc12_2001_p5",
+    "problem_idx": 3,
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g5",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "amc12_2001_p5",
+    "problem_idx": 3,
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g6",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "amc12_2001_p5",
+    "problem_idx": 3,
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g6",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "amc12_2001_p5",
+    "problem_idx": 3,
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g7",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "amc12_2001_p5",
+    "problem_idx": 3,
+    "round_idx": 1,
+    "parent_attempt_id": "amc12_2001_p5__r0_g7",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "imo_1969_p2",
+    "problem_idx": 6,
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g0",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "imo_1969_p2",
+    "problem_idx": 6,
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g0",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "imo_1969_p2",
+    "problem_idx": 6,
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g1",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "imo_1969_p2",
+    "problem_idx": 6,
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g1",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "imo_1969_p2",
+    "problem_idx": 6,
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g2",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "imo_1969_p2",
+    "problem_idx": 6,
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g2",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "imo_1969_p2",
+    "problem_idx": 6,
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g3",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "imo_1969_p2",
+    "problem_idx": 6,
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g3",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "imo_1969_p2",
+    "problem_idx": 6,
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g4",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "imo_1969_p2",
+    "problem_idx": 6,
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g4",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "imo_1969_p2",
+    "problem_idx": 6,
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g5",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "imo_1969_p2",
+    "problem_idx": 6,
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g5",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "imo_1969_p2",
+    "problem_idx": 6,
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g6",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "imo_1969_p2",
+    "problem_idx": 6,
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g6",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "imo_1969_p2",
+    "problem_idx": 6,
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g7",
+    "reason": "failed_verification_unsolved_problem"
+  },
+  {
+    "item_id": "",
+    "original_problem_id": "imo_1969_p2",
+    "problem_idx": 6,
+    "round_idx": 1,
+    "parent_attempt_id": "imo_1969_p2__r0_g7",
+    "reason": "failed_verification_unsolved_problem"
+  }
+]

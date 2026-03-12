@@ -1,0 +1,1785 @@
+[
+  {
+    "item_id": "mathd_algebra_478__r0_g0",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.052
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g1",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.095
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g2",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.039
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g3",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.04
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g4",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.034
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g5",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.036
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g6",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.04
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g7",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.04
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478",
+    "round_idx": 0
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g0",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 6, 'column': 30}, 'endPos': {'line': 6, 'column': 35}, 'goal': 'x y : ℤ\\n⊢ 4 * x ^ 3 - 7 * y ^ 3 ≠ 2003'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.022
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003",
+    "round_idx": 0
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g1",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 6, 'column': 30}, 'endPos': {'line': 6, 'column': 35}, 'goal': 'x y : ℤ\\n⊢ 4 * x ^ 3 - 7 * y ^ 3 ≠ 2003'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.023
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003",
+    "round_idx": 0
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g2",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 6, 'column': 30}, 'endPos': {'line': 6, 'column': 35}, 'goal': 'x y : ℤ\\n⊢ 4 * x ^ 3 - 7 * y ^ 3 ≠ 2003'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.022
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003",
+    "round_idx": 0
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g3",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 6, 'column': 30}, 'endPos': {'line': 6, 'column': 35}, 'goal': 'x y : ℤ\\n⊢ 4 * x ^ 3 - 7 * y ^ 3 ≠ 2003'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.022
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003",
+    "round_idx": 0
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g4",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 6, 'column': 30}, 'endPos': {'line': 6, 'column': 35}, 'goal': 'x y : ℤ\\n⊢ 4 * x ^ 3 - 7 * y ^ 3 ≠ 2003'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.022
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003",
+    "round_idx": 0
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g5",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 6, 'column': 30}, 'endPos': {'line': 6, 'column': 35}, 'goal': 'x y : ℤ\\n⊢ 4 * x ^ 3 - 7 * y ^ 3 ≠ 2003'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.029
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003",
+    "round_idx": 0
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g6",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 6, 'column': 30}, 'endPos': {'line': 6, 'column': 35}, 'goal': 'x y : ℤ\\n⊢ 4 * x ^ 3 - 7 * y ^ 3 ≠ 2003'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.022
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003",
+    "round_idx": 0
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g7",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 6, 'column': 30}, 'endPos': {'line': 6, 'column': 35}, 'goal': 'x y : ℤ\\n⊢ 4 * x ^ 3 - 7 * y ^ 3 ≠ 2003'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.022
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003",
+    "round_idx": 0
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g0",
+    "passed": false,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": false,
+      "complete": false,
+      "has_sorry": false,
+      "feedback": "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nthis : Real.log ↑w / Real.log ↑x = 24\na✝ : Real.log ↑x * 24 < Real.log ↑w\n⊢ False failed\nlinarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nthis : Real.log ↑w / Real.log ↑y = 40\na✝ : Real.log ↑y * 40 < Real.log ↑w\n⊢ False failed\nlinarith failed to find a contradiction\ncase h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nh4 : Real.log ↑y = Real.log ↑w / 40\na✝ : ↑x * ↑y = 0\n⊢ False failed\nlinarith failed to find a contradiction\ncase h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nh4 : Real.log ↑y = Real.log ↑w / 40\na✝ : ↑z = 0\n⊢ False failed\nlinarith failed to find a contradiction\ncase h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nh4 : Real.log ↑y = Real.log ↑w / 40\na✝ : ↑x = 0\n⊢ False failed\nlinarith failed to find a contradiction\ncase h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nh4 : Real.log ↑y = Real.log ↑w / 40\na✝ : ↑y = 0\n⊢ False failed\nlinarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nh4 : Real.log ↑y = Real.log ↑w / 40\nh5 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nthis : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\na✝ : Real.log (↑x * ↑y * ↑z) * 12 < Real.log ↑w\n⊢ False failed\nlinarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nh4 : Real.log ↑y = Real.log ↑w / 40\nh5 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh6 : Real.log (↑x * ↑y * ↑z) = Real.log ↑w / 12\nh7 : Real.log ↑x + Real.log ↑y + Real.log ↑z = Real.log ↑w / 12\nh8 h10 : Real.log ↑z = Real.log ↑w / 60\na✝ : Real.log ↑w * (Real.log ↑w)⁻¹ * 60 < 60\n⊢ False failed",
+      "errors": [
+        "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nthis : Real.log ↑w / Real.log ↑x = 24\na✝ : Real.log ↑x * 24 < Real.log ↑w\n⊢ False failed",
+        "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nthis : Real.log ↑w / Real.log ↑y = 40\na✝ : Real.log ↑y * 40 < Real.log ↑w\n⊢ False failed",
+        "linarith failed to find a contradiction\ncase h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nh4 : Real.log ↑y = Real.log ↑w / 40\na✝ : ↑x * ↑y = 0\n⊢ False failed",
+        "linarith failed to find a contradiction\ncase h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nh4 : Real.log ↑y = Real.log ↑w / 40\na✝ : ↑z = 0\n⊢ False failed",
+        "linarith failed to find a contradiction\ncase h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nh4 : Real.log ↑y = Real.log ↑w / 40\na✝ : ↑x = 0\n⊢ False failed",
+        "linarith failed to find a contradiction\ncase h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nh4 : Real.log ↑y = Real.log ↑w / 40\na✝ : ↑y = 0\n⊢ False failed",
+        "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nh4 : Real.log ↑y = Real.log ↑w / 40\nh5 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nthis : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\na✝ : Real.log (↑x * ↑y * ↑z) * 12 < Real.log ↑w\n⊢ False failed",
+        "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nh4 : Real.log ↑y = Real.log ↑w / 40\nh5 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh6 : Real.log (↑x * ↑y * ↑z) = Real.log ↑w / 12\nh7 : Real.log ↑x + Real.log ↑y + Real.log ↑z = Real.log ↑w / 12\nh8 h10 : Real.log ↑z = Real.log ↑w / 60\na✝ : Real.log ↑w * (Real.log ↑w)⁻¹ * 60 < 60\n⊢ False failed"
+      ],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 2.434
+      }
+    },
+    "extracted_error_messages": [
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nthis : Real.log ↑w / Real.log ↑x = 24\na✝ : Real.log ↑x * 24 < Real.log ↑w\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nthis : Real.log ↑w / Real.log ↑y = 40\na✝ : Real.log ↑y * 40 < Real.log ↑w\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nh4 : Real.log ↑y = Real.log ↑w / 40\na✝ : ↑x * ↑y = 0\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nh4 : Real.log ↑y = Real.log ↑w / 40\na✝ : ↑z = 0\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nh4 : Real.log ↑y = Real.log ↑w / 40\na✝ : ↑x = 0\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nh4 : Real.log ↑y = Real.log ↑w / 40\na✝ : ↑y = 0\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nh4 : Real.log ↑y = Real.log ↑w / 40\nh5 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nthis : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\na✝ : Real.log (↑x * ↑y * ↑z) * 12 < Real.log ↑w\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nh4 : Real.log ↑y = Real.log ↑w / 40\nh5 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh6 : Real.log (↑x * ↑y * ↑z) = Real.log ↑w / 12\nh7 : Real.log ↑x + Real.log ↑y + Real.log ↑z = Real.log ↑w / 12\nh8 h10 : Real.log ↑z = Real.log ↑w / 60\na✝ : Real.log ↑w * (Real.log ↑w)⁻¹ * 60 < 60\n⊢ False failed"
+    ],
+    "structured_errors": [
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nthis : Real.log ↑w / Real.log ↑x = 24\na✝ : Real.log ↑x * 24 < Real.log ↑w\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nthis : Real.log ↑w / Real.log ↑y = 40\na✝ : Real.log ↑y * 40 < Real.log ↑w\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nh4 : Real.log ↑y = Real.log ↑w / 40\na✝ : ↑x * ↑y = 0\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nh4 : Real.log ↑y = Real.log ↑w / 40\na✝ : ↑z = 0\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nh4 : Real.log ↑y = Real.log ↑w / 40\na✝ : ↑x = 0\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nh4 : Real.log ↑y = Real.log ↑w / 40\na✝ : ↑y = 0\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nh4 : Real.log ↑y = Real.log ↑w / 40\nh5 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nthis : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\na✝ : Real.log (↑x * ↑y * ↑z) * 12 < Real.log ↑w\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log ↑x = Real.log ↑w / 24\nh4 : Real.log ↑y = Real.log ↑w / 40\nh5 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh6 : Real.log (↑x * ↑y * ↑z) = Real.log ↑w / 12\nh7 : Real.log ↑x + Real.log ↑y + Real.log ↑z = Real.log ↑w / 12\nh8 h10 : Real.log ↑z = Real.log ↑w / 60\na✝ : Real.log ↑w * (Real.log ↑w)⁻¹ * 60 < 60\n⊢ False failed"
+    ],
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1",
+    "round_idx": 0
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g1",
+    "passed": false,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": false,
+      "complete": false,
+      "has_sorry": false,
+      "feedback": "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 < w\nh0 : log ↑w / log ↑x = 24\nh1 : log ↑w / log ↑y = 40\nh2 : log ↑w / log (↑x * ↑y * ↑z) = 12\nthis : log ↑w / log ↑x = 24\na✝ : log ↑w < 24 * log ↑x\n⊢ False failed\nlinarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 < w\nh0 : log ↑w / log ↑x = 24\nh1 : log ↑w / log ↑y = 40\nh2 : log ↑w / log (↑x * ↑y * ↑z) = 12\nh3 : log ↑w = 24 * log ↑x\nthis : log ↑w / log ↑y = 40\na✝ : log ↑w < 40 * log ↑y\n⊢ False failed\nlinarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 < w\nh0 : log ↑w / log ↑x = 24\nh1 : log ↑w / log ↑y = 40\nh2 : log ↑w / log (↑x * ↑y * ↑z) = 12\nh3 : log ↑w = 24 * log ↑x\nh4 : log ↑w = 40 * log ↑y\nthis : log ↑w / log (↑x * ↑y * ↑z) = 12\na✝ : log ↑w < 12 * log (↑x * ↑y * ↑z)\n⊢ False failed\nfailed to prove nonzeroness, but it would be possible to prove nonnegativity if desired\nfailed to prove nonzeroness, but it would be possible to prove nonnegativity if desired\nfailed to prove nonzeroness, but it would be possible to prove nonnegativity if desired\nfailed to prove nonzeroness, but it would be possible to prove nonnegativity if desired\nno goals to be solved\ntactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  log ↑y\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 < w\nh0 : log ↑w / log ↑x = 24\nh1 : log ↑w / log ↑y = 40\nh2 : log ↑w / log (↑x * ↑y * ↑z) = 12\nh3 : log ↑w = 24 * log ↑x\nh4 : log ↑w = 40 * log ↑y\nh5 : log ↑w = 12 * (log ↑x + log ↑y + log ↑z)\nh6 : log (↑x * ↑y * ↑z) = log ↑x + log ↑y + log ↑z\nh7 : 24 * log ↑x = 12 * (log ↑x + log ↑y + log ↑z)\nh8 : 24 * log ↑x = 12 * log ↑x + 12 * log ↑y + 12 * log ↑z\nh9 : 12 * log ↑x = 12 * log ↑y + 12 * log ↑z\nh10 : log ↑x = log ↑y + log ↑z\nh11 : log ↑w = 24 * (log ↑y + log ↑z)\nthis✝ : log ↑w = 40 * log ↑y\nthis : log ↑y = 3 / 2 * log ↑z\n⊢ log ↑w = 40 * (3 / 2 * log ↑z)\nunsolved goals\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 < w\nh0 : log ↑w / log ↑x = 24\nh1 : log ↑w / log ↑y = 40\nh2 : log ↑w / log (↑x * ↑y * ↑z) = 12\nh3 : log ↑w = 24 * log ↑x\nh4 : log ↑w = 40 * log ↑y\nh5 : log ↑w = 12 * (log ↑x + log ↑y + log ↑z)\nh6 : log (↑x * ↑y * ↑z) = log ↑x + log ↑y + log ↑z\nh7 : 24 * log ↑x = 12 * (log ↑x + log ↑y + log ↑z)\nh8 : 24 * log ↑x = 12 * log ↑x + 12 * log ↑y + 12 * log ↑z\nh9 : 12 * log ↑x = 12 * log ↑y + 12 * log ↑z\nh10 : log ↑x = log ↑y + log ↑z\nh11 : log ↑w = 24 * (log ↑y + log ↑z)\nthis✝¹ : log ↑w = 40 * log ↑y\nthis✝ : log ↑y = 3 / 2 * log ↑z\nthis : log ↑w = 40 * (3 / 2 * log ↑z)\n⊢ log ↑w = log ↑z * 60\nsimp made no progress",
+      "errors": [
+        "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 < w\nh0 : log ↑w / log ↑x = 24\nh1 : log ↑w / log ↑y = 40\nh2 : log ↑w / log (↑x * ↑y * ↑z) = 12\nthis : log ↑w / log ↑x = 24\na✝ : log ↑w < 24 * log ↑x\n⊢ False failed",
+        "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 < w\nh0 : log ↑w / log ↑x = 24\nh1 : log ↑w / log ↑y = 40\nh2 : log ↑w / log (↑x * ↑y * ↑z) = 12\nh3 : log ↑w = 24 * log ↑x\nthis : log ↑w / log ↑y = 40\na✝ : log ↑w < 40 * log ↑y\n⊢ False failed",
+        "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 < w\nh0 : log ↑w / log ↑x = 24\nh1 : log ↑w / log ↑y = 40\nh2 : log ↑w / log (↑x * ↑y * ↑z) = 12\nh3 : log ↑w = 24 * log ↑x\nh4 : log ↑w = 40 * log ↑y\nthis : log ↑w / log (↑x * ↑y * ↑z) = 12\na✝ : log ↑w < 12 * log (↑x * ↑y * ↑z)\n⊢ False failed",
+        "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+        "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+        "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+        "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+        "no goals to be solved",
+        "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  log ↑y\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 < w\nh0 : log ↑w / log ↑x = 24\nh1 : log ↑w / log ↑y = 40\nh2 : log ↑w / log (↑x * ↑y * ↑z) = 12\nh3 : log ↑w = 24 * log ↑x\nh4 : log ↑w = 40 * log ↑y\nh5 : log ↑w = 12 * (log ↑x + log ↑y + log ↑z)\nh6 : log (↑x * ↑y * ↑z) = log ↑x + log ↑y + log ↑z\nh7 : 24 * log ↑x = 12 * (log ↑x + log ↑y + log ↑z)\nh8 : 24 * log ↑x = 12 * log ↑x + 12 * log ↑y + 12 * log ↑z\nh9 : 12 * log ↑x = 12 * log ↑y + 12 * log ↑z\nh10 : log ↑x = log ↑y + log ↑z\nh11 : log ↑w = 24 * (log ↑y + log ↑z)\nthis✝ : log ↑w = 40 * log ↑y\nthis : log ↑y = 3 / 2 * log ↑z\n⊢ log ↑w = 40 * (3 / 2 * log ↑z)",
+        "unsolved goals\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 < w\nh0 : log ↑w / log ↑x = 24\nh1 : log ↑w / log ↑y = 40\nh2 : log ↑w / log (↑x * ↑y * ↑z) = 12\nh3 : log ↑w = 24 * log ↑x\nh4 : log ↑w = 40 * log ↑y\nh5 : log ↑w = 12 * (log ↑x + log ↑y + log ↑z)\nh6 : log (↑x * ↑y * ↑z) = log ↑x + log ↑y + log ↑z\nh7 : 24 * log ↑x = 12 * (log ↑x + log ↑y + log ↑z)\nh8 : 24 * log ↑x = 12 * log ↑x + 12 * log ↑y + 12 * log ↑z\nh9 : 12 * log ↑x = 12 * log ↑y + 12 * log ↑z\nh10 : log ↑x = log ↑y + log ↑z\nh11 : log ↑w = 24 * (log ↑y + log ↑z)\nthis✝¹ : log ↑w = 40 * log ↑y\nthis✝ : log ↑y = 3 / 2 * log ↑z\nthis : log ↑w = 40 * (3 / 2 * log ↑z)\n⊢ log ↑w = log ↑z * 60",
+        "simp made no progress"
+      ],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 1.892
+      }
+    },
+    "extracted_error_messages": [
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 < w\nh0 : log ↑w / log ↑x = 24\nh1 : log ↑w / log ↑y = 40\nh2 : log ↑w / log (↑x * ↑y * ↑z) = 12\nthis : log ↑w / log ↑x = 24\na✝ : log ↑w < 24 * log ↑x\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 < w\nh0 : log ↑w / log ↑x = 24\nh1 : log ↑w / log ↑y = 40\nh2 : log ↑w / log (↑x * ↑y * ↑z) = 12\nh3 : log ↑w = 24 * log ↑x\nthis : log ↑w / log ↑y = 40\na✝ : log ↑w < 40 * log ↑y\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 < w\nh0 : log ↑w / log ↑x = 24\nh1 : log ↑w / log ↑y = 40\nh2 : log ↑w / log (↑x * ↑y * ↑z) = 12\nh3 : log ↑w = 24 * log ↑x\nh4 : log ↑w = 40 * log ↑y\nthis : log ↑w / log (↑x * ↑y * ↑z) = 12\na✝ : log ↑w < 12 * log (↑x * ↑y * ↑z)\n⊢ False failed",
+      "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+      "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+      "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+      "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+      "no goals to be solved",
+      "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  log ↑y\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 < w\nh0 : log ↑w / log ↑x = 24\nh1 : log ↑w / log ↑y = 40\nh2 : log ↑w / log (↑x * ↑y * ↑z) = 12\nh3 : log ↑w = 24 * log ↑x\nh4 : log ↑w = 40 * log ↑y\nh5 : log ↑w = 12 * (log ↑x + log ↑y + log ↑z)\nh6 : log (↑x * ↑y * ↑z) = log ↑x + log ↑y + log ↑z\nh7 : 24 * log ↑x = 12 * (log ↑x + log ↑y + log ↑z)\nh8 : 24 * log ↑x = 12 * log ↑x + 12 * log ↑y + 12 * log ↑z\nh9 : 12 * log ↑x = 12 * log ↑y + 12 * log ↑z\nh10 : log ↑x = log ↑y + log ↑z\nh11 : log ↑w = 24 * (log ↑y + log ↑z)\nthis✝ : log ↑w = 40 * log ↑y\nthis : log ↑y = 3 / 2 * log ↑z\n⊢ log ↑w = 40 * (3 / 2 * log ↑z)",
+      "unsolved goals\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 < w\nh0 : log ↑w / log ↑x = 24\nh1 : log ↑w / log ↑y = 40\nh2 : log ↑w / log (↑x * ↑y * ↑z) = 12\nh3 : log ↑w = 24 * log ↑x\nh4 : log ↑w = 40 * log ↑y\nh5 : log ↑w = 12 * (log ↑x + log ↑y + log ↑z)\nh6 : log (↑x * ↑y * ↑z) = log ↑x + log ↑y + log ↑z\nh7 : 24 * log ↑x = 12 * (log ↑x + log ↑y + log ↑z)\nh8 : 24 * log ↑x = 12 * log ↑x + 12 * log ↑y + 12 * log ↑z\nh9 : 12 * log ↑x = 12 * log ↑y + 12 * log ↑z\nh10 : log ↑x = log ↑y + log ↑z\nh11 : log ↑w = 24 * (log ↑y + log ↑z)\nthis✝¹ : log ↑w = 40 * log ↑y\nthis✝ : log ↑y = 3 / 2 * log ↑z\nthis : log ↑w = 40 * (3 / 2 * log ↑z)\n⊢ log ↑w = log ↑z * 60",
+      "simp made no progress"
+    ],
+    "structured_errors": [
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 < w\nh0 : log ↑w / log ↑x = 24\nh1 : log ↑w / log ↑y = 40\nh2 : log ↑w / log (↑x * ↑y * ↑z) = 12\nthis : log ↑w / log ↑x = 24\na✝ : log ↑w < 24 * log ↑x\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 < w\nh0 : log ↑w / log ↑x = 24\nh1 : log ↑w / log ↑y = 40\nh2 : log ↑w / log (↑x * ↑y * ↑z) = 12\nh3 : log ↑w = 24 * log ↑x\nthis : log ↑w / log ↑y = 40\na✝ : log ↑w < 40 * log ↑y\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 < w\nh0 : log ↑w / log ↑x = 24\nh1 : log ↑w / log ↑y = 40\nh2 : log ↑w / log (↑x * ↑y * ↑z) = 12\nh3 : log ↑w = 24 * log ↑x\nh4 : log ↑w = 40 * log ↑y\nthis : log ↑w / log (↑x * ↑y * ↑z) = 12\na✝ : log ↑w < 12 * log (↑x * ↑y * ↑z)\n⊢ False failed",
+      "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+      "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+      "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+      "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+      "no goals to be solved",
+      "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  log ↑y\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 < w\nh0 : log ↑w / log ↑x = 24\nh1 : log ↑w / log ↑y = 40\nh2 : log ↑w / log (↑x * ↑y * ↑z) = 12\nh3 : log ↑w = 24 * log ↑x\nh4 : log ↑w = 40 * log ↑y\nh5 : log ↑w = 12 * (log ↑x + log ↑y + log ↑z)\nh6 : log (↑x * ↑y * ↑z) = log ↑x + log ↑y + log ↑z\nh7 : 24 * log ↑x = 12 * (log ↑x + log ↑y + log ↑z)\nh8 : 24 * log ↑x = 12 * log ↑x + 12 * log ↑y + 12 * log ↑z\nh9 : 12 * log ↑x = 12 * log ↑y + 12 * log ↑z\nh10 : log ↑x = log ↑y + log ↑z\nh11 : log ↑w = 24 * (log ↑y + log ↑z)\nthis✝ : log ↑w = 40 * log ↑y\nthis : log ↑y = 3 / 2 * log ↑z\n⊢ log ↑w = 40 * (3 / 2 * log ↑z)",
+      "unsolved goals\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 < w\nh0 : log ↑w / log ↑x = 24\nh1 : log ↑w / log ↑y = 40\nh2 : log ↑w / log (↑x * ↑y * ↑z) = 12\nh3 : log ↑w = 24 * log ↑x\nh4 : log ↑w = 40 * log ↑y\nh5 : log ↑w = 12 * (log ↑x + log ↑y + log ↑z)\nh6 : log (↑x * ↑y * ↑z) = log ↑x + log ↑y + log ↑z\nh7 : 24 * log ↑x = 12 * (log ↑x + log ↑y + log ↑z)\nh8 : 24 * log ↑x = 12 * log ↑x + 12 * log ↑y + 12 * log ↑z\nh9 : 12 * log ↑x = 12 * log ↑y + 12 * log ↑z\nh10 : log ↑x = log ↑y + log ↑z\nh11 : log ↑w = 24 * (log ↑y + log ↑z)\nthis✝¹ : log ↑w = 40 * log ↑y\nthis✝ : log ↑y = 3 / 2 * log ↑z\nthis : log ↑w = 40 * (3 / 2 * log ↑z)\n⊢ log ↑w = log ↑z * 60",
+      "simp made no progress"
+    ],
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1",
+    "round_idx": 0
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g2",
+    "passed": false,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": false,
+      "complete": false,
+      "has_sorry": false,
+      "feedback": "unsolved goals\ncase hx\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\n⊢ ¬x = 0 ∧ ¬y = 0\n\ncase hy\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\n⊢ ¬z = 0\nunsolved goals\ncase hx\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3a : Real.log (↑x * ↑y * ↑z) = Real.log (↑x * ↑y) + Real.log ↑z\n⊢ ¬x = 0\n\ncase hy\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3a : Real.log (↑x * ↑y * ↑z) = Real.log (↑x * ↑y) + Real.log ↑z\n⊢ ¬y = 0\nlinarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh4a : Real.log ↑w / Real.log ↑x = 24\na✝ : Real.log ↑w < 24 * Real.log ↑x\n⊢ False failed\nlinarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh4 : Real.log ↑w = 24 * Real.log ↑x\nh5a : Real.log ↑w / Real.log ↑y = 40\na✝ : Real.log ↑w < 40 * Real.log ↑y\n⊢ False failed\nsimp made no progress\nlinarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh4 : Real.log ↑w = 24 * Real.log ↑x\nh5 : Real.log ↑w = 40 * Real.log ↑y\nh6 : Real.log ↑w = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\nh7 : 24 * Real.log ↑x = 40 * Real.log ↑y\nh8 : 24 * Real.log ↑x = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\nh9 : 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z) = 24 * Real.log ↑x\nh10 : 12 * Real.log ↑z = 24 * Real.log ↑x - 12 * Real.log ↑x - 12 * Real.log ↑y\nh11 : 12 * Real.log ↑z = 12 * Real.log ↑x - 12 * Real.log ↑y\nh12 : Real.log ↑z = Real.log ↑x - Real.log ↑y\na✝ : 12 * Real.log ↑x < 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\n⊢ False failed\nlinarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh4 : Real.log ↑w = 24 * Real.log ↑x\nh5 : Real.log ↑w = 40 * Real.log ↑y\nh6 : Real.log ↑w = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\nh7 : 24 * Real.log ↑x = 40 * Real.log ↑y\nh8 : 24 * Real.log ↑x = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\nh9 : 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z) = 24 * Real.log ↑x\nh10 : 12 * Real.log ↑z = 24 * Real.log ↑x - 12 * Real.log ↑x - 12 * Real.log ↑y\nh11 : 12 * Real.log ↑z = 12 * Real.log ↑x - 12 * Real.log ↑y\nh12 : Real.log ↑z = Real.log ↑x - Real.log ↑y\nh13 : 12 * Real.log ↑x = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\nh14 : Real.log ↑z = 3 * Real.log ↑y\nh15a : Real.log ↑w = 40 * Real.log ↑y\nh15b : Real.log ↑z = 3 * Real.log ↑y\na✝ : Real.log ↑w / (Real.log ↑y * 3) < 60\n⊢ False failed",
+      "errors": [
+        "unsolved goals\ncase hx\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\n⊢ ¬x = 0 ∧ ¬y = 0\n\ncase hy\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\n⊢ ¬z = 0",
+        "unsolved goals\ncase hx\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3a : Real.log (↑x * ↑y * ↑z) = Real.log (↑x * ↑y) + Real.log ↑z\n⊢ ¬x = 0\n\ncase hy\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3a : Real.log (↑x * ↑y * ↑z) = Real.log (↑x * ↑y) + Real.log ↑z\n⊢ ¬y = 0",
+        "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh4a : Real.log ↑w / Real.log ↑x = 24\na✝ : Real.log ↑w < 24 * Real.log ↑x\n⊢ False failed",
+        "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh4 : Real.log ↑w = 24 * Real.log ↑x\nh5a : Real.log ↑w / Real.log ↑y = 40\na✝ : Real.log ↑w < 40 * Real.log ↑y\n⊢ False failed",
+        "simp made no progress",
+        "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh4 : Real.log ↑w = 24 * Real.log ↑x\nh5 : Real.log ↑w = 40 * Real.log ↑y\nh6 : Real.log ↑w = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\nh7 : 24 * Real.log ↑x = 40 * Real.log ↑y\nh8 : 24 * Real.log ↑x = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\nh9 : 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z) = 24 * Real.log ↑x\nh10 : 12 * Real.log ↑z = 24 * Real.log ↑x - 12 * Real.log ↑x - 12 * Real.log ↑y\nh11 : 12 * Real.log ↑z = 12 * Real.log ↑x - 12 * Real.log ↑y\nh12 : Real.log ↑z = Real.log ↑x - Real.log ↑y\na✝ : 12 * Real.log ↑x < 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\n⊢ False failed",
+        "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh4 : Real.log ↑w = 24 * Real.log ↑x\nh5 : Real.log ↑w = 40 * Real.log ↑y\nh6 : Real.log ↑w = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\nh7 : 24 * Real.log ↑x = 40 * Real.log ↑y\nh8 : 24 * Real.log ↑x = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\nh9 : 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z) = 24 * Real.log ↑x\nh10 : 12 * Real.log ↑z = 24 * Real.log ↑x - 12 * Real.log ↑x - 12 * Real.log ↑y\nh11 : 12 * Real.log ↑z = 12 * Real.log ↑x - 12 * Real.log ↑y\nh12 : Real.log ↑z = Real.log ↑x - Real.log ↑y\nh13 : 12 * Real.log ↑x = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\nh14 : Real.log ↑z = 3 * Real.log ↑y\nh15a : Real.log ↑w = 40 * Real.log ↑y\nh15b : Real.log ↑z = 3 * Real.log ↑y\na✝ : Real.log ↑w / (Real.log ↑y * 3) < 60\n⊢ False failed"
+      ],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 4.14
+      }
+    },
+    "extracted_error_messages": [
+      "unsolved goals\ncase hx\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\n⊢ ¬x = 0 ∧ ¬y = 0\n\ncase hy\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\n⊢ ¬z = 0",
+      "unsolved goals\ncase hx\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3a : Real.log (↑x * ↑y * ↑z) = Real.log (↑x * ↑y) + Real.log ↑z\n⊢ ¬x = 0\n\ncase hy\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3a : Real.log (↑x * ↑y * ↑z) = Real.log (↑x * ↑y) + Real.log ↑z\n⊢ ¬y = 0",
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh4a : Real.log ↑w / Real.log ↑x = 24\na✝ : Real.log ↑w < 24 * Real.log ↑x\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh4 : Real.log ↑w = 24 * Real.log ↑x\nh5a : Real.log ↑w / Real.log ↑y = 40\na✝ : Real.log ↑w < 40 * Real.log ↑y\n⊢ False failed",
+      "simp made no progress",
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh4 : Real.log ↑w = 24 * Real.log ↑x\nh5 : Real.log ↑w = 40 * Real.log ↑y\nh6 : Real.log ↑w = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\nh7 : 24 * Real.log ↑x = 40 * Real.log ↑y\nh8 : 24 * Real.log ↑x = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\nh9 : 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z) = 24 * Real.log ↑x\nh10 : 12 * Real.log ↑z = 24 * Real.log ↑x - 12 * Real.log ↑x - 12 * Real.log ↑y\nh11 : 12 * Real.log ↑z = 12 * Real.log ↑x - 12 * Real.log ↑y\nh12 : Real.log ↑z = Real.log ↑x - Real.log ↑y\na✝ : 12 * Real.log ↑x < 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh4 : Real.log ↑w = 24 * Real.log ↑x\nh5 : Real.log ↑w = 40 * Real.log ↑y\nh6 : Real.log ↑w = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\nh7 : 24 * Real.log ↑x = 40 * Real.log ↑y\nh8 : 24 * Real.log ↑x = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\nh9 : 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z) = 24 * Real.log ↑x\nh10 : 12 * Real.log ↑z = 24 * Real.log ↑x - 12 * Real.log ↑x - 12 * Real.log ↑y\nh11 : 12 * Real.log ↑z = 12 * Real.log ↑x - 12 * Real.log ↑y\nh12 : Real.log ↑z = Real.log ↑x - Real.log ↑y\nh13 : 12 * Real.log ↑x = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\nh14 : Real.log ↑z = 3 * Real.log ↑y\nh15a : Real.log ↑w = 40 * Real.log ↑y\nh15b : Real.log ↑z = 3 * Real.log ↑y\na✝ : Real.log ↑w / (Real.log ↑y * 3) < 60\n⊢ False failed"
+    ],
+    "structured_errors": [
+      "unsolved goals\ncase hx\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\n⊢ ¬x = 0 ∧ ¬y = 0\n\ncase hy\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\n⊢ ¬z = 0",
+      "unsolved goals\ncase hx\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3a : Real.log (↑x * ↑y * ↑z) = Real.log (↑x * ↑y) + Real.log ↑z\n⊢ ¬x = 0\n\ncase hy\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3a : Real.log (↑x * ↑y * ↑z) = Real.log (↑x * ↑y) + Real.log ↑z\n⊢ ¬y = 0",
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh4a : Real.log ↑w / Real.log ↑x = 24\na✝ : Real.log ↑w < 24 * Real.log ↑x\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh4 : Real.log ↑w = 24 * Real.log ↑x\nh5a : Real.log ↑w / Real.log ↑y = 40\na✝ : Real.log ↑w < 40 * Real.log ↑y\n⊢ False failed",
+      "simp made no progress",
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh4 : Real.log ↑w = 24 * Real.log ↑x\nh5 : Real.log ↑w = 40 * Real.log ↑y\nh6 : Real.log ↑w = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\nh7 : 24 * Real.log ↑x = 40 * Real.log ↑y\nh8 : 24 * Real.log ↑x = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\nh9 : 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z) = 24 * Real.log ↑x\nh10 : 12 * Real.log ↑z = 24 * Real.log ↑x - 12 * Real.log ↑x - 12 * Real.log ↑y\nh11 : 12 * Real.log ↑z = 12 * Real.log ↑x - 12 * Real.log ↑y\nh12 : Real.log ↑z = Real.log ↑x - Real.log ↑y\na✝ : 12 * Real.log ↑x < 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nh3 : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh4 : Real.log ↑w = 24 * Real.log ↑x\nh5 : Real.log ↑w = 40 * Real.log ↑y\nh6 : Real.log ↑w = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\nh7 : 24 * Real.log ↑x = 40 * Real.log ↑y\nh8 : 24 * Real.log ↑x = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\nh9 : 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z) = 24 * Real.log ↑x\nh10 : 12 * Real.log ↑z = 24 * Real.log ↑x - 12 * Real.log ↑x - 12 * Real.log ↑y\nh11 : 12 * Real.log ↑z = 12 * Real.log ↑x - 12 * Real.log ↑y\nh12 : Real.log ↑z = Real.log ↑x - Real.log ↑y\nh13 : 12 * Real.log ↑x = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\nh14 : Real.log ↑z = 3 * Real.log ↑y\nh15a : Real.log ↑w = 40 * Real.log ↑y\nh15b : Real.log ↑z = 3 * Real.log ↑y\na✝ : Real.log ↑w / (Real.log ↑y * 3) < 60\n⊢ False failed"
+    ],
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1",
+    "round_idx": 0
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g3",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 6, 'column': 84}, 'endPos': {'line': 6, 'column': 89}, 'goal': 'x y z w : ℕ\\nht : 1 < x ∧ 1 < y ∧ 1 < z\\nhw : 0 ≤ w\\nh0 : Real.log ↑w / Real.log ↑x = 24\\nh1 : Real.log ↑w / Real.log ↑y = 40\\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\\n⊢ Real.log ↑w / Real.log ↑z = 60'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.031
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1",
+    "round_idx": 0
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g4",
+    "passed": false,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": false,
+      "complete": false,
+      "has_sorry": false,
+      "feedback": "invalid field notation, type is not of the form (C ...) where C is a constant\n  log_pos\nhas type\n  1 < ?m.23764 → 0 < log ?m.23764\nno goals to be solved\ninvalid field notation, type is not of the form (C ...) where C is a constant\n  log_pos\nhas type\n  1 < ?m.23827 → 0 < log ?m.23827\nno goals to be solved\ninvalid field notation, type is not of the form (C ...) where C is a constant\n  log_pos\nhas type\n  1 < ?m.24051 → 0 < log ?m.24051\nno goals to be solved\ntactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  log ↑z * 60\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhx : 0 < x\nhy : 0 < y\nhz : 0 < z\nhwx : 0 < log ↑x\nhyx : 0 < log ↑y\nhxyz_log : 0 < log (↑x * ↑y * ↑z)\nh0' : log ↑w = 24 * log ↑x\nh1' : log ↑w = 40 * log ↑y\nh2' : log ↑w = 12 * (log ↑x + log ↑y + log ↑z)\nh3 : log (↑x * ↑y * ↑z) = log ↑x + log ↑y + log ↑z\nh4 : 24 * log ↑x = 40 * log ↑y\nh5 : 24 * log ↑x = 12 * (log ↑x + log ↑y + log ↑z)\nhw : True\nh0 : log ↑w = 24 * log ↑x\nh1 : log ↑w = 40 * log ↑y\nh2 : log ↑w = 12 * log (↑x * ↑y * ↑z)\nhxy : 0 < y\nhxyz : 0 < z\nh6 : log ↑z * 60 = log ↑w\nh7a : True\n⊢ log ↑w = 60 * log ↑z",
+      "errors": [
+        "invalid field notation, type is not of the form (C ...) where C is a constant\n  log_pos\nhas type\n  1 < ?m.23764 → 0 < log ?m.23764",
+        "no goals to be solved",
+        "invalid field notation, type is not of the form (C ...) where C is a constant\n  log_pos\nhas type\n  1 < ?m.23827 → 0 < log ?m.23827",
+        "no goals to be solved",
+        "invalid field notation, type is not of the form (C ...) where C is a constant\n  log_pos\nhas type\n  1 < ?m.24051 → 0 < log ?m.24051",
+        "no goals to be solved",
+        "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  log ↑z * 60\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhx : 0 < x\nhy : 0 < y\nhz : 0 < z\nhwx : 0 < log ↑x\nhyx : 0 < log ↑y\nhxyz_log : 0 < log (↑x * ↑y * ↑z)\nh0' : log ↑w = 24 * log ↑x\nh1' : log ↑w = 40 * log ↑y\nh2' : log ↑w = 12 * (log ↑x + log ↑y + log ↑z)\nh3 : log (↑x * ↑y * ↑z) = log ↑x + log ↑y + log ↑z\nh4 : 24 * log ↑x = 40 * log ↑y\nh5 : 24 * log ↑x = 12 * (log ↑x + log ↑y + log ↑z)\nhw : True\nh0 : log ↑w = 24 * log ↑x\nh1 : log ↑w = 40 * log ↑y\nh2 : log ↑w = 12 * log (↑x * ↑y * ↑z)\nhxy : 0 < y\nhxyz : 0 < z\nh6 : log ↑z * 60 = log ↑w\nh7a : True\n⊢ log ↑w = 60 * log ↑z"
+      ],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 3.037
+      }
+    },
+    "extracted_error_messages": [
+      "invalid field notation, type is not of the form (C ...) where C is a constant\n  log_pos\nhas type\n  1 < ?m.23764 → 0 < log ?m.23764",
+      "no goals to be solved",
+      "invalid field notation, type is not of the form (C ...) where C is a constant\n  log_pos\nhas type\n  1 < ?m.23827 → 0 < log ?m.23827",
+      "no goals to be solved",
+      "invalid field notation, type is not of the form (C ...) where C is a constant\n  log_pos\nhas type\n  1 < ?m.24051 → 0 < log ?m.24051",
+      "no goals to be solved",
+      "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  log ↑z * 60\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhx : 0 < x\nhy : 0 < y\nhz : 0 < z\nhwx : 0 < log ↑x\nhyx : 0 < log ↑y\nhxyz_log : 0 < log (↑x * ↑y * ↑z)\nh0' : log ↑w = 24 * log ↑x\nh1' : log ↑w = 40 * log ↑y\nh2' : log ↑w = 12 * (log ↑x + log ↑y + log ↑z)\nh3 : log (↑x * ↑y * ↑z) = log ↑x + log ↑y + log ↑z\nh4 : 24 * log ↑x = 40 * log ↑y\nh5 : 24 * log ↑x = 12 * (log ↑x + log ↑y + log ↑z)\nhw : True\nh0 : log ↑w = 24 * log ↑x\nh1 : log ↑w = 40 * log ↑y\nh2 : log ↑w = 12 * log (↑x * ↑y * ↑z)\nhxy : 0 < y\nhxyz : 0 < z\nh6 : log ↑z * 60 = log ↑w\nh7a : True\n⊢ log ↑w = 60 * log ↑z"
+    ],
+    "structured_errors": [
+      "invalid field notation, type is not of the form (C ...) where C is a constant\n  log_pos\nhas type\n  1 < ?m.23764 → 0 < log ?m.23764",
+      "no goals to be solved",
+      "invalid field notation, type is not of the form (C ...) where C is a constant\n  log_pos\nhas type\n  1 < ?m.23827 → 0 < log ?m.23827",
+      "no goals to be solved",
+      "invalid field notation, type is not of the form (C ...) where C is a constant\n  log_pos\nhas type\n  1 < ?m.24051 → 0 < log ?m.24051",
+      "no goals to be solved",
+      "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  log ↑z * 60\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhx : 0 < x\nhy : 0 < y\nhz : 0 < z\nhwx : 0 < log ↑x\nhyx : 0 < log ↑y\nhxyz_log : 0 < log (↑x * ↑y * ↑z)\nh0' : log ↑w = 24 * log ↑x\nh1' : log ↑w = 40 * log ↑y\nh2' : log ↑w = 12 * (log ↑x + log ↑y + log ↑z)\nh3 : log (↑x * ↑y * ↑z) = log ↑x + log ↑y + log ↑z\nh4 : 24 * log ↑x = 40 * log ↑y\nh5 : 24 * log ↑x = 12 * (log ↑x + log ↑y + log ↑z)\nhw : True\nh0 : log ↑w = 24 * log ↑x\nh1 : log ↑w = 40 * log ↑y\nh2 : log ↑w = 12 * log (↑x * ↑y * ↑z)\nhxy : 0 < y\nhxyz : 0 < z\nh6 : log ↑z * 60 = log ↑w\nh7a : True\n⊢ log ↑w = 60 * log ↑z"
+    ],
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1",
+    "round_idx": 0
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g5",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 6, 'column': 84}, 'endPos': {'line': 6, 'column': 89}, 'goal': 'x y z w : ℕ\\nht : 1 < x ∧ 1 < y ∧ 1 < z\\nhw : 0 ≤ w\\nh0 : Real.log ↑w / Real.log ↑x = 24\\nh1 : Real.log ↑w / Real.log ↑y = 40\\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\\n⊢ Real.log ↑w / Real.log ↑z = 60'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.031
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1",
+    "round_idx": 0
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g6",
+    "passed": false,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": false,
+      "complete": false,
+      "has_sorry": false,
+      "feedback": "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nhwx' : Real.log ↑w / Real.log ↑x = 24\na✝ : Real.log ↑w < 24 * Real.log ↑x\n⊢ False failed\nlinarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nhwx : Real.log ↑w = 24 * Real.log ↑x\nhwy' : Real.log ↑w / Real.log ↑y = 40\na✝ : Real.log ↑w < 40 * Real.log ↑y\n⊢ False failed\nfailed to prove nonzeroness, but it would be possible to prove nonnegativity if desired\nfailed to prove nonzeroness, but it would be possible to prove nonnegativity if desired\nfailed to prove nonzeroness, but it would be possible to prove nonnegativity if desired\nfailed to prove nonzeroness, but it would be possible to prove nonnegativity if desired\nlinarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nhwx : Real.log ↑w = 24 * Real.log ↑x\nhwy : Real.log ↑w = 40 * Real.log ↑y\nhx : Real.log ↑x = 5 / 3 * Real.log ↑y\nhxyz : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh3' : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\na✝ : Real.log ↑w < 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\n⊢ False failed\nlinarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nhwx : Real.log ↑w = 24 * Real.log ↑x\nhwy : Real.log ↑w = 40 * Real.log ↑y\nhx : Real.log ↑x = 5 / 3 * Real.log ↑y\nhxyz : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh3 : Real.log ↑w = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\nh4 : Real.log ↑z = 2 / 3 * Real.log ↑y\nh5' : Real.log ↑w = 40 * Real.log ↑y\nh5'' : Real.log ↑z = 2 / 3 * Real.log ↑y\na✝ : Real.log ↑y * 60 / Real.log ↑y < 60\n⊢ False failed",
+      "errors": [
+        "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nhwx' : Real.log ↑w / Real.log ↑x = 24\na✝ : Real.log ↑w < 24 * Real.log ↑x\n⊢ False failed",
+        "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nhwx : Real.log ↑w = 24 * Real.log ↑x\nhwy' : Real.log ↑w / Real.log ↑y = 40\na✝ : Real.log ↑w < 40 * Real.log ↑y\n⊢ False failed",
+        "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+        "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+        "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+        "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+        "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nhwx : Real.log ↑w = 24 * Real.log ↑x\nhwy : Real.log ↑w = 40 * Real.log ↑y\nhx : Real.log ↑x = 5 / 3 * Real.log ↑y\nhxyz : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh3' : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\na✝ : Real.log ↑w < 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\n⊢ False failed",
+        "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nhwx : Real.log ↑w = 24 * Real.log ↑x\nhwy : Real.log ↑w = 40 * Real.log ↑y\nhx : Real.log ↑x = 5 / 3 * Real.log ↑y\nhxyz : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh3 : Real.log ↑w = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\nh4 : Real.log ↑z = 2 / 3 * Real.log ↑y\nh5' : Real.log ↑w = 40 * Real.log ↑y\nh5'' : Real.log ↑z = 2 / 3 * Real.log ↑y\na✝ : Real.log ↑y * 60 / Real.log ↑y < 60\n⊢ False failed"
+      ],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 4.743
+      }
+    },
+    "extracted_error_messages": [
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nhwx' : Real.log ↑w / Real.log ↑x = 24\na✝ : Real.log ↑w < 24 * Real.log ↑x\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nhwx : Real.log ↑w = 24 * Real.log ↑x\nhwy' : Real.log ↑w / Real.log ↑y = 40\na✝ : Real.log ↑w < 40 * Real.log ↑y\n⊢ False failed",
+      "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+      "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+      "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+      "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nhwx : Real.log ↑w = 24 * Real.log ↑x\nhwy : Real.log ↑w = 40 * Real.log ↑y\nhx : Real.log ↑x = 5 / 3 * Real.log ↑y\nhxyz : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh3' : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\na✝ : Real.log ↑w < 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nhwx : Real.log ↑w = 24 * Real.log ↑x\nhwy : Real.log ↑w = 40 * Real.log ↑y\nhx : Real.log ↑x = 5 / 3 * Real.log ↑y\nhxyz : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh3 : Real.log ↑w = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\nh4 : Real.log ↑z = 2 / 3 * Real.log ↑y\nh5' : Real.log ↑w = 40 * Real.log ↑y\nh5'' : Real.log ↑z = 2 / 3 * Real.log ↑y\na✝ : Real.log ↑y * 60 / Real.log ↑y < 60\n⊢ False failed"
+    ],
+    "structured_errors": [
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nhwx' : Real.log ↑w / Real.log ↑x = 24\na✝ : Real.log ↑w < 24 * Real.log ↑x\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nhwx : Real.log ↑w = 24 * Real.log ↑x\nhwy' : Real.log ↑w / Real.log ↑y = 40\na✝ : Real.log ↑w < 40 * Real.log ↑y\n⊢ False failed",
+      "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+      "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+      "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+      "failed to prove nonzeroness, but it would be possible to prove nonnegativity if desired",
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nhwx : Real.log ↑w = 24 * Real.log ↑x\nhwy : Real.log ↑w = 40 * Real.log ↑y\nhx : Real.log ↑x = 5 / 3 * Real.log ↑y\nhxyz : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh3' : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\na✝ : Real.log ↑w < 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\n⊢ False failed",
+      "linarith failed to find a contradiction\ncase h1.h\nx y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 ≤ w\nh0 : Real.log ↑w / Real.log ↑x = 24\nh1 : Real.log ↑w / Real.log ↑y = 40\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\nhwx : Real.log ↑w = 24 * Real.log ↑x\nhwy : Real.log ↑w = 40 * Real.log ↑y\nhx : Real.log ↑x = 5 / 3 * Real.log ↑y\nhxyz : Real.log (↑x * ↑y * ↑z) = Real.log ↑x + Real.log ↑y + Real.log ↑z\nh3 : Real.log ↑w = 12 * (Real.log ↑x + Real.log ↑y + Real.log ↑z)\nh4 : Real.log ↑z = 2 / 3 * Real.log ↑y\nh5' : Real.log ↑w = 40 * Real.log ↑y\nh5'' : Real.log ↑z = 2 / 3 * Real.log ↑y\na✝ : Real.log ↑y * 60 / Real.log ↑y < 60\n⊢ False failed"
+    ],
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1",
+    "round_idx": 0
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g7",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 6, 'column': 84}, 'endPos': {'line': 6, 'column': 89}, 'goal': 'x y z w : ℕ\\nht : 1 < x ∧ 1 < y ∧ 1 < z\\nhw : 0 ≤ w\\nh0 : Real.log ↑w / Real.log ↑x = 24\\nh1 : Real.log ↑w / Real.log ↑y = 40\\nh2 : Real.log ↑w / Real.log (↑x * ↑y * ↑z) = 12\\n⊢ Real.log ↑w / Real.log ↑z = 60'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.032
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1",
+    "round_idx": 0
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g0",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 5, 'column': 117}, 'endPos': {'line': 5, 'column': 122}, 'goal': '⊢ (Finset.filter (fun x => ¬Even x) (Finset.range 10000)).prod id = factorial 10000 / (2 ^ 5000 * factorial 5000)'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.025
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5",
+    "round_idx": 0
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g1",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 5, 'column': 117}, 'endPos': {'line': 5, 'column': 122}, 'goal': '⊢ (Finset.filter (fun x => ¬Even x) (Finset.range 10000)).prod id = factorial 10000 / (2 ^ 5000 * factorial 5000)'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.025
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5",
+    "round_idx": 0
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g2",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 5, 'column': 117}, 'endPos': {'line': 5, 'column': 122}, 'goal': '⊢ (Finset.filter (fun x => ¬Even x) (Finset.range 10000)).prod id = factorial 10000 / (2 ^ 5000 * factorial 5000)'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.024
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5",
+    "round_idx": 0
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g3",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 5, 'column': 117}, 'endPos': {'line': 5, 'column': 122}, 'goal': '⊢ (Finset.filter (fun x => ¬Even x) (Finset.range 10000)).prod id = factorial 10000 / (2 ^ 5000 * factorial 5000)'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.024
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5",
+    "round_idx": 0
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g4",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 5, 'column': 117}, 'endPos': {'line': 5, 'column': 122}, 'goal': '⊢ (Finset.filter (fun x => ¬Even x) (Finset.range 10000)).prod id = factorial 10000 / (2 ^ 5000 * factorial 5000)'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.024
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5",
+    "round_idx": 0
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g5",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 5, 'column': 117}, 'endPos': {'line': 5, 'column': 122}, 'goal': '⊢ (Finset.filter (fun x => ¬Even x) (Finset.range 10000)).prod id = factorial 10000 / (2 ^ 5000 * factorial 5000)'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.025
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5",
+    "round_idx": 0
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g6",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 5, 'column': 117}, 'endPos': {'line': 5, 'column': 122}, 'goal': '⊢ (Finset.filter (fun x => ¬Even x) (Finset.range 10000)).prod id = factorial 10000 / (2 ^ 5000 * factorial 5000)'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.025
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5",
+    "round_idx": 0
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g7",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 5, 'column': 117}, 'endPos': {'line': 5, 'column': 122}, 'goal': '⊢ (Finset.filter (fun x => ¬Even x) (Finset.range 10000)).prod id = factorial 10000 / (2 ^ 5000 * factorial 5000)'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.023
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g0",
+    "passed": false,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": false,
+      "complete": false,
+      "has_sorry": false,
+      "feedback": "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  a * b\na b : ℝ\nh₁ : a * b = 180\nh₂ : 2 * (a + b) = 54\nh₃ : a + b = 27\nh₄ : a ^ 2 + b ^ 2 = 27 ^ 2 - 2 * a * b\n⊢ a ^ 2 + b ^ 2 = 369",
+      "errors": [
+        "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  a * b\na b : ℝ\nh₁ : a * b = 180\nh₂ : 2 * (a + b) = 54\nh₃ : a + b = 27\nh₄ : a ^ 2 + b ^ 2 = 27 ^ 2 - 2 * a * b\n⊢ a ^ 2 + b ^ 2 = 369"
+      ],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.082
+      }
+    },
+    "extracted_error_messages": [
+      "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  a * b\na b : ℝ\nh₁ : a * b = 180\nh₂ : 2 * (a + b) = 54\nh₃ : a + b = 27\nh₄ : a ^ 2 + b ^ 2 = 27 ^ 2 - 2 * a * b\n⊢ a ^ 2 + b ^ 2 = 369"
+    ],
+    "structured_errors": [
+      "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  a * b\na b : ℝ\nh₁ : a * b = 180\nh₂ : 2 * (a + b) = 54\nh₃ : a + b = 27\nh₄ : a ^ 2 + b ^ 2 = 27 ^ 2 - 2 * a * b\n⊢ a ^ 2 + b ^ 2 = 369"
+    ],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g1",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.172
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g2",
+    "passed": false,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": false,
+      "complete": false,
+      "has_sorry": false,
+      "feedback": "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  a * b\na b : ℝ\nh₁ : a * b = 180\nh₂ : 2 * (a + b) = 54\nh₃ : a + b = 27\nh₄ : a ^ 2 + b ^ 2 = (a + b) ^ 2 - 2 * a * b\n⊢ 27 ^ 2 - 2 * a * b = 369",
+      "errors": [
+        "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  a * b\na b : ℝ\nh₁ : a * b = 180\nh₂ : 2 * (a + b) = 54\nh₃ : a + b = 27\nh₄ : a ^ 2 + b ^ 2 = (a + b) ^ 2 - 2 * a * b\n⊢ 27 ^ 2 - 2 * a * b = 369"
+      ],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.107
+      }
+    },
+    "extracted_error_messages": [
+      "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  a * b\na b : ℝ\nh₁ : a * b = 180\nh₂ : 2 * (a + b) = 54\nh₃ : a + b = 27\nh₄ : a ^ 2 + b ^ 2 = (a + b) ^ 2 - 2 * a * b\n⊢ 27 ^ 2 - 2 * a * b = 369"
+    ],
+    "structured_errors": [
+      "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  a * b\na b : ℝ\nh₁ : a * b = 180\nh₂ : 2 * (a + b) = 54\nh₃ : a + b = 27\nh₄ : a ^ 2 + b ^ 2 = (a + b) ^ 2 - 2 * a * b\n⊢ 27 ^ 2 - 2 * a * b = 369"
+    ],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g3",
+    "passed": false,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": false,
+      "complete": false,
+      "has_sorry": false,
+      "feedback": "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  a * b\na b : ℝ\nh₁ : a * b = 180\nh₂ : 2 * (a + b) = 54\nh₃ : a + b = 27\n⊢ 27 ^ 2 - 2 * a * b = 27 ^ 2 - 2 * 180",
+      "errors": [
+        "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  a * b\na b : ℝ\nh₁ : a * b = 180\nh₂ : 2 * (a + b) = 54\nh₃ : a + b = 27\n⊢ 27 ^ 2 - 2 * a * b = 27 ^ 2 - 2 * 180"
+      ],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.096
+      }
+    },
+    "extracted_error_messages": [
+      "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  a * b\na b : ℝ\nh₁ : a * b = 180\nh₂ : 2 * (a + b) = 54\nh₃ : a + b = 27\n⊢ 27 ^ 2 - 2 * a * b = 27 ^ 2 - 2 * 180"
+    ],
+    "structured_errors": [
+      "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  a * b\na b : ℝ\nh₁ : a * b = 180\nh₂ : 2 * (a + b) = 54\nh₃ : a + b = 27\n⊢ 27 ^ 2 - 2 * a * b = 27 ^ 2 - 2 * 180"
+    ],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g4",
+    "passed": false,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": false,
+      "complete": false,
+      "has_sorry": false,
+      "feedback": "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  a + b\na b : ℝ\nh₁ : a * b = 180\nh₂ : 2 * (a + b) = 54\nh₃ : a + b = 27\nh₄ : a ^ 2 + b ^ 2 = (a + b) ^ 2 - 2 * (a * b)\n⊢ a ^ 2 + b ^ 2 = 369",
+      "errors": [
+        "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  a + b\na b : ℝ\nh₁ : a * b = 180\nh₂ : 2 * (a + b) = 54\nh₃ : a + b = 27\nh₄ : a ^ 2 + b ^ 2 = (a + b) ^ 2 - 2 * (a * b)\n⊢ a ^ 2 + b ^ 2 = 369"
+      ],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.081
+      }
+    },
+    "extracted_error_messages": [
+      "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  a + b\na b : ℝ\nh₁ : a * b = 180\nh₂ : 2 * (a + b) = 54\nh₃ : a + b = 27\nh₄ : a ^ 2 + b ^ 2 = (a + b) ^ 2 - 2 * (a * b)\n⊢ a ^ 2 + b ^ 2 = 369"
+    ],
+    "structured_errors": [
+      "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  a + b\na b : ℝ\nh₁ : a * b = 180\nh₂ : 2 * (a + b) = 54\nh₃ : a + b = 27\nh₄ : a ^ 2 + b ^ 2 = (a + b) ^ 2 - 2 * (a * b)\n⊢ a ^ 2 + b ^ 2 = 369"
+    ],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g5",
+    "passed": false,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": false,
+      "complete": false,
+      "has_sorry": false,
+      "feedback": "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  a * b\na b : ℝ\nh₁ : a * b = 180\nh₂ : 2 * (a + b) = 54\nh_sum : a + b = 27\n⊢ 27 ^ 2 - 2 * a * b = 27 ^ 2 - 2 * 180",
+      "errors": [
+        "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  a * b\na b : ℝ\nh₁ : a * b = 180\nh₂ : 2 * (a + b) = 54\nh_sum : a + b = 27\n⊢ 27 ^ 2 - 2 * a * b = 27 ^ 2 - 2 * 180"
+      ],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.092
+      }
+    },
+    "extracted_error_messages": [
+      "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  a * b\na b : ℝ\nh₁ : a * b = 180\nh₂ : 2 * (a + b) = 54\nh_sum : a + b = 27\n⊢ 27 ^ 2 - 2 * a * b = 27 ^ 2 - 2 * 180"
+    ],
+    "structured_errors": [
+      "tactic 'rewrite' failed, did not find instance of the pattern in the target expression\n  a * b\na b : ℝ\nh₁ : a * b = 180\nh₂ : 2 * (a + b) = 54\nh_sum : a + b = 27\n⊢ 27 ^ 2 - 2 * a * b = 27 ^ 2 - 2 * 180"
+    ],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g6",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.132
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g7",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.129
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g0",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 5, 'column': 52}, 'endPos': {'line': 5, 'column': 57}, 'goal': '⊢ (∑ x ∈ Finset.range 10, (x + 1) ^ 2) % 10 = 5'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.025
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g1",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.043
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g2",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 5, 'column': 52}, 'endPos': {'line': 5, 'column': 57}, 'goal': '⊢ (∑ x ∈ Finset.range 10, (x + 1) ^ 2) % 10 = 5'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.024
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g3",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 5, 'column': 52}, 'endPos': {'line': 5, 'column': 57}, 'goal': '⊢ (∑ x ∈ Finset.range 10, (x + 1) ^ 2) % 10 = 5'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.024
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g4",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 5, 'column': 52}, 'endPos': {'line': 5, 'column': 57}, 'goal': '⊢ (∑ x ∈ Finset.range 10, (x + 1) ^ 2) % 10 = 5'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.024
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g5",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 5, 'column': 52}, 'endPos': {'line': 5, 'column': 57}, 'goal': '⊢ (∑ x ∈ Finset.range 10, (x + 1) ^ 2) % 10 = 5'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.023
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g6",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.039
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g7",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 5, 'column': 52}, 'endPos': {'line': 5, 'column': 57}, 'goal': '⊢ (∑ x ∈ Finset.range 10, (x + 1) ^ 2) % 10 = 5'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.024
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3",
+    "round_idx": 0
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g0",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 13, 'column': 28}, 'endPos': {'line': 13, 'column': 33}, 'goal': 'm n : ℝ\\nk : ℕ\\na : ℕ → ℝ\\ny : ℝ → ℝ\\nh₀ : 0 < k\\nh₁ : ∀ (x : ℝ), y x = ∑ i ∈ Finset.range k, cos (a i + x) / 2 ^ i\\nh₂ : y m = 0\\nh₃ : y n = 0\\n⊢ ∃ t, m - n = ↑t * Real.pi'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.03
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2",
+    "round_idx": 0
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g1",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 13, 'column': 28}, 'endPos': {'line': 13, 'column': 33}, 'goal': 'm n : ℝ\\nk : ℕ\\na : ℕ → ℝ\\ny : ℝ → ℝ\\nh₀ : 0 < k\\nh₁ : ∀ (x : ℝ), y x = ∑ i ∈ Finset.range k, cos (a i + x) / 2 ^ i\\nh₂ : y m = 0\\nh₃ : y n = 0\\n⊢ ∃ t, m - n = ↑t * Real.pi'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.029
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2",
+    "round_idx": 0
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g2",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 13, 'column': 28}, 'endPos': {'line': 13, 'column': 33}, 'goal': 'm n : ℝ\\nk : ℕ\\na : ℕ → ℝ\\ny : ℝ → ℝ\\nh₀ : 0 < k\\nh₁ : ∀ (x : ℝ), y x = ∑ i ∈ Finset.range k, cos (a i + x) / 2 ^ i\\nh₂ : y m = 0\\nh₃ : y n = 0\\n⊢ ∃ t, m - n = ↑t * Real.pi'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.029
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2",
+    "round_idx": 0
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g3",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 13, 'column': 28}, 'endPos': {'line': 13, 'column': 33}, 'goal': 'm n : ℝ\\nk : ℕ\\na : ℕ → ℝ\\ny : ℝ → ℝ\\nh₀ : 0 < k\\nh₁ : ∀ (x : ℝ), y x = ∑ i ∈ Finset.range k, cos (a i + x) / 2 ^ i\\nh₂ : y m = 0\\nh₃ : y n = 0\\n⊢ ∃ t, m - n = ↑t * Real.pi'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.03
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2",
+    "round_idx": 0
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g4",
+    "passed": false,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": false,
+      "complete": false,
+      "has_sorry": false,
+      "feedback": "simp made no progress\nlinarith failed to find a contradiction\ncase h.h1.h\nm n : ℝ\nk : ℕ\na : ℕ → ℝ\ny : ℝ → ℝ\nh₀ : 0 < k\nh₁ : ∀ (x : ℝ), y x = ∑ i ∈ Finset.range k, cos (a i + x) / 2 ^ i\nh₂ : ∑ i ∈ Finset.range k, cos (a i + m) / 2 ^ i = 0\nh₃ : ∑ i ∈ Finset.range k, cos (a i + n) / 2 ^ i = 0\nh₆ : ∑ i ∈ Finset.range k, (cos (a i + m) - cos (a i + n)) / 2 ^ i = 0\na✝ : m - n < 0\n⊢ False failed",
+      "errors": [
+        "simp made no progress",
+        "linarith failed to find a contradiction\ncase h.h1.h\nm n : ℝ\nk : ℕ\na : ℕ → ℝ\ny : ℝ → ℝ\nh₀ : 0 < k\nh₁ : ∀ (x : ℝ), y x = ∑ i ∈ Finset.range k, cos (a i + x) / 2 ^ i\nh₂ : ∑ i ∈ Finset.range k, cos (a i + m) / 2 ^ i = 0\nh₃ : ∑ i ∈ Finset.range k, cos (a i + n) / 2 ^ i = 0\nh₆ : ∑ i ∈ Finset.range k, (cos (a i + m) - cos (a i + n)) / 2 ^ i = 0\na✝ : m - n < 0\n⊢ False failed"
+      ],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.247
+      }
+    },
+    "extracted_error_messages": [
+      "simp made no progress",
+      "linarith failed to find a contradiction\ncase h.h1.h\nm n : ℝ\nk : ℕ\na : ℕ → ℝ\ny : ℝ → ℝ\nh₀ : 0 < k\nh₁ : ∀ (x : ℝ), y x = ∑ i ∈ Finset.range k, cos (a i + x) / 2 ^ i\nh₂ : ∑ i ∈ Finset.range k, cos (a i + m) / 2 ^ i = 0\nh₃ : ∑ i ∈ Finset.range k, cos (a i + n) / 2 ^ i = 0\nh₆ : ∑ i ∈ Finset.range k, (cos (a i + m) - cos (a i + n)) / 2 ^ i = 0\na✝ : m - n < 0\n⊢ False failed"
+    ],
+    "structured_errors": [
+      "simp made no progress",
+      "linarith failed to find a contradiction\ncase h.h1.h\nm n : ℝ\nk : ℕ\na : ℕ → ℝ\ny : ℝ → ℝ\nh₀ : 0 < k\nh₁ : ∀ (x : ℝ), y x = ∑ i ∈ Finset.range k, cos (a i + x) / 2 ^ i\nh₂ : ∑ i ∈ Finset.range k, cos (a i + m) / 2 ^ i = 0\nh₃ : ∑ i ∈ Finset.range k, cos (a i + n) / 2 ^ i = 0\nh₆ : ∑ i ∈ Finset.range k, (cos (a i + m) - cos (a i + n)) / 2 ^ i = 0\na✝ : m - n < 0\n⊢ False failed"
+    ],
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2",
+    "round_idx": 0
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g5",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 13, 'column': 28}, 'endPos': {'line': 13, 'column': 33}, 'goal': 'm n : ℝ\\nk : ℕ\\na : ℕ → ℝ\\ny : ℝ → ℝ\\nh₀ : 0 < k\\nh₁ : ∀ (x : ℝ), y x = ∑ i ∈ Finset.range k, cos (a i + x) / 2 ^ i\\nh₂ : y m = 0\\nh₃ : y n = 0\\n⊢ ∃ t, m - n = ↑t * Real.pi'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.054
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2",
+    "round_idx": 0
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g6",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 13, 'column': 28}, 'endPos': {'line': 13, 'column': 33}, 'goal': 'm n : ℝ\\nk : ℕ\\na : ℕ → ℝ\\ny : ℝ → ℝ\\nh₀ : 0 < k\\nh₁ : ∀ (x : ℝ), y x = ∑ i ∈ Finset.range k, cos (a i + x) / 2 ^ i\\nh₂ : y m = 0\\nh₃ : y n = 0\\n⊢ ∃ t, m - n = ↑t * Real.pi'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.03
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2",
+    "round_idx": 0
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g7",
+    "passed": true,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": false,
+      "has_sorry": true,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [
+        "{'pos': {'line': 13, 'column': 28}, 'endPos': {'line': 13, 'column': 33}, 'goal': 'm n : ℝ\\nk : ℕ\\na : ℕ → ℝ\\ny : ℝ → ℝ\\nh₀ : 0 < k\\nh₁ : ∀ (x : ℝ), y x = ∑ i ∈ Finset.range k, cos (a i + x) / 2 ^ i\\nh₂ : y m = 0\\nh₃ : y n = 0\\n⊢ ∃ t, m - n = ↑t * Real.pi'}"
+      ],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.03
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g0",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.143
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g1",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.104
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g2",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.143
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g3",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.117
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g4",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.099
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g5",
+    "passed": false,
+    "complete": false,
+    "verifier_raw_response": {
+      "success": false,
+      "complete": false,
+      "has_sorry": false,
+      "feedback": "linarith failed to find a contradiction\ncase h1.h\ns t : ℝ\nh₀ : 9 - 2 * t = 9 - 2 * t\nh₁ : t = 3 * (9 - 2 * t) + 1\na✝ : s < 9 - 2 * (3 * s + 1)\n⊢ False failed",
+      "errors": [
+        "linarith failed to find a contradiction\ncase h1.h\ns t : ℝ\nh₀ : 9 - 2 * t = 9 - 2 * t\nh₁ : t = 3 * (9 - 2 * t) + 1\na✝ : s < 9 - 2 * (3 * s + 1)\n⊢ False failed"
+      ],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.096
+      }
+    },
+    "extracted_error_messages": [
+      "linarith failed to find a contradiction\ncase h1.h\ns t : ℝ\nh₀ : 9 - 2 * t = 9 - 2 * t\nh₁ : t = 3 * (9 - 2 * t) + 1\na✝ : s < 9 - 2 * (3 * s + 1)\n⊢ False failed"
+    ],
+    "structured_errors": [
+      "linarith failed to find a contradiction\ncase h1.h\ns t : ℝ\nh₀ : 9 - 2 * t = 9 - 2 * t\nh₁ : t = 3 * (9 - 2 * t) + 1\na✝ : s < 9 - 2 * (3 * s + 1)\n⊢ False failed"
+    ],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g6",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.124
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44",
+    "round_idx": 0
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g7",
+    "passed": true,
+    "complete": true,
+    "verifier_raw_response": {
+      "success": true,
+      "complete": true,
+      "has_sorry": false,
+      "feedback": "",
+      "errors": [],
+      "messages": [],
+      "sorries": [],
+      "source": "kimina",
+      "is_server_error": false,
+      "debug": {
+        "verifier_wall_s": 0.074
+      }
+    },
+    "extracted_error_messages": [],
+    "structured_errors": [],
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44",
+    "round_idx": 0
+  }
+]

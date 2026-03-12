@@ -1,0 +1,642 @@
+[
+  {
+    "item_id": "mathd_algebra_478__r0_g0",
+    "parsed_lean_block": "theorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  have h₄ : v = 65 := by\n    rw [h₁]\n    rw [h₂]\n    rw [h₃]\n    norm_num\n    <;>\n    (try norm_num) <;>\n    (try linarith) <;>\n    (try ring_nf) <;>\n    (try field_simp) <;>\n    (try norm_num)\n    <;>\n    (try\n      {\n        norm_num at *\n        <;>\n        linarith\n      })\n  exact h₄",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  have h₄ : v = 65 := by\n    rw [h₁]\n    rw [h₂]\n    rw [h₃]\n    norm_num\n    <;>\n    (try norm_num) <;>\n    (try linarith) <;>\n    (try ring_nf) <;>\n    (try field_simp) <;>\n    (try norm_num)\n    <;>\n    (try\n      {\n        norm_num at *\n        <;>\n        linarith\n      })\n  exact h₄",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478"
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g1",
+    "parsed_lean_block": "theorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  have h₄ : v = 65 := by\n    rw [h₁]\n    rw [h₂]\n    rw [h₃]\n    norm_num\n    <;>\n    (try norm_num) <;>\n    (try ring_nf) <;>\n    (try linarith)\n  \n  exact h₄",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  have h₄ : v = 65 := by\n    rw [h₁]\n    rw [h₂]\n    rw [h₃]\n    norm_num\n    <;>\n    (try norm_num) <;>\n    (try ring_nf) <;>\n    (try linarith)\n  \n  exact h₄",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478"
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g2",
+    "parsed_lean_block": "theorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  have h₄ : v = 65 := by\n    rw [h₁]\n    rw [h₂]\n    rw [h₃]\n    norm_num\n    <;>\n    (try norm_num) <;>\n    (try ring_nf) <;>\n    (try linarith)\n    <;>\n    (try field_simp) <;>\n    (try norm_num)\n    <;>\n    (try linarith)\n  \n  exact h₄",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  have h₄ : v = 65 := by\n    rw [h₁]\n    rw [h₂]\n    rw [h₃]\n    norm_num\n    <;>\n    (try norm_num) <;>\n    (try ring_nf) <;>\n    (try linarith)\n    <;>\n    (try field_simp) <;>\n    (try norm_num)\n    <;>\n    (try linarith)\n  \n  exact h₄",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478"
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g3",
+    "parsed_lean_block": "theorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  have h₄ : v = 65 := by\n    rw [h₁]\n    rw [h₂]\n    rw [h₃]\n    -- Substitute the values of b and h into the equation for v\n    norm_num\n    <;>\n    (try norm_num) <;>\n    (try ring_nf) <;>\n    (try linarith)\n  \n  exact h₄",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  have h₄ : v = 65 := by\n    rw [h₁]\n    rw [h₂]\n    rw [h₃]\n    -- Substitute the values of b and h into the equation for v\n    norm_num\n    <;>\n    (try norm_num) <;>\n    (try ring_nf) <;>\n    (try linarith)\n  \n  exact h₄",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478"
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g4",
+    "parsed_lean_block": "theorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  have h₄ : v = 1 / 3 * (30 * (13 / 2)) := by\n    have h₄₁ : v = 1 / 3 * (b * h) := h₁\n    have h₄₂ : b = 30 := h₂\n    have h₄₃ : h = 13 / 2 := h₃\n    rw [h₄₁, h₄₂, h₄₃]\n    <;> ring_nf\n    <;> norm_num\n  \n  have h₅ : v = 65 := by\n    have h₅₁ : v = 1 / 3 * (30 * (13 / 2)) := h₄\n    have h₅₂ : v = 65 := by\n      rw [h₅₁]\n      <;> norm_num\n    exact h₅₂\n  \n  exact h₅",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  have h₄ : v = 1 / 3 * (30 * (13 / 2)) := by\n    have h₄₁ : v = 1 / 3 * (b * h) := h₁\n    have h₄₂ : b = 30 := h₂\n    have h₄₃ : h = 13 / 2 := h₃\n    rw [h₄₁, h₄₂, h₄₃]\n    <;> ring_nf\n    <;> norm_num\n  \n  have h₅ : v = 65 := by\n    have h₅₁ : v = 1 / 3 * (30 * (13 / 2)) := h₄\n    have h₅₂ : v = 65 := by\n      rw [h₅₁]\n      <;> norm_num\n    exact h₅₂\n  \n  exact h₅",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478"
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g5",
+    "parsed_lean_block": "theorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  have h₄ : v = 65 := by\n    rw [h₁]\n    rw [h₂, h₃]\n    norm_num\n    <;>\n    (try norm_num) <;>\n    (try ring_nf) <;>\n    (try linarith)\n  \n  exact h₄",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  have h₄ : v = 65 := by\n    rw [h₁]\n    rw [h₂, h₃]\n    norm_num\n    <;>\n    (try norm_num) <;>\n    (try ring_nf) <;>\n    (try linarith)\n  \n  exact h₄",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478"
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g6",
+    "parsed_lean_block": "theorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  have h₄ : v = 65 := by\n    rw [h₁]\n    rw [h₂]\n    rw [h₃]\n    norm_num\n    <;>\n    (try norm_num) <;>\n    (try linarith)\n    <;>\n    (try ring_nf)\n    <;>\n    (try field_simp)\n    <;>\n    (try norm_num)\n    <;>\n    (try linarith)\n  \n  exact h₄",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  have h₄ : v = 65 := by\n    rw [h₁]\n    rw [h₂]\n    rw [h₃]\n    norm_num\n    <;>\n    (try norm_num) <;>\n    (try linarith)\n    <;>\n    (try ring_nf)\n    <;>\n    (try field_simp)\n    <;>\n    (try norm_num)\n    <;>\n    (try linarith)\n  \n  exact h₄",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478"
+  },
+  {
+    "item_id": "mathd_algebra_478__r0_g7",
+    "parsed_lean_block": "theorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  have h₄ : v = 65 := by\n    rw [h₁]\n    rw [h₂]\n    rw [h₃]\n    norm_num\n    <;>\n    (try norm_num) <;>\n    (try linarith) <;>\n    (try ring_nf) <;>\n    (try field_simp) <;>\n    (try norm_num)\n    <;>\n    (try linarith)\n  exact h₄",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_478\n  (b h v : ℝ)\n  (h₀ : 0 < b ∧ 0 < h ∧ 0 < v)\n  (h₁ : v = 1 / 3 * (b * h))\n  (h₂ : b = 30)\n  (h₃ : h = 13 / 2) :\n  v = 65 := by\n  have h₄ : v = 65 := by\n    rw [h₁]\n    rw [h₂]\n    rw [h₃]\n    norm_num\n    <;>\n    (try norm_num) <;>\n    (try linarith) <;>\n    (try ring_nf) <;>\n    (try field_simp) <;>\n    (try norm_num)\n    <;>\n    (try linarith)\n  exact h₄",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_478"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g0",
+    "parsed_lean_block": "theorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := by\n  have h_main : 4 * x ^ 3 - 7 * y ^ 3 ≠ 2003 := by\n    intro h\n    have h₁ : (4 * x ^ 3 - 7 * y ^ 3 : ℤ) % 7 = 2003 % 7 := by\n      rw [h]\n    have h₂ : (4 * x ^ 3 - 7 * y ^ 3 : ℤ) % 7 = (4 * x ^ 3 : ℤ) % 7 := by\n      have h₃ : (7 * y ^ 3 : ℤ) % 7 = 0 := by\n        norm_num [Int.mul_emod, pow_succ]\n      have h₄ : (4 * x ^ 3 - 7 * y ^ 3 : ℤ) % 7 = (4 * x ^ 3 : ℤ) % 7 := by\n        omega\n      exact h₄\n    have h₃ : (2003 : ℤ) % 7 = 1 := by norm_num\n    have h₄ : (4 * x ^ 3 : ℤ) % 7 = 1 := by\n      omega\n    have h₅ : x % 7 = 0 ∨ x % 7 = 1 ∨ x % 7 = 2 ∨ x % 7 = 3 ∨ x % 7 = 4 ∨ x % 7 = 5 ∨ x % 7 = 6 := by\n      omega\n    rcases h₅ with (h₅ | h₅ | h₅ | h₅ | h₅ | h₅ | h₅) <;>\n      (try omega) <;>\n      (try {\n        simp [h₅, pow_succ, Int.mul_emod, Int.add_emod] at h₄ ⊢\n        <;> norm_num at h₄ ⊢ <;> omega\n      }) <;>\n      (try {\n        simp [h₅, pow_succ, Int.mul_emod, Int.add_emod] at h₄ ⊢\n        <;> norm_num at h₄ ⊢ <;> omega\n      }) <;>\n      (try {\n        simp [h₅, pow_succ, Int.mul_emod, Int.add_emod] at h₄ ⊢\n        <;> norm_num at h₄ ⊢ <;> omega\n      }) <;>\n      (try {\n        simp [h₅, pow_succ, Int.mul_emod, Int.add_emod] at h₄ ⊢\n        <;> norm_num at h₄ ⊢ <;> omega\n      }) <;>\n      (try {\n        simp [h₅, pow_succ, Int.mul_emod, Int.add_emod] at h₄ ⊢\n        <;> norm_num at h₄ ⊢ <;> omega\n      }) <;>\n      (try {\n        simp [h₅, pow_succ, Int.mul_emod, Int.add_emod] at h₄ ⊢\n        <;> norm_num at h₄ ⊢ <;> omega\n      }) <;>\n      (try {\n        simp [h₅, pow_succ, Int.mul_emod, Int.add_emod] at h₄ ⊢\n        <;> norm_num at h₄ ⊢ <;> omega\n      })\n  exact h_main",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := by\n  have h_main : 4 * x ^ 3 - 7 * y ^ 3 ≠ 2003 := by\n    intro h\n    have h₁ : (4 * x ^ 3 - 7 * y ^ 3 : ℤ) % 7 = 2003 % 7 := by\n      rw [h]\n    have h₂ : (4 * x ^ 3 - 7 * y ^ 3 : ℤ) % 7 = (4 * x ^ 3 : ℤ) % 7 := by\n      have h₃ : (7 * y ^ 3 : ℤ) % 7 = 0 := by\n        norm_num [Int.mul_emod, pow_succ]\n      have h₄ : (4 * x ^ 3 - 7 * y ^ 3 : ℤ) % 7 = (4 * x ^ 3 : ℤ) % 7 := by\n        omega\n      exact h₄\n    have h₃ : (2003 : ℤ) % 7 = 1 := by norm_num\n    have h₄ : (4 * x ^ 3 : ℤ) % 7 = 1 := by\n      omega\n    have h₅ : x % 7 = 0 ∨ x % 7 = 1 ∨ x % 7 = 2 ∨ x % 7 = 3 ∨ x % 7 = 4 ∨ x % 7 = 5 ∨ x % 7 = 6 := by\n      omega\n    rcases h₅ with (h₅ | h₅ | h₅ | h₅ | h₅ | h₅ | h₅) <;>\n      (try omega) <;>\n      (try {\n        simp [h₅, pow_succ, Int.mul_emod, Int.add_emod] at h₄ ⊢\n        <;> norm_num at h₄ ⊢ <;> omega\n      }) <;>\n      (try {\n        simp [h₅, pow_succ, Int.mul_emod, Int.add_emod] at h₄ ⊢\n        <;> norm_num at h₄ ⊢ <;> omega\n      }) <;>\n      (try {\n        simp [h₅, pow_succ, Int.mul_emod, Int.add_emod] at h₄ ⊢\n        <;> norm_num at h₄ ⊢ <;> omega\n      }) <;>\n      (try {\n        simp [h₅, pow_succ, Int.mul_emod, Int.add_emod] at h₄ ⊢\n        <;> norm_num at h₄ ⊢ <;> omega\n      }) <;>\n      (try {\n        simp [h₅, pow_succ, Int.mul_emod, Int.add_emod] at h₄ ⊢\n        <;> norm_num at h₄ ⊢ <;> omega\n      }) <;>\n      (try {\n        simp [h₅, pow_succ, Int.mul_emod, Int.add_emod] at h₄ ⊢\n        <;> norm_num at h₄ ⊢ <;> omega\n      }) <;>\n      (try {\n        simp [h₅, pow_succ, Int.mul_emod, Int.add_emod] at h₄ ⊢\n        <;> norm_num at h₄ ⊢ <;> omega\n      })\n  exact h_main",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g1",
+    "parsed_lean_block": "theorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := by\n  have h_main : 4 * x^3 - 7 * y^3 ≠ 2003 := by\n    intro h\n    have h₁ : (4 * x^3 - 7 * y^3) % 7 = 2003 % 7 := by rw [h]\n    have h₂ : (4 * x^3 - 7 * y^3) % 7 = (4 * x^3) % 7 := by\n      have h₃ : (7 * y^3) % 7 = 0 := by\n        norm_num [Int.mul_emod, pow_three]\n      have h₄ : (4 * x^3 - 7 * y^3) % 7 = (4 * x^3) % 7 := by\n        omega\n      exact h₄\n    have h₃ : (4 * x^3) % 7 = 1 := by\n      have h₄ : 2003 % 7 = 1 := by norm_num\n      have h₅ : (4 * x^3) % 7 = 1 := by\n        omega\n      exact h₅\n    have h₄ : (x^3) % 7 = 2 := by\n      have h₅ : (4 * x^3) % 7 = 1 := h₃\n      have h₆ : (x^3) % 7 = 2 := by\n        have : (4 * x^3) % 7 = (4 * (x^3 % 7)) % 7 := by\n          simp [Int.mul_emod]\n        have : (4 * (x^3 % 7)) % 7 = 1 := by\n          omega\n        have : (x^3 % 7) = 0 ∨ (x^3 % 7) = 1 ∨ (x^3 % 7) = 2 ∨ (x^3 % 7) = 3 ∨ (x^3 % 7) = 4 ∨ (x^3 % 7) = 5 ∨ (x^3 % 7) = 6 := by\n          omega\n        rcases this with (h | h | h | h | h | h | h) <;>\n          (try omega) <;>\n          (try {\n            simp [h, Int.mul_emod, pow_three] at *\n            <;> omega\n          })\n      exact h₆\n    have h₅ : (x^3) % 7 ≠ 2 := by\n      have h₆ : (x % 7) = 0 ∨ (x % 7) = 1 ∨ (x % 7) = 2 ∨ (x % 7) = 3 ∨ (x % 7) = 4 ∨ (x % 7) = 5 ∨ (x % 7) = 6 := by\n        omega\n      rcases h₆ with (h₆ | h₆ | h₆ | h₆ | h₆ | h₆ | h₆) <;>\n        (try {\n          simp [h₆, pow_three, Int.mul_emod, Int.add_emod]\n          <;> norm_num <;> omega\n        })\n    contradiction\n  exact h_main",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := by\n  have h_main : 4 * x^3 - 7 * y^3 ≠ 2003 := by\n    intro h\n    have h₁ : (4 * x^3 - 7 * y^3) % 7 = 2003 % 7 := by rw [h]\n    have h₂ : (4 * x^3 - 7 * y^3) % 7 = (4 * x^3) % 7 := by\n      have h₃ : (7 * y^3) % 7 = 0 := by\n        norm_num [Int.mul_emod, pow_three]\n      have h₄ : (4 * x^3 - 7 * y^3) % 7 = (4 * x^3) % 7 := by\n        omega\n      exact h₄\n    have h₃ : (4 * x^3) % 7 = 1 := by\n      have h₄ : 2003 % 7 = 1 := by norm_num\n      have h₅ : (4 * x^3) % 7 = 1 := by\n        omega\n      exact h₅\n    have h₄ : (x^3) % 7 = 2 := by\n      have h₅ : (4 * x^3) % 7 = 1 := h₃\n      have h₆ : (x^3) % 7 = 2 := by\n        have : (4 * x^3) % 7 = (4 * (x^3 % 7)) % 7 := by\n          simp [Int.mul_emod]\n        have : (4 * (x^3 % 7)) % 7 = 1 := by\n          omega\n        have : (x^3 % 7) = 0 ∨ (x^3 % 7) = 1 ∨ (x^3 % 7) = 2 ∨ (x^3 % 7) = 3 ∨ (x^3 % 7) = 4 ∨ (x^3 % 7) = 5 ∨ (x^3 % 7) = 6 := by\n          omega\n        rcases this with (h | h | h | h | h | h | h) <;>\n          (try omega) <;>\n          (try {\n            simp [h, Int.mul_emod, pow_three] at *\n            <;> omega\n          })\n      exact h₆\n    have h₅ : (x^3) % 7 ≠ 2 := by\n      have h₆ : (x % 7) = 0 ∨ (x % 7) = 1 ∨ (x % 7) = 2 ∨ (x % 7) = 3 ∨ (x % 7) = 4 ∨ (x % 7) = 5 ∨ (x % 7) = 6 := by\n        omega\n      rcases h₆ with (h₆ | h₆ | h₆ | h₆ | h₆ | h₆ | h₆) <;>\n        (try {\n          simp [h₆, pow_three, Int.mul_emod, Int.add_emod]\n          <;> norm_num <;> omega\n        })\n    contradiction\n  exact h_main",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g2",
+    "parsed_lean_block": "theorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := by\n  have h_main : 4 * x^3 - 7 * y^3 ≠ 2003 := by\n    intro h\n    have h₁ : (4 * x^3 - 7 * y^3) % 7 = 2003 % 7 := by\n      rw [h]\n    have h₂ : (4 * x^3 - 7 * y^3) % 7 = (4 * x^3) % 7 := by\n      have h₃ : (7 * y^3 : ℤ) % 7 = 0 := by\n        norm_num [Int.mul_emod, Int.emod_emod]\n      have h₄ : (4 * x^3 - 7 * y^3 : ℤ) % 7 = (4 * x^3 : ℤ) % 7 := by\n        omega\n      exact h₄\n    have h₃ : (4 * x^3) % 7 = 1 := by\n      have h₄ : (4 * x^3) % 7 = 1 := by\n        have h₅ : (4 * x^3 - 7 * y^3 : ℤ) % 7 = 2003 % 7 := h₁\n        have h₆ : (4 * x^3 : ℤ) % 7 = (4 * x^3 - 7 * y^3 : ℤ) % 7 := by\n          omega\n        have h₇ : (2003 : ℤ) % 7 = 1 := by norm_num\n        omega\n      exact h₄\n    have h₄ : x % 7 = 0 ∨ x % 7 = 1 ∨ x % 7 = 2 ∨ x % 7 = 3 ∨ x % 7 = 4 ∨ x % 7 = 5 ∨ x % 7 = 6 := by\n      omega\n    have h₅ : False := by\n      rcases h₄ with (h₄ | h₄ | h₄ | h₄ | h₄ | h₄ | h₄)\n      · -- Case x ≡ 0 mod 7\n        have h₆ : (4 * x^3) % 7 = 0 := by\n          have h₇ : x % 7 = 0 := h₄\n          have h₈ : (x : ℤ) % 7 = 0 := by exact_mod_cast h₇\n          have h₉ : (x^3 : ℤ) % 7 = 0 := by\n            have : (x : ℤ) % 7 = 0 := h₈\n            have : (x^3 : ℤ) % 7 = 0 := by\n              norm_num [pow_three, Int.mul_emod, this]\n            exact this\n          omega\n        omega\n      · -- Case x ≡ 1 mod 7\n        have h₆ : (4 * x^3) % 7 = 4 := by\n          have h₇ : x % 7 = 1 := h₄\n          have h₈ : (x : ℤ) % 7 = 1 := by exact_mod_cast h₇\n          have h₉ : (x^3 : ℤ) % 7 = 1 := by\n            have : (x : ℤ) % 7 = 1 := h₈\n            have : (x^3 : ℤ) % 7 = 1 := by\n              norm_num [pow_three, Int.mul_emod, this]\n            exact this\n          omega\n        omega\n      · -- Case x ≡ 2 mod 7\n        have h₆ : (4 * x^3) % 7 = 1 := by\n          have h₇ : x % 7 = 2 := h₄\n          have h₈ : (x : ℤ) % 7 = 2 := by exact_mod_cast h₇\n          have h₉ : (x^3 : ℤ) % 7 = 1 := by\n            have : (x : ℤ) % 7 = 2 := h₈\n            have : (x^3 : ℤ) % 7 = 1 := by\n              norm_num [pow_three, Int.mul_emod, this]\n            exact this\n          omega\n        omega\n      · -- Case x ≡ 3 mod 7\n        have h₆ : (4 * x^3) % 7 = 6 := by\n          have h₇ : x % 7 = 3 := h₄\n          have h₈ : (x : ℤ) % 7 = 3 := by exact_mod_cast h₇\n          have h₉ : (x^3 : ℤ) % 7 = 6 := by\n            have : (x : ℤ) % 7 = 3 := h₈\n            have : (x^3 : ℤ) % 7 = 6 := by\n              norm_num [pow_three, Int.mul_emod, this]\n            exact this\n          omega\n        omega\n      · -- Case x ≡ 4 mod 7\n        have h₆ : (4 * x^3) % 7 = 1 := by\n          have h₇ : x % 7 = 4 := h₄\n          have h₈ : (x : ℤ) % 7 = 4 := by exact_mod_cast h₇\n          have h₉ : (x^3 : ℤ) % 7 = 1 := by\n            have : (x : ℤ) % 7 = 4 := h₈\n            have : (x^3 : ℤ) % 7 = 1 := by\n              norm_num [pow_three, Int.mul_emod, this]\n            exact this\n          omega\n        omega\n      · -- Case x ≡ 5 mod 7\n        have h₆ : (4 * x^3) % 7 = 6 := by\n          have h₇ : x % 7 = 5 := h₄\n          have h₈ : (x : ℤ) % 7 = 5 := by exact_mod_cast h₇\n          have h₉ : (x^3 : ℤ) % 7 = 6 := by\n            have : (x : ℤ) % 7 = 5 := h₈\n            have : (x^3 : ℤ) % 7 = 6 := by\n              norm_num [pow_three, Int.mul_emod, this]\n            exact this\n          omega\n        omega\n      · -- Case x ≡ 6 mod 7\n        have h₆ : (4 * x^3) % 7 = 6 := by\n          have h₇ : x % 7 = 6 := h₄\n          have h₈ : (x : ℤ) % 7 = 6 := by exact_mod_cast h₇\n          have h₉ : (x^3 : ℤ) % 7 = 6 := by\n            have : (x : ℤ) % 7 = 6 := h₈\n            have : (x^3 : ℤ) % 7 = 6 := by\n              norm_num [pow_three, Int.mul_emod, this]\n            exact this\n          omega\n        omega\n    exact h₅\n  exact h_main",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := by\n  have h_main : 4 * x^3 - 7 * y^3 ≠ 2003 := by\n    intro h\n    have h₁ : (4 * x^3 - 7 * y^3) % 7 = 2003 % 7 := by\n      rw [h]\n    have h₂ : (4 * x^3 - 7 * y^3) % 7 = (4 * x^3) % 7 := by\n      have h₃ : (7 * y^3 : ℤ) % 7 = 0 := by\n        norm_num [Int.mul_emod, Int.emod_emod]\n      have h₄ : (4 * x^3 - 7 * y^3 : ℤ) % 7 = (4 * x^3 : ℤ) % 7 := by\n        omega\n      exact h₄\n    have h₃ : (4 * x^3) % 7 = 1 := by\n      have h₄ : (4 * x^3) % 7 = 1 := by\n        have h₅ : (4 * x^3 - 7 * y^3 : ℤ) % 7 = 2003 % 7 := h₁\n        have h₆ : (4 * x^3 : ℤ) % 7 = (4 * x^3 - 7 * y^3 : ℤ) % 7 := by\n          omega\n        have h₇ : (2003 : ℤ) % 7 = 1 := by norm_num\n        omega\n      exact h₄\n    have h₄ : x % 7 = 0 ∨ x % 7 = 1 ∨ x % 7 = 2 ∨ x % 7 = 3 ∨ x % 7 = 4 ∨ x % 7 = 5 ∨ x % 7 = 6 := by\n      omega\n    have h₅ : False := by\n      rcases h₄ with (h₄ | h₄ | h₄ | h₄ | h₄ | h₄ | h₄)\n      · -- Case x ≡ 0 mod 7\n        have h₆ : (4 * x^3) % 7 = 0 := by\n          have h₇ : x % 7 = 0 := h₄\n          have h₈ : (x : ℤ) % 7 = 0 := by exact_mod_cast h₇\n          have h₉ : (x^3 : ℤ) % 7 = 0 := by\n            have : (x : ℤ) % 7 = 0 := h₈\n            have : (x^3 : ℤ) % 7 = 0 := by\n              norm_num [pow_three, Int.mul_emod, this]\n            exact this\n          omega\n        omega\n      · -- Case x ≡ 1 mod 7\n        have h₆ : (4 * x^3) % 7 = 4 := by\n          have h₇ : x % 7 = 1 := h₄\n          have h₈ : (x : ℤ) % 7 = 1 := by exact_mod_cast h₇\n          have h₉ : (x^3 : ℤ) % 7 = 1 := by\n            have : (x : ℤ) % 7 = 1 := h₈\n            have : (x^3 : ℤ) % 7 = 1 := by\n              norm_num [pow_three, Int.mul_emod, this]\n            exact this\n          omega\n        omega\n      · -- Case x ≡ 2 mod 7\n        have h₆ : (4 * x^3) % 7 = 1 := by\n          have h₇ : x % 7 = 2 := h₄\n          have h₈ : (x : ℤ) % 7 = 2 := by exact_mod_cast h₇\n          have h₉ : (x^3 : ℤ) % 7 = 1 := by\n            have : (x : ℤ) % 7 = 2 := h₈\n            have : (x^3 : ℤ) % 7 = 1 := by\n              norm_num [pow_three, Int.mul_emod, this]\n            exact this\n          omega\n        omega\n      · -- Case x ≡ 3 mod 7\n        have h₆ : (4 * x^3) % 7 = 6 := by\n          have h₇ : x % 7 = 3 := h₄\n          have h₈ : (x : ℤ) % 7 = 3 := by exact_mod_cast h₇\n          have h₉ : (x^3 : ℤ) % 7 = 6 := by\n            have : (x : ℤ) % 7 = 3 := h₈\n            have : (x^3 : ℤ) % 7 = 6 := by\n              norm_num [pow_three, Int.mul_emod, this]\n            exact this\n          omega\n        omega\n      · -- Case x ≡ 4 mod 7\n        have h₆ : (4 * x^3) % 7 = 1 := by\n          have h₇ : x % 7 = 4 := h₄\n          have h₈ : (x : ℤ) % 7 = 4 := by exact_mod_cast h₇\n          have h₉ : (x^3 : ℤ) % 7 = 1 := by\n            have : (x : ℤ) % 7 = 4 := h₈\n            have : (x^3 : ℤ) % 7 = 1 := by\n              norm_num [pow_three, Int.mul_emod, this]\n            exact this\n          omega\n        omega\n      · -- Case x ≡ 5 mod 7\n        have h₆ : (4 * x^3) % 7 = 6 := by\n          have h₇ : x % 7 = 5 := h₄\n          have h₈ : (x : ℤ) % 7 = 5 := by exact_mod_cast h₇\n          have h₉ : (x^3 : ℤ) % 7 = 6 := by\n            have : (x : ℤ) % 7 = 5 := h₈\n            have : (x^3 : ℤ) % 7 = 6 := by\n              norm_num [pow_three, Int.mul_emod, this]\n            exact this\n          omega\n        omega\n      · -- Case x ≡ 6 mod 7\n        have h₆ : (4 * x^3) % 7 = 6 := by\n          have h₇ : x % 7 = 6 := h₄\n          have h₈ : (x : ℤ) % 7 = 6 := by exact_mod_cast h₇\n          have h₉ : (x^3 : ℤ) % 7 = 6 := by\n            have : (x : ℤ) % 7 = 6 := h₈\n            have : (x^3 : ℤ) % 7 = 6 := by\n              norm_num [pow_three, Int.mul_emod, this]\n            exact this\n          omega\n        omega\n    exact h₅\n  exact h_main",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g3",
+    "parsed_lean_block": "theorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := by\n  have h_main : 4 * x^3 - 7 * y^3 ≠ 2003 := by\n    intro h\n    have h₁ : (4 * x^3 - 7 * y^3) % 7 = 2003 % 7 := by rw [h]\n    have h₂ : 2003 % 7 = 1 := by norm_num\n    have h₃ : (4 * x^3 - 7 * y^3) % 7 = (4 * x^3) % 7 := by\n      have h₄ : (7 * y^3) % 7 = 0 := by\n        norm_num [Int.mul_emod, Int.emod_emod]\n      have h₅ : (4 * x^3 - 7 * y^3) % 7 = (4 * x^3 - 0) % 7 := by\n        rw [h₄]\n        <;> simp [Int.sub_emod]\n      rw [h₅]\n      <;> simp [Int.mul_emod, Int.add_emod]\n    have h₆ : (4 * x^3) % 7 = 1 := by\n      omega\n    have h₇ : x^3 % 7 = 2 := by\n      have h₈ : (4 * x^3) % 7 = 1 := h₆\n      have h₉ : x^3 % 7 = 2 := by\n        have : x^3 % 7 = 0 ∨ x^3 % 7 = 1 ∨ x^3 % 7 = 2 ∨ x^3 % 7 = 3 ∨ x^3 % 7 = 4 ∨ x^3 % 7 = 5 ∨ x^3 % 7 = 6 := by\n          omega\n        rcases this with (h | h | h | h | h | h | h) <;>\n          (try omega) <;>\n          (try {\n            simp [h, Int.mul_emod, Int.emod_emod] at h₈ ⊢\n            <;> omega\n          })\n      exact h₉\n    have h₈ : x^3 % 7 ≠ 2 := by\n      have : x^3 % 7 = 0 ∨ x^3 % 7 = 1 ∨ x^3 % 7 = 2 ∨ x^3 % 7 = 3 ∨ x^3 % 7 = 4 ∨ x^3 % 7 = 5 ∨ x^3 % 7 = 6 := by\n        omega\n      rcases this with (h | h | h | h | h | h | h) <;>\n        (try omega) <;>\n        (try {\n          norm_num [h, Int.mul_emod, Int.emod_emod] at h ⊢\n          <;> omega\n        })\n    omega\n  exact h_main",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := by\n  have h_main : 4 * x^3 - 7 * y^3 ≠ 2003 := by\n    intro h\n    have h₁ : (4 * x^3 - 7 * y^3) % 7 = 2003 % 7 := by rw [h]\n    have h₂ : 2003 % 7 = 1 := by norm_num\n    have h₃ : (4 * x^3 - 7 * y^3) % 7 = (4 * x^3) % 7 := by\n      have h₄ : (7 * y^3) % 7 = 0 := by\n        norm_num [Int.mul_emod, Int.emod_emod]\n      have h₅ : (4 * x^3 - 7 * y^3) % 7 = (4 * x^3 - 0) % 7 := by\n        rw [h₄]\n        <;> simp [Int.sub_emod]\n      rw [h₅]\n      <;> simp [Int.mul_emod, Int.add_emod]\n    have h₆ : (4 * x^3) % 7 = 1 := by\n      omega\n    have h₇ : x^3 % 7 = 2 := by\n      have h₈ : (4 * x^3) % 7 = 1 := h₆\n      have h₉ : x^3 % 7 = 2 := by\n        have : x^3 % 7 = 0 ∨ x^3 % 7 = 1 ∨ x^3 % 7 = 2 ∨ x^3 % 7 = 3 ∨ x^3 % 7 = 4 ∨ x^3 % 7 = 5 ∨ x^3 % 7 = 6 := by\n          omega\n        rcases this with (h | h | h | h | h | h | h) <;>\n          (try omega) <;>\n          (try {\n            simp [h, Int.mul_emod, Int.emod_emod] at h₈ ⊢\n            <;> omega\n          })\n      exact h₉\n    have h₈ : x^3 % 7 ≠ 2 := by\n      have : x^3 % 7 = 0 ∨ x^3 % 7 = 1 ∨ x^3 % 7 = 2 ∨ x^3 % 7 = 3 ∨ x^3 % 7 = 4 ∨ x^3 % 7 = 5 ∨ x^3 % 7 = 6 := by\n        omega\n      rcases this with (h | h | h | h | h | h | h) <;>\n        (try omega) <;>\n        (try {\n          norm_num [h, Int.mul_emod, Int.emod_emod] at h ⊢\n          <;> omega\n        })\n    omega\n  exact h_main",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g4",
+    "parsed_lean_block": "theorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := by\n  intro h\n  have h_mod : (4 * x^3 - 7 * y^3) % 7 = 2003 % 7 := by\n    rw [h]\n  have h_left : (4 * x^3 - 7 * y^3) % 7 = 4 * x^3 % 7 := by\n    have : (7 * y^3) % 7 = 0 := by simp [Int.mul_emod]\n    rw [Int.sub_emod this]\n  have h_right : 2003 % 7 = 1 := by norm_num\n  have h_main : (4 * x^3) % 7 = 1 := by\n    linarith\n  have h_x3 : x^3 % 7 = 2 := by\n    have : (4 * x^3) % 7 = 1 := h_main\n    have : (4 * (x^3 % 7)) % 7 = 1 := by\n      have : (4 * x^3) % 7 = (4 * (x^3 % 7)) % 7 := by\n        simp [Int.mul_emod]\n      rw [this] at *\n      exact this\n    have h1 : x^3 % 7 = 0 ∨ x^3 % 7 = 1 ∨ x^3 % 7 = 2 ∨ x^3 % 7 = 3 ∨ x^3 % 7 = 4 ∨ x^3 % 7 = 5 ∨ x^3 % 7 = 6 := by\n      omega\n    rcases h1 with (h1 | h1 | h1 | h1 | h1 | h1 | h1) <;>\n      simp [h1, Int.mul_emod, Int.add_emod] at * <;>\n      norm_num at * <;>\n      omega\n  have h_impossible : x^3 % 7 ≠ 2 := by\n    have h1 : x % 7 = 0 ∨ x % 7 = 1 ∨ x % 7 = 2 ∨ x % 7 = 3 ∨ x % 7 = 4 ∨ x % 7 = 5 ∨ x % 7 = 6 := by\n      omega\n    rcases h1 with (h1 | h1 | h1 | h1 | h1 | h1 | h1) <;>\n      simp [h1, pow_three, Int.mul_emod, Int.add_emod] <;>\n      norm_num <;>\n      omega\n  exact h_impossible h_x3",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := by\n  intro h\n  have h_mod : (4 * x^3 - 7 * y^3) % 7 = 2003 % 7 := by\n    rw [h]\n  have h_left : (4 * x^3 - 7 * y^3) % 7 = 4 * x^3 % 7 := by\n    have : (7 * y^3) % 7 = 0 := by simp [Int.mul_emod]\n    rw [Int.sub_emod this]\n  have h_right : 2003 % 7 = 1 := by norm_num\n  have h_main : (4 * x^3) % 7 = 1 := by\n    linarith\n  have h_x3 : x^3 % 7 = 2 := by\n    have : (4 * x^3) % 7 = 1 := h_main\n    have : (4 * (x^3 % 7)) % 7 = 1 := by\n      have : (4 * x^3) % 7 = (4 * (x^3 % 7)) % 7 := by\n        simp [Int.mul_emod]\n      rw [this] at *\n      exact this\n    have h1 : x^3 % 7 = 0 ∨ x^3 % 7 = 1 ∨ x^3 % 7 = 2 ∨ x^3 % 7 = 3 ∨ x^3 % 7 = 4 ∨ x^3 % 7 = 5 ∨ x^3 % 7 = 6 := by\n      omega\n    rcases h1 with (h1 | h1 | h1 | h1 | h1 | h1 | h1) <;>\n      simp [h1, Int.mul_emod, Int.add_emod] at * <;>\n      norm_num at * <;>\n      omega\n  have h_impossible : x^3 % 7 ≠ 2 := by\n    have h1 : x % 7 = 0 ∨ x % 7 = 1 ∨ x % 7 = 2 ∨ x % 7 = 3 ∨ x % 7 = 4 ∨ x % 7 = 5 ∨ x % 7 = 6 := by\n      omega\n    rcases h1 with (h1 | h1 | h1 | h1 | h1 | h1 | h1) <;>\n      simp [h1, pow_three, Int.mul_emod, Int.add_emod] <;>\n      norm_num <;>\n      omega\n  exact h_impossible h_x3",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g5",
+    "parsed_lean_block": "import Mathlib.Data.Int.ModEq\nimport Mathlib.Data.Nat.ModEq\nimport Mathlib.Tactic\n\nopen Int ModEq\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := by\n  intro h\n  have h1 : (4 * x^3 - 7 * y^3) ≡ 2003 [ZMOD 7] := by\n    rw [h]\n    <;> simp [Int.ModEq]\n  \n  have h2 : 4 * x^3 ≡ 1 [ZMOD 7] := by\n    have h2' : (4 * x^3 - 7 * y^3) ≡ 4 * x^3 [ZMOD 7] := by\n      simp [Int.ModEq, Int.emod_eq_emod_iff_emod_sub_eq_zero]\n      <;> ring_nf\n      <;> simp [Int.add_emod]\n    have h2'' : (2003 : ℤ) ≡ 1 [ZMOD 7] := by\n      norm_num [Int.ModEq]\n    have h2''' : 4 * x^3 ≡ 1 [ZMOD 7] := by\n      calc\n        4 * x^3 ≡ 4 * x^3 - 7 * y^3 [ZMOD 7] := by\n          -- 4*x^3 - 7*y^3 ≡ 4*x^3 (mod 7) because 7*y^3 ≡ 0 (mod 7)\n          simp [Int.ModEq, Int.emod_eq_emod_iff_emod_sub_eq_zero] at h1 ⊢\n          <;>\n          (try omega) <;>\n          (try ring_nf at h1 ⊢) <;>\n          (try simp_all [Int.add_emod])\n          <;>\n          omega\n        _ ≡ 2003 [ZMOD 7] := h1\n        _ ≡ 1 [ZMOD 7] := h2''\n    exact h2'''\n  \n  have h3 : x^3 ≡ 2 [ZMOD 7] := by\n    have h3' : 4 * x^3 ≡ 1 [ZMOD 7] := h2\n    have h3'' : x^3 ≡ 2 [ZMOD 7] := by\n      -- Multiply by 2 (inverse of 4 mod 7)\n      have h3''' : 2 * (4 * x^3) ≡ 2 * 1 [ZMOD 7] := by\n        exact Int.ModEq.mul_right 2 h3'\n      -- 2 * 4 = 8 ≡ 1 (mod 7)\n      have h3'''' : 8 * x^3 ≡ 2 [ZMOD 7] := by\n        simpa [Int.ModEq, Int.emod_eq_emod_iff_emod_sub_eq_zero] using h3'''\n      have h3''''' : 1 * x^3 ≡ 2 [ZMOD 7] := by\n        have h3'''''' : (8 : ℤ) ≡ 1 [ZMOD 7] := by norm_num [Int.ModEq]\n        have h3''''''' : 8 * x^3 ≡ 1 * x^3 [ZMOD 7] := by\n          simpa [Int.ModEq, Int.emod_eq_emod_iff_emod_sub_eq_zero] using h3''''''\n        calc\n          1 * x^3 ≡ 8 * x^3 [ZMOD 7] := by\n            simpa [Int.ModEq, Int.emod_eq_emod_iff_emod_sub_eq_zero] using h3''''''\n          _ ≡ 2 [ZMOD 7] := h3''''\n          _ ≡ 1 * x^3 [ZMOD 7] := by\n            simpa [Int.ModEq, Int.emod_eq_emod_iff_emod_sub_eq_zero] using h3''''''\n      simpa [Int.ModEq, Int.emod_eq_emod_iff_emod_sub_eq_zero] using h3'''''\n    exact h3''\n  \n  have h4 : False := by\n    have h4' : x % 7 = 0 ∨ x % 7 = 1 ∨ x % 7 = 2 ∨ x % 7 = 3 ∨ x % 7 = 4 ∨ x % 7 = 5 ∨ x % 7 = 6 := by\n      omega\n    have h4'' : x^3 % 7 = 2 := by\n      have h4''' : x^3 ≡ 2 [ZMOD 7] := h3\n      have h4'''' : x^3 % 7 = 2 := by\n        -- Convert ModEq to % operator equality\n        have h4''''' : (x^3 : ℤ) % 7 = 2 := by\n          -- Since x^3 ≡ 2 [ZMOD 7], x^3 = 7k + 2\n          -- So x^3 % 7 = 2 % 7 = 2\n          have h4'''''' : (x^3 : ℤ) % 7 = 2 := by\n            rw [Int.ModEq] at h4'''\n            omega\n          exact h4''''''\n        exact_mod_cast h4'''''\n      exact h4''''\n    -- Check all cases for x % 7\n    have h5 : x^3 % 7 ≠ 2 := by\n      rcases h4' with (h | h | h | h | h | h | h) <;>\n      (try {\n        simp [h, pow_three, Int.mul_emod, Int.add_emod, Int.emod_emod] at h4'' ⊢\n        <;> omega\n      }) <;>\n      (try {\n        simp [h, pow_three, Int.mul_emod, Int.add_emod, Int.emod_emod] at h4'' ⊢\n        <;> omega\n      })\n    exact h5 h4''\n  \n  exact h4",
+    "truncated": false,
+    "full_lean_code": "import Mathlib.Data.Int.ModEq\nimport Mathlib.Data.Nat.ModEq\nimport Mathlib.Tactic\n\nopen Int ModEq\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := by\n  intro h\n  have h1 : (4 * x^3 - 7 * y^3) ≡ 2003 [ZMOD 7] := by\n    rw [h]\n    <;> simp [Int.ModEq]\n  \n  have h2 : 4 * x^3 ≡ 1 [ZMOD 7] := by\n    have h2' : (4 * x^3 - 7 * y^3) ≡ 4 * x^3 [ZMOD 7] := by\n      simp [Int.ModEq, Int.emod_eq_emod_iff_emod_sub_eq_zero]\n      <;> ring_nf\n      <;> simp [Int.add_emod]\n    have h2'' : (2003 : ℤ) ≡ 1 [ZMOD 7] := by\n      norm_num [Int.ModEq]\n    have h2''' : 4 * x^3 ≡ 1 [ZMOD 7] := by\n      calc\n        4 * x^3 ≡ 4 * x^3 - 7 * y^3 [ZMOD 7] := by\n          -- 4*x^3 - 7*y^3 ≡ 4*x^3 (mod 7) because 7*y^3 ≡ 0 (mod 7)\n          simp [Int.ModEq, Int.emod_eq_emod_iff_emod_sub_eq_zero] at h1 ⊢\n          <;>\n          (try omega) <;>\n          (try ring_nf at h1 ⊢) <;>\n          (try simp_all [Int.add_emod])\n          <;>\n          omega\n        _ ≡ 2003 [ZMOD 7] := h1\n        _ ≡ 1 [ZMOD 7] := h2''\n    exact h2'''\n  \n  have h3 : x^3 ≡ 2 [ZMOD 7] := by\n    have h3' : 4 * x^3 ≡ 1 [ZMOD 7] := h2\n    have h3'' : x^3 ≡ 2 [ZMOD 7] := by\n      -- Multiply by 2 (inverse of 4 mod 7)\n      have h3''' : 2 * (4 * x^3) ≡ 2 * 1 [ZMOD 7] := by\n        exact Int.ModEq.mul_right 2 h3'\n      -- 2 * 4 = 8 ≡ 1 (mod 7)\n      have h3'''' : 8 * x^3 ≡ 2 [ZMOD 7] := by\n        simpa [Int.ModEq, Int.emod_eq_emod_iff_emod_sub_eq_zero] using h3'''\n      have h3''''' : 1 * x^3 ≡ 2 [ZMOD 7] := by\n        have h3'''''' : (8 : ℤ) ≡ 1 [ZMOD 7] := by norm_num [Int.ModEq]\n        have h3''''''' : 8 * x^3 ≡ 1 * x^3 [ZMOD 7] := by\n          simpa [Int.ModEq, Int.emod_eq_emod_iff_emod_sub_eq_zero] using h3''''''\n        calc\n          1 * x^3 ≡ 8 * x^3 [ZMOD 7] := by\n            simpa [Int.ModEq, Int.emod_eq_emod_iff_emod_sub_eq_zero] using h3''''''\n          _ ≡ 2 [ZMOD 7] := h3''''\n          _ ≡ 1 * x^3 [ZMOD 7] := by\n            simpa [Int.ModEq, Int.emod_eq_emod_iff_emod_sub_eq_zero] using h3''''''\n      simpa [Int.ModEq, Int.emod_eq_emod_iff_emod_sub_eq_zero] using h3'''''\n    exact h3''\n  \n  have h4 : False := by\n    have h4' : x % 7 = 0 ∨ x % 7 = 1 ∨ x % 7 = 2 ∨ x % 7 = 3 ∨ x % 7 = 4 ∨ x % 7 = 5 ∨ x % 7 = 6 := by\n      omega\n    have h4'' : x^3 % 7 = 2 := by\n      have h4''' : x^3 ≡ 2 [ZMOD 7] := h3\n      have h4'''' : x^3 % 7 = 2 := by\n        -- Convert ModEq to % operator equality\n        have h4''''' : (x^3 : ℤ) % 7 = 2 := by\n          -- Since x^3 ≡ 2 [ZMOD 7], x^3 = 7k + 2\n          -- So x^3 % 7 = 2 % 7 = 2\n          have h4'''''' : (x^3 : ℤ) % 7 = 2 := by\n            rw [Int.ModEq] at h4'''\n            omega\n          exact h4''''''\n        exact_mod_cast h4'''''\n      exact h4''''\n    -- Check all cases for x % 7\n    have h5 : x^3 % 7 ≠ 2 := by\n      rcases h4' with (h | h | h | h | h | h | h) <;>\n      (try {\n        simp [h, pow_three, Int.mul_emod, Int.add_emod, Int.emod_emod] at h4'' ⊢\n        <;> omega\n      }) <;>\n      (try {\n        simp [h, pow_three, Int.mul_emod, Int.add_emod, Int.emod_emod] at h4'' ⊢\n        <;> omega\n      })\n    exact h5 h4''\n  \n  exact h4",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g6",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "numbertheory_4x3m7y3neq2003__r0_g7",
+    "parsed_lean_block": "theorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := by\n  have h_main : 4 * x^3 - 7 * y^3 ≠ 2003 := by\n    intro h\n    have h₁ : (4 * x ^ 3 - 7 * y ^ 3 : ℤ) % 7 = 1 := by\n      have h₂ : (4 * x ^ 3 - 7 * y ^ 3 : ℤ) = 2003 := h\n      rw [h₂]\n      norm_num [Int.emod_eq_of_lt]\n      <;> decide\n    have h₂ : (4 * x ^ 3 : ℤ) % 7 = 1 := by\n      have h₃ : (4 * x ^ 3 - 7 * y ^ 3 : ℤ) % 7 = 1 := h₁\n      have h₄ : (7 * y ^ 3 : ℤ) % 7 = 0 := by\n        norm_num [Int.mul_emod]\n      have h₅ : (4 * x ^ 3 : ℤ) % 7 = 1 := by\n        omega\n      exact h₅\n    have h₃ : (x : ℤ) % 7 = 0 ∨ (x : ℤ) % 7 = 1 ∨ (x : ℤ) % 7 = 2 ∨ (x : ℤ) % 7 = 3 ∨ (x : ℤ) % 7 = 4 ∨ (x : ℤ) % 7 = 5 ∨ (x : ℤ) % 7 = 6 := by\n      omega\n    have h₄ : (4 * x ^ 3 : ℤ) % 7 = 0 ∨ (4 * x ^ 3 : ℤ) % 7 = 4 ∨ (4 * x ^ 3 : ℤ) % 7 = 3 := by\n      have h₅ : (x : ℤ) % 7 = 0 ∨ (x : ℤ) % 7 = 1 ∨ (x : ℤ) % 7 = 2 ∨ (x : ℤ) % 7 = 3 ∨ (x : ℤ) % 7 = 4 ∨ (x : ℤ) % 7 = 5 ∨ (x : ℤ) % 7 = 6 := h₃\n      rcases h₅ with (h₅ | h₅ | h₅ | h₅ | h₅ | h₅ | h₅)\n      · -- Case x ≡ 0 mod 7\n        have h₆ : (4 * x ^ 3 : ℤ) % 7 = 0 := by\n          have h₇ : (x : ℤ) % 7 = 0 := h₅\n          have h₈ : (x : ℤ) % 7 = 0 := by exact_mod_cast h₇\n          have h₉ : (4 * x ^ 3 : ℤ) % 7 = 0 := by\n            norm_num [pow_three, Int.mul_emod, Int.emod_emod] at h₈ ⊢\n            <;> simp [h₈]\n            <;> norm_num\n          exact h₉\n        exact Or.inl h₆\n      · -- Case x ≡ 1 mod 7\n        have h₆ : (4 * x ^ 3 : ℤ) % 7 = 4 := by\n          have h₇ : (x : ℤ) % 7 = 1 := h₅\n          have h₈ : (x : ℤ) % 7 = 1 := by exact_mod_cast h₇\n          have h₉ : (4 * x ^ 3 : ℤ) % 7 = 4 := by\n            norm_num [pow_three, Int.mul_emod, Int.emod_emod] at h₈ ⊢\n            <;> simp [h₈]\n            <;> norm_num\n          exact h₉\n        exact Or.inr (Or.inl h₆)\n      · -- Case x ≡ 2 mod 7\n        have h₆ : (4 * x ^ 3 : ℤ) % 7 = 3 := by\n          have h₇ : (x : ℤ) % 7 = 2 := h₅\n          have h₈ : (x : ℤ) % 7 = 2 := by exact_mod_cast h₇\n          have h₉ : (4 * x ^ 3 : ℤ) % 7 = 3 := by\n            norm_num [pow_three, Int.mul_emod, Int.emod_emod] at h₈ ⊢\n            <;> simp [h₈]\n            <;> norm_num\n          exact h₉\n        exact Or.inr (Or.inr h₆)\n      · -- Case x ≡ 3 mod 7\n        have h₆ : (4 * x ^ 3 : ℤ) % 7 = 3 := by\n          have h₇ : (x : ℤ) % 7 = 3 := h₅\n          have h₈ : (x : ℤ) % 7 = 3 := by exact_mod_cast h₇\n          have h₉ : (4 * x ^ 3 : ℤ) % 7 = 3 := by\n            norm_num [pow_three, Int.mul_emod, Int.emod_emod] at h₈ ⊢\n            <;> simp [h₈]\n            <;> norm_num\n          exact h₉\n        exact Or.inr (Or.inr h₆)\n      · -- Case x ≡ 4 mod 7\n        have h₆ : (4 * x ^ 3 : ℤ) % 7 = 4 := by\n          have h₇ : (x : ℤ) % 7 = 4 := h₅\n          have h₈ : (x : ℤ) % 7 = 4 := by exact_mod_cast h₇\n          have h₉ : (4 * x ^ 3 : ℤ) % 7 = 4 := by\n            norm_num [pow_three, Int.mul_emod, Int.emod_emod] at h₈ ⊢\n            <;> simp [h₈]\n            <;> norm_num\n          exact h₉\n        exact Or.inr (Or.inl h₆)\n      · -- Case x ≡ 5 mod 7\n        have h₆ : (4 * x ^ 3 : ℤ) % 7 = 3 := by\n          have h₇ : (x : ℤ) % 7 = 5 := h₅\n          have h₈ : (x : ℤ) % 7 = 5 := by exact_mod_cast h₇\n          have h₉ : (4 * x ^ 3 : ℤ) % 7 = 3 := by\n            norm_num [pow_three, Int.mul_emod, Int.emod_emod] at h₈ ⊢\n            <;> simp [h₈]\n            <;> norm_num\n          exact h₉\n        exact Or.inr (Or.inr h₆)\n      · -- Case x ≡ 6 mod 7\n        have h₆ : (4 * x ^ 3 : ℤ) % 7 = 3 := by\n          have h₇ : (x : ℤ) % 7 = 6 := h₅\n          have h₈ : (x : ℤ) % 7 = 6 := by exact_mod_cast h₇\n          have h₉ : (4 * x ^ 3 : ℤ) % 7 = 3 := by\n            norm_num [pow_three, Int.mul_emod, Int.emod_emod] at h₈ ⊢\n            <;> simp [h₈]\n            <;> norm_num\n          exact h₉\n        exact Or.inr (Or.inr h₆)\n    -- Now we have (4 * x ^ 3 : ℤ) % 7 = 1, but from h₄, it can only be 0, 3, or 4.\n    -- This is a contradiction.\n    omega\n  exact h_main",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem numbertheory_4x3m7y3neq2003\n  (x y : ℤ) :\n  4 * x^3 - 7 * y^3 ≠ 2003 := by\n  have h_main : 4 * x^3 - 7 * y^3 ≠ 2003 := by\n    intro h\n    have h₁ : (4 * x ^ 3 - 7 * y ^ 3 : ℤ) % 7 = 1 := by\n      have h₂ : (4 * x ^ 3 - 7 * y ^ 3 : ℤ) = 2003 := h\n      rw [h₂]\n      norm_num [Int.emod_eq_of_lt]\n      <;> decide\n    have h₂ : (4 * x ^ 3 : ℤ) % 7 = 1 := by\n      have h₃ : (4 * x ^ 3 - 7 * y ^ 3 : ℤ) % 7 = 1 := h₁\n      have h₄ : (7 * y ^ 3 : ℤ) % 7 = 0 := by\n        norm_num [Int.mul_emod]\n      have h₅ : (4 * x ^ 3 : ℤ) % 7 = 1 := by\n        omega\n      exact h₅\n    have h₃ : (x : ℤ) % 7 = 0 ∨ (x : ℤ) % 7 = 1 ∨ (x : ℤ) % 7 = 2 ∨ (x : ℤ) % 7 = 3 ∨ (x : ℤ) % 7 = 4 ∨ (x : ℤ) % 7 = 5 ∨ (x : ℤ) % 7 = 6 := by\n      omega\n    have h₄ : (4 * x ^ 3 : ℤ) % 7 = 0 ∨ (4 * x ^ 3 : ℤ) % 7 = 4 ∨ (4 * x ^ 3 : ℤ) % 7 = 3 := by\n      have h₅ : (x : ℤ) % 7 = 0 ∨ (x : ℤ) % 7 = 1 ∨ (x : ℤ) % 7 = 2 ∨ (x : ℤ) % 7 = 3 ∨ (x : ℤ) % 7 = 4 ∨ (x : ℤ) % 7 = 5 ∨ (x : ℤ) % 7 = 6 := h₃\n      rcases h₅ with (h₅ | h₅ | h₅ | h₅ | h₅ | h₅ | h₅)\n      · -- Case x ≡ 0 mod 7\n        have h₆ : (4 * x ^ 3 : ℤ) % 7 = 0 := by\n          have h₇ : (x : ℤ) % 7 = 0 := h₅\n          have h₈ : (x : ℤ) % 7 = 0 := by exact_mod_cast h₇\n          have h₉ : (4 * x ^ 3 : ℤ) % 7 = 0 := by\n            norm_num [pow_three, Int.mul_emod, Int.emod_emod] at h₈ ⊢\n            <;> simp [h₈]\n            <;> norm_num\n          exact h₉\n        exact Or.inl h₆\n      · -- Case x ≡ 1 mod 7\n        have h₆ : (4 * x ^ 3 : ℤ) % 7 = 4 := by\n          have h₇ : (x : ℤ) % 7 = 1 := h₅\n          have h₈ : (x : ℤ) % 7 = 1 := by exact_mod_cast h₇\n          have h₉ : (4 * x ^ 3 : ℤ) % 7 = 4 := by\n            norm_num [pow_three, Int.mul_emod, Int.emod_emod] at h₈ ⊢\n            <;> simp [h₈]\n            <;> norm_num\n          exact h₉\n        exact Or.inr (Or.inl h₆)\n      · -- Case x ≡ 2 mod 7\n        have h₆ : (4 * x ^ 3 : ℤ) % 7 = 3 := by\n          have h₇ : (x : ℤ) % 7 = 2 := h₅\n          have h₈ : (x : ℤ) % 7 = 2 := by exact_mod_cast h₇\n          have h₉ : (4 * x ^ 3 : ℤ) % 7 = 3 := by\n            norm_num [pow_three, Int.mul_emod, Int.emod_emod] at h₈ ⊢\n            <;> simp [h₈]\n            <;> norm_num\n          exact h₉\n        exact Or.inr (Or.inr h₆)\n      · -- Case x ≡ 3 mod 7\n        have h₆ : (4 * x ^ 3 : ℤ) % 7 = 3 := by\n          have h₇ : (x : ℤ) % 7 = 3 := h₅\n          have h₈ : (x : ℤ) % 7 = 3 := by exact_mod_cast h₇\n          have h₉ : (4 * x ^ 3 : ℤ) % 7 = 3 := by\n            norm_num [pow_three, Int.mul_emod, Int.emod_emod] at h₈ ⊢\n            <;> simp [h₈]\n            <;> norm_num\n          exact h₉\n        exact Or.inr (Or.inr h₆)\n      · -- Case x ≡ 4 mod 7\n        have h₆ : (4 * x ^ 3 : ℤ) % 7 = 4 := by\n          have h₇ : (x : ℤ) % 7 = 4 := h₅\n          have h₈ : (x : ℤ) % 7 = 4 := by exact_mod_cast h₇\n          have h₉ : (4 * x ^ 3 : ℤ) % 7 = 4 := by\n            norm_num [pow_three, Int.mul_emod, Int.emod_emod] at h₈ ⊢\n            <;> simp [h₈]\n            <;> norm_num\n          exact h₉\n        exact Or.inr (Or.inl h₆)\n      · -- Case x ≡ 5 mod 7\n        have h₆ : (4 * x ^ 3 : ℤ) % 7 = 3 := by\n          have h₇ : (x : ℤ) % 7 = 5 := h₅\n          have h₈ : (x : ℤ) % 7 = 5 := by exact_mod_cast h₇\n          have h₉ : (4 * x ^ 3 : ℤ) % 7 = 3 := by\n            norm_num [pow_three, Int.mul_emod, Int.emod_emod] at h₈ ⊢\n            <;> simp [h₈]\n            <;> norm_num\n          exact h₉\n        exact Or.inr (Or.inr h₆)\n      · -- Case x ≡ 6 mod 7\n        have h₆ : (4 * x ^ 3 : ℤ) % 7 = 3 := by\n          have h₇ : (x : ℤ) % 7 = 6 := h₅\n          have h₈ : (x : ℤ) % 7 = 6 := by exact_mod_cast h₇\n          have h₉ : (4 * x ^ 3 : ℤ) % 7 = 3 := by\n            norm_num [pow_three, Int.mul_emod, Int.emod_emod] at h₈ ⊢\n            <;> simp [h₈]\n            <;> norm_num\n          exact h₉\n        exact Or.inr (Or.inr h₆)\n    -- Now we have (4 * x ^ 3 : ℤ) % 7 = 1, but from h₄, it can only be 0, 3, or 4.\n    -- This is a contradiction.\n    omega\n  exact h_main",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "numbertheory_4x3m7y3neq2003"
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g0",
+    "parsed_lean_block": "theorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := by\n  have h_w_pos : w > 0 := by\n    by_contra h\n    have h₁ : w = 0 := by\n      omega\n    have h₂ : Real.log w = 0 := by\n      rw [h₁]\n      have h₃ : Real.log (0 : ℝ) = 0 := by norm_num [Real.log_zero]\n      exact h₃\n    have h₃ : Real.log x > 0 := by\n      have h₄ : (x : ℝ) > 1 := by exact_mod_cast ht.1\n      have h₅ : Real.log x > 0 := Real.log_pos (by linarith)\n      exact h₅\n    have h₄ : Real.log w / Real.log x = 0 := by\n      rw [h₂]\n      field_simp [h₃.ne']\n      <;> norm_num\n    rw [h₄] at h0\n    norm_num at h0\n    <;> linarith\n  \n  have h_x_log_pos : Real.log x > 0 := by\n    have h₁ : (x : ℝ) > 1 := by exact_mod_cast ht.1\n    have h₂ : Real.log x > 0 := Real.log_pos (by linarith)\n    exact h₂\n  \n  have h_y_log_pos : Real.log y > 0 := by\n    have h₁ : (y : ℝ) > 1 := by exact_mod_cast ht.2.1\n    have h₂ : Real.log y > 0 := Real.log_pos (by linarith)\n    exact h₂\n  \n  have h_z_log_pos : Real.log z > 0 := by\n    have h₁ : (z : ℝ) > 1 := by exact_mod_cast ht.2.2\n    have h₂ : Real.log z > 0 := Real.log_pos (by linarith)\n    exact h₂\n  \n  have h_w_log_pos : Real.log w > 0 := by\n    have h₁ : (w : ℝ) > 1 := by\n      have h₂ : w ≥ 1 := by linarith\n      have h₃ : w ≠ 1 := by\n        by_contra h\n        have h₄ : w = 1 := by omega\n        have h₅ : Real.log w = 0 := by\n          rw [h₄]\n          norm_num [Real.log_one]\n        have h₆ : Real.log w / Real.log x = 24 := h0\n        rw [h₅] at h₆\n        have h₇ : (0 : ℝ) / Real.log x = 24 := by simpa using h₆\n        have h₈ : Real.log x > 0 := h_x_log_pos\n        norm_num at h₇\n        <;> linarith\n      have h₄ : w ≥ 2 := by\n        by_contra h\n        have h₅ : w < 2 := by omega\n        have h₆ : w = 0 ∨ w = 1 := by omega\n        cases h₆ with\n        | inl h₆ =>\n          exfalso\n          exact h₁ h₆\n        | inr h₆ =>\n          exfalso\n          exact h₃ h₆\n      exact by linarith\n    have h₂ : Real.log w > 0 := Real.log_pos (by linarith)\n    exact h₂\n  \n  have h_log_w_eq_24_log_x : Real.log w = 24 * Real.log x := by\n    have h₁ : Real.log w / Real.log x = 24 := h0\n    have h₂ : Real.log x > 0 := h_x_log_pos\n    have h₃ : Real.log w = 24 * Real.log x := by\n      field_simp [h₂.ne'] at h₁ ⊢\n      <;> nlinarith\n    exact h₃\n  \n  have h_log_w_eq_40_log_y : Real.log w = 40 * Real.log y := by\n    have h₁ : Real.log w / Real.log y = 40 := h1\n    have h₂ : Real.log y > 0 := h_y_log_pos\n    have h₃ : Real.log w = 40 * Real.log y := by\n      field_simp [h₂.ne'] at h₁ ⊢\n      <;> nlinarith\n    exact h₃\n  \n  have h_24_log_x_eq_40_log_y : 24 * Real.log x = 40 * Real.log y := by\n    linarith [h_log_w_eq_24_log_x, h_log_w_eq_40_log_y]\n  \n  have h_3_log_x_eq_5_log_y : 3 * Real.log x = 5 * Real.log y := by\n    have h₁ : 24 * Real.log x = 40 * Real.log y := h_24_log_x_eq_40_log_y\n    have h₂ : 3 * Real.log x = 5 * Real.log y := by\n      linarith\n    exact h₂\n  \n  have h_log_w_eq_12_log_xyz : Real.log w = 12 * (Real.log x + Real.log y + Real.log z) := by\n    have h₁ : Real.log w / Real.log (x * y * z) = 12 := h2\n    have h₂ : Real.log (x * y * z) = Real.log x + Real.log y + Real.log z := by\n      have h₃ : Real.log (x * y * z) = Real.log (x * y) + Real.log z := by\n        rw [Real.log_mul (by positivity) (by positivity)]\n      rw [h₃]\n      have h₄ : Real.log (x * y) = Real.log x + Real.log y := by\n        rw [Real.log_mul (by positivity) (by positivity)]\n      rw [h₄]\n      <;> ring\n    have h₃ : Real.log x > 0 := h_x_log_pos\n    have h₄ : Real.log y > 0 := h_y_log_pos\n    have h₅ : Real.log z > 0 := h_z_log_pos\n    have h₆ : Real.log (x * y * z) > 0 := by\n      have h₇ : Real.log (x * y * z) = Real.log x + Real.log y + Real.log z := h₂\n      linarith\n    have h₇ : Real.log w = 12 * Real.log (x * y * z) := by\n      have h₈ : Real.log w / Real.log (x * y * z) = 12 := h2\n      have h₉ : Real.log (x * y * z) > 0 := h₆\n      field_simp [h₉.ne'] at h₈ ⊢\n      <;> nlinarith\n    have h₈ : Real.log w = 12 * (Real.log x + Real.log y + Real.log z) := by\n      rw [h₂] at h₇\n      linarith\n    exact h₈\n  \n  have h_log_x_eq_log_y_plus_log_z : Real.log x = Real.log y + Real.log z := by\n    have h₁ : Real.log w = 12 * (Real.log x + Real.log y + Real.log z) := h_log_w_eq_12_log_xyz\n    have h₂ : Real.log w = 24 * Real.log x := h_log_w_eq_24_log_x\n    have h₃ : 24 * Real.log x = 12 * (Real.log x + Real.log y + Real.log z) := by linarith\n    have h₄ : 2 * Real.log x = Real.log x + Real.log y + Real.log z := by\n      linarith\n    have h₅ : Real.log x = Real.log y + Real.log z := by\n      linarith\n    exact h₅\n  \n  have h_log_z_eq_two_fifth_log_x : Real.log z = (2 : ℝ) / 5 * Real.log x := by\n    have h₁ : 3 * Real.log x = 5 * Real.log y := h_3_log_x_eq_5_log_y\n    have h₂ : Real.log x = Real.log y + Real.log z := h_log_x_eq_log_y_plus_log_z\n    have h₃ : Real.log z = (2 : ℝ) / 5 * Real.log x := by\n      have h₄ : Real.log y = (3 : ℝ) / 5 * Real.log x := by\n        linarith\n      have h₅ : Real.log x = (3 : ℝ) / 5 * Real.log x + Real.log z := by\n        linarith\n      have h₆ : Real.log z = Real.log x - (3 : ℝ) / 5 * Real.log x := by linarith\n      have h₇ : Real.log z = (2 : ℝ) / 5 * Real.log x := by\n        ring_nf at h₆ ⊢\n        <;> linarith\n      exact h₇\n    exact h₃\n  \n  have h_main : Real.log w / Real.log z = 60 := by\n    have h₁ : Real.log w = 24 * Real.log x := h_log_w_eq_24_log_x\n    have h₂ : Real.log z = (2 : ℝ) / 5 * Real.log x := h_log_z_eq_two_fifth_log_x\n    have h₃ : Real.log x > 0 := h_x_log_pos\n    have h₄ : Real.log z > 0 := h_z_log_pos\n    have h₅ : Real.log w / Real.log z = 60 := by\n      rw [h₁, h₂]\n      field_simp [h₃.ne', h₄.ne']\n      <;> ring_nf\n      <;> field_simp [h₃.ne']\n      <;> nlinarith\n    exact h₅\n  \n  exact h_main",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := by\n  have h_w_pos : w > 0 := by\n    by_contra h\n    have h₁ : w = 0 := by\n      omega\n    have h₂ : Real.log w = 0 := by\n      rw [h₁]\n      have h₃ : Real.log (0 : ℝ) = 0 := by norm_num [Real.log_zero]\n      exact h₃\n    have h₃ : Real.log x > 0 := by\n      have h₄ : (x : ℝ) > 1 := by exact_mod_cast ht.1\n      have h₅ : Real.log x > 0 := Real.log_pos (by linarith)\n      exact h₅\n    have h₄ : Real.log w / Real.log x = 0 := by\n      rw [h₂]\n      field_simp [h₃.ne']\n      <;> norm_num\n    rw [h₄] at h0\n    norm_num at h0\n    <;> linarith\n  \n  have h_x_log_pos : Real.log x > 0 := by\n    have h₁ : (x : ℝ) > 1 := by exact_mod_cast ht.1\n    have h₂ : Real.log x > 0 := Real.log_pos (by linarith)\n    exact h₂\n  \n  have h_y_log_pos : Real.log y > 0 := by\n    have h₁ : (y : ℝ) > 1 := by exact_mod_cast ht.2.1\n    have h₂ : Real.log y > 0 := Real.log_pos (by linarith)\n    exact h₂\n  \n  have h_z_log_pos : Real.log z > 0 := by\n    have h₁ : (z : ℝ) > 1 := by exact_mod_cast ht.2.2\n    have h₂ : Real.log z > 0 := Real.log_pos (by linarith)\n    exact h₂\n  \n  have h_w_log_pos : Real.log w > 0 := by\n    have h₁ : (w : ℝ) > 1 := by\n      have h₂ : w ≥ 1 := by linarith\n      have h₃ : w ≠ 1 := by\n        by_contra h\n        have h₄ : w = 1 := by omega\n        have h₅ : Real.log w = 0 := by\n          rw [h₄]\n          norm_num [Real.log_one]\n        have h₆ : Real.log w / Real.log x = 24 := h0\n        rw [h₅] at h₆\n        have h₇ : (0 : ℝ) / Real.log x = 24 := by simpa using h₆\n        have h₈ : Real.log x > 0 := h_x_log_pos\n        norm_num at h₇\n        <;> linarith\n      have h₄ : w ≥ 2 := by\n        by_contra h\n        have h₅ : w < 2 := by omega\n        have h₆ : w = 0 ∨ w = 1 := by omega\n        cases h₆ with\n        | inl h₆ =>\n          exfalso\n          exact h₁ h₆\n        | inr h₆ =>\n          exfalso\n          exact h₃ h₆\n      exact by linarith\n    have h₂ : Real.log w > 0 := Real.log_pos (by linarith)\n    exact h₂\n  \n  have h_log_w_eq_24_log_x : Real.log w = 24 * Real.log x := by\n    have h₁ : Real.log w / Real.log x = 24 := h0\n    have h₂ : Real.log x > 0 := h_x_log_pos\n    have h₃ : Real.log w = 24 * Real.log x := by\n      field_simp [h₂.ne'] at h₁ ⊢\n      <;> nlinarith\n    exact h₃\n  \n  have h_log_w_eq_40_log_y : Real.log w = 40 * Real.log y := by\n    have h₁ : Real.log w / Real.log y = 40 := h1\n    have h₂ : Real.log y > 0 := h_y_log_pos\n    have h₃ : Real.log w = 40 * Real.log y := by\n      field_simp [h₂.ne'] at h₁ ⊢\n      <;> nlinarith\n    exact h₃\n  \n  have h_24_log_x_eq_40_log_y : 24 * Real.log x = 40 * Real.log y := by\n    linarith [h_log_w_eq_24_log_x, h_log_w_eq_40_log_y]\n  \n  have h_3_log_x_eq_5_log_y : 3 * Real.log x = 5 * Real.log y := by\n    have h₁ : 24 * Real.log x = 40 * Real.log y := h_24_log_x_eq_40_log_y\n    have h₂ : 3 * Real.log x = 5 * Real.log y := by\n      linarith\n    exact h₂\n  \n  have h_log_w_eq_12_log_xyz : Real.log w = 12 * (Real.log x + Real.log y + Real.log z) := by\n    have h₁ : Real.log w / Real.log (x * y * z) = 12 := h2\n    have h₂ : Real.log (x * y * z) = Real.log x + Real.log y + Real.log z := by\n      have h₃ : Real.log (x * y * z) = Real.log (x * y) + Real.log z := by\n        rw [Real.log_mul (by positivity) (by positivity)]\n      rw [h₃]\n      have h₄ : Real.log (x * y) = Real.log x + Real.log y := by\n        rw [Real.log_mul (by positivity) (by positivity)]\n      rw [h₄]\n      <;> ring\n    have h₃ : Real.log x > 0 := h_x_log_pos\n    have h₄ : Real.log y > 0 := h_y_log_pos\n    have h₅ : Real.log z > 0 := h_z_log_pos\n    have h₆ : Real.log (x * y * z) > 0 := by\n      have h₇ : Real.log (x * y * z) = Real.log x + Real.log y + Real.log z := h₂\n      linarith\n    have h₇ : Real.log w = 12 * Real.log (x * y * z) := by\n      have h₈ : Real.log w / Real.log (x * y * z) = 12 := h2\n      have h₉ : Real.log (x * y * z) > 0 := h₆\n      field_simp [h₉.ne'] at h₈ ⊢\n      <;> nlinarith\n    have h₈ : Real.log w = 12 * (Real.log x + Real.log y + Real.log z) := by\n      rw [h₂] at h₇\n      linarith\n    exact h₈\n  \n  have h_log_x_eq_log_y_plus_log_z : Real.log x = Real.log y + Real.log z := by\n    have h₁ : Real.log w = 12 * (Real.log x + Real.log y + Real.log z) := h_log_w_eq_12_log_xyz\n    have h₂ : Real.log w = 24 * Real.log x := h_log_w_eq_24_log_x\n    have h₃ : 24 * Real.log x = 12 * (Real.log x + Real.log y + Real.log z) := by linarith\n    have h₄ : 2 * Real.log x = Real.log x + Real.log y + Real.log z := by\n      linarith\n    have h₅ : Real.log x = Real.log y + Real.log z := by\n      linarith\n    exact h₅\n  \n  have h_log_z_eq_two_fifth_log_x : Real.log z = (2 : ℝ) / 5 * Real.log x := by\n    have h₁ : 3 * Real.log x = 5 * Real.log y := h_3_log_x_eq_5_log_y\n    have h₂ : Real.log x = Real.log y + Real.log z := h_log_x_eq_log_y_plus_log_z\n    have h₃ : Real.log z = (2 : ℝ) / 5 * Real.log x := by\n      have h₄ : Real.log y = (3 : ℝ) / 5 * Real.log x := by\n        linarith\n      have h₅ : Real.log x = (3 : ℝ) / 5 * Real.log x + Real.log z := by\n        linarith\n      have h₆ : Real.log z = Real.log x - (3 : ℝ) / 5 * Real.log x := by linarith\n      have h₇ : Real.log z = (2 : ℝ) / 5 * Real.log x := by\n        ring_nf at h₆ ⊢\n        <;> linarith\n      exact h₇\n    exact h₃\n  \n  have h_main : Real.log w / Real.log z = 60 := by\n    have h₁ : Real.log w = 24 * Real.log x := h_log_w_eq_24_log_x\n    have h₂ : Real.log z = (2 : ℝ) / 5 * Real.log x := h_log_z_eq_two_fifth_log_x\n    have h₃ : Real.log x > 0 := h_x_log_pos\n    have h₄ : Real.log z > 0 := h_z_log_pos\n    have h₅ : Real.log w / Real.log z = 60 := by\n      rw [h₁, h₂]\n      field_simp [h₃.ne', h₄.ne']\n      <;> ring_nf\n      <;> field_simp [h₃.ne']\n      <;> nlinarith\n    exact h₅\n  \n  exact h_main",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g1",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g2",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g3",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g4",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g5",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g6",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "aime_1983_p1__r0_g7",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem aime_1983_p1 (x y z w : ℕ) (ht : 1 < x ∧ 1 < y ∧ 1 < z) (hw : 0 ≤ w)\n    (h0 : Real.log w / Real.log x = 24) (h1 : Real.log w / Real.log y = 40)\n    (h2 : Real.log w / Real.log (x * y * z) = 12) : Real.log w / Real.log z = 60 := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "aime_1983_p1"
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g0",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g1",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g2",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g3",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g4",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g5",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g6",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "amc12_2001_p5__r0_g7",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem amc12_2001_p5 :\n  Finset.prod (Finset.filter (λ x => ¬ Even x) (Finset.range 10000)) (id : ℕ → ℕ) = (10000!) / ((2^5000) * 5000!) := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "amc12_2001_p5"
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g0",
+    "parsed_lean_block": "theorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : (a * b)=180)\n  (h₂ : 2 * (a + b)=54) :\n  (a^2 + b^2) = 369 := by\n  have h₃ : a + b = 27 := by\n    have h₃₁ : 2 * (a + b) = 54 := h₂\n    have h₃₂ : a + b = 27 := by\n      linarith\n    exact h₃₂\n  \n  have h₄ : a^2 + b^2 = 369 := by\n    have h₄₁ : (a + b) ^ 2 = a ^ 2 + b ^ 2 + 2 * (a * b) := by\n      ring\n    rw [h₃] at h₄₁\n    have h₄₂ : (27 : ℝ) ^ 2 = a ^ 2 + b ^ 2 + 2 * (a * b) := by linarith\n    have h₄₃ : a * b = 180 := h₁\n    rw [h₄₃] at h₄₂\n    norm_num at h₄₂ ⊢\n    linarith\n  \n  exact h₄",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : (a * b)=180)\n  (h₂ : 2 * (a + b)=54) :\n  (a^2 + b^2) = 369 := by\n  have h₃ : a + b = 27 := by\n    have h₃₁ : 2 * (a + b) = 54 := h₂\n    have h₃₂ : a + b = 27 := by\n      linarith\n    exact h₃₂\n  \n  have h₄ : a^2 + b^2 = 369 := by\n    have h₄₁ : (a + b) ^ 2 = a ^ 2 + b ^ 2 + 2 * (a * b) := by\n      ring\n    rw [h₃] at h₄₁\n    have h₄₂ : (27 : ℝ) ^ 2 = a ^ 2 + b ^ 2 + 2 * (a * b) := by linarith\n    have h₄₃ : a * b = 180 := h₁\n    rw [h₄₃] at h₄₂\n    norm_num at h₄₂ ⊢\n    linarith\n  \n  exact h₄",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141"
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g1",
+    "parsed_lean_block": "theorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : (a * b)=180)\n  (h₂ : 2 * (a + b)=54) :\n  (a^2 + b^2) = 369 := by\n  have h₃ : a + b = 27 := by\n    have h₃₁ : 2 * (a + b) = 54 := h₂\n    have h₃₂ : a + b = 27 := by\n      linarith\n    exact h₃₂\n  \n  have h₄ : a^2 + b^2 = 369 := by\n    have h₄₁ : a + b = 27 := h₃\n    have h₄₂ : a * b = 180 := h₁\n    have h₄₃ : a ^ 2 + b ^ 2 = (a + b) ^ 2 - 2 * (a * b) := by\n      ring\n    rw [h₄₃]\n    rw [h₄₁]\n    rw [h₄₂]\n    norm_num\n    <;>\n    linarith\n  \n  exact h₄",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : (a * b)=180)\n  (h₂ : 2 * (a + b)=54) :\n  (a^2 + b^2) = 369 := by\n  have h₃ : a + b = 27 := by\n    have h₃₁ : 2 * (a + b) = 54 := h₂\n    have h₃₂ : a + b = 27 := by\n      linarith\n    exact h₃₂\n  \n  have h₄ : a^2 + b^2 = 369 := by\n    have h₄₁ : a + b = 27 := h₃\n    have h₄₂ : a * b = 180 := h₁\n    have h₄₃ : a ^ 2 + b ^ 2 = (a + b) ^ 2 - 2 * (a * b) := by\n      ring\n    rw [h₄₃]\n    rw [h₄₁]\n    rw [h₄₂]\n    norm_num\n    <;>\n    linarith\n  \n  exact h₄",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141"
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g2",
+    "parsed_lean_block": "theorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : (a * b)=180)\n  (h₂ : 2 * (a + b)=54) :\n  (a^2 + b^2) = 369 := by\n  have h₃ : a + b = 27 := by\n    have h₃₁ : 2 * (a + b) = 54 := h₂\n    have h₃₂ : a + b = 27 := by\n      linarith\n    exact h₃₂\n  \n  have h₄ : (a + b)^2 = 729 := by\n    rw [h₃]\n    <;> norm_num\n  \n  have h₅ : a^2 + b^2 + 2 * (a * b) = 729 := by\n    have h₅₁ : (a + b)^2 = a^2 + b^2 + 2 * (a * b) := by\n      ring\n    rw [h₅₁] at h₄\n    linarith\n  \n  have h₆ : a^2 + b^2 + 360 = 729 := by\n    have h₆₁ : a^2 + b^2 + 2 * (a * b) = 729 := h₅\n    have h₆₂ : a * b = 180 := h₁\n    have h₆₃ : 2 * (a * b) = 360 := by\n      rw [h₆₂]\n      <;> norm_num\n    linarith\n  \n  have h₇ : a^2 + b^2 = 369 := by\n    have h₇₁ : a^2 + b^2 + 360 = 729 := h₆\n    linarith\n  \n  exact h₇",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : (a * b)=180)\n  (h₂ : 2 * (a + b)=54) :\n  (a^2 + b^2) = 369 := by\n  have h₃ : a + b = 27 := by\n    have h₃₁ : 2 * (a + b) = 54 := h₂\n    have h₃₂ : a + b = 27 := by\n      linarith\n    exact h₃₂\n  \n  have h₄ : (a + b)^2 = 729 := by\n    rw [h₃]\n    <;> norm_num\n  \n  have h₅ : a^2 + b^2 + 2 * (a * b) = 729 := by\n    have h₅₁ : (a + b)^2 = a^2 + b^2 + 2 * (a * b) := by\n      ring\n    rw [h₅₁] at h₄\n    linarith\n  \n  have h₆ : a^2 + b^2 + 360 = 729 := by\n    have h₆₁ : a^2 + b^2 + 2 * (a * b) = 729 := h₅\n    have h₆₂ : a * b = 180 := h₁\n    have h₆₃ : 2 * (a * b) = 360 := by\n      rw [h₆₂]\n      <;> norm_num\n    linarith\n  \n  have h₇ : a^2 + b^2 = 369 := by\n    have h₇₁ : a^2 + b^2 + 360 = 729 := h₆\n    linarith\n  \n  exact h₇",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141"
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g3",
+    "parsed_lean_block": "theorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : (a * b)=180)\n  (h₂ : 2 * (a + b)=54) :\n  (a^2 + b^2) = 369 := by\n  have h₃ : a + b = 27 := by\n    have h₃₁ : 2 * (a + b) = 54 := h₂\n    have h₃₂ : a + b = 27 := by\n      apply mul_left_cancel₀ (show (2 : ℝ) ≠ 0 by norm_num)\n      linarith\n    exact h₃₂\n  \n  have h₄ : a^2 + b^2 = 369 := by\n    have h₄₁ : (a + b) ^ 2 = 27 ^ 2 := by\n      rw [h₃]\n      <;> norm_num\n    have h₄₂ : (a + b) ^ 2 = a ^ 2 + 2 * (a * b) + b ^ 2 := by\n      ring\n    have h₄₃ : a ^ 2 + 2 * (a * b) + b ^ 2 = 27 ^ 2 := by\n      linarith\n    have h₄₄ : a ^ 2 + b ^ 2 = 369 := by\n      have h₄₅ : a ^ 2 + b ^ 2 = 27 ^ 2 - 2 * (a * b) := by\n        linarith\n      rw [h₄₅]\n      norm_num [h₁]\n      <;>\n      (try norm_num) <;>\n      (try ring_nf) <;>\n      (try linarith)\n      <;>\n      (try nlinarith)\n    exact h₄₄\n  \n  exact h₄",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : (a * b)=180)\n  (h₂ : 2 * (a + b)=54) :\n  (a^2 + b^2) = 369 := by\n  have h₃ : a + b = 27 := by\n    have h₃₁ : 2 * (a + b) = 54 := h₂\n    have h₃₂ : a + b = 27 := by\n      apply mul_left_cancel₀ (show (2 : ℝ) ≠ 0 by norm_num)\n      linarith\n    exact h₃₂\n  \n  have h₄ : a^2 + b^2 = 369 := by\n    have h₄₁ : (a + b) ^ 2 = 27 ^ 2 := by\n      rw [h₃]\n      <;> norm_num\n    have h₄₂ : (a + b) ^ 2 = a ^ 2 + 2 * (a * b) + b ^ 2 := by\n      ring\n    have h₄₃ : a ^ 2 + 2 * (a * b) + b ^ 2 = 27 ^ 2 := by\n      linarith\n    have h₄₄ : a ^ 2 + b ^ 2 = 369 := by\n      have h₄₅ : a ^ 2 + b ^ 2 = 27 ^ 2 - 2 * (a * b) := by\n        linarith\n      rw [h₄₅]\n      norm_num [h₁]\n      <;>\n      (try norm_num) <;>\n      (try ring_nf) <;>\n      (try linarith)\n      <;>\n      (try nlinarith)\n    exact h₄₄\n  \n  exact h₄",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141"
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g4",
+    "parsed_lean_block": "theorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : (a * b)=180)\n  (h₂ : 2 * (a + b)=54) :\n  (a^2 + b^2) = 369 := by\n  have h₃ : a + b = 27 := by\n    have h₃₁ : 2 * (a + b) = 54 := h₂\n    have h₃₂ : a + b = 27 := by\n      linarith\n    exact h₃₂\n  \n  have h₄ : a^2 + b^2 = 369 := by\n    have h₄₁ : (a + b) ^ 2 = a ^ 2 + b ^ 2 + 2 * (a * b) := by\n      ring\n    have h₄₂ : a ^ 2 + b ^ 2 = (a + b) ^ 2 - 2 * (a * b) := by\n      linarith\n    have h₄₃ : (a + b) ^ 2 = 27 ^ 2 := by\n      rw [h₃]\n      <;> norm_num\n    have h₄₄ : a ^ 2 + b ^ 2 = 369 := by\n      rw [h₄₂]\n      rw [h₄₃]\n      norm_num [h₁]\n      <;> ring_nf at *\n      <;> linarith\n    exact h₄₄\n  \n  exact h₄",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : (a * b)=180)\n  (h₂ : 2 * (a + b)=54) :\n  (a^2 + b^2) = 369 := by\n  have h₃ : a + b = 27 := by\n    have h₃₁ : 2 * (a + b) = 54 := h₂\n    have h₃₂ : a + b = 27 := by\n      linarith\n    exact h₃₂\n  \n  have h₄ : a^2 + b^2 = 369 := by\n    have h₄₁ : (a + b) ^ 2 = a ^ 2 + b ^ 2 + 2 * (a * b) := by\n      ring\n    have h₄₂ : a ^ 2 + b ^ 2 = (a + b) ^ 2 - 2 * (a * b) := by\n      linarith\n    have h₄₃ : (a + b) ^ 2 = 27 ^ 2 := by\n      rw [h₃]\n      <;> norm_num\n    have h₄₄ : a ^ 2 + b ^ 2 = 369 := by\n      rw [h₄₂]\n      rw [h₄₃]\n      norm_num [h₁]\n      <;> ring_nf at *\n      <;> linarith\n    exact h₄₄\n  \n  exact h₄",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141"
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g5",
+    "parsed_lean_block": "theorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : (a * b)=180)\n  (h₂ : 2 * (a + b)=54) :\n  (a^2 + b^2) = 369 := by\n  have h₃ : a + b = 27 := by\n    have h₃₁ : 2 * (a + b) = 54 := h₂\n    have h₃₂ : a + b = 27 := by\n      linarith\n    exact h₃₂\n  \n  have h₄ : (a + b)^2 = 729 := by\n    rw [h₃]\n    <;> norm_num\n  \n  have h₅ : a^2 + b^2 = (a + b)^2 - 2 * (a * b) := by\n    have h₅₁ : a ^ 2 + b ^ 2 = (a + b) ^ 2 - 2 * (a * b) := by\n      ring\n    rw [h₅₁]\n  \n  have h₆ : a^2 + b^2 = 369 := by\n    rw [h₅]\n    rw [h₄]\n    rw [h₁]\n    <;> norm_num\n    <;> linarith\n  \n  exact h₆",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : (a * b)=180)\n  (h₂ : 2 * (a + b)=54) :\n  (a^2 + b^2) = 369 := by\n  have h₃ : a + b = 27 := by\n    have h₃₁ : 2 * (a + b) = 54 := h₂\n    have h₃₂ : a + b = 27 := by\n      linarith\n    exact h₃₂\n  \n  have h₄ : (a + b)^2 = 729 := by\n    rw [h₃]\n    <;> norm_num\n  \n  have h₅ : a^2 + b^2 = (a + b)^2 - 2 * (a * b) := by\n    have h₅₁ : a ^ 2 + b ^ 2 = (a + b) ^ 2 - 2 * (a * b) := by\n      ring\n    rw [h₅₁]\n  \n  have h₆ : a^2 + b^2 = 369 := by\n    rw [h₅]\n    rw [h₄]\n    rw [h₁]\n    <;> norm_num\n    <;> linarith\n  \n  exact h₆",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141"
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g6",
+    "parsed_lean_block": "theorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : (a * b)=180)\n  (h₂ : 2 * (a + b)=54) :\n  (a^2 + b^2) = 369 := by\n  have h₃ : a + b = 27 := by\n    have h₃₁ : 2 * (a + b) = 54 := h₂\n    have h₃₂ : a + b = 27 := by\n      apply mul_left_cancel₀ (show (2 : ℝ) ≠ 0 by norm_num)\n      linarith\n    exact h₃₂\n  \n  have h₄ : (a + b)^2 = 729 := by\n    rw [h₃]\n    <;> norm_num\n  \n  have h₅ : a^2 + b^2 = 369 := by\n    have h₅₁ : (a + b) ^ 2 = a ^ 2 + 2 * (a * b) + b ^ 2 := by ring\n    rw [h₅₁] at h₄\n    have h₅₂ : a ^ 2 + 2 * (a * b) + b ^ 2 = 729 := by linarith\n    have h₅₃ : a * b = 180 := h₁\n    rw [h₅₃] at h₅₂\n    have h₅₄ : a ^ 2 + 2 * 180 + b ^ 2 = 729 := by linarith\n    have h₅₅ : a ^ 2 + b ^ 2 = 369 := by linarith\n    exact h₅₅\n  \n  exact h₅",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : (a * b)=180)\n  (h₂ : 2 * (a + b)=54) :\n  (a^2 + b^2) = 369 := by\n  have h₃ : a + b = 27 := by\n    have h₃₁ : 2 * (a + b) = 54 := h₂\n    have h₃₂ : a + b = 27 := by\n      apply mul_left_cancel₀ (show (2 : ℝ) ≠ 0 by norm_num)\n      linarith\n    exact h₃₂\n  \n  have h₄ : (a + b)^2 = 729 := by\n    rw [h₃]\n    <;> norm_num\n  \n  have h₅ : a^2 + b^2 = 369 := by\n    have h₅₁ : (a + b) ^ 2 = a ^ 2 + 2 * (a * b) + b ^ 2 := by ring\n    rw [h₅₁] at h₄\n    have h₅₂ : a ^ 2 + 2 * (a * b) + b ^ 2 = 729 := by linarith\n    have h₅₃ : a * b = 180 := h₁\n    rw [h₅₃] at h₅₂\n    have h₅₄ : a ^ 2 + 2 * 180 + b ^ 2 = 729 := by linarith\n    have h₅₅ : a ^ 2 + b ^ 2 = 369 := by linarith\n    exact h₅₅\n  \n  exact h₅",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141"
+  },
+  {
+    "item_id": "mathd_algebra_141__r0_g7",
+    "parsed_lean_block": "theorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : (a * b)=180)\n  (h₂ : 2 * (a + b)=54) :\n  (a^2 + b^2) = 369 := by\n  have h₃ : a + b = 27 := by\n    have h₃₁ : 2 * (a + b) = 54 := h₂\n    have h₃₂ : a + b = 27 := by\n      linarith\n    exact h₃₂\n  \n  have h₄ : a^2 + b^2 = 369 := by\n    have h₄₁ : a + b = 27 := h₃\n    have h₄₂ : a * b = 180 := h₁\n    have h₄₃ : (a + b) ^ 2 = a ^ 2 + b ^ 2 + 2 * (a * b) := by\n      ring\n    have h₄₄ : (a + b) ^ 2 = 27 ^ 2 := by\n      rw [h₄₁]\n      <;> norm_num\n    have h₄₅ : a ^ 2 + b ^ 2 + 2 * (a * b) = 27 ^ 2 := by\n      linarith\n    have h₄₆ : a ^ 2 + b ^ 2 = 369 := by\n      have h₄₇ : 2 * (a * b) = 360 := by\n        rw [h₄₂]\n        <;> norm_num\n      have h₄₈ : a ^ 2 + b ^ 2 + 360 = 729 := by\n        linarith\n      linarith\n    exact h₄₆\n  \n  exact h₄",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_141\n  (a b : ℝ)\n  (h₁ : (a * b)=180)\n  (h₂ : 2 * (a + b)=54) :\n  (a^2 + b^2) = 369 := by\n  have h₃ : a + b = 27 := by\n    have h₃₁ : 2 * (a + b) = 54 := h₂\n    have h₃₂ : a + b = 27 := by\n      linarith\n    exact h₃₂\n  \n  have h₄ : a^2 + b^2 = 369 := by\n    have h₄₁ : a + b = 27 := h₃\n    have h₄₂ : a * b = 180 := h₁\n    have h₄₃ : (a + b) ^ 2 = a ^ 2 + b ^ 2 + 2 * (a * b) := by\n      ring\n    have h₄₄ : (a + b) ^ 2 = 27 ^ 2 := by\n      rw [h₄₁]\n      <;> norm_num\n    have h₄₅ : a ^ 2 + b ^ 2 + 2 * (a * b) = 27 ^ 2 := by\n      linarith\n    have h₄₆ : a ^ 2 + b ^ 2 = 369 := by\n      have h₄₇ : 2 * (a * b) = 360 := by\n        rw [h₄₂]\n        <;> norm_num\n      have h₄₈ : a ^ 2 + b ^ 2 + 360 = 729 := by\n        linarith\n      linarith\n    exact h₄₆\n  \n  exact h₄",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_141"
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g0",
+    "parsed_lean_block": "theorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n  have h_main : (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n    norm_num [Finset.sum_range_succ, pow_two]\n    <;> rfl\n  \n  exact h_main",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n  have h_main : (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n    norm_num [Finset.sum_range_succ, pow_two]\n    <;> rfl\n  \n  exact h_main",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3"
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g1",
+    "parsed_lean_block": "theorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n  have h_sum : (∑ x in Finset.range 10, ((x + 1)^2)) = 385 := by\n    norm_num [Finset.sum_range_succ, pow_two]\n    <;> rfl\n  \n  have h_mod : (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n    rw [h_sum]\n    <;> norm_num\n    <;> rfl\n  \n  apply h_mod",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n  have h_sum : (∑ x in Finset.range 10, ((x + 1)^2)) = 385 := by\n    norm_num [Finset.sum_range_succ, pow_two]\n    <;> rfl\n  \n  have h_mod : (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n    rw [h_sum]\n    <;> norm_num\n    <;> rfl\n  \n  apply h_mod",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3"
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g2",
+    "parsed_lean_block": "theorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n  have h_main : (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n    norm_num [Finset.sum_range_succ, pow_two]\n    <;> decide\n  \n  apply h_main",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n  have h_main : (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n    norm_num [Finset.sum_range_succ, pow_two]\n    <;> decide\n  \n  apply h_main",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3"
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g3",
+    "parsed_lean_block": "theorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n  have h_sum : (∑ x in Finset.range 10, ((x + 1)^2)) = 385 := by\n    rfl\n  \n  have h_mod : 385 % 10 = 5 := by\n    norm_num\n    <;> rfl\n  \n  have h_main : (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n    rw [h_sum]\n    <;> rw [h_mod]\n    <;> rfl\n  \n  exact h_main",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n  have h_sum : (∑ x in Finset.range 10, ((x + 1)^2)) = 385 := by\n    rfl\n  \n  have h_mod : 385 % 10 = 5 := by\n    norm_num\n    <;> rfl\n  \n  have h_main : (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n    rw [h_sum]\n    <;> rw [h_mod]\n    <;> rfl\n  \n  exact h_main",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3"
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g4",
+    "parsed_lean_block": "theorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n  have h_sum : (∑ x in Finset.range 10, ((x + 1)^2)) = 385 := by\n    norm_num [Finset.sum_range_succ, Finset.sum_range_succ]\n    <;> rfl\n  \n  have h_mod : 385 % 10 = 5 := by\n    norm_num\n  \n  have h_main : (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n    rw [h_sum]\n    <;> rw [h_mod]\n  \n  exact h_main",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n  have h_sum : (∑ x in Finset.range 10, ((x + 1)^2)) = 385 := by\n    norm_num [Finset.sum_range_succ, Finset.sum_range_succ]\n    <;> rfl\n  \n  have h_mod : 385 % 10 = 5 := by\n    norm_num\n  \n  have h_main : (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n    rw [h_sum]\n    <;> rw [h_mod]\n  \n  exact h_main",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3"
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g5",
+    "parsed_lean_block": "theorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n  have h_main : (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n    norm_num [Finset.sum_range_succ, pow_two, Nat.mul_mod, Nat.add_mod, Nat.mod_mod]\n    <;> rfl\n  \n  apply h_main",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n  have h_main : (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n    norm_num [Finset.sum_range_succ, pow_two, Nat.mul_mod, Nat.add_mod, Nat.mod_mod]\n    <;> rfl\n  \n  apply h_main",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3"
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g6",
+    "parsed_lean_block": "theorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n  have h₁ : (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n    norm_num [Finset.sum_range_succ, Finset.sum_range_succ, Finset.sum_range_succ,\n      Finset.sum_range_succ, Finset.sum_range_succ, Finset.sum_range_succ,\n      Finset.sum_range_succ, Finset.sum_range_succ, Finset.sum_range_succ]\n    <;> rfl\n  exact h₁",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n  have h₁ : (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n    norm_num [Finset.sum_range_succ, Finset.sum_range_succ, Finset.sum_range_succ,\n      Finset.sum_range_succ, Finset.sum_range_succ, Finset.sum_range_succ,\n      Finset.sum_range_succ, Finset.sum_range_succ, Finset.sum_range_succ]\n    <;> rfl\n  exact h₁",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3"
+  },
+  {
+    "item_id": "mathd_numbertheory_3__r0_g7",
+    "parsed_lean_block": "theorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n  have h_main : (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n    norm_num [Finset.sum_range_succ, pow_two]\n    <;> rfl\n  \n  exact h_main",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_numbertheory_3 :\n  (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n  have h_main : (∑ x in Finset.range 10, ((x + 1)^2)) % 10 = 5 := by\n    norm_num [Finset.sum_range_succ, pow_two]\n    <;> rfl\n  \n  exact h_main",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_numbertheory_3"
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g0",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g1",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g2",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g3",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g4",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g5",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g6",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "imo_1969_p2__r0_g7",
+    "parsed_lean_block": "sorry",
+    "truncated": true,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem imo_1969_p2\n  (m n : ℝ)\n  (k : ℕ)\n  (a : ℕ → ℝ)\n  (y : ℝ → ℝ)\n  (h₀ : 0 < k)\n  (h₁ : ∀ x, y x = ∑ i in Finset.range k, ((Real.cos (a i + x)) / (2^i)))\n  (h₂ : y m = 0)\n  (h₃ : y n = 0) :\n  ∃ t : ℤ, m - n = t * π := sorry",
+    "parsing_notes": "truncated",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "imo_1969_p2"
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g0",
+    "parsed_lean_block": "theorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : s = 1 := by\n    have h₂₁ : s = 9 - 2 * t := h₀\n    have h₂₂ : t = 3 * s + 1 := h₁\n    rw [h₂₁] at h₂₂\n    have h₂₃ : 9 - 2 * t = 9 - 2 * (3 * s + 1) := by\n      rw [h₂₂] at h₂₁\n      linarith\n    have h₂₄ : s = 9 - 2 * (3 * s + 1) := by linarith\n    have h₂₅ : s = 7 - 6 * s := by\n      ring_nf at h₂₄ ⊢\n      linarith\n    have h₂₆ : 7 * s = 7 := by\n      linarith\n    have h₂₇ : s = 1 := by\n      linarith\n    exact h₂₇\n  \n  have h₃ : t = 4 := by\n    have h₃₁ : s = 1 := h₂\n    have h₃₂ : t = 3 * s + 1 := h₁\n    rw [h₃₁] at h₃₂\n    linarith\n  \n  have h₄ : s = 1 ∧ t = 4 := by\n    exact ⟨h₂, h₃⟩\n  \n  exact h₄",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : s = 1 := by\n    have h₂₁ : s = 9 - 2 * t := h₀\n    have h₂₂ : t = 3 * s + 1 := h₁\n    rw [h₂₁] at h₂₂\n    have h₂₃ : 9 - 2 * t = 9 - 2 * (3 * s + 1) := by\n      rw [h₂₂] at h₂₁\n      linarith\n    have h₂₄ : s = 9 - 2 * (3 * s + 1) := by linarith\n    have h₂₅ : s = 7 - 6 * s := by\n      ring_nf at h₂₄ ⊢\n      linarith\n    have h₂₆ : 7 * s = 7 := by\n      linarith\n    have h₂₇ : s = 1 := by\n      linarith\n    exact h₂₇\n  \n  have h₃ : t = 4 := by\n    have h₃₁ : s = 1 := h₂\n    have h₃₂ : t = 3 * s + 1 := h₁\n    rw [h₃₁] at h₃₂\n    linarith\n  \n  have h₄ : s = 1 ∧ t = 4 := by\n    exact ⟨h₂, h₃⟩\n  \n  exact h₄",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44"
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g1",
+    "parsed_lean_block": "theorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : s = 1 := by\n    have h₂₁ : s = 7 - 6 * s := by\n      rw [h₀]\n      rw [h₁]\n      ring_nf\n      <;> linarith\n    -- Solve for s: s = 7 - 6s => 7s = 7 => s = 1\n    have h₂₂ : s = 1 := by\n      apply mul_left_cancel₀ (show (7 : ℝ) ≠ 0 by norm_num)\n      linarith\n    exact h₂₂\n  \n  have h₃ : t = 4 := by\n    have h₃₁ : t = 3 * s + 1 := h₁\n    rw [h₃₁]\n    rw [h₂]\n    <;> norm_num\n    <;> linarith\n  \n  have h₄ : s = 1 ∧ t = 4 := by\n    exact ⟨h₂, h₃⟩\n  \n  exact h₄",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : s = 1 := by\n    have h₂₁ : s = 7 - 6 * s := by\n      rw [h₀]\n      rw [h₁]\n      ring_nf\n      <;> linarith\n    -- Solve for s: s = 7 - 6s => 7s = 7 => s = 1\n    have h₂₂ : s = 1 := by\n      apply mul_left_cancel₀ (show (7 : ℝ) ≠ 0 by norm_num)\n      linarith\n    exact h₂₂\n  \n  have h₃ : t = 4 := by\n    have h₃₁ : t = 3 * s + 1 := h₁\n    rw [h₃₁]\n    rw [h₂]\n    <;> norm_num\n    <;> linarith\n  \n  have h₄ : s = 1 ∧ t = 4 := by\n    exact ⟨h₂, h₃⟩\n  \n  exact h₄",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44"
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g2",
+    "parsed_lean_block": "theorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : s = 1 := by\n    have h₂₁ : s = 7 - 6 * s := by\n      have h₂₂ : s = 9 - 2 * t := h₀\n      have h₂₃ : t = 3 * s + 1 := h₁\n      rw [h₂₂, h₂₃]\n      ring_nf\n      <;> linarith\n    have h₂₄ : 7 * s = 7 := by\n      linarith\n    have h₂₅ : s = 1 := by\n      linarith\n    exact h₂₅\n  \n  have h₃ : t = 4 := by\n    have h₃₁ : t = 3 * s + 1 := h₁\n    rw [h₃₁]\n    rw [h₂]\n    <;> norm_num\n    <;> linarith\n  \n  have h₄ : s = 1 ∧ t = 4 := by\n    exact ⟨h₂, h₃⟩\n  \n  exact h₄",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : s = 1 := by\n    have h₂₁ : s = 7 - 6 * s := by\n      have h₂₂ : s = 9 - 2 * t := h₀\n      have h₂₃ : t = 3 * s + 1 := h₁\n      rw [h₂₂, h₂₃]\n      ring_nf\n      <;> linarith\n    have h₂₄ : 7 * s = 7 := by\n      linarith\n    have h₂₅ : s = 1 := by\n      linarith\n    exact h₂₅\n  \n  have h₃ : t = 4 := by\n    have h₃₁ : t = 3 * s + 1 := h₁\n    rw [h₃₁]\n    rw [h₂]\n    <;> norm_num\n    <;> linarith\n  \n  have h₄ : s = 1 ∧ t = 4 := by\n    exact ⟨h₂, h₃⟩\n  \n  exact h₄",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44"
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g3",
+    "parsed_lean_block": "theorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : s = 1 := by\n    have h₂₁ : s = 9 - 2 * t := h₀\n    have h₂₂ : t = 3 * s + 1 := h₁\n    -- Substitute t from h₂₂ into h₂₁\n    have h₂₃ : s = 9 - 2 * (3 * s + 1) := by\n      rw [h₂₂] at h₂₁\n      exact h₂₁\n    -- Simplify the equation\n    have h₂₄ : s = 7 - 6 * s := by\n      ring_nf at h₂₃ ⊢\n      linarith\n    -- Solve for s\n    have h₂₅ : 7 * s = 7 := by\n      linarith\n    have h₂₆ : s = 1 := by\n      linarith\n    exact h₂₆\n  \n  have h₃ : t = 4 := by\n    have h₃₁ : t = 3 * s + 1 := h₁\n    have h₃₂ : s = 1 := h₂\n    rw [h₃₁, h₃₂]\n    <;> norm_num\n    <;> linarith\n  \n  have h₄ : s = 1 ∧ t = 4 := by\n    exact ⟨h₂, h₃⟩\n  \n  exact h₄",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : s = 1 := by\n    have h₂₁ : s = 9 - 2 * t := h₀\n    have h₂₂ : t = 3 * s + 1 := h₁\n    -- Substitute t from h₂₂ into h₂₁\n    have h₂₃ : s = 9 - 2 * (3 * s + 1) := by\n      rw [h₂₂] at h₂₁\n      exact h₂₁\n    -- Simplify the equation\n    have h₂₄ : s = 7 - 6 * s := by\n      ring_nf at h₂₃ ⊢\n      linarith\n    -- Solve for s\n    have h₂₅ : 7 * s = 7 := by\n      linarith\n    have h₂₆ : s = 1 := by\n      linarith\n    exact h₂₆\n  \n  have h₃ : t = 4 := by\n    have h₃₁ : t = 3 * s + 1 := h₁\n    have h₃₂ : s = 1 := h₂\n    rw [h₃₁, h₃₂]\n    <;> norm_num\n    <;> linarith\n  \n  have h₄ : s = 1 ∧ t = 4 := by\n    exact ⟨h₂, h₃⟩\n  \n  exact h₄",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44"
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g4",
+    "parsed_lean_block": "theorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : s = 1 := by\n    have h₂₁ : s = 9 - 2 * t := h₀\n    have h₂₂ : t = 3 * s + 1 := h₁\n    -- Substitute t = 3 * s + 1 into s = 9 - 2 * t\n    have h₂₃ : s = 9 - 2 * (3 * s + 1) := by\n      rw [h₂₁, h₂₂]\n      <;> ring\n    -- Simplify the equation to solve for s\n    have h₂₄ : s = 7 - 6 * s := by\n      linarith\n    -- Rearrange to get 7 * s = 7\n    have h₂₅ : 7 * s = 7 := by\n      linarith\n    -- Divide both sides by 7 to get s = 1\n    have h₂₆ : s = 1 := by\n      linarith\n    exact h₂₆\n  \n  have h₃ : t = 4 := by\n    have h₃₁ : t = 3 * s + 1 := h₁\n    have h₃₂ : s = 1 := h₂\n    rw [h₃₁, h₃₂]\n    <;> norm_num\n    <;> linarith\n  \n  have h₄ : s = 1 ∧ t = 4 := by\n    exact ⟨h₂, h₃⟩\n  \n  exact h₄",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : s = 1 := by\n    have h₂₁ : s = 9 - 2 * t := h₀\n    have h₂₂ : t = 3 * s + 1 := h₁\n    -- Substitute t = 3 * s + 1 into s = 9 - 2 * t\n    have h₂₃ : s = 9 - 2 * (3 * s + 1) := by\n      rw [h₂₁, h₂₂]\n      <;> ring\n    -- Simplify the equation to solve for s\n    have h₂₄ : s = 7 - 6 * s := by\n      linarith\n    -- Rearrange to get 7 * s = 7\n    have h₂₅ : 7 * s = 7 := by\n      linarith\n    -- Divide both sides by 7 to get s = 1\n    have h₂₆ : s = 1 := by\n      linarith\n    exact h₂₆\n  \n  have h₃ : t = 4 := by\n    have h₃₁ : t = 3 * s + 1 := h₁\n    have h₃₂ : s = 1 := h₂\n    rw [h₃₁, h₃₂]\n    <;> norm_num\n    <;> linarith\n  \n  have h₄ : s = 1 ∧ t = 4 := by\n    exact ⟨h₂, h₃⟩\n  \n  exact h₄",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44"
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g5",
+    "parsed_lean_block": "theorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : t = 4 := by\n    have h₂₁ : t = 3 * s + 1 := h₁\n    have h₂₂ : s = 9 - 2 * t := h₀\n    -- Substitute s = 9 - 2t into t = 3s + 1\n    have h₂₃ : t = 3 * (9 - 2 * t) + 1 := by\n      rw [h₂₁, h₂₂]\n      <;> ring_nf\n    -- Simplify the equation to find t\n    have h₂₄ : t = 28 - 6 * t := by\n      ring_nf at h₂₃ ⊢\n      linarith\n    -- Solve for t\n    have h₂₅ : 7 * t = 28 := by\n      linarith\n    have h₂₆ : t = 4 := by\n      linarith\n    exact h₂₆\n  \n  have h₃ : s = 1 := by\n    have h₃₁ : s = 9 - 2 * t := h₀\n    have h₃₂ : t = 4 := h₂\n    rw [h₃₁, h₃₂]\n    <;> norm_num\n    <;> linarith\n  \n  have h₄ : s = 1 ∧ t = 4 := by\n    exact ⟨h₃, h₂⟩\n  \n  exact h₄",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : t = 4 := by\n    have h₂₁ : t = 3 * s + 1 := h₁\n    have h₂₂ : s = 9 - 2 * t := h₀\n    -- Substitute s = 9 - 2t into t = 3s + 1\n    have h₂₃ : t = 3 * (9 - 2 * t) + 1 := by\n      rw [h₂₁, h₂₂]\n      <;> ring_nf\n    -- Simplify the equation to find t\n    have h₂₄ : t = 28 - 6 * t := by\n      ring_nf at h₂₃ ⊢\n      linarith\n    -- Solve for t\n    have h₂₅ : 7 * t = 28 := by\n      linarith\n    have h₂₆ : t = 4 := by\n      linarith\n    exact h₂₆\n  \n  have h₃ : s = 1 := by\n    have h₃₁ : s = 9 - 2 * t := h₀\n    have h₃₂ : t = 4 := h₂\n    rw [h₃₁, h₃₂]\n    <;> norm_num\n    <;> linarith\n  \n  have h₄ : s = 1 ∧ t = 4 := by\n    exact ⟨h₃, h₂⟩\n  \n  exact h₄",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44"
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g6",
+    "parsed_lean_block": "theorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : s = 1 := by\n    have h₂₁ : s = 9 - 2 * t := h₀\n    have h₂₂ : t = 3 * s + 1 := h₁\n    rw [h₂₂] at h₂₁\n    have h₂₃ : s = 9 - 2 * (3 * s + 1) := by linarith\n    have h₂₄ : s = 9 - 2 * (3 * s + 1) := by linarith\n    ring_nf at h₂₄ ⊢\n    linarith\n  \n  have h₃ : t = 4 := by\n    have h₃₁ : t = 3 * s + 1 := h₁\n    rw [h₃₁]\n    rw [h₂]\n    <;> norm_num\n    <;> linarith\n  \n  have h₄ : s = 1 ∧ t = 4 := by\n    exact ⟨h₂, h₃⟩\n  \n  exact h₄",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : s = 1 := by\n    have h₂₁ : s = 9 - 2 * t := h₀\n    have h₂₂ : t = 3 * s + 1 := h₁\n    rw [h₂₂] at h₂₁\n    have h₂₃ : s = 9 - 2 * (3 * s + 1) := by linarith\n    have h₂₄ : s = 9 - 2 * (3 * s + 1) := by linarith\n    ring_nf at h₂₄ ⊢\n    linarith\n  \n  have h₃ : t = 4 := by\n    have h₃₁ : t = 3 * s + 1 := h₁\n    rw [h₃₁]\n    rw [h₂]\n    <;> norm_num\n    <;> linarith\n  \n  have h₄ : s = 1 ∧ t = 4 := by\n    exact ⟨h₂, h₃⟩\n  \n  exact h₄",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44"
+  },
+  {
+    "item_id": "mathd_algebra_44__r0_g7",
+    "parsed_lean_block": "theorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : s = 1 := by\n    have h₂₁ : s = 9 - 2 * t := h₀\n    have h₂₂ : t = 3 * s + 1 := h₁\n    -- Substitute t = 3s + 1 into s = 9 - 2t\n    have h₂₃ : s = 9 - 2 * (3 * s + 1) := by\n      rw [h₂₁, h₂₂]\n      <;> ring_nf\n    -- Simplify the equation\n    have h₂₄ : s = 7 - 6 * s := by\n      ring_nf at h₂₃ ⊢\n      linarith\n    -- Solve for s\n    have h₂₅ : 7 * s = 7 := by\n      linarith\n    have h₂₆ : s = 1 := by\n      linarith\n    exact h₂₆\n  \n  have h₃ : t = 4 := by\n    have h₃₁ : t = 3 * s + 1 := h₁\n    have h₃₂ : s = 1 := h₂\n    rw [h₃₁, h₃₂]\n    <;> norm_num\n    <;> linarith\n  \n  have h₄ : s = 1 ∧ t = 4 := by\n    exact ⟨h₂, h₃⟩\n  \n  exact h₄",
+    "truncated": false,
+    "full_lean_code": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat\n\ntheorem mathd_algebra_44\n  (s t : ℝ)\n  (h₀ : s = 9 - 2 * t)\n  (h₁ : t = 3 * s + 1) :\n  s = 1 ∧ t = 4 := by\n  have h₂ : s = 1 := by\n    have h₂₁ : s = 9 - 2 * t := h₀\n    have h₂₂ : t = 3 * s + 1 := h₁\n    -- Substitute t = 3s + 1 into s = 9 - 2t\n    have h₂₃ : s = 9 - 2 * (3 * s + 1) := by\n      rw [h₂₁, h₂₂]\n      <;> ring_nf\n    -- Simplify the equation\n    have h₂₄ : s = 7 - 6 * s := by\n      ring_nf at h₂₃ ⊢\n      linarith\n    -- Solve for s\n    have h₂₅ : 7 * s = 7 := by\n      linarith\n    have h₂₆ : s = 1 := by\n      linarith\n    exact h₂₆\n  \n  have h₃ : t = 4 := by\n    have h₃₁ : t = 3 * s + 1 := h₁\n    have h₃₂ : s = 1 := h₂\n    rw [h₃₁, h₃₂]\n    <;> norm_num\n    <;> linarith\n  \n  have h₄ : s = 1 ∧ t = 4 := by\n    exact ⟨h₂, h₃⟩\n  \n  exact h₄",
+    "parsing_notes": "last_block",
+    "round_idx": 0,
+    "parent_attempt_id": null,
+    "original_problem_id": "mathd_algebra_44"
+  }
+]

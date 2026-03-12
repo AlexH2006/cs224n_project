@@ -1,0 +1,65 @@
+{
+  "model": "Qwen/Qwen3.5-4B",
+  "dataset": "cat-searcher/minif2f-lean4",
+  "split": "test",
+  "n_problems": 8,
+  "pass_k": 8,
+  "n_success": 5,
+  "pass_at_k": 0.625,
+  "timestamp": "2026-03-11T03:18:49.507596",
+  "run_dir": "baseline/run_Qwen3.5-4B_20260311_030158",
+  "sampling": {
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 0.0,
+    "repetition_penalty": 1.0,
+    "max_new_tokens": 8192,
+    "seed": 42
+  },
+  "generation_metrics": {
+    "generation_wall_s": 582.4503,
+    "total_output_tokens": 1041295,
+    "tokens_per_second": 1787.78
+  },
+  "correction_rounds": {
+    "max_correction_rounds": 2,
+    "rounds_executed": 3,
+    "solved_count_by_round": [
+      5,
+      5,
+      5
+    ],
+    "first_solved_round_per_problem": {
+      "0": 0,
+      "1": 0,
+      "4": 0,
+      "5": 0,
+      "7": 0
+    },
+    "total_attempts_generated": 208,
+    "total_attempts_verified": 208,
+    "counts_per_round": [
+      {
+        "round": 0,
+        "generated": 64,
+        "verified": 64,
+        "solved_after_round": 5
+      },
+      {
+        "round": 1,
+        "generated": 48,
+        "verified": 48,
+        "solved_after_round": 5
+      },
+      {
+        "round": 2,
+        "generated": 96,
+        "verified": 96,
+        "solved_after_round": 5
+      }
+    ],
+    "seed": 42
+  }
+}
