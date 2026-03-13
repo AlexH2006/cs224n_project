@@ -16,8 +16,8 @@ import time
 import traceback
 from typing import Literal, Optional
 
-from sdpo_modal_local_verify_qwen.kimina_transport import run_kimina_verify
-from sdpo_modal_local_verify_qwen.lean_verification import VerifyResult, verification_error_result
+from imo_p6_experiment.kimina_transport import run_kimina_verify
+from imo_p6_experiment.lean_verification import VerifyResult, verification_error_result
 
 
 # Default paths: assume repo layout is 224n_project/sdpo_modal/ and 224n_project/Goedel-Prover-main/mathlib4/

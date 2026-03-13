@@ -1,0 +1,8 @@
+[
+  {
+    "iteration": 1,
+    "extracted_block": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\n\ntheorem imo_1964_p2\n  (a b c : \u211d)\n  (h\u2080 : 0 < a \u2227 0 < b \u2227 0 < c)\n  (h\u2081 : c < a + b)\n  (h\u2082 : b < a + c)\n  (h\u2083 : a < b + c) :\n  a^2 * (b + c - a) + b^2 * (c + a - b) + c^2 * (a + b - c) \u2264 3 * a * b * c := by\n  have h\u2084 : 0 < a * b := by nlinarith\n  have h\u2085 : 0 < b * c := by nlinarith\n  have h\u2086 : 0 < c * a := by nlinarith\n  nlinarith [sq_nonneg (a - b), sq_nonneg (b - c), sq_nonneg (c - a)]",
+    "success": true,
+    "problem_id": "imo_1964_p2"
+  }
+]

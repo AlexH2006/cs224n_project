@@ -1,0 +1,11 @@
+{
+  "pass_k": 1,
+  "n_problems": 1,
+  "problems": [
+    {
+      "problem_id": "imo_1962_p2",
+      "success_rate": 1.0,
+      "problem_idx": 105
+    }
+  ]
+}

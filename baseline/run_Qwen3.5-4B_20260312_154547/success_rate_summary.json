@@ -1,0 +1,11 @@
+{
+  "pass_k": 10,
+  "n_problems": 1,
+  "problems": [
+    {
+      "problem_id": "mathd_algebra_76",
+      "success_rate": 1.0,
+      "problem_idx": 119
+    }
+  ]
+}

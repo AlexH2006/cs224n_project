@@ -10,7 +10,7 @@ over the Lean proof tokens (not the reasoning prefix).
 
 from typing import TYPE_CHECKING, Optional
 
-from sdpo_modal_local_verify_qwen.config import SDPOConfig
+from imo_p6_experiment.config import SDPOConfig
 
 if TYPE_CHECKING:
     import torch

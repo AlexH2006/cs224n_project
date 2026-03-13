@@ -1,14 +1,12 @@
 """
-TLDR: Build the chat-formatted prompt for Qwen3.5-4B proof generation.
+TLDR: Build chat-formatted prompts for Qwen proof generation (round 0 and correction).
 
-Strategy:
-  - Zero-shot CoT: "Think step-by-step" triggers Qwen3.5's <think>...</think> reasoning.
-  - Full-block output: model is instructed to emit a complete, self-contained lean4
-    code block (imports + set_option + full theorem with proof) as the very last thing
-    in its response, with nothing after the closing fence.
-  - This "last block" placement makes parsing unambiguous: always take the last lean4 block.
+- use_think_mode (EvalConfig) is passed to the tokenizer as enable_thinking. Default is
+  False (reasoning off). When False, the template signals the model not to emit <think>.
+- Full-block output: model is instructed to emit one final ```lean4``` code block.
+- Parsing takes the last lean4 block from the response.
 
-Used by: modal_app.py (ProofGenerator.setup builds prompts before batching).
+Used by: modal_app.ProofGenerator (generate_all, generate_correction_round).
 """
 
 from qwen_eval.config import EvalConfig
@@ -29,8 +27,16 @@ Prove the following Lean 4 theorem without using `sorry`. At the very end of you
 """
 
 
-def _initial_messages(theorem_code: str, informal: str, header: str, cfg: EvalConfig) -> list[dict]:
-    """Build the initial conversation messages (system + user) for one problem. Used by build_prompt and get_initial_messages."""
+def get_initial_messages(
+    theorem_code: str,
+    informal: str,
+    header: str,
+    cfg: EvalConfig,
+) -> list[dict]:
+    """
+    Build the initial conversation messages (system + user) for one problem.
+    Used by build_prompt for round 0 and by build_correction_prompt to extend the conversation.
+    """
     effective_header = header.strip() if header and header.strip() else cfg.default_header
     header_and_theorem = f"{effective_header}\n{theorem_code}"
     user_content = _USER_TEMPLATE.format(
@@ -43,26 +49,53 @@ def _initial_messages(theorem_code: str, informal: str, header: str, cfg: EvalCo
     ]
 
 
-def messages_to_prompt(messages: list[dict], tokenizer, cfg: EvalConfig) -> str:
+_CORRECTION_USER_TEMPLATE = """\
+The previous proof did not verify in Lean.
+
+Here is the Lean/compiler feedback from your previous attempt:
+<error>
+{feedback}
+</error>
+
+Please revise your previous solution to fix these errors.
+
+Requirements:
+- Keep working on the same theorem.
+- Use the verifier feedback above.
+- At the very end of your response, output your complete corrected solution as exactly one ```lean4``` code block.
+- Do not output multiple final Lean code blocks.
+- Do not leave any `sorry` in the final code.
+"""
+
+
+def build_correction_prompt(
+    problem: dict,
+    previous_assistant_output: str,
+    feedback: str,
+    tokenizer,
+    cfg: EvalConfig,
+) -> str:
     """
-    Convert a conversation messages list to a single prompt string for vLLM.
-    Used for correction rounds when messages have been extended with assistant + user.
+    Build a chat-formatted prompt for a correction round: initial messages +
+    previous assistant response + new USER message with only the latest verifier feedback.
+    cfg.use_think_mode is passed to the tokenizer as enable_thinking.
     """
+    messages = get_initial_messages(
+        theorem_code=problem["formal_statement"],
+        informal=problem["informal_stmt"],
+        header=problem["header"],
+        cfg=cfg,
+    )
+    correction_content = _CORRECTION_USER_TEMPLATE.format(
+        feedback=feedback if feedback else "(no feedback provided)"
+    )
+    messages.append({"role": "assistant", "content": previous_assistant_output})
+    messages.append({"role": "user", "content": correction_content})
     return tokenizer.apply_chat_template(
         messages,
         tokenize=False,
         add_generation_prompt=True,
         enable_thinking=cfg.use_think_mode,
-    )
-
-
-def get_initial_messages(problem: dict, cfg: EvalConfig) -> list[dict]:
-    """Return the initial messages list for a problem (for correction-flow state init)."""
-    return _initial_messages(
-        problem["formal_statement"],
-        problem.get("informal_stmt", ""),
-        problem.get("header", ""),
-        cfg,
     )
 
 
@@ -74,7 +107,7 @@ def build_prompt(
     cfg: EvalConfig,
 ) -> str:
     """
-    Build a chat-formatted prompt string for one problem.
+    Build a chat-formatted prompt string for one problem (round 0).
 
     Args:
         theorem_code: The formal Lean 4 theorem (with `sorry` placeholder).
@@ -82,10 +115,15 @@ def build_prompt(
         header:       Dataset-provided header (imports + set_option). May be empty;
                       falls back to cfg.default_header so the model sees correct imports.
         tokenizer:    HuggingFace tokenizer with apply_chat_template.
-        cfg:          EvalConfig (use_think_mode passed to tokenizer as enable_thinking).
+        cfg:          EvalConfig; cfg.use_think_mode is passed to tokenizer as enable_thinking.
 
     Returns:
         A fully formatted string ready to pass to vLLM as a prompt.
     """
-    messages = _initial_messages(theorem_code, informal, header, cfg)
-    return messages_to_prompt(messages, tokenizer, cfg)
+    messages = get_initial_messages(theorem_code, informal, header, cfg)
+    return tokenizer.apply_chat_template(
+        messages,
+        tokenize=False,
+        add_generation_prompt=True,
+        enable_thinking=cfg.use_think_mode,
+    )

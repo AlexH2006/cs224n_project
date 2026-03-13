@@ -12,11 +12,11 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Optional, Type
 
-from sdpo_modal_local_verify_qwen.config import SDPOConfig
-from sdpo_modal_local_verify_qwen.local_lean_verifier import verify as local_verify
-from sdpo_modal_local_verify_qwen.prompts import create_base_prompt, create_feedback_prompt
-from sdpo_modal_local_verify_qwen.parsing import extract_full_lean_block
-from sdpo_modal_local_verify_qwen.utils import (
+from imo_p6_experiment.config import SDPOConfig
+from imo_p6_experiment.local_lean_verifier import verify as local_verify
+from imo_p6_experiment.prompts import create_base_prompt, create_feedback_prompt
+from imo_p6_experiment.parsing import extract_full_lean_block
+from imo_p6_experiment.utils import (
     clamp_problem_idx,
     create_full_lean_code,
     get_field,
@@ -43,6 +43,7 @@ def run_main(
     problem_idx = kwargs.get("problem_idx", cfg.problem_idx)
     max_iterations = kwargs.get("max_iterations", cfg.max_iterations)
     learning_rate = kwargs.get("learning_rate", cfg.learning_rate)
+    temperature = kwargs.get("temperature", cfg.temperature)
     feedback_errors_only = kwargs.get("feedback_errors_only", cfg.feedback_errors_only)
     system_prompt = kwargs.get("system_prompt", cfg.system_prompt) or ""
     default_header = kwargs.get("default_header", cfg.default_header) or ""
@@ -50,11 +51,13 @@ def run_main(
     informal_field = kwargs.get("informal_field", cfg.informal_field_override) or ""
     header_field = kwargs.get("header_field", cfg.header_field_override) or ""
     gpu = kwargs.get("gpu", cfg.gpu)
+
     # Output path: local_verify/{model_name}/{dataset_name}/run_{problem_idx}_{timestamp}
     output_dir_name = kwargs.get("output_dir_name")
     if not output_dir_name:
         model_short = model.split("/")[-1] if "/" in model else model
         output_dir_name = f"local_verify/{model_short}"
+
     verify_backend = kwargs.get("verify_backend") or os.environ.get("LEAN_VERIFY_BACKEND", "kimina")
     kimina_base_url = kwargs.get("kimina_base_url") or os.environ.get("LEAN_VERIFY_KIMINA_URL", "http://localhost:8000")
     kimina_api_key = kwargs.get("kimina_api_key") or os.environ.get("LEAN_VERIFY_KIMINA_API_KEY")
@@ -65,6 +68,14 @@ def run_main(
     )
 
     ds = load_dataset_with_fallback(dataset, dataset_subset, dataset_split)
+
+    # Print test set (index and name/id for each problem)
+    print(f"Test set ({len(ds)} problems):")
+    for i in range(len(ds)):
+        p = dict(ds[i])
+        name = p.get("name") or get_field(p, cfg.id_fields, "")
+        print(f"  {i}: {name}")
+
     problem_idx = clamp_problem_idx(problem_idx, len(ds))
     problem = dict(ds[problem_idx])
 
@@ -86,7 +97,7 @@ def run_main(
         "problem_idx": problem_idx,
         "max_iterations": max_iterations,
         "learning_rate": learning_rate,
-        "temperature": cfg.temperature,
+        "temperature": temperature,
         "feedback_include_failed_proof": not feedback_errors_only,
         "theorem_fields": theorem_fields,
         "informal_fields": informal_fields,
@@ -94,10 +105,12 @@ def run_main(
         "id_fields": id_fields,
         "output_dir": output_dir_name,
     }
+
     if system_prompt:
         config_dict["system_prompt"] = system_prompt
     if default_header:
         config_dict["default_header"] = default_header
+
     config_dict.setdefault("default_header", cfg.default_header)
     config_dict.setdefault("distillation_topk", cfg.distillation_topk)
     config_dict.setdefault("max_new_tokens", cfg.max_new_tokens)
@@ -105,11 +118,14 @@ def run_main(
     config_dict.setdefault("stop_tokens", cfg.stop_tokens)
 
     print(f"Using {gpu} GPU")
-    print(f"Verification: {verify_backend} (Kimina Docker)" if verify_backend == "kimina" else "Verification: local (Goedel-Prover lake exe repl)")
+    print(
+        f"Verification: {verify_backend} (Kimina Docker)"
+        if verify_backend == "kimina"
+        else "Verification: local (Goedel-Prover lake exe repl)"
+    )
+
     trainer = trainer_cls(model_name=model, gpu=gpu)
 
-    # Build config for prompts (tokenizer not available locally for full prompt; we only need base_prompt on Modal)
-    # We need tokenizer for create_base_prompt and create_feedback_prompt - but those run locally and we don't have the model tokenizer locally. So we need to either load tokenizer locally (lightweight) or pass prompt-building to Modal. The original entrypoint doesn't load tokenizer; it's all on Modal. So for the local loop we need tokenizer for create_base_prompt and create_feedback_prompt. Let me load the tokenizer locally (no model) just for prompt building.
     from transformers import AutoTokenizer
     tokenizer = AutoTokenizer.from_pretrained(model, trust_remote_code=True)
     if tokenizer.pad_token is None:
@@ -118,11 +134,22 @@ def run_main(
     run_config = SDPOConfig(**config_dict)
     base_prompt = create_base_prompt(run_config, problem, get_field, tokenizer)
 
-    metrics = {"iterations": [], "losses": [], "rewards": [], "kl_divs": [], "entropies": [], "grad_norms": [], "timestamps": []}
-    logs = {"problem": problem, "config": config_dict, "iteration_logs": [], "start_time": datetime.now().isoformat()}
+    metrics = {
+        "iterations": [],
+        "losses": [],
+        "rewards": [],
+        "kl_divs": [],
+        "entropies": [],
+        "grad_norms": [],
+        "timestamps": [],
+    }
+    logs = {
+        "problem": problem,
+        "config": config_dict,
+        "iteration_logs": [],
+        "start_time": datetime.now().isoformat(),
+    }
     best_proof = None
-    # All previous attempts (code + compiler errors only) for teacher prompt.
-    feedback_history: list[tuple[str, str]] = []
 
     for iteration in range(max_iterations):
         iter_start = time.time()
@@ -140,17 +167,31 @@ def run_main(
         if theorem_code_is_commented_out(lean4_code):
             print("  Skipping: formal statement is entirely commented out (unsupported problem)")
             verification = {
-                "success": False, "complete": False, "has_sorry": True,
+                "success": False,
+                "complete": False,
+                "has_sorry": True,
                 "feedback": "Formal statement is entirely commented out.",
                 "errors": ["Commented-out formal statement"],
-                "messages": [], "sorries": [], "source": "skipped", "is_server_error": False,
+                "messages": [],
+                "sorries": [],
+                "source": "skipped",
+                "is_server_error": False,
             }
             full_code = lean4_code
             iter_log = {
-                "iteration": iteration + 1, "student_prompt": base_prompt, "teacher_prompt": None,
-                "raw_output": raw_output, "extracted_block": extracted_block, "full_code": full_code,
-                "verification": verification, "success": False,
-                "loss": None, "reward": None, "kl_div": None, "entropy": None, "grad_norm": None,
+                "iteration": iteration + 1,
+                "student_prompt": base_prompt,
+                "teacher_prompt": None,
+                "raw_output": raw_output,
+                "extracted_block": extracted_block,
+                "full_code": full_code,
+                "verification": verification,
+                "success": False,
+                "loss": None,
+                "reward": None,
+                "kl_div": None,
+                "entropy": None,
+                "grad_norm": None,
                 "num_tokens": num_tokens,
             }
             logs["iteration_logs"].append(iter_log)
@@ -183,6 +224,7 @@ def run_main(
         is_success = verification["success"] and verification["complete"]
         is_server_error = verification.get("is_server_error", False)
         is_sorry_like = extracted_block.strip().lower() == "sorry"
+
         if is_sorry_like:
             is_success = False
             verification["complete"] = False
@@ -205,7 +247,6 @@ def run_main(
             feedback = verification.get("feedback", "")
             errors = verification.get("errors", [])
             if feedback:
-                # Print as one block and flush so vLLM/Modal progress bar doesn't overwrite
                 lines = feedback.strip().split("\n")
                 block = "  Lean feedback:\n" + "\n".join(f"    {line}" for line in lines)
                 print(block, flush=True)
@@ -215,13 +256,12 @@ def run_main(
             else:
                 print("  (no Lean feedback captured)", flush=True)
 
-        # Build teacher prompt from all attempts so far (code + compiler errors only, no reasoning).
         feedback = verification.get("feedback") or "Proof verification failed."
-        feedback_history.append((feedback, extracted_block))
         teacher_prompt = create_feedback_prompt(
             run_config,
             problem,
-            feedback_history=feedback_history,
+            latest_feedback=(feedback, ""),
+            feedback_history=[],
             get_field=get_field,
             tokenizer=tokenizer,
         )
@@ -282,41 +322,34 @@ def run_main(
 
         iter_log = trainer.run_sdpo_step.remote(config_dict, problem, payload)
         logs["iteration_logs"].append(iter_log)
+
         metrics["iterations"].append(iteration + 1)
-        metrics["losses"].append(iter_log.get("loss") or 0.0)
-        metrics["rewards"].append(iter_log.get("reward") or 0.0)
-        metrics["kl_divs"].append(iter_log.get("kl_div") or 0.0)
-        metrics["entropies"].append(iter_log.get("entropy") or 0.0)
-        metrics["grad_norms"].append(iter_log.get("grad_norm") or 0.0)
+        metrics["losses"].append(iter_log.get("loss", 0.0) or 0.0)
+        metrics["rewards"].append(iter_log.get("reward", 0.0) or 0.0)
+        metrics["kl_divs"].append(iter_log.get("kl_div", 0.0) or 0.0)
+        metrics["entropies"].append(iter_log.get("entropy", 0.0) or 0.0)
+        metrics["grad_norms"].append(iter_log.get("grad_norm", 0.0) or 0.0)
         metrics["timestamps"].append(time.time() - iter_start)
-        print(f"  Loss: {iter_log.get('loss', 0):.4f}, Reward: {iter_log.get('reward', 0):.4f}, Grad norm: {iter_log.get('grad_norm', 0):.4f}")
 
+    final_model_path = trainer.finalize_run.remote(config_dict)
     logs["end_time"] = datetime.now().isoformat()
-    logs["success"] = best_proof is not None
     logs["best_proof"] = best_proof
-    logs["metrics"] = metrics
-    logs["total_generation_tokens"] = sum(e.get("num_tokens", 0) for e in logs["iteration_logs"])
+    logs["final_model_path"] = final_model_path
 
-    results = trainer.finalize_run.remote(config_dict, logs)
+    save_path = save_local_run(Path("."), run_config, logs, metrics)
+    print(f"\nSaved run to: {save_path}")
 
-    print("\n" + "=" * 60)
-    print("RESULTS")
-    print("=" * 60)
-    print(f"Success: {results['success']}")
-    print(f"Iterations used: {len(results['iteration_logs'])}")
-    if results["success"]:
-        print(f"Best proof: {results['best_proof'][:200]}...")
-    if results["metrics"]["losses"]:
-        print(f"\nFinal metrics:")
-        print(f"  Final loss: {results['metrics']['losses'][-1]:.4f}")
-    print(f"\nResults saved to Modal volume 'sdpo-output-local-verify' under '{output_dir_name}/'")
-
-    run_dir = save_local_run(results, output_dir_name, dataset, problem_idx)
-    if metrics.get("iterations") and len(metrics["iterations"]) > 0:
+    if metrics["iterations"]:
         plot_training_curves(
             metrics,
-            run_dir / "training_curves.png",
-            title=f"SDPO Local Verify - Problem {problem_idx}",
+            Path(save_path) / "training_curves.png",
+            f"SDPO Test-Time RL - {run_config.model_name}",
         )
-        print(f"Training curves saved to: {run_dir / 'training_curves.png'}")
-    return results
+
+    return {
+        "best_proof": best_proof,
+        "metrics": metrics,
+        "logs": logs,
+        "save_path": save_path,
+        "final_model_path": final_model_path,
+    }

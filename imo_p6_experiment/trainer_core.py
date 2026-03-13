@@ -14,17 +14,17 @@ from pathlib import Path
 from typing import Callable, Optional
 import torch
 
-from sdpo_modal_local_verify_qwen.config import SDPOConfig
-from sdpo_modal_local_verify_qwen.prompts import create_base_prompt, create_feedback_prompt
-from sdpo_modal_local_verify_qwen.parsing import extract_full_lean_block
-from sdpo_modal_local_verify_qwen.utils import (
+from imo_p6_experiment.config import SDPOConfig
+from imo_p6_experiment.prompts import create_base_prompt, create_feedback_prompt
+from imo_p6_experiment.parsing import extract_full_lean_block
+from imo_p6_experiment.utils import (
     collect_per_token_kl,
     create_full_lean_code,
     get_field as default_get_field,
     save_run,
     theorem_code_is_commented_out,
 )
-from sdpo_modal_local_verify_qwen.sdpo_loss import compute_sdpo_loss, get_proof_token_range
+from imo_p6_experiment.sdpo_loss import compute_sdpo_loss, get_proof_token_range
 
 
 def run_sdpo(

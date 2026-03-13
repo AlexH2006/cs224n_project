@@ -47,6 +47,8 @@ class SDPOConfig:
         "<|im_end|>", "<|endoftext|>", "</s>", "<|end|>",
         "[/INST]", "<|eot_id|>"
     ])
+    # Chunk size for vLLM generate() when batching prompts. None or 0 = process all in one call.
+    inference_batch_size: Optional[int] = 128
 
     # Test-time RL settings
     max_iterations: int = 5

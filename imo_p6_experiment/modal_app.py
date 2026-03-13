@@ -26,7 +26,7 @@ Used by: modal_trainer, entrypoint.
 import os
 from typing import Any
 
-from sdpo_modal_local_verify_qwen.config import SDPOConfig
+from imo_p6_experiment.config import SDPOConfig
 
 try:
     import modal
@@ -75,7 +75,7 @@ else:
 
     # LoRA target modules for Qwen3.5 (Qwen/Qwen3.5-4B):
     # Standard attention (q/k/v/o) + GDN linear attention (in_proj_*, out_proj) + MLP.
-    from sdpo_modal_local_verify_qwen._weight_sync_kimina import KIMINA_LORA_TARGET_MODULES as _KIMINA_LORA_TARGET_MODULES
+    from imo_p6_experiment._weight_sync_kimina import KIMINA_LORA_TARGET_MODULES as _KIMINA_LORA_TARGET_MODULES
 
     def _setup_trainer(trainer_self: Any, gpu_name: str) -> None:
         """Shared setup: env, tokenizer, vLLM engine (with KiminaSDPOWorkerExtension), HF QLoRA model.
@@ -121,7 +121,8 @@ else:
             gpu_memory_utilization=gpu_memory_utilization,
             max_model_len=max_model_len,
             enforce_eager=True,
-            worker_extension_cls="sdpo_modal_local_verify_qwen._weight_sync_kimina.KiminaSDPOWorkerExtension"
+            enable_prefix_caching=True,
+            worker_extension_cls="imo_p6_experiment._weight_sync_kimina.KiminaSDPOWorkerExtension"
         )
         print("vLLM engine initialized!")
 

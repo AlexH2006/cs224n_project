@@ -1,27 +1,32 @@
 """
-TLDR: Modal SDPOTrainer for local-lean-verify: generate_only and run_sdpo_step.
+TLDR: Modal SDPOTrainer for local-lean-verify: generate_only, generate_batch, and run_sdpo_step.
 
 Target model: Qwen/Qwen3.5-4B (Qwen3_5ForConditionalGeneration).
 
 Verification runs locally (not on Modal). The entrypoint loop is:
-  generate_only.remote() → local parse + local verify → run_sdpo_step.remote(payload)
+  generate_batch.remote([prompt], ...) → local parse + local verify → run_sdpo_step.remote(payload)
 
-After each gradient step, merged LoRA weights are pushed into the vLLM engine in-place
+Generation uses the same high-throughput pattern as qwen_eval: one vLLM engine, flat list of
+prompts, chunked generate() calls (inference_batch_size), ordered list of (raw_text, generated_ids).
+generate_only is a convenience that calls generate_batch with a single prompt.
+
+After each gradient step, merged LoRA weights are pushed to the vLLM engine in-place
 via CUDA IPC (sync_lora_weights_to_vllm_kimina). This closes the online RL loop so
 generation quality improves with each iteration. CUDA graphs are NOT recaptured — the
 in-place update preserves tensor memory addresses.
 """
 
 from pathlib import Path
+from typing import Optional
 
-from sdpo_modal_local_verify_qwen.config import SDPOConfig
-from sdpo_modal_local_verify_qwen.sdpo_loss import compute_sdpo_loss, get_proof_token_range
-from sdpo_modal_local_verify_qwen.utils import collect_per_token_kl, save_run
-from sdpo_modal_local_verify_qwen._weight_sync_kimina import sync_lora_weights_to_vllm_kimina
+from imo_p6_experiment.config import SDPOConfig
+from imo_p6_experiment.sdpo_loss import compute_sdpo_loss, get_proof_token_range
+from imo_p6_experiment.utils import collect_per_token_kl, save_run
+from imo_p6_experiment._weight_sync_kimina import sync_lora_weights_to_vllm_kimina
 
 try:
     import modal
-    from sdpo_modal_local_verify_qwen.modal_app import (
+    from imo_p6_experiment.modal_app import (
         _setup_trainer,
         app,
         hf_cache_volume,
@@ -99,12 +104,69 @@ if modal is not None and app is not None:
             ).input_ids[0]
             return generated_text, generated_ids
 
+        def _generate_batch(
+            self,
+            config: SDPOConfig,
+            prompts: list[str],
+            inference_batch_size: Optional[int] = None,
+        ) -> list[tuple[str, list[int]]]:
+            """Generate for multiple prompts in batched vLLM calls; return list of (raw_text, generated_ids) in same order as prompts."""
+            from vllm import SamplingParams
+
+            if not prompts:
+                return []
+
+            sampling_params = SamplingParams(
+                temperature=config.temperature,
+                top_p=config.top_p,
+                max_tokens=config.max_new_tokens,
+                stop=config.stop_tokens,
+            )
+            batch_size = inference_batch_size or 0
+            if batch_size <= 0:
+                batch_size = len(prompts)
+
+            all_outputs: list[tuple[str, list[int]]] = []
+            for start in range(0, len(prompts), batch_size):
+                chunk = prompts[start : start + batch_size]
+                chunk_out = self.vllm_engine.generate(chunk, sampling_params)
+                for o in chunk_out:
+                    out = o.outputs[0]
+                    raw_text = out.text
+                    token_ids = getattr(out, "token_ids", None)
+                    if token_ids is not None:
+                        ids_list = list(token_ids)
+                    else:
+                        encoded = self.tokenizer(
+                            raw_text, return_tensors="pt", add_special_tokens=False
+                        )
+                        ids_list = encoded.input_ids[0].tolist()
+                    all_outputs.append((raw_text, ids_list))
+            return all_outputs
+
         @modal.method()
         def generate_only(self, config_dict: dict, prompt: str) -> tuple[str, list[int]]:
             """Generate one response; return (raw_text, generated_ids as list for round-trip)."""
             config = SDPOConfig(**config_dict)
-            raw_text, generated_ids = self._generate_proof(config, prompt)
-            return raw_text, generated_ids.tolist()
+            batch = self._generate_batch(
+                config, [prompt], config_dict.get("inference_batch_size")
+            )
+            return batch[0]
+
+        @modal.method()
+        def generate_batch(
+            self,
+            config_dict: dict,
+            prompts: list[str],
+            inference_batch_size: Optional[int] = None,
+        ) -> list[tuple[str, list[int]]]:
+            """Generate for multiple prompts in batched vLLM calls. Chunks prompts by inference_batch_size,
+            runs vLLM generate() per chunk, returns list of (raw_text, generated_ids) in same order as prompts."""
+            config = SDPOConfig(**config_dict)
+            batch_size = inference_batch_size if inference_batch_size is not None else getattr(
+                config, "inference_batch_size", None
+            )
+            return self._generate_batch(config, prompts, batch_size)
 
         @modal.method()
         def run_sdpo_step(self, config_dict: dict, problem: dict, payload: dict) -> dict:

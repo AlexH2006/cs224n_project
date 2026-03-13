@@ -1,12 +1,12 @@
 """
 SDPO on Modal with Lean verification (Qwen3.5-4B).
 
-TLDR: Uses sdpo_modal_local_verify_qwen; loop runs locally, generate and train step on Modal.
+TLDR: Self-contained imo_p6_experiment; loop runs locally, generate and train step on Modal.
 Verification uses the Kimina Docker server by default (http://localhost:8000). Start it with:
   docker run -p 8000:8000 projectnumina/kimina-lean-server:2.0.0
 To use local Lean instead: --verify-backend local (or LEAN_VERIFY_BACKEND=local).
 
-Run: modal run qwen_sdpo_old/run_pipeline.py --problem-idx 0
+Run: modal run imo_p6_experiment/run_pipeline.py --problem-idx 0
 """
 
 try:
@@ -15,9 +15,9 @@ except ImportError:
     modal = None
 
 if modal is not None:
-    from sdpo_modal_local_verify_qwen.modal_app import app
-    from sdpo_modal_local_verify_qwen.modal_trainer import get_trainer_cls, normalize_gpu
-    from sdpo_modal_local_verify_qwen.entrypoint import run_main
+    from imo_p6_experiment.modal_app import app
+    from imo_p6_experiment.modal_trainer import get_trainer_cls, normalize_gpu
+    from imo_p6_experiment.entrypoint import run_main
 
     @app.local_entrypoint()
     def main(

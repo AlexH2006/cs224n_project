@@ -24,7 +24,7 @@ Usage:
     python3 -m modal run qwen_eval/modal_app.py --n-problems 20 --pass-k 4
     python3 -m modal run qwen_eval/modal_app.py --generation-save-batch-size 50   # save after each 50 problems
     python3 -m modal run qwen_eval/modal_app.py --generate-only
-    python3 -m modal run qwen_eval/modal_app.py --no-think-mode   # disable <think>...</think> via tokenizer enable_thinking=False
+    python3 -m modal run qwen_eval/modal_app.py --think-mode   # enable <think>...</think> (default: off)
 """
 
 from __future__ import annotations
@@ -41,22 +41,9 @@ from qwen_eval.config import EvalConfig
 from qwen_eval.dataset import load_problems
 from qwen_eval.local_lean_verifier import verify
 from qwen_eval.parsing import create_full_lean_code, extract_full_lean_block_parsed
-from qwen_eval.prompts import get_initial_messages, messages_to_prompt
 from qwen_eval.results import build_problem_log, make_run_dir, save_results
-from qwen_eval.utils.plot_passk_by_round import plot_passk_by_round
-
-
-def _verifier_feedback_content(verification: dict) -> str:
-    """Extract a string for the correction user message; robust to missing keys."""
-    if not verification:
-        return "(No feedback available.)"
-    feedback = (verification.get("feedback") or "").strip()
-    if feedback:
-        return feedback
-    errors = verification.get("errors") or []
-    if errors:
-        return "\n".join(str(e) for e in errors)
-    return "(No feedback available.)"
+from qwen_eval.results import _round_success as round_success
+from qwen_eval.utils.plot_correction_rounds import plot_correction_rounds_performance
 
 # ---------------------------------------------------------------------------
 # Modal app + image
@@ -137,7 +124,7 @@ class ProofGenerator:
             dtype="bfloat16",
             trust_remote_code=True,
             download_dir="/hf_cache",
-            gpu_memory_utilization=0.90,
+            gpu_memory_utilization=0.90,  # 90% GPU utilization
             max_model_len=16384,
             # Skip vision encoder: Qwen3.5 is multimodal but we only need text.
             # Equivalent to CLI --language-model-only: frees GPU memory for KV cache.
@@ -241,22 +228,38 @@ class ProofGenerator:
         return {"raw_results": raw_results, "generation_metrics": generation_metrics}
 
     @modal.method()
-    def generate_from_prompts(
+    def generate_correction_round(
         self,
-        flat_prompts: list[str],
+        items: list[dict],
         model_name: str,
         sampling_cfg: dict,
         config_dict: dict,
         inference_batch_size: Optional[int] = 128,
     ) -> dict:
         """
-        Run vLLM generate on a flat list of prompt strings (for correction rounds).
-        Returns raw_results: list of (raw_text, finish_reason) in same order as flat_prompts.
+        Run one correction round: build correction prompts for each item (problem,
+        previous_assistant_output, feedback), generate, return flat list of (text, finish_reason).
+        Model must already be loaded (e.g. after generate_all). Same sampling params as round 0.
         """
         import time
-        if not flat_prompts:
+        from qwen_eval.config import EvalConfig
+        from qwen_eval.prompts import build_correction_prompt
+
+        if not items:
             return {"raw_results": [], "generation_metrics": {}}
+
         self._load(model_name, sampling_cfg)
+        cfg = EvalConfig(**config_dict)
+        flat_prompts = [
+            build_correction_prompt(
+                problem=item["problem"],
+                previous_assistant_output=item["previous_assistant_output"],
+                feedback=item["feedback"],
+                tokenizer=self._tokenizer,
+                cfg=cfg,
+            )
+            for item in items
+        ]
         batch_size = inference_batch_size or 0
         if batch_size <= 0:
             batch_size = len(flat_prompts)
@@ -282,22 +285,29 @@ class ProofGenerator:
         }
         return {"raw_results": all_outputs, "generation_metrics": generation_metrics}
 
+# When building correction prompts, include at most this many errors from the previous attempt.
+MAX_ERRORS_IN_CORRECTION_PROMPT = 10
 
-# ---------------------------------------------------------------------------
-# Phase 2: Verification helpers (run locally on the driver)
-# ---------------------------------------------------------------------------
 
-@dataclass
-class AttemptState:
-    """Per-attempt conversation state across correction rounds."""
-    problem_idx: int
-    attempt: int
-    messages: list
-    rounds: list
-    success: bool
-    final_extracted_block: Optional[str] = None
-    final_full_code: Optional[str] = None
-    final_verification: Optional[dict] = None
+def _feedback_for_correction_prompt(verification: dict | None) -> str:
+    """First MAX_ERRORS_IN_CORRECTION_PROMPT errors from verification, newline-joined."""
+    if not verification:
+        return ""
+    errors = verification.get("errors") or []
+    if not errors:
+        return verification.get("feedback", "")
+    return "\n".join(errors[:MAX_ERRORS_IN_CORRECTION_PROMPT])
+
+
+def _count_solved_in_chunk(chunk_sample_rounds: list[list[list[dict]]], up_to_round: int) -> int:
+    """Number of problems in chunk with at least one sample succeeded by round <= up_to_round."""
+    n = 0
+    for samples in chunk_sample_rounds:
+        for rounds in samples:
+            if any(round_success(r) for r in rounds if r.get("round", 0) <= up_to_round):
+                n += 1
+                break
+    return n
 
 
 @dataclass
@@ -372,7 +382,7 @@ def run_eval(
     problem_idx: int = -1,         # -1 = first n_problems; >=0 = single problem at that index
     pass_k: int = 4,
     model: str = "Qwen/Qwen3.5-4B",
-    no_think_mode: bool = False,   # Pass --no-think-mode to disable Qwen3.5 <think>...</think> (tokenizer enable_thinking=False)
+    think_mode: bool = False,      # Pass --think-mode to enable <think>...</think> reasoning (default: off).
     temperature: float = 0.6,
     top_p: float = 0.95,
     top_k: int = 20,
@@ -385,7 +395,7 @@ def run_eval(
     generate_only: bool = False,
     inference_batch_size: Optional[int] = None,
     generation_save_batch_size: Optional[int] = None,
-    num_correction_rounds: int = 0,
+    correction_rounds: int = 0,
 ):
     """
     Orchestrate the full eval: generate → parse → verify → save.
@@ -394,15 +404,17 @@ def run_eval(
     --generate-only  Skip verification (useful for testing generation + parsing).
     --inference-batch-size N  Max prompts per vLLM generate() call (default: 256).
     --generation-save-batch-size N  Save results after each batch of N problems (default: all at once).
-    --num-correction-rounds N  Multi-turn correction rounds; 0 = one-shot (default).
+    --correction-rounds N  Self-correction rounds per sample (0 = off; N = round 0 + up to N corrections).
     """
     problem_indices = [problem_idx] if problem_idx >= 0 else None
-    # problem_indices = [7, 9, 10, 18, 19, 20, 21, 26, 32, 34, 43, 46, 48, 52, 53, 55, 56, 57, 65, 68, 87, 89, 95, 97, 100, 108, 110, 115, 116, 117, 119, 122, 127, 128, 132, 140, 146, 147, 155, 157, 159, 174, 183, 187, 202, 227, 228, 231, 239, 241]
+    # problem_indices = [7,9,10,18,19,20,21,26,32,34,43,46,48,52,53,55,56,57,65,68,87,89,95,97,100,108,110,115,116,117,119,122,127,128,132,140,146,147,155,157,159,174,183,187,202,227,228,231,239,241]
+    # problem_indices = [86, 69, 138, 168, 13, 66, 105, 212, 119, 37]
     cfg = EvalConfig(
         model_name=model,
         n_problems=1 if problem_idx >= 0 else n_problems,
         pass_k=pass_k,
-        use_think_mode=not no_think_mode,
+        correction_rounds=correction_rounds,
+        use_think_mode=think_mode,
         temperature=temperature,
         top_p=top_p,
         top_k=top_k,
@@ -413,7 +425,6 @@ def run_eval(
         seed=seed,
         kimina_url=kimina_url,
         problem_indices=problem_indices,
-        num_correction_rounds=num_correction_rounds,
     )
     if inference_batch_size is not None:
         cfg.inference_batch_size = inference_batch_size
@@ -435,7 +446,7 @@ def run_eval(
     print(f"Qwen MiniF2F Eval  |  model={cfg.model_name}")
     print(f"  dataset={cfg.dataset_name}, split={cfg.dataset_split}")
     print(f"  n_problems={cfg.n_problems}, pass@{cfg.pass_k}")
-    print(f"  num_correction_rounds={cfg.num_correction_rounds}")
+    print(f"  correction_rounds={cfg.correction_rounds}")
     print(f"  use_think_mode={cfg.use_think_mode}")
     print(f"  kimina={cfg.kimina_url}")
     print("=" * 60)
@@ -473,170 +484,160 @@ def run_eval(
     if not generate_only:
         print(f"\n[3/3] Verifying with Kimina at {cfg.kimina_url}...")
 
-    driver_tokenizer = None
-    if cfg.num_correction_rounds > 0:
-        from transformers import AutoTokenizer
-        driver_tokenizer = AutoTokenizer.from_pretrained(cfg.model_name, trust_remote_code=True)
-
     for chunk_idx, problem_chunk in enumerate(chunks):
-        if cfg.num_correction_rounds == 0:
-            # ------------------------------------------------------------------
-            # One-shot: Phase 1 (this chunk): Generate on Modal
-            # ------------------------------------------------------------------
-            print(f"\n[2/3] Generating chunk {chunk_idx + 1}/{n_chunks} ({len(problem_chunk)} problems, {len(problem_chunk) * cfg.pass_k} outputs)...")
-            gen_response = generator.generate_all.remote(
-                problem_chunk,
-                cfg.pass_k,
-                cfg.model_name,
-                sampling_cfg,
-                dataclasses.asdict(cfg),
-                cfg.inference_batch_size,
-            )
-            raw_results_chunk: list[list] = gen_response["raw_results"]
-            metrics = gen_response.get("generation_metrics") or {}
-            aggregated_metrics["generation_wall_s"] += metrics.get("generation_wall_s", 0)
-            aggregated_metrics["total_output_tokens"] += metrics.get("total_output_tokens", 0)
-            aggregated_metrics["n_requests"] += metrics.get("n_requests", 0)
-            if metrics:
-                tps = metrics.get("tokens_per_second", 0)
-                wall = metrics.get("generation_wall_s", 0)
-                print(f"  Chunk done: {wall:.1f}s, {tps:.1f} tok/s")
+        # ------------------------------------------------------------------
+        # Phase 1 (this chunk): Generate on Modal
+        # ------------------------------------------------------------------
+        print(f"\n[2/3] Generating chunk {chunk_idx + 1}/{n_chunks} ({len(problem_chunk)} problems, {len(problem_chunk) * cfg.pass_k} outputs)...")
+        gen_response = generator.generate_all.remote(
+            problem_chunk,
+            cfg.pass_k,
+            cfg.model_name,
+            sampling_cfg,
+            dataclasses.asdict(cfg),
+            cfg.inference_batch_size,
+        )
+        raw_results_chunk: list[list] = gen_response["raw_results"]
+        metrics = gen_response.get("generation_metrics") or {}
+        aggregated_metrics["generation_wall_s"] += metrics.get("generation_wall_s", 0)
+        aggregated_metrics["total_output_tokens"] += metrics.get("total_output_tokens", 0)
+        aggregated_metrics["n_requests"] += metrics.get("n_requests", 0)
+        if metrics:
+            tps = metrics.get("tokens_per_second", 0)
+            wall = metrics.get("generation_wall_s", 0)
+            print(f"  Chunk done: {wall:.1f}s, {tps:.1f} tok/s")
 
-            # ------------------------------------------------------------------
-            # Parse: extract lean4 blocks from raw outputs (this chunk)
-            # ------------------------------------------------------------------
-            all_attempts_chunk: list[list[AttemptResult]] = []
-            for problem, result in zip(problem_chunk, raw_results_chunk):
-                prompt = result[0]
-                raw_pairs = result[1:]
-                problem_attempts = []
-                for attempt_idx, (raw_output, finish_reason) in enumerate(raw_pairs):
-                    parse_result = extract_full_lean_block_parsed(
-                        raw_output,
-                        finish_reason=finish_reason,
-                    )
-                    extracted_block = parse_result.block
-                    if parse_result.truncated:
-                        print(f"    [attempt {attempt_idx}] TRUNCATED (finish_reason={finish_reason!r}) — no code block reached")
-                    elif parse_result.no_block:
-                        print(f"    [attempt {attempt_idx}] PARSE FAILED — no lean4 block found in output")
-                    full_code = create_full_lean_code(
-                        theorem_code=problem["formal_statement"],
-                        extracted_block=extracted_block,
-                        default_header=cfg.default_header,
-                    )
-                    problem_attempts.append(AttemptResult(
-                        problem_idx=problem["problem_idx"],
-                        attempt=attempt_idx,
-                        prompt=prompt,
-                        raw_output=raw_output,
-                        extracted_block=extracted_block,
-                        full_code=full_code,
-                        num_tokens=len(raw_output.split()),
-                        truncated=parse_result.truncated,
-                        finish_reason=finish_reason,
-                    ))
-                all_attempts_chunk.append(problem_attempts)
+        # ------------------------------------------------------------------
+        # Parse: extract lean4 blocks from raw outputs (this chunk)
+        # ------------------------------------------------------------------
+        all_attempts_chunk: list[list[AttemptResult]] = []
+        for problem, result in zip(problem_chunk, raw_results_chunk):
+            prompt = result[0]
+            raw_pairs = result[1:]
+            problem_attempts = []
+            for attempt_idx, (raw_output, finish_reason) in enumerate(raw_pairs):
+                parse_result = extract_full_lean_block_parsed(
+                    raw_output,
+                    finish_reason=finish_reason,
+                )
+                extracted_block = parse_result.block
+                if parse_result.truncated:
+                    print(f"    [attempt {attempt_idx}] TRUNCATED (finish_reason={finish_reason!r}) — no code block reached")
+                elif parse_result.no_block:
+                    print(f"    [attempt {attempt_idx}] PARSE FAILED — no lean4 block found in output")
+                full_code = create_full_lean_code(
+                    theorem_code=problem["formal_statement"],
+                    extracted_block=extracted_block,
+                    default_header=cfg.default_header,
+                )
+                problem_attempts.append(AttemptResult(
+                    problem_idx=problem["problem_idx"],
+                    attempt=attempt_idx,
+                    prompt=prompt,
+                    raw_output=raw_output,
+                    extracted_block=extracted_block,
+                    full_code=full_code,
+                    num_tokens=len(raw_output.split()),
+                    truncated=parse_result.truncated,
+                    finish_reason=finish_reason,
+                ))
+            all_attempts_chunk.append(problem_attempts)
 
-            # ------------------------------------------------------------------
-            # Verify (or build logs without verification) and append to problem_logs
-            # ------------------------------------------------------------------
-            if generate_only:
-                print("  --generate-only: skipping verification.")
-                total_wall = aggregated_metrics["generation_wall_s"]
-                n_after = len(problem_logs) + len(problem_chunk)
-                avg_gen_s = (total_wall / n_after) if n_after > 0 else 0.0
-                for problem, attempts in zip(problem_chunk, all_attempts_chunk):
-                    problem_log = build_problem_log(
-                        problem,
-                        [
-                            {
-                                "attempt": a.attempt,
-                                "prompt": a.prompt,
-                                "raw_output": a.raw_output,
-                                "extracted_block": a.extracted_block,
-                                "full_code": a.full_code,
-                                "verification": None,
-                                "num_tokens": a.num_tokens,
-                            }
-                            for a in attempts
-                        ],
-                        cfg,
-                        generation_time_s=avg_gen_s,
-                    )
-                    problem_logs.append(problem_log)
-            else:
-                for prob_num, (problem, attempts) in enumerate(zip(problem_chunk, all_attempts_chunk), len(problem_logs) + 1):
-                    print(f"  [{prob_num}/{len(problems)}] {problem['problem_id']}")
-                    verify_start = time.perf_counter()
-                    attempt_logs = _verify_problem(problem, attempts, cfg)
-                    verification_time_s = time.perf_counter() - verify_start
-                    total_wall = aggregated_metrics["generation_wall_s"]
-                    n_so_far = len(problem_logs) + 1
-                    avg_gen_s = (total_wall / n_so_far) if n_so_far > 0 else 0.0
-                    problem_log = build_problem_log(
-                        problem,
-                        attempt_logs,
-                        cfg,
-                        verification_time_s=verification_time_s,
-                        generation_time_s=avg_gen_s,
-                    )
-                    problem_logs.append(problem_log)
-                    status = "SOLVED" if problem_log["success"] else "failed"
-                    best = problem_log.get("best_attempt")
-                    print(f"    → {status}" + (f" (attempt {best})" if best is not None else "") + f"  [{verification_time_s:.1f}s]")
-        else:
-            # ------------------------------------------------------------------
-            # Correction flow: multi-turn per attempt
-            # ------------------------------------------------------------------
-            tokenizer = driver_tokenizer
-            problem_by_idx = {p["problem_idx"]: p for p in problem_chunk}
-            states_chunk: list[list[AttemptState]] = []
-            for problem in problem_chunk:
-                states_chunk.append([
-                    AttemptState(
-                        problem_idx=problem["problem_idx"],
-                        attempt=a_idx,
-                        messages=get_initial_messages(problem, cfg),
-                        rounds=[],
-                        success=False,
-                    )
-                    for a_idx in range(cfg.pass_k)
-                ])
-            for round_idx in range(cfg.num_correction_rounds + 1):
-                unresolved = [s for per_problem in states_chunk for s in per_problem if not s.success]
-                if not unresolved:
+        # ------------------------------------------------------------------
+        # Verify (or build logs without verification) and append to problem_logs
+        # ------------------------------------------------------------------
+        if cfg.correction_rounds > 0:
+            # Build chunk_sample_rounds: problem -> sample -> list of round dicts
+            chunk_sample_rounds: list[list[list[dict]]] = []
+            for problem_i, (problem, attempts) in enumerate(zip(problem_chunk, all_attempts_chunk)):
+                sample_rounds = []
+                for att in attempts:
+                    verification = None
+                    if not generate_only:
+                        for retry in range(cfg.verify_retries + 1):
+                            verification = verify(
+                                att.full_code,
+                                kimina_url=cfg.kimina_url,
+                                timeout=cfg.verify_timeout_s,
+                            )
+                            if not verification.get("is_server_error"):
+                                break
+                            if retry < cfg.verify_retries:
+                                time.sleep(cfg.verify_retry_wait_s)
+                    if verification is None:
+                        verification = {}
+                    v = verification
+                    success = bool(v.get("success") and v.get("complete") and not v.get("has_sorry"))
+                    round_0 = {
+                        "round": 0,
+                        "prompt": att.prompt,
+                        "raw_output": att.raw_output,
+                        "extracted_block": att.extracted_block,
+                        "full_code": att.full_code,
+                        "verification": verification,
+                        "num_tokens": att.num_tokens,
+                        "truncated": att.truncated,
+                        "finish_reason": att.finish_reason,
+                        "success": success,
+                    }
+                    sample_rounds.append([round_0])
+                chunk_sample_rounds.append(sample_rounds)
+
+            n_chunk = len(problem_chunk)
+            n_solved_r0 = _count_solved_in_chunk(chunk_sample_rounds, 0)
+            pct0 = 100.0 * n_solved_r0 / n_chunk if n_chunk else 0.0
+            print(f"  Round 0 done: {n_solved_r0}/{n_chunk} problems solved ({pct0:.1f}%), {n_chunk - n_solved_r0} remaining.")
+
+            for r in range(1, cfg.correction_rounds + 1):
+                to_correct: list[tuple[int, int, dict]] = []
+                for problem_i, samples in enumerate(chunk_sample_rounds):
+                    for sample_idx, rounds in enumerate(samples):
+                        if len(rounds) == r and not rounds[-1].get("success"):
+                            to_correct.append((problem_i, sample_idx, rounds[-1]))
+                if not to_correct:
+                    print(f"  No samples to correct; stopping after round {r - 1}.")
                     break
-                unresolved_with_prompts = [(s, messages_to_prompt(s.messages, tokenizer, cfg)) for s in unresolved]
-                flat_prompts = [p for _, p in unresolved_with_prompts]
-                print(f"\n[2/3] Chunk {chunk_idx + 1}/{n_chunks} round {round_idx}: generating {len(flat_prompts)} attempts...")
-                resp = generator.generate_from_prompts.remote(
-                    flat_prompts,
+                n_solved_prev = _count_solved_in_chunk(chunk_sample_rounds, r - 1)
+                n_remaining = n_chunk - n_solved_prev
+                pct_prev = 100.0 * n_solved_prev / n_chunk if n_chunk else 0.0
+                n_problems_with_work = len({pi for pi, _, _ in to_correct})
+                print(f"  --- Correction round {r}/{cfg.correction_rounds} ---")
+                print(f"  After round {r - 1}: {n_solved_prev}/{n_chunk} solved ({pct_prev:.1f}%), {n_remaining} problems remaining.")
+                print(f"  Samples to correct this round: {len(to_correct)} (across {n_problems_with_work} problems)")
+                items = [
+                    {
+                        "problem": problem_chunk[problem_i],
+                        "previous_assistant_output": last_round["raw_output"],
+                        "feedback": _feedback_for_correction_prompt(last_round.get("verification")),
+                    }
+                    for problem_i, sample_idx, last_round in to_correct
+                ]
+                corr_response = generator.generate_correction_round.remote(
+                    items,
                     cfg.model_name,
                     sampling_cfg,
                     dataclasses.asdict(cfg),
                     cfg.inference_batch_size,
                 )
-                raw_list = resp["raw_results"]
-                metrics = resp.get("generation_metrics") or {}
-                aggregated_metrics["generation_wall_s"] += metrics.get("generation_wall_s", 0)
-                aggregated_metrics["total_output_tokens"] += metrics.get("total_output_tokens", 0)
-                aggregated_metrics["n_requests"] += metrics.get("n_requests", 0)
-                if metrics:
-                    print(f"  Round done: {metrics.get('generation_wall_s', 0):.1f}s, {metrics.get('tokens_per_second', 0):.1f} tok/s")
-                for (state, prompt_str), (raw_text, finish_reason) in zip(unresolved_with_prompts, raw_list):
+                raw_corr = corr_response.get("raw_results") or []
+                m = corr_response.get("generation_metrics") or {}
+                aggregated_metrics["generation_wall_s"] += m.get("generation_wall_s", 0)
+                aggregated_metrics["total_output_tokens"] += m.get("total_output_tokens", 0)
+                aggregated_metrics["n_requests"] += m.get("n_requests", 0)
+                for idx, (problem_i, sample_idx, last_round) in enumerate(to_correct):
+                    if idx >= len(raw_corr):
+                        break
+                    raw_text, finish_reason = raw_corr[idx]
+                    problem = problem_chunk[problem_i]
                     parse_result = extract_full_lean_block_parsed(raw_text, finish_reason=finish_reason)
                     extracted_block = parse_result.block
-                    problem = problem_by_idx[state.problem_idx]
                     full_code = create_full_lean_code(
                         theorem_code=problem["formal_statement"],
                         extracted_block=extracted_block,
                         default_header=cfg.default_header,
                     )
-                    if generate_only:
-                        verification = None
-                    else:
-                        verification = None
+                    verification = None
+                    if not generate_only:
                         for retry in range(cfg.verify_retries + 1):
                             verification = verify(
                                 full_code,
@@ -647,54 +648,41 @@ def run_eval(
                                 break
                             if retry < cfg.verify_retries:
                                 time.sleep(cfg.verify_retry_wait_s)
-                    num_tokens = len(raw_text.split())
-                    round_record = {
-                        "round_idx": round_idx,
-                        "prompt": prompt_str,
+                    if verification is None:
+                        verification = {}
+                    success = bool(
+                        verification.get("success")
+                        and verification.get("complete")
+                        and not verification.get("has_sorry")
+                    )
+                    round_r = {
+                        "round": r,
+                        "prompt": "",
                         "raw_output": raw_text,
                         "extracted_block": extracted_block,
                         "full_code": full_code,
                         "verification": verification,
-                        "finish_reason": finish_reason,
+                        "num_tokens": len(raw_text.split()),
                         "truncated": parse_result.truncated,
-                        "num_tokens": num_tokens,
+                        "finish_reason": finish_reason,
+                        "success": success,
                     }
-                    state.rounds.append(round_record)
-                    if verification and verification.get("success") and verification.get("complete") and not verification.get("has_sorry"):
-                        state.success = True
-                        state.final_extracted_block = extracted_block
-                        state.final_full_code = full_code
-                        state.final_verification = verification
-                    elif round_idx < cfg.num_correction_rounds and not generate_only:
-                        previous = extracted_block or ""
-                        state.messages.append({
-                        "role": "assistant",
-                        "content": f"```lean4\n{previous}\n```"
-                        })
+                    chunk_sample_rounds[problem_i][sample_idx].append(round_r)
 
-                        state.messages.append({
-                        "role": "user",
-                        "content": _verifier_feedback_content(verification or {})
-                        })
-                if generate_only:
-                    break
-            if not generate_only:
-                verify_start = time.perf_counter()
-            for problem in problem_chunk:
-                states = next(per_problem for per_problem in states_chunk if per_problem[0].problem_idx == problem["problem_idx"])
-                attempt_logs = []
-                for s in states:
-                    attempt_logs.append({
-                        "attempt": s.attempt,
-                        "rounds": s.rounds,
-                        "success": s.success,
-                        "final_extracted_block": s.final_extracted_block,
-                        "final_full_code": s.final_full_code,
-                        "final_verification": s.final_verification,
-                        "verification": s.final_verification or {},
-                        "extracted_block": s.final_extracted_block,
-                    })
-                verification_time_s = (time.perf_counter() - verify_start) if not generate_only else None
+                n_solved_now = _count_solved_in_chunk(chunk_sample_rounds, r)
+                pct_now = 100.0 * n_solved_now / n_chunk if n_chunk else 0.0
+                print(f"  Round {r} done: {n_solved_now}/{n_chunk} solved ({pct_now:.1f}%).")
+
+            verify_start = time.perf_counter()
+            for prob_num, (problem, samples_rounds) in enumerate(
+                zip(problem_chunk, chunk_sample_rounds), len(problem_logs) + 1
+            ):
+                print(f"  [{prob_num}/{len(problems)}] {problem['problem_id']}")
+                attempt_logs = [
+                    {"attempt": j, "rounds": rounds}
+                    for j, rounds in enumerate(samples_rounds)
+                ]
+                verification_time_s = time.perf_counter() - verify_start
                 total_wall = aggregated_metrics["generation_wall_s"]
                 n_so_far = len(problem_logs) + 1
                 avg_gen_s = (total_wall / n_so_far) if n_so_far > 0 else 0.0
@@ -706,10 +694,58 @@ def run_eval(
                     generation_time_s=avg_gen_s,
                 )
                 problem_logs.append(problem_log)
-                if not generate_only:
-                    status = "SOLVED" if problem_log["success"] else "failed"
-                    best = problem_log.get("best_attempt")
-                    print(f"  [{problem['problem_id']}] → {status}" + (f" (attempt {best})" if best is not None else ""))
+                status = "SOLVED" if problem_log["success"] else "failed"
+                best = problem_log.get("best_attempt")
+                best_r = problem_log.get("best_round")
+                round_str = f", round {best_r}" if best_r is not None else ""
+                print(f"    → {status}" + (f" (attempt {best}{round_str})" if best is not None else ""))
+                verify_start = time.perf_counter()
+        elif generate_only:
+            print("  --generate-only: skipping verification.")
+            total_wall = aggregated_metrics["generation_wall_s"]
+            n_after = len(problem_logs) + len(problem_chunk)
+            avg_gen_s = (total_wall / n_after) if n_after > 0 else 0.0
+            for problem, attempts in zip(problem_chunk, all_attempts_chunk):
+                problem_log = build_problem_log(
+                    problem,
+                    [
+                        {
+                            "attempt": a.attempt,
+                            "prompt": a.prompt,
+                            "raw_output": a.raw_output,
+                            "extracted_block": a.extracted_block,
+                            "full_code": a.full_code,
+                            "verification": None,
+                            "num_tokens": a.num_tokens,
+                        }
+                        for a in attempts
+                    ],
+                    cfg,
+                    generation_time_s=avg_gen_s,
+                )
+                problem_logs.append(problem_log)
+        else:
+            for prob_num, (problem, attempts) in enumerate(zip(problem_chunk, all_attempts_chunk), len(problem_logs) + 1):
+                print(f"  [{prob_num}/{len(problems)}] {problem['problem_id']}")
+                verify_start = time.perf_counter()
+                attempt_logs = _verify_problem(problem, attempts, cfg)
+                verification_time_s = time.perf_counter() - verify_start
+                total_wall = aggregated_metrics["generation_wall_s"]
+                n_so_far = len(problem_logs) + 1
+                avg_gen_s = (total_wall / n_so_far) if n_so_far > 0 else 0.0
+                problem_log = build_problem_log(
+                    problem,
+                    attempt_logs,
+                    cfg,
+                    verification_time_s=verification_time_s,
+                    generation_time_s=avg_gen_s,
+                )
+                problem_logs.append(problem_log)
+                status = "SOLVED" if problem_log["success"] else "failed"
+                best = problem_log.get("best_attempt")
+                best_r = problem_log.get("best_round")
+                round_str = f", round {best_r}" if best_r is not None else ""
+                print(f"    → {status}" + (f" (attempt {best}{round_str})" if best is not None else "") + f"  [{verification_time_s:.1f}s]")
 
         # Derived metrics for summary (so far)
         total_wall = aggregated_metrics["generation_wall_s"]
@@ -739,7 +775,6 @@ def run_eval(
             "avg_generation_s_per_problem": round(total_wall / n_done, 4),
         }
         save_results(run_dir, cfg, problem_logs, generation_metrics=final_metrics)
-    if problem_logs:
-        print("\nPass@k by round:")
-        plot_passk_by_round(problem_logs, cfg, run_dir)
+        if cfg.correction_rounds > 0:
+            plot_correction_rounds_performance(problem_logs, cfg.correction_rounds, run_dir)
     print(f"\nDone. Results in: {run_dir}")

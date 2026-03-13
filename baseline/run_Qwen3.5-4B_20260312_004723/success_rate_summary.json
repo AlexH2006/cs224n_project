@@ -1,0 +1,1226 @@
+{
+  "pass_k": 1,
+  "n_problems": 244,
+  "problems": [
+    {
+      "problem_id": "mathd_algebra_478",
+      "success_rate": 1.0,
+      "problem_idx": 0
+    },
+    {
+      "problem_id": "numbertheory_4x3m7y3neq2003",
+      "success_rate": 0.0,
+      "problem_idx": 1
+    },
+    {
+      "problem_id": "aime_1983_p1",
+      "success_rate": 0.0,
+      "problem_idx": 2
+    },
+    {
+      "problem_id": "amc12_2001_p5",
+      "success_rate": 0.0,
+      "problem_idx": 3
+    },
+    {
+      "problem_id": "mathd_algebra_141",
+      "success_rate": 1.0,
+      "problem_idx": 4
+    },
+    {
+      "problem_id": "mathd_numbertheory_3",
+      "success_rate": 1.0,
+      "problem_idx": 5
+    },
+    {
+      "problem_id": "imo_1969_p2",
+      "success_rate": 0.0,
+      "problem_idx": 6
+    },
+    {
+      "problem_id": "mathd_algebra_44",
+      "success_rate": 1.0,
+      "problem_idx": 7
+    },
+    {
+      "problem_id": "mathd_algebra_209",
+      "success_rate": 1.0,
+      "problem_idx": 8
+    },
+    {
+      "problem_id": "mathd_numbertheory_1124",
+      "success_rate": 0.0,
+      "problem_idx": 9
+    },
+    {
+      "problem_id": "imo_1983_p6",
+      "success_rate": 0.0,
+      "problem_idx": 10
+    },
+    {
+      "problem_id": "mathd_numbertheory_237",
+      "success_rate": 1.0,
+      "problem_idx": 11
+    },
+    {
+      "problem_id": "mathd_algebra_33",
+      "success_rate": 1.0,
+      "problem_idx": 12
+    },
+    {
+      "problem_id": "amc12b_2021_p3",
+      "success_rate": 0.0,
+      "problem_idx": 13
+    },
+    {
+      "problem_id": "mathd_numbertheory_299",
+      "success_rate": 1.0,
+      "problem_idx": 14
+    },
+    {
+      "problem_id": "amc12b_2020_p2",
+      "success_rate": 1.0,
+      "problem_idx": 15
+    },
+    {
+      "problem_id": "algebra_sqineq_unitcircatbpabsamblt1",
+      "success_rate": 0.0,
+      "problem_idx": 16
+    },
+    {
+      "problem_id": "imo_1977_p6",
+      "success_rate": 0.0,
+      "problem_idx": 17
+    },
+    {
+      "problem_id": "mathd_algebra_419",
+      "success_rate": 1.0,
+      "problem_idx": 18
+    },
+    {
+      "problem_id": "amc12a_2020_p10",
+      "success_rate": 0.0,
+      "problem_idx": 19
+    },
+    {
+      "problem_id": "imo_1960_p2",
+      "success_rate": 1.0,
+      "problem_idx": 20
+    },
+    {
+      "problem_id": "mathd_numbertheory_427",
+      "success_rate": 0.0,
+      "problem_idx": 21
+    },
+    {
+      "problem_id": "numbertheory_x5neqy2p4",
+      "success_rate": 0.0,
+      "problem_idx": 22
+    },
+    {
+      "problem_id": "mathd_algebra_398",
+      "success_rate": 1.0,
+      "problem_idx": 23
+    },
+    {
+      "problem_id": "imo_1963_p5",
+      "success_rate": 0.0,
+      "problem_idx": 24
+    },
+    {
+      "problem_id": "mathd_numbertheory_430",
+      "success_rate": 0.0,
+      "problem_idx": 25
+    },
+    {
+      "problem_id": "mathd_algebra_459",
+      "success_rate": 1.0,
+      "problem_idx": 26
+    },
+    {
+      "problem_id": "induction_12dvd4expnp1p20",
+      "success_rate": 0.0,
+      "problem_idx": 27
+    },
+    {
+      "problem_id": "mathd_algebra_320",
+      "success_rate": 0.0,
+      "problem_idx": 28
+    },
+    {
+      "problem_id": "mathd_algebra_137",
+      "success_rate": 1.0,
+      "problem_idx": 29
+    },
+    {
+      "problem_id": "imo_1997_p5",
+      "success_rate": 0.0,
+      "problem_idx": 30
+    },
+    {
+      "problem_id": "mathd_numbertheory_277",
+      "success_rate": 0.0,
+      "problem_idx": 31
+    },
+    {
+      "problem_id": "mathd_numbertheory_559",
+      "success_rate": 1.0,
+      "problem_idx": 32
+    },
+    {
+      "problem_id": "mathd_algebra_160",
+      "success_rate": 1.0,
+      "problem_idx": 33
+    },
+    {
+      "problem_id": "mathd_algebra_24",
+      "success_rate": 1.0,
+      "problem_idx": 34
+    },
+    {
+      "problem_id": "mathd_algebra_176",
+      "success_rate": 1.0,
+      "problem_idx": 35
+    },
+    {
+      "problem_id": "induction_nfactltnexpnm1ngt3",
+      "success_rate": 0.0,
+      "problem_idx": 36
+    },
+    {
+      "problem_id": "mathd_algebra_208",
+      "success_rate": 0.0,
+      "problem_idx": 37
+    },
+    {
+      "problem_id": "mathd_numbertheory_353",
+      "success_rate": 0.0,
+      "problem_idx": 38
+    },
+    {
+      "problem_id": "numbertheory_notequiv2i2jasqbsqdiv8",
+      "success_rate": 0.0,
+      "problem_idx": 39
+    },
+    {
+      "problem_id": "mathd_algebra_156",
+      "success_rate": 1.0,
+      "problem_idx": 40
+    },
+    {
+      "problem_id": "mathd_numbertheory_12",
+      "success_rate": 1.0,
+      "problem_idx": 41
+    },
+    {
+      "problem_id": "mathd_numbertheory_345",
+      "success_rate": 1.0,
+      "problem_idx": 42
+    },
+    {
+      "problem_id": "mathd_numbertheory_447",
+      "success_rate": 1.0,
+      "problem_idx": 43
+    },
+    {
+      "problem_id": "mathd_numbertheory_328",
+      "success_rate": 0.0,
+      "problem_idx": 44
+    },
+    {
+      "problem_id": "mathd_numbertheory_451",
+      "success_rate": 0.0,
+      "problem_idx": 45
+    },
+    {
+      "problem_id": "aime_1997_p9",
+      "success_rate": 0.0,
+      "problem_idx": 46
+    },
+    {
+      "problem_id": "algebra_sqineq_at2malt1",
+      "success_rate": 1.0,
+      "problem_idx": 47
+    },
+    {
+      "problem_id": "algebra_apbmpcneq0_aeq0anbeq0anceq0",
+      "success_rate": 0.0,
+      "problem_idx": 48
+    },
+    {
+      "problem_id": "mathd_algebra_171",
+      "success_rate": 1.0,
+      "problem_idx": 49
+    },
+    {
+      "problem_id": "mathd_numbertheory_227",
+      "success_rate": 0.0,
+      "problem_idx": 50
+    },
+    {
+      "problem_id": "mathd_algebra_188",
+      "success_rate": 0.0,
+      "problem_idx": 51
+    },
+    {
+      "problem_id": "mathd_numbertheory_765",
+      "success_rate": 0.0,
+      "problem_idx": 52
+    },
+    {
+      "problem_id": "imo_1959_p1",
+      "success_rate": 1.0,
+      "problem_idx": 53
+    },
+    {
+      "problem_id": "mathd_numbertheory_175",
+      "success_rate": 1.0,
+      "problem_idx": 54
+    },
+    {
+      "problem_id": "numbertheory_fxeq4powxp6powxp9powx_f2powmdvdf2pown",
+      "success_rate": 0.0,
+      "problem_idx": 55
+    },
+    {
+      "problem_id": "imo_1992_p1",
+      "success_rate": 0.0,
+      "problem_idx": 56
+    },
+    {
+      "problem_id": "imo_1982_p1",
+      "success_rate": 0.0,
+      "problem_idx": 57
+    },
+    {
+      "problem_id": "aime_1987_p5",
+      "success_rate": 0.0,
+      "problem_idx": 58
+    },
+    {
+      "problem_id": "mathd_algebra_346",
+      "success_rate": 1.0,
+      "problem_idx": 59
+    },
+    {
+      "problem_id": "mathd_algebra_487",
+      "success_rate": 0.0,
+      "problem_idx": 60
+    },
+    {
+      "problem_id": "mathd_numbertheory_728",
+      "success_rate": 1.0,
+      "problem_idx": 61
+    },
+    {
+      "problem_id": "mathd_algebra_184",
+      "success_rate": 0.0,
+      "problem_idx": 62
+    },
+    {
+      "problem_id": "mathd_numbertheory_552",
+      "success_rate": 0.0,
+      "problem_idx": 63
+    },
+    {
+      "problem_id": "amc12b_2021_p9",
+      "success_rate": 1.0,
+      "problem_idx": 64
+    },
+    {
+      "problem_id": "aime_1994_p3",
+      "success_rate": 0.0,
+      "problem_idx": 65
+    },
+    {
+      "problem_id": "mathd_algebra_215",
+      "success_rate": 0.0,
+      "problem_idx": 66
+    },
+    {
+      "problem_id": "mathd_numbertheory_293",
+      "success_rate": 1.0,
+      "problem_idx": 67
+    },
+    {
+      "problem_id": "mathd_numbertheory_769",
+      "success_rate": 0.0,
+      "problem_idx": 68
+    },
+    {
+      "problem_id": "mathd_algebra_452",
+      "success_rate": 0.0,
+      "problem_idx": 69
+    },
+    {
+      "problem_id": "mathd_numbertheory_5",
+      "success_rate": 0.0,
+      "problem_idx": 70
+    },
+    {
+      "problem_id": "mathd_numbertheory_207",
+      "success_rate": 1.0,
+      "problem_idx": 71
+    },
+    {
+      "problem_id": "mathd_numbertheory_342",
+      "success_rate": 1.0,
+      "problem_idx": 72
+    },
+    {
+      "problem_id": "mathd_numbertheory_483",
+      "success_rate": 0.0,
+      "problem_idx": 73
+    },
+    {
+      "problem_id": "amc12b_2020_p21",
+      "success_rate": 0.0,
+      "problem_idx": 74
+    },
+    {
+      "problem_id": "amc12a_2003_p5",
+      "success_rate": 1.0,
+      "problem_idx": 75
+    },
+    {
+      "problem_id": "mathd_numbertheory_495",
+      "success_rate": 0.0,
+      "problem_idx": 76
+    },
+    {
+      "problem_id": "mathd_algebra_296",
+      "success_rate": 1.0,
+      "problem_idx": 77
+    },
+    {
+      "problem_id": "algebra_abpbcpcageq3_sumaonsqrtapbgeq3onsqrt2",
+      "success_rate": 0.0,
+      "problem_idx": 78
+    },
+    {
+      "problem_id": "algebra_2varlineareq_fp3zeq11_3tfm1m5zeqn68_feqn10_zeq7",
+      "success_rate": 0.0,
+      "problem_idx": 79
+    },
+    {
+      "problem_id": "mathd_numbertheory_247",
+      "success_rate": 0.0,
+      "problem_idx": 80
+    },
+    {
+      "problem_id": "induction_pord1p1on2powklt5on2",
+      "success_rate": 0.0,
+      "problem_idx": 81
+    },
+    {
+      "problem_id": "mathd_algebra_107",
+      "success_rate": 1.0,
+      "problem_idx": 82
+    },
+    {
+      "problem_id": "numbertheory_2pownm1prime_nprime",
+      "success_rate": 0.0,
+      "problem_idx": 83
+    },
+    {
+      "problem_id": "mathd_algebra_412",
+      "success_rate": 1.0,
+      "problem_idx": 84
+    },
+    {
+      "problem_id": "amc12a_2013_p4",
+      "success_rate": 1.0,
+      "problem_idx": 85
+    },
+    {
+      "problem_id": "mathd_algebra_392",
+      "success_rate": 0.0,
+      "problem_idx": 86
+    },
+    {
+      "problem_id": "mathd_numbertheory_314",
+      "success_rate": 0.0,
+      "problem_idx": 87
+    },
+    {
+      "problem_id": "induction_prod1p1onk3le3m1onn",
+      "success_rate": 0.0,
+      "problem_idx": 88
+    },
+    {
+      "problem_id": "mathd_numbertheory_343",
+      "success_rate": 1.0,
+      "problem_idx": 89
+    },
+    {
+      "problem_id": "mathd_algebra_756",
+      "success_rate": 0.0,
+      "problem_idx": 90
+    },
+    {
+      "problem_id": "amc12b_2002_p7",
+      "success_rate": 0.0,
+      "problem_idx": 91
+    },
+    {
+      "problem_id": "mathd_algebra_80",
+      "success_rate": 1.0,
+      "problem_idx": 92
+    },
+    {
+      "problem_id": "mathd_numbertheory_457",
+      "success_rate": 0.0,
+      "problem_idx": 93
+    },
+    {
+      "problem_id": "amc12_2000_p12",
+      "success_rate": 0.0,
+      "problem_idx": 94
+    },
+    {
+      "problem_id": "mathd_numbertheory_135",
+      "success_rate": 0.0,
+      "problem_idx": 95
+    },
+    {
+      "problem_id": "mathd_algebra_275",
+      "success_rate": 0.0,
+      "problem_idx": 96
+    },
+    {
+      "problem_id": "mathd_algebra_388",
+      "success_rate": 1.0,
+      "problem_idx": 97
+    },
+    {
+      "problem_id": "amc12a_2020_p7",
+      "success_rate": 1.0,
+      "problem_idx": 98
+    },
+    {
+      "problem_id": "induction_sumkexp3eqsumksq",
+      "success_rate": 0.0,
+      "problem_idx": 99
+    },
+    {
+      "problem_id": "imo_1981_p6",
+      "success_rate": 0.0,
+      "problem_idx": 100
+    },
+    {
+      "problem_id": "mathd_algebra_263",
+      "success_rate": 1.0,
+      "problem_idx": 101
+    },
+    {
+      "problem_id": "mathd_numbertheory_34",
+      "success_rate": 0.0,
+      "problem_idx": 102
+    },
+    {
+      "problem_id": "mathd_numbertheory_764",
+      "success_rate": 0.0,
+      "problem_idx": 103
+    },
+    {
+      "problem_id": "amc12b_2021_p4",
+      "success_rate": 1.0,
+      "problem_idx": 104
+    },
+    {
+      "problem_id": "imo_1962_p2",
+      "success_rate": 0.0,
+      "problem_idx": 105
+    },
+    {
+      "problem_id": "mathd_algebra_170",
+      "success_rate": 0.0,
+      "problem_idx": 106
+    },
+    {
+      "problem_id": "mathd_algebra_432",
+      "success_rate": 1.0,
+      "problem_idx": 107
+    },
+    {
+      "problem_id": "mathd_algebra_598",
+      "success_rate": 0.0,
+      "problem_idx": 108
+    },
+    {
+      "problem_id": "algebra_bleqa_apbon2msqrtableqambsqon8b",
+      "success_rate": 0.0,
+      "problem_idx": 109
+    },
+    {
+      "problem_id": "mathd_algebra_276",
+      "success_rate": 0.0,
+      "problem_idx": 110
+    },
+    {
+      "problem_id": "amc12a_2021_p14",
+      "success_rate": 0.0,
+      "problem_idx": 111
+    },
+    {
+      "problem_id": "algebra_sum1onsqrt2to1onsqrt10000lt198",
+      "success_rate": 0.0,
+      "problem_idx": 112
+    },
+    {
+      "problem_id": "mathd_numbertheory_618",
+      "success_rate": 0.0,
+      "problem_idx": 113
+    },
+    {
+      "problem_id": "amc12a_2020_p4",
+      "success_rate": 0.0,
+      "problem_idx": 114
+    },
+    {
+      "problem_id": "amc12b_2020_p6",
+      "success_rate": 0.0,
+      "problem_idx": 115
+    },
+    {
+      "problem_id": "mathd_numbertheory_435",
+      "success_rate": 1.0,
+      "problem_idx": 116
+    },
+    {
+      "problem_id": "algebra_others_exirrpowirrrat",
+      "success_rate": 0.0,
+      "problem_idx": 117
+    },
+    {
+      "problem_id": "mathd_algebra_427",
+      "success_rate": 1.0,
+      "problem_idx": 118
+    },
+    {
+      "problem_id": "mathd_algebra_76",
+      "success_rate": 1.0,
+      "problem_idx": 119
+    },
+    {
+      "problem_id": "mathd_numbertheory_99",
+      "success_rate": 1.0,
+      "problem_idx": 120
+    },
+    {
+      "problem_id": "algebra_9onxpypzleqsum2onxpy",
+      "success_rate": 1.0,
+      "problem_idx": 121
+    },
+    {
+      "problem_id": "mathd_numbertheory_233",
+      "success_rate": 0.0,
+      "problem_idx": 122
+    },
+    {
+      "problem_id": "algebra_absapbon1pabsapbleqsumabsaon1pabsa",
+      "success_rate": 1.0,
+      "problem_idx": 123
+    },
+    {
+      "problem_id": "imo_1984_p6",
+      "success_rate": 0.0,
+      "problem_idx": 124
+    },
+    {
+      "problem_id": "imo_2001_p6",
+      "success_rate": 0.0,
+      "problem_idx": 125
+    },
+    {
+      "problem_id": "mathd_numbertheory_321",
+      "success_rate": 0.0,
+      "problem_idx": 126
+    },
+    {
+      "problem_id": "mathd_algebra_17",
+      "success_rate": 0.0,
+      "problem_idx": 127
+    },
+    {
+      "problem_id": "mathd_algebra_153",
+      "success_rate": 1.0,
+      "problem_idx": 128
+    },
+    {
+      "problem_id": "algebra_sqineq_unitcircatbpamblt1",
+      "success_rate": 1.0,
+      "problem_idx": 129
+    },
+    {
+      "problem_id": "amc12a_2021_p18",
+      "success_rate": 0.0,
+      "problem_idx": 130
+    },
+    {
+      "problem_id": "mathd_algebra_329",
+      "success_rate": 1.0,
+      "problem_idx": 131
+    },
+    {
+      "problem_id": "induction_pprime_pdvdapowpma",
+      "success_rate": 0.0,
+      "problem_idx": 132
+    },
+    {
+      "problem_id": "amc12a_2021_p9",
+      "success_rate": 0.0,
+      "problem_idx": 133
+    },
+    {
+      "problem_id": "aime_1984_p1",
+      "success_rate": 0.0,
+      "problem_idx": 134
+    },
+    {
+      "problem_id": "amc12a_2021_p22",
+      "success_rate": 0.0,
+      "problem_idx": 135
+    },
+    {
+      "problem_id": "mathd_numbertheory_229",
+      "success_rate": 1.0,
+      "problem_idx": 136
+    },
+    {
+      "problem_id": "mathd_numbertheory_100",
+      "success_rate": 1.0,
+      "problem_idx": 137
+    },
+    {
+      "problem_id": "mathd_algebra_313",
+      "success_rate": 1.0,
+      "problem_idx": 138
+    },
+    {
+      "problem_id": "amc12b_2002_p4",
+      "success_rate": 0.0,
+      "problem_idx": 139
+    },
+    {
+      "problem_id": "amc12a_2002_p6",
+      "success_rate": 1.0,
+      "problem_idx": 140
+    },
+    {
+      "problem_id": "amc12a_2003_p23",
+      "success_rate": 0.0,
+      "problem_idx": 141
+    },
+    {
+      "problem_id": "mathd_algebra_129",
+      "success_rate": 1.0,
+      "problem_idx": 142
+    },
+    {
+      "problem_id": "amc12b_2021_p18",
+      "success_rate": 0.0,
+      "problem_idx": 143
+    },
+    {
+      "problem_id": "mathd_algebra_484",
+      "success_rate": 1.0,
+      "problem_idx": 144
+    },
+    {
+      "problem_id": "mathd_numbertheory_551",
+      "success_rate": 1.0,
+      "problem_idx": 145
+    },
+    {
+      "problem_id": "mathd_algebra_304",
+      "success_rate": 1.0,
+      "problem_idx": 146
+    },
+    {
+      "problem_id": "amc12a_2021_p8",
+      "success_rate": 0.0,
+      "problem_idx": 147
+    },
+    {
+      "problem_id": "algebra_ineq_nto1onlt2m1on",
+      "success_rate": 0.0,
+      "problem_idx": 148
+    },
+    {
+      "problem_id": "amc12b_2002_p19",
+      "success_rate": 1.0,
+      "problem_idx": 149
+    },
+    {
+      "problem_id": "mathd_numbertheory_341",
+      "success_rate": 0.0,
+      "problem_idx": 150
+    },
+    {
+      "problem_id": "mathd_numbertheory_711",
+      "success_rate": 0.0,
+      "problem_idx": 151
+    },
+    {
+      "problem_id": "amc12b_2020_p22",
+      "success_rate": 0.0,
+      "problem_idx": 152
+    },
+    {
+      "problem_id": "mathd_algebra_113",
+      "success_rate": 1.0,
+      "problem_idx": 153
+    },
+    {
+      "problem_id": "amc12a_2020_p9",
+      "success_rate": 0.0,
+      "problem_idx": 154
+    },
+    {
+      "problem_id": "amc12_2000_p1",
+      "success_rate": 0.0,
+      "problem_idx": 155
+    },
+    {
+      "problem_id": "amc12a_2021_p19",
+      "success_rate": 0.0,
+      "problem_idx": 156
+    },
+    {
+      "problem_id": "algebra_amgm_sumasqdivbgeqsuma",
+      "success_rate": 1.0,
+      "problem_idx": 157
+    },
+    {
+      "problem_id": "mathd_numbertheory_212",
+      "success_rate": 1.0,
+      "problem_idx": 158
+    },
+    {
+      "problem_id": "mathd_numbertheory_320",
+      "success_rate": 0.0,
+      "problem_idx": 159
+    },
+    {
+      "problem_id": "mathd_algebra_125",
+      "success_rate": 1.0,
+      "problem_idx": 160
+    },
+    {
+      "problem_id": "induction_1pxpownlt1pnx",
+      "success_rate": 0.0,
+      "problem_idx": 161
+    },
+    {
+      "problem_id": "mathd_algebra_148",
+      "success_rate": 1.0,
+      "problem_idx": 162
+    },
+    {
+      "problem_id": "amc12a_2019_p12",
+      "success_rate": 0.0,
+      "problem_idx": 163
+    },
+    {
+      "problem_id": "induction_11div10tonmn1ton",
+      "success_rate": 1.0,
+      "problem_idx": 164
+    },
+    {
+      "problem_id": "algebra_amgm_sum1toneqn_prod1tonleq1",
+      "success_rate": 0.0,
+      "problem_idx": 165
+    },
+    {
+      "problem_id": "imo_1985_p6",
+      "success_rate": 0.0,
+      "problem_idx": 166
+    },
+    {
+      "problem_id": "amc12a_2020_p15",
+      "success_rate": 0.0,
+      "problem_idx": 167
+    },
+    {
+      "problem_id": "mathd_algebra_332",
+      "success_rate": 1.0,
+      "problem_idx": 168
+    },
+    {
+      "problem_id": "algebra_cubrtrp1oncubrtreq3_rcubp1onrcubeq5778",
+      "success_rate": 0.0,
+      "problem_idx": 169
+    },
+    {
+      "problem_id": "mathd_algebra_293",
+      "success_rate": 0.0,
+      "problem_idx": 170
+    },
+    {
+      "problem_id": "mathd_algebra_440",
+      "success_rate": 1.0,
+      "problem_idx": 171
+    },
+    {
+      "problem_id": "mathd_numbertheory_254",
+      "success_rate": 1.0,
+      "problem_idx": 172
+    },
+    {
+      "problem_id": "amc12_2000_p6",
+      "success_rate": 0.0,
+      "problem_idx": 173
+    },
+    {
+      "problem_id": "aime_1988_p8",
+      "success_rate": 0.0,
+      "problem_idx": 174
+    },
+    {
+      "problem_id": "mathd_algebra_114",
+      "success_rate": 0.0,
+      "problem_idx": 175
+    },
+    {
+      "problem_id": "imo_2019_p1",
+      "success_rate": 0.0,
+      "problem_idx": 176
+    },
+    {
+      "problem_id": "mathd_algebra_513",
+      "success_rate": 1.0,
+      "problem_idx": 177
+    },
+    {
+      "problem_id": "mathd_algebra_143",
+      "success_rate": 1.0,
+      "problem_idx": 178
+    },
+    {
+      "problem_id": "mathd_algebra_354",
+      "success_rate": 1.0,
+      "problem_idx": 179
+    },
+    {
+      "problem_id": "aime_1984_p7",
+      "success_rate": 0.0,
+      "problem_idx": 180
+    },
+    {
+      "problem_id": "mathd_algebra_246",
+      "success_rate": 1.0,
+      "problem_idx": 181
+    },
+    {
+      "problem_id": "aime_1983_p3",
+      "success_rate": 0.0,
+      "problem_idx": 182
+    },
+    {
+      "problem_id": "numbertheory_3pow2pownm1mod2pownp3eq2pownp2",
+      "success_rate": 0.0,
+      "problem_idx": 183
+    },
+    {
+      "problem_id": "mathd_numbertheory_85",
+      "success_rate": 1.0,
+      "problem_idx": 184
+    },
+    {
+      "problem_id": "amc12_2001_p21",
+      "success_rate": 0.0,
+      "problem_idx": 185
+    },
+    {
+      "problem_id": "mathd_numbertheory_239",
+      "success_rate": 1.0,
+      "problem_idx": 186
+    },
+    {
+      "problem_id": "amc12b_2002_p2",
+      "success_rate": 1.0,
+      "problem_idx": 187
+    },
+    {
+      "problem_id": "mathd_algebra_196",
+      "success_rate": 0.0,
+      "problem_idx": 188
+    },
+    {
+      "problem_id": "mathd_algebra_342",
+      "success_rate": 1.0,
+      "problem_idx": 189
+    },
+    {
+      "problem_id": "mathd_numbertheory_517",
+      "success_rate": 1.0,
+      "problem_idx": 190
+    },
+    {
+      "problem_id": "amc12a_2009_p7",
+      "success_rate": 0.0,
+      "problem_idx": 191
+    },
+    {
+      "problem_id": "mathd_algebra_270",
+      "success_rate": 1.0,
+      "problem_idx": 192
+    },
+    {
+      "problem_id": "amc12a_2021_p12",
+      "success_rate": 0.0,
+      "problem_idx": 193
+    },
+    {
+      "problem_id": "mathd_algebra_362",
+      "success_rate": 0.0,
+      "problem_idx": 194
+    },
+    {
+      "problem_id": "mathd_numbertheory_521",
+      "success_rate": 1.0,
+      "problem_idx": 195
+    },
+    {
+      "problem_id": "amc12a_2002_p13",
+      "success_rate": 0.0,
+      "problem_idx": 196
+    },
+    {
+      "problem_id": "imo_1964_p2",
+      "success_rate": 1.0,
+      "problem_idx": 197
+    },
+    {
+      "problem_id": "mathd_algebra_289",
+      "success_rate": 0.0,
+      "problem_idx": 198
+    },
+    {
+      "problem_id": "amc12a_2021_p3",
+      "success_rate": 0.0,
+      "problem_idx": 199
+    },
+    {
+      "problem_id": "amc12a_2008_p25",
+      "success_rate": 0.0,
+      "problem_idx": 200
+    },
+    {
+      "problem_id": "algebra_apbpceq2_abpbcpcaeq1_aleq1on3anbleq1ancleq4on3",
+      "success_rate": 0.0,
+      "problem_idx": 201
+    },
+    {
+      "problem_id": "mathd_numbertheory_66",
+      "success_rate": 1.0,
+      "problem_idx": 202
+    },
+    {
+      "problem_id": "amc12b_2021_p1",
+      "success_rate": 0.0,
+      "problem_idx": 203
+    },
+    {
+      "problem_id": "algebra_apbon2pownleqapownpbpowon2",
+      "success_rate": 0.0,
+      "problem_idx": 204
+    },
+    {
+      "problem_id": "imo_1968_p5_1",
+      "success_rate": 0.0,
+      "problem_idx": 205
+    },
+    {
+      "problem_id": "aime_1990_p15",
+      "success_rate": 1.0,
+      "problem_idx": 206
+    },
+    {
+      "problem_id": "mathd_numbertheory_235",
+      "success_rate": 1.0,
+      "problem_idx": 207
+    },
+    {
+      "problem_id": "amc12b_2020_p13",
+      "success_rate": 0.0,
+      "problem_idx": 208
+    },
+    {
+      "problem_id": "amc12b_2021_p13",
+      "success_rate": 0.0,
+      "problem_idx": 209
+    },
+    {
+      "problem_id": "mathd_numbertheory_234",
+      "success_rate": 1.0,
+      "problem_idx": 210
+    },
+    {
+      "problem_id": "numbertheory_aoddbdiv4asqpbsqmod8eq1",
+      "success_rate": 1.0,
+      "problem_idx": 211
+    },
+    {
+      "problem_id": "mathd_numbertheory_222",
+      "success_rate": 0.0,
+      "problem_idx": 212
+    },
+    {
+      "problem_id": "aime_1999_p11",
+      "success_rate": 0.0,
+      "problem_idx": 213
+    },
+    {
+      "problem_id": "mathd_algebra_359",
+      "success_rate": 1.0,
+      "problem_idx": 214
+    },
+    {
+      "problem_id": "imo_1965_p2",
+      "success_rate": 0.0,
+      "problem_idx": 215
+    },
+    {
+      "problem_id": "mathd_algebra_288",
+      "success_rate": 1.0,
+      "problem_idx": 216
+    },
+    {
+      "problem_id": "mathd_numbertheory_127",
+      "success_rate": 0.0,
+      "problem_idx": 217
+    },
+    {
+      "problem_id": "imo_1974_p3",
+      "success_rate": 0.0,
+      "problem_idx": 218
+    },
+    {
+      "problem_id": "aime_1991_p9",
+      "success_rate": 0.0,
+      "problem_idx": 219
+    },
+    {
+      "problem_id": "amc12a_2009_p6",
+      "success_rate": 0.0,
+      "problem_idx": 220
+    },
+    {
+      "problem_id": "mathd_algebra_158",
+      "success_rate": 1.0,
+      "problem_idx": 221
+    },
+    {
+      "problem_id": "algebra_absxm1pabsxpabsxp1eqxp2_0leqxleq1",
+      "success_rate": 1.0,
+      "problem_idx": 222
+    },
+    {
+      "problem_id": "aime_1990_p4",
+      "success_rate": 1.0,
+      "problem_idx": 223
+    },
+    {
+      "problem_id": "mathd_numbertheory_541",
+      "success_rate": 0.0,
+      "problem_idx": 224
+    },
+    {
+      "problem_id": "mathd_algebra_314",
+      "success_rate": 1.0,
+      "problem_idx": 225
+    },
+    {
+      "problem_id": "imosl_2007_algebra_p6",
+      "success_rate": 0.0,
+      "problem_idx": 226
+    },
+    {
+      "problem_id": "amc12_2000_p20",
+      "success_rate": 0.0,
+      "problem_idx": 227
+    },
+    {
+      "problem_id": "mathd_algebra_302",
+      "success_rate": 1.0,
+      "problem_idx": 228
+    },
+    {
+      "problem_id": "aime_1983_p2",
+      "success_rate": 1.0,
+      "problem_idx": 229
+    },
+    {
+      "problem_id": "mathd_algebra_139",
+      "success_rate": 1.0,
+      "problem_idx": 230
+    },
+    {
+      "problem_id": "amc12a_2021_p25",
+      "success_rate": 0.0,
+      "problem_idx": 231
+    },
+    {
+      "problem_id": "amc12a_2020_p25",
+      "success_rate": 0.0,
+      "problem_idx": 232
+    },
+    {
+      "problem_id": "mathd_numbertheory_150",
+      "success_rate": 1.0,
+      "problem_idx": 233
+    },
+    {
+      "problem_id": "aime_1989_p8",
+      "success_rate": 1.0,
+      "problem_idx": 234
+    },
+    {
+      "problem_id": "mathd_numbertheory_296",
+      "success_rate": 0.0,
+      "problem_idx": 235
+    },
+    {
+      "problem_id": "mathd_algebra_142",
+      "success_rate": 1.0,
+      "problem_idx": 236
+    },
+    {
+      "problem_id": "numbertheory_exk2powkeqapb2mulbpa2_aeq1",
+      "success_rate": 0.0,
+      "problem_idx": 237
+    },
+    {
+      "problem_id": "mathd_algebra_400",
+      "success_rate": 1.0,
+      "problem_idx": 238
+    },
+    {
+      "problem_id": "aime_1995_p7",
+      "success_rate": 0.0,
+      "problem_idx": 239
+    },
+    {
+      "problem_id": "mathd_numbertheory_185",
+      "success_rate": 1.0,
+      "problem_idx": 240
+    },
+    {
+      "problem_id": "mathd_algebra_441",
+      "success_rate": 0.0,
+      "problem_idx": 241
+    },
+    {
+      "problem_id": "mathd_numbertheory_582",
+      "success_rate": 1.0,
+      "problem_idx": 242
+    },
+    {
+      "problem_id": "mathd_algebra_338",
+      "success_rate": 1.0,
+      "problem_idx": 243
+    }
+  ]
+}

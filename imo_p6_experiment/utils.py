@@ -16,7 +16,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Optional
 
-from sdpo_modal_local_verify_qwen.config import SDPOConfig
+from imo_p6_experiment.config import SDPOConfig
 
 if TYPE_CHECKING:
     import torch
@@ -99,21 +99,23 @@ def create_full_lean_code(
 ) -> str:
     """Create full Lean 4 code from parsed model output.
 
-    Two cases:
-      - extracted_block == "sorry" (incomplete or no block): return (header or default_header) + theorem_code.
-      - Otherwise: use block as-is if it has imports; else prepend (default_header or header) + block.
+    Cases:
+      - If extracted_block is empty or "sorry": return (header or default_header) + theorem_code.
+      - If extracted_block already contains imports: use it as-is.
+      - Otherwise prepend (header or default_header) to the extracted block.
+
+    This prefers dataset-provided headers over the fallback default_header.
     """
+    preferred_header = (header or default_header or "").strip()
+
     if not extracted_block or extracted_block.strip().lower() == "sorry":
-        h = (header or default_header or "").strip()
-        return f"{h}\n\n{theorem_code}" if h else theorem_code
+        return f"{preferred_header}\n\n{theorem_code}" if preferred_header else theorem_code
 
     block = extracted_block.strip()
     if _block_has_header(block):
         return block
 
-    h = (default_header or header or "").strip()
-    return f"{h}\n\n{block}" if h else block
-
+    return f"{preferred_header}\n\n{block}" if preferred_header else block
 
 # -----------------------------------------------------------------------------
 # KL diagnostics: per-token collection and heatmap visualization
@@ -407,7 +409,7 @@ def write_proofs_json_from_logs_path(logs_path: Path) -> Path:
     Use this to generate proofs.json for an existing run that only has logs.json.
     Example:
         from pathlib import Path
-        from sdpo_modal_local_verify_qwen.utils import write_proofs_json_from_logs_path
+        from imo_p6_experiment.utils import write_proofs_json_from_logs_path
         write_proofs_json_from_logs_path(Path("sdpo_results/.../run_100_.../logs.json"))
     """
     run_dir = logs_path.parent

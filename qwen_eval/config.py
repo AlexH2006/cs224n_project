@@ -16,8 +16,8 @@ class EvalConfig:
     # -------------------------------------------------------------------------
     model_name: str = "Qwen/Qwen3.5-4B"
 
-    # When True, Qwen3.5 may emit <think>...</think> reasoning (via tokenizer enable_thinking).
-    # When False, tokenizer.apply_chat_template(..., enable_thinking=False) disables it.
+    # Passed to tokenizer.apply_chat_template(..., enable_thinking=use_think_mode).
+    # When True, Qwen3.5 may emit <think>...</think> reasoning. When False (default), reasoning is off.
     use_think_mode: bool = False
 
     # -------------------------------------------------------------------------
@@ -48,10 +48,9 @@ class EvalConfig:
     # -------------------------------------------------------------------------
     n_problems: int = 20
     pass_k: int = 4
+    # Self-correction: 0 = initial generation only; N = round 0 + up to N correction rounds per sample.
+    correction_rounds: int = 0
     seed: int = 42
-
-    # Multi-turn correction: 0 = one-shot only; N = up to N+1 generations per attempt.
-    num_correction_rounds: int = 0
 
     # -------------------------------------------------------------------------
     # Sampling parameters (passed directly to vLLM SamplingParams)

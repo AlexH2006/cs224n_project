@@ -1,0 +1,39 @@
+{
+  "model": "Qwen/Qwen3.5-4B",
+  "dataset": "cat-searcher/minif2f-lean4",
+  "split": "test",
+  "n_problems": 244,
+  "pass_k": 1,
+  "n_success": 104,
+  "pass_at_k": 0.4262,
+  "timestamp": "2026-03-12T02:39:17.543444",
+  "run_dir": "baseline/run_Qwen3.5-4B_20260312_004723",
+  "sampling": {
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 0.0,
+    "repetition_penalty": 1.0,
+    "max_new_tokens": 8192,
+    "seed": 42
+  },
+  "generation_metrics": {
+    "generation_wall_s": 3256.4273,
+    "total_output_tokens": 5258308,
+    "tokens_per_second": 1614.75,
+    "n_requests": 1483,
+    "avg_generation_s_per_problem": 13.346
+  },
+  "correction_rounds": 8,
+  "round_0_accuracy": 25.0,
+  "round_1_accuracy": 32.377,
+  "round_2_accuracy": 33.6066,
+  "round_3_accuracy": 37.7049,
+  "round_4_accuracy": 39.3443,
+  "round_5_accuracy": 40.5738,
+  "round_6_accuracy": 41.3934,
+  "round_7_accuracy": 42.2131,
+  "round_8_accuracy": 42.623,
+  "final_round_accuracy": 42.623
+}

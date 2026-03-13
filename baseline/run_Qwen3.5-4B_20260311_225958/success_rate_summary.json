@@ -1,0 +1,56 @@
+{
+  "pass_k": 1,
+  "n_problems": 10,
+  "problems": [
+    {
+      "problem_id": "mathd_algebra_478",
+      "success_rate": 1.0,
+      "problem_idx": 0
+    },
+    {
+      "problem_id": "numbertheory_4x3m7y3neq2003",
+      "success_rate": 1.0,
+      "problem_idx": 1
+    },
+    {
+      "problem_id": "aime_1983_p1",
+      "success_rate": 0.0,
+      "problem_idx": 2
+    },
+    {
+      "problem_id": "amc12_2001_p5",
+      "success_rate": 0.0,
+      "problem_idx": 3
+    },
+    {
+      "problem_id": "mathd_algebra_141",
+      "success_rate": 1.0,
+      "problem_idx": 4
+    },
+    {
+      "problem_id": "mathd_numbertheory_3",
+      "success_rate": 1.0,
+      "problem_idx": 5
+    },
+    {
+      "problem_id": "imo_1969_p2",
+      "success_rate": 0.0,
+      "problem_idx": 6
+    },
+    {
+      "problem_id": "mathd_algebra_44",
+      "success_rate": 1.0,
+      "problem_idx": 7
+    },
+    {
+      "problem_id": "mathd_algebra_209",
+      "success_rate": 0.0,
+      "problem_idx": 8
+    },
+    {
+      "problem_id": "mathd_numbertheory_1124",
+      "success_rate": 0.0,
+      "problem_idx": 9
+    }
+  ]
+}
