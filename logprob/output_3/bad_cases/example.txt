@@ -1,8 +1,0 @@
-=== CONTEXT ===
-import Mathlib
-
-theorem bad_cases (P : Prop) (h : P) : P := by
-
-=== PROOF ===
-  cases h with
-  | intro h1 => exact h1

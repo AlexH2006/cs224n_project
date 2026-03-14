@@ -1,0 +1,80 @@
+{
+  "problem_id": "p0",
+  "problem": {
+    "problem_id": "p0",
+    "formal_statement": "theorem t : True := by sorry",
+    "informal_stmt": "prove True",
+    "header": "",
+    "problem_idx": 0
+  },
+  "config": {
+    "model_name": "Qwen/Qwen3.5-4B",
+    "dataset_name": "cat-searcher/minif2f-lean4",
+    "dataset_split": "test",
+    "problem_idx": 0,
+    "max_new_tokens": 8192,
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "repetition_penalty": 1.0,
+    "max_iterations": 1,
+    "learning_rate": 1e-06,
+    "distillation_topk": 20,
+    "feedback_errors_only": true,
+    "use_think_mode": true,
+    "teacher_response_mode": "full_output",
+    "max_feedback_errors": 10,
+    "minibatch_size": 1,
+    "default_header": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat",
+    "use_lora": true,
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "kimina_url": "http://localhost:8000",
+    "verify_timeout_s": 60,
+    "verify_retries": 3,
+    "verify_retry_wait_s": 3.0,
+    "results_base_dir": "sdpo_results",
+    "gpu": "A100-40GB"
+  },
+  "iteration_logs": [
+    {
+      "iteration": 1,
+      "loss": 0.5,
+      "reward": 0.0,
+      "n_valid": 1,
+      "minibatch_size": 1,
+      "kl_div": 0.0,
+      "entropy": 0.0,
+      "grad_norm": 0.1
+    }
+  ],
+  "start_time": "2026-03-13T14:32:15.348354",
+  "end_time": "2026-03-13T14:32:15.348414",
+  "success": false,
+  "best_proof": null,
+  "metrics": {
+    "iterations": [
+      1
+    ],
+    "losses": [
+      0.5
+    ],
+    "rewards": [
+      0.0
+    ],
+    "kl_divs": [
+      0.0
+    ],
+    "entropies": [
+      0.0
+    ],
+    "grad_norms": [
+      0.1
+    ],
+    "timestamps": [
+      4.7206878662109375e-05
+    ]
+  },
+  "total_generation_tokens": 0
+}

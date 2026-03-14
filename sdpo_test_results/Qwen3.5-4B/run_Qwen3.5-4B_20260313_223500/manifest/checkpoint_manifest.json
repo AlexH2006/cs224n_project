@@ -1,0 +1,17 @@
+{
+  "checkpoints": [
+    {
+      "problem_idx": 20,
+      "problem_id": "imo_1960_p2",
+      "base_model": "Qwen/Qwen3.5-4B",
+      "max_iterations": 32,
+      "modal_run_dir": "/output/Qwen3.5-4B/full_output/run_Qwen3.5-4B_20_20260314_063400",
+      "local_run_dir": "sdpo_results/Qwen3.5-4B/run_Qwen3.5-4B_20260313_223500/runs/problem_20",
+      "success": false,
+      "timestamp": "2026-03-13T23:39:57.552520"
+    }
+  ],
+  "base_model": "Qwen/Qwen3.5-4B",
+  "max_iterations": 32,
+  "created": "2026-03-13T22:35:00.840285"
+}

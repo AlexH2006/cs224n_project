@@ -1,14 +1,16 @@
 {
-  "success": true,
-  "complete": true,
+  "success": false,
+  "complete": false,
   "has_sorry": false,
-  "feedback": "",
-  "errors": [],
+  "feedback": "unsolved goals\ncase \u00ab1\u00bb\nk : \u2115\nh\u2080 : 0 < 1\nh\u2081 : \u2200 (n : \u2115), (6 * n + 1).gcd (6 * n + 3) = 1\nh\u2082 : \u2200 (n : \u2115), (6 * n + 1).gcd (6 * n + 2) = 1\nh : 1 < 5\nh\u2084 : 1 \u2264 4\nh\u2083 : \u2200 (n : \u2115), n = 0\n\u22a2 False\n\ncase \u00ab2\u00bb\nk : \u2115\nh\u2080 : 0 < 2\nh\u2081 : \u2200 (n : \u2115), (6 * n + 2).gcd (6 * n + 3) = 1\nh : 2 < 5\nh\u2084 : 2 \u2264 4\nh\u2082 : \u2200 (n : \u2115), 6 * n + 2 = 1\nh\u2083 : \u2200 (n : \u2115), (6 * n + 1).gcd (6 * n + 2) = 1\n\u22a2 False\n\ncase \u00ab3\u00bb\nk : \u2115\nh\u2080 : 0 < 3\nh : 3 < 5\nh\u2084 : 3 \u2264 4\nh\u2081 : \u2200 (n : \u2115), 6 * n + 3 = 1\nh\u2082 : \u2200 (n : \u2115), (6 * n + 2).gcd (6 * n + 3) = 1\nh\u2083 : \u2200 (n : \u2115), (6 * n + 1).gcd (6 * n + 3) = 1\n\u22a2 False\n\ncase \u00ab4\u00bb\nk : \u2115\nh\u2080 : 0 < 4\nh : 4 < 5\nh\u2084 : 4 \u2264 4\nh\u2081 : \u2200 (n : \u2115), (6 * n + 3).gcd (6 * n + 4) = 1\nh\u2082 : \u2200 (n : \u2115), (6 * n + 2).gcd (6 * n + 4) = 1\nh\u2083 : \u2200 (n : \u2115), (6 * n + 1).gcd (6 * n + 4) = 1\n\u22a2 False",
+  "errors": [
+    "unsolved goals\ncase \u00ab1\u00bb\nk : \u2115\nh\u2080 : 0 < 1\nh\u2081 : \u2200 (n : \u2115), (6 * n + 1).gcd (6 * n + 3) = 1\nh\u2082 : \u2200 (n : \u2115), (6 * n + 1).gcd (6 * n + 2) = 1\nh : 1 < 5\nh\u2084 : 1 \u2264 4\nh\u2083 : \u2200 (n : \u2115), n = 0\n\u22a2 False\n\ncase \u00ab2\u00bb\nk : \u2115\nh\u2080 : 0 < 2\nh\u2081 : \u2200 (n : \u2115), (6 * n + 2).gcd (6 * n + 3) = 1\nh : 2 < 5\nh\u2084 : 2 \u2264 4\nh\u2082 : \u2200 (n : \u2115), 6 * n + 2 = 1\nh\u2083 : \u2200 (n : \u2115), (6 * n + 1).gcd (6 * n + 2) = 1\n\u22a2 False\n\ncase \u00ab3\u00bb\nk : \u2115\nh\u2080 : 0 < 3\nh : 3 < 5\nh\u2084 : 3 \u2264 4\nh\u2081 : \u2200 (n : \u2115), 6 * n + 3 = 1\nh\u2082 : \u2200 (n : \u2115), (6 * n + 2).gcd (6 * n + 3) = 1\nh\u2083 : \u2200 (n : \u2115), (6 * n + 1).gcd (6 * n + 3) = 1\n\u22a2 False\n\ncase \u00ab4\u00bb\nk : \u2115\nh\u2080 : 0 < 4\nh : 4 < 5\nh\u2084 : 4 \u2264 4\nh\u2081 : \u2200 (n : \u2115), (6 * n + 3).gcd (6 * n + 4) = 1\nh\u2082 : \u2200 (n : \u2115), (6 * n + 2).gcd (6 * n + 4) = 1\nh\u2083 : \u2200 (n : \u2115), (6 * n + 1).gcd (6 * n + 4) = 1\n\u22a2 False"
+  ],
   "messages": [],
   "sorries": [],
   "source": "kimina",
   "is_server_error": false,
   "debug": {
-    "verifier_wall_s": 0.113
+    "verifier_wall_s": 2.898
   }
 }

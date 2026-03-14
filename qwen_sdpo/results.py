@@ -12,6 +12,7 @@ Output layout (local mirror):
         run_Qwen3.5-9B_{problem_idx}_{timestamp}/
         logs.json               — per-iteration log (per_token_kl stripped to keep size small)
         metrics.json            — scalar metrics timeseries
+        hyperparameters.json    — SDPOConfig used for this run
         training_curves.png     — 2x2 matplotlib figure (loss, grad_norm, entropy, kl_div)
         kl/
           iter_{n}_per_token_kl.json   — raw per-token KL records
@@ -34,6 +35,7 @@ Used by: modal_trainer.py (save_run on volume), entrypoint.py (save_local_run).
 """
 
 import json
+from dataclasses import asdict
 from datetime import datetime
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Optional
@@ -110,6 +112,7 @@ def plot_token_kl_heatmap(
     records: list[dict],
     path: Path,
     iteration: Optional[int] = None,
+    sample_index: Optional[int] = None,
     max_tokens_per_line: int = 20,
 ) -> None:
     """Render generated text as a heatmap: each token colored by KL value.
@@ -121,6 +124,7 @@ def plot_token_kl_heatmap(
         records:             Output of collect_per_token_kl.
         path:                Destination PNG path.
         iteration:           Optional iteration number shown in title.
+        sample_index:        Optional sample index (minibatch) shown in title.
         max_tokens_per_line: Soft wrap column limit.
     """
     import matplotlib
@@ -185,6 +189,8 @@ def plot_token_kl_heatmap(
     title = "Per-token KL divergence (student ∥ teacher)"
     if iteration is not None:
         title += f"  —  iteration {iteration}"
+    if sample_index is not None:
+        title += f"  sample {sample_index}"
     ax.set_title(title, fontsize=10, pad=6)
 
     n_rows = len(rows)
@@ -283,19 +289,40 @@ def plot_training_curves(metrics: dict, path: Path, title: Optional[str] = None)
 
 
 def _save_kl_artifacts(run_dir: Path, iteration_logs: list[dict]) -> None:
-    """Write per-token KL JSON and heatmap PNG for each iteration that has KL data.
+    """Write per-token KL JSON and heatmap PNG for each iteration (and each sample in minibatch).
 
-    Files written per iteration n:
-      run_dir/kl/iter_{n}_per_token_kl.json
-      run_dir/kl/iter_{n}_kl_heatmap.png
+    Single-sample (no "samples" key): writes iter_{n}_per_token_kl.json and iter_{n}_kl_heatmap.png.
+    Minibatch (iter_log has "samples"): for each sample that has per_token_kl, writes
+      iter_{n}_sample_{s}_per_token_kl.json and iter_{n}_sample_{s}_kl_heatmap.png.
     """
     kl_dir = run_dir / "kl"
     kl_dir.mkdir(exist_ok=True)
     for iter_log in iteration_logs:
+        n = iter_log.get("iteration", "?")
+        samples = iter_log.get("samples")
+        if samples is not None:
+            # Minibatch: one KL artifact per sample that has per_token_kl.
+            for s_idx, sample in enumerate(samples):
+                records = sample.get("per_token_kl")
+                if not records:
+                    continue
+                kl_json_path = kl_dir / f"iter_{n}_sample_{s_idx}_per_token_kl.json"
+                with open(kl_json_path, "w") as f:
+                    json.dump(records, f, indent=2)
+                heatmap_path = kl_dir / f"iter_{n}_sample_{s_idx}_kl_heatmap.png"
+                try:
+                    plot_token_kl_heatmap(
+                        records, heatmap_path, iteration=n, sample_index=s_idx
+                    )
+                except Exception as e:
+                    print(
+                        f"  Warning: could not render KL heatmap for iter {n} sample {s_idx}: {e}"
+                    )
+            continue
+        # Single-sample (legacy or minibatch_size=1 without "samples").
         records = iter_log.get("per_token_kl")
         if not records:
             continue
-        n = iter_log.get("iteration", "?")
         kl_json_path = kl_dir / f"iter_{n}_per_token_kl.json"
         with open(kl_json_path, "w") as f:
             json.dump(records, f, indent=2)
@@ -349,23 +376,31 @@ def save_run(
         tokenizer.save_pretrained(model_save_dir)
 
     # Strip per_token_kl from iteration_logs to keep logs.json compact.
-    # Raw KL data lives in kl/iter_{n}_per_token_kl.json (written locally only).
+    # Raw KL data lives in kl/iter_{n}_*.json (written above). Minibatch entries
+    # have "samples"; strip per_token_kl from each sample as well.
     iteration_logs = logs.get("iteration_logs", [])
     if save_kl:
         _save_kl_artifacts(run_dir, iteration_logs)
-    slim_logs = {
-        **logs,
-        "iteration_logs": [
-            {k: v for k, v in il.items() if k != "per_token_kl"}
-            for il in iteration_logs
-        ],
-    }
+    slim_iteration_logs = []
+    for il in iteration_logs:
+        slim_il = {k: v for k, v in il.items() if k != "per_token_kl"}
+        if "samples" in slim_il:
+            slim_il["samples"] = [
+                {k: v for k, v in s.items() if k != "per_token_kl"}
+                for s in slim_il["samples"]
+            ]
+        slim_iteration_logs.append(slim_il)
+    slim_logs = {**logs, "iteration_logs": slim_iteration_logs}
 
     with open(run_dir / "logs.json", "w") as f:
         json.dump(slim_logs, f, indent=2, default=str)
 
     with open(run_dir / "metrics.json", "w") as f:
         json.dump(metrics, f, indent=2)
+
+    hyperparams = asdict(cfg)
+    with open(run_dir / "hyperparameters.json", "w") as f:
+        json.dump(hyperparams, f, indent=2, default=str)
 
     if metrics.get("iterations"):
         model_tag = cfg.model_name.split("/")[-1]

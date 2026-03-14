@@ -22,6 +22,7 @@ Usage:
     python3 -m modal run qwen_eval/modal_app.py
     python3 -m modal run qwen_eval/modal_app.py --model "Qwen/Qwen3.5-9B" --problem-idx 0 --pass-k 4
     python3 -m modal run qwen_eval/modal_app.py --n-problems 20 --pass-k 4
+    python3 -m modal run qwen_eval/modal_app.py --problem-index-file qwen_eval/problem_idx.json   # eval only problems in that file
     python3 -m modal run qwen_eval/modal_app.py --generation-save-batch-size 50   # save after each 50 problems
     python3 -m modal run qwen_eval/modal_app.py --generate-only
     python3 -m modal run qwen_eval/modal_app.py --no-think-mode   # disable <think>...</think> via tokenizer enable_thinking=False
@@ -38,7 +39,7 @@ import modal
 
 from qwen_eval.batch_generation import build_flat_prompts_and_meta, unflatten_results
 from qwen_eval.config import EvalConfig
-from qwen_eval.dataset import load_problems
+from qwen_eval.dataset import load_problem_indices_from_file, load_problems
 from qwen_eval.local_lean_verifier import verify
 from qwen_eval.parsing import create_full_lean_code, extract_full_lean_block_parsed
 from qwen_eval.results import build_problem_log, make_run_dir, save_results
@@ -300,6 +301,7 @@ def _verify_problem(
 def run_eval(
     n_problems: int = 20,
     problem_idx: int = -1,         # -1 = first n_problems; >=0 = single problem at that index
+    problem_index_file: Optional[str] = None,  # If set, evaluate only indices from this JSON (e.g. qwen_eval/problem_idx.json)
     pass_k: int = 4,
     model: str = "Qwen/Qwen3.5-4B",
     no_think_mode: bool = False,   # Pass --no-think-mode to disable Qwen3.5 <think>...</think> (tokenizer enable_thinking=False)
@@ -315,19 +317,35 @@ def run_eval(
     generate_only: bool = False,
     inference_batch_size: Optional[int] = None,
     generation_save_batch_size: Optional[int] = None,
+    results_base_dir: Optional[str] = None,
 ):
     """
     Orchestrate the full eval: generate → parse → verify → save.
 
     --problem-idx N  Run on a single problem at dataset index N (overrides --n-problems).
+    --problem-index-file PATH  Evaluate only problems listed in JSON file (e.g. qwen_eval/problem_idx.json).
     --generate-only  Skip verification (useful for testing generation + parsing).
     --inference-batch-size N  Max prompts per vLLM generate() call (default: 256).
     --generation-save-batch-size N  Save results after each batch of N problems (default: all at once).
+    --results-base-dir PATH  Override base directory for run output (default: baseline). Used by dynamic_sampling.
     """
-    problem_indices = [problem_idx] if problem_idx >= 0 else None
+    problem_indices: Optional[list[int]] = None
+    num_problems = n_problems
+    if problem_index_file:
+        import os
+        path = problem_index_file
+        if not os.path.isabs(path):
+            path = os.path.join(os.getcwd(), path)
+        problem_indices = load_problem_indices_from_file(path)
+        num_problems = len(problem_indices)
+        print(f"Using problem index file: {problem_index_file} -> {num_problems} problems")
+    elif problem_idx >= 0:
+        problem_indices = [problem_idx]
+        num_problems = 1
+
     cfg = EvalConfig(
         model_name=model,
-        n_problems=1 if problem_idx >= 0 else n_problems,
+        n_problems=num_problems,
         pass_k=pass_k,
         use_think_mode=not no_think_mode,
         temperature=temperature,
@@ -345,6 +363,8 @@ def run_eval(
         cfg.inference_batch_size = inference_batch_size
     if generation_save_batch_size is not None:
         cfg.generation_save_batch_size = generation_save_batch_size
+    if results_base_dir is not None:
+        cfg.results_base_dir = results_base_dir
 
     # Sampling config dict passed explicitly to Modal workers (avoids env var hack).
     sampling_cfg = {

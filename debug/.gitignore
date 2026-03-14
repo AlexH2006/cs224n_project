@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+
+# OS
+.DS_Store
+
+# Generated / run outputs (optional: uncomment to ignore verify result JSONs)
+# verify_results/*.json

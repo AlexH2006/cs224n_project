@@ -1,0 +1,28 @@
+{
+  "model": "Qwen/Qwen3.5-4B",
+  "dataset": "cat-searcher/minif2f-lean4",
+  "split": "test",
+  "n_problems": 50,
+  "pass_k": 32,
+  "n_success": 27,
+  "pass_at_k": 0.54,
+  "timestamp": "2026-03-12T13:35:19.175911",
+  "run_dir": "baseline/run_Qwen3.5-4B_20260312_121359",
+  "sampling": {
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 0.0,
+    "repetition_penalty": 1.0,
+    "max_new_tokens": 8192,
+    "seed": 42
+  },
+  "generation_metrics": {
+    "generation_wall_s": 2435.8392,
+    "total_output_tokens": 6562448,
+    "tokens_per_second": 2694.12,
+    "n_requests": 1600,
+    "avg_generation_s_per_problem": 48.7168
+  }
+}

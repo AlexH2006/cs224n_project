@@ -1,0 +1,56 @@
+{
+  "pass_k": 128,
+  "n_problems": 10,
+  "problems": [
+    {
+      "problem_id": "amc12b_2021_p3",
+      "success_rate": 0.0156,
+      "problem_idx": 13
+    },
+    {
+      "problem_id": "mathd_algebra_208",
+      "success_rate": 0.0078,
+      "problem_idx": 37
+    },
+    {
+      "problem_id": "mathd_algebra_215",
+      "success_rate": 0.0,
+      "problem_idx": 66
+    },
+    {
+      "problem_id": "mathd_algebra_452",
+      "success_rate": 0.0312,
+      "problem_idx": 69
+    },
+    {
+      "problem_id": "mathd_algebra_392",
+      "success_rate": 0.0078,
+      "problem_idx": 86
+    },
+    {
+      "problem_id": "imo_1962_p2",
+      "success_rate": 0.0,
+      "problem_idx": 105
+    },
+    {
+      "problem_id": "mathd_algebra_76",
+      "success_rate": 0.0234,
+      "problem_idx": 119
+    },
+    {
+      "problem_id": "mathd_algebra_313",
+      "success_rate": 0.0078,
+      "problem_idx": 138
+    },
+    {
+      "problem_id": "mathd_algebra_332",
+      "success_rate": 0.0078,
+      "problem_idx": 168
+    },
+    {
+      "problem_id": "mathd_numbertheory_222",
+      "success_rate": 0.0156,
+      "problem_idx": 212
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "checkpoints": [],
+  "base_model": "Qwen/Qwen3.5-4B",
+  "max_iterations": 32,
+  "created": "2026-03-13T22:25:20.727828"
+}

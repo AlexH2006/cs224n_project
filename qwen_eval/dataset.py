@@ -2,14 +2,45 @@
 TLDR: Dataset loading and field extraction for the qwen_eval pipeline.
 
 get_field() handles dataset-agnostic field access using priority lists from EvalConfig.
+load_problem_indices_from_file() reads a JSON subset file (e.g. problem_idx.json).
 load_problems() loads the HuggingFace dataset and returns a flat list of problem dicts.
 
 Used by: modal_app.py (before building prompts).
 """
 
+import json
+from pathlib import Path
 from typing import Any
 
 from qwen_eval.config import EvalConfig
+
+
+def load_problem_indices_from_file(path: str) -> list[int]:
+    """
+    Load problem indices from a JSON file.
+
+    Accepts either:
+      - "problem_indices": list of ints, or
+      - "problems": list of dicts with "problem_idx" (order preserved).
+
+    Raises:
+        FileNotFoundError: path does not exist.
+        json.JSONDecodeError: file is not valid JSON.
+        ValueError: JSON has neither "problem_indices" nor "problems".
+    """
+    p = Path(path)
+    if not p.is_file():
+        raise FileNotFoundError(f"Problem index file not found: {path}")
+    raw = p.read_text()
+    data = json.loads(raw)
+    if "problem_indices" in data:
+        return list(data["problem_indices"])
+    if "problems" in data:
+        return [int(item["problem_idx"]) for item in data["problems"]]
+    raise ValueError(
+        "JSON must contain 'problem_indices' or 'problems'; "
+        f"got keys: {list(data.keys())}"
+    )
 
 
 def get_field(data: dict, field_names: list[str], default: str = "") -> str:

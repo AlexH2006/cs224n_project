@@ -1,0 +1,27 @@
+{
+  "checkpoints": [
+    {
+      "problem_idx": 7,
+      "problem_id": "mathd_algebra_44",
+      "base_model": "Qwen/Qwen3.5-4B",
+      "max_iterations": 8,
+      "modal_run_dir": "/output/Qwen3.5-4B/full_output/run_Qwen3.5-4B_7_20260311_194000",
+      "local_run_dir": "sdpo_results/Qwen3.5-4B/run_Qwen3.5-4B_20260311_123346/runs/problem_7",
+      "success": true,
+      "timestamp": "2026-03-11T12:40:04.230749"
+    },
+    {
+      "problem_idx": 9,
+      "problem_id": "mathd_numbertheory_1124",
+      "base_model": "Qwen/Qwen3.5-4B",
+      "max_iterations": 8,
+      "modal_run_dir": "/output/Qwen3.5-4B/full_output/run_Qwen3.5-4B_9_20260311_194136",
+      "local_run_dir": "sdpo_results/Qwen3.5-4B/run_Qwen3.5-4B_20260311_123346/runs/problem_9",
+      "success": true,
+      "timestamp": "2026-03-11T12:41:42.486954"
+    }
+  ],
+  "base_model": "Qwen/Qwen3.5-4B",
+  "max_iterations": 8,
+  "created": "2026-03-11T12:33:46.902991"
+}

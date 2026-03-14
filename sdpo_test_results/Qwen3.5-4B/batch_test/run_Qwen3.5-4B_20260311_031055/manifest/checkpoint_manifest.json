@@ -1,0 +1,17 @@
+{
+  "checkpoints": [
+    {
+      "problem_idx": 7,
+      "problem_id": "mathd_algebra_44",
+      "base_model": "Qwen/Qwen3.5-4B",
+      "max_iterations": 8,
+      "modal_run_dir": "/output/Qwen3.5-4B/full_output/run_Qwen3.5-4B_7_20260311_101643",
+      "local_run_dir": "sdpo_results/Qwen3.5-4B/run_Qwen3.5-4B_20260311_031055/runs/problem_7",
+      "success": true,
+      "timestamp": "2026-03-11T03:16:48.083955"
+    }
+  ],
+  "base_model": "Qwen/Qwen3.5-4B",
+  "max_iterations": 8,
+  "created": "2026-03-11T03:10:55.331495"
+}

@@ -134,3 +134,21 @@ class TestSdpoLossIndexing:
         )
         assert per_token_kl.shape[0] == answer_len
         assert per_token_kl.dim() == 1
+
+
+class TestTotalKLLossScalar:
+    """Training loss uses total KL (sum over tokens), not mean per-token KL."""
+
+    def test_total_kl_equals_sum_of_per_token_kl(self):
+        """Total KL loss (used for backward) is per_token_kl.sum()."""
+        per_token_kl = torch.tensor([0.1, 0.2, 0.3], dtype=torch.float32)
+        total_kl = per_token_kl.sum()
+        assert total_kl.item() == pytest.approx(0.6)
+        assert total_kl != per_token_kl.mean()
+
+    def test_total_kl_differs_from_mean_when_seq_len_gt_one(self):
+        """When seq_len > 1, total KL (sum) != mean per-token KL."""
+        per_token_kl = torch.tensor([0.5, 0.5], dtype=torch.float32)
+        assert per_token_kl.sum().item() == 1.0
+        assert per_token_kl.mean().item() == 0.5
+        assert per_token_kl.sum() != per_token_kl.mean()

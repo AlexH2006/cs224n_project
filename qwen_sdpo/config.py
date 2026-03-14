@@ -76,7 +76,7 @@ class SDPOConfig:
     # SDPO training
     # -------------------------------------------------------------------------
     max_iterations: int = 5
-    learning_rate: float = 1e-5
+    learning_rate: float = 5e-6
     # Number of top-K token logits used in KL divergence computation.
     # A tail bucket captures remaining probability mass so KL covers full distribution.
     distillation_topk: int = 20
@@ -87,6 +87,16 @@ class SDPOConfig:
     # answer_only (tokens after </think>), or code_only (parsed lean4 block only).
     # Run directory is sdpo_results/{model_tag}/{teacher_response_mode}/...
     teacher_response_mode: TeacherResponseMode = "full_output"
+    # Max number of compiler error messages to include in the teacher prompt (first N only).
+    max_feedback_errors: int = 10
+    # Number of on-policy samples per iteration; 1 preserves current single-sample behavior;
+    # >1 enables minibatch training (one vLLM batch, one gradient update per iteration).
+    minibatch_size: int = 1
+    # When True, KL training loss is summed only over tokens in the final parsed lean4 code
+    # block; student and teacher context still use the full generation. Independent of
+    # teacher_response_mode. If parsing fails or there is no code block, fall back to
+    # full-sequence loss.
+    kl_mask_final_code_only: bool = False
 
     # -------------------------------------------------------------------------
     # Lean header fallback

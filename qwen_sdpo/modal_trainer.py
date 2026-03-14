@@ -23,12 +23,14 @@ Key implementation notes:
       Qwen3_5MLP (gate/up/down_proj)
 
 GPU memory budget on H100 (80GB):
-  Qwen3.5-9B + QLoRA | vLLM util=0.45 → ~36GB | HF 4-bit ~5GB   | LoRA ~0.5GB  | ~38GB headroom
-  Qwen3.5-4B + QLoRA | vLLM util=0.45 → ~36GB | HF 4-bit ~2.1GB | LoRA ~0.45GB | ~41GB headroom
+  Qwen3.5-9B + QLoRA | vLLM util=0.3 → ~24GB | HF 4-bit ~5GB   | LoRA ~0.5GB  | ~50GB headroom
+  Qwen3.5-4B + QLoRA | vLLM util=0.3 → ~24GB | HF 4-bit ~2.1GB | LoRA ~0.45GB | ~53GB headroom
 
 Methods (exposed via Modal):
   generate_only(config_dict, prompt) → (raw_text, generated_ids as list)
+  generate_batch(config_dict, prompts) → list of (raw_text, generated_ids, finish_reason)
   run_sdpo_step(config_dict, payload) → iter_log dict
+  run_sdpo_step_minibatch(config_dict, payloads) → aggregated iter_log dict
   finalize_run(config_dict, logs) → logs with model_save_path
   reset_to_base(config_dict) → {"status": "ok", "model_name": ...} — reload base HF LoRA,
     sync into vLLM; used between problems in a batch so the next problem trains from
@@ -38,6 +40,7 @@ Used by: modal_app.py (instantiates QwenSDPOTrainer at module level, passes to r
 """
 
 from pathlib import Path
+from typing import Optional, Tuple
 
 from qwen_sdpo.config import SDPOConfig
 from qwen_sdpo.sdpo_loss import compute_sdpo_loss
@@ -60,6 +63,90 @@ except ImportError:
     hf_cache_volume = None
     output_volume = None
     compile_cache_volume = None
+
+
+def _should_skip_gradient_step(payload: dict) -> bool:
+    """True iff we should skip the gradient update (no backward, no optimizer.step, no sync).
+
+    Used by run_sdpo_step to decide early return. Kept as a pure function for unit testing.
+    """
+    return (
+        payload.get("is_success") is True
+        or payload.get("is_server_error") is True
+        or payload.get("is_truncated") is True
+    )
+
+
+def _skip_iter_log_updates(payload: dict) -> dict:
+    """Key-value updates applied to iter_log when we skip the gradient step.
+
+    Used by run_sdpo_step and by tests to assert the skip-path contract (loss=None, etc.).
+    """
+    updates = {
+        "loss": None,
+        "reward": None,
+        "kl_div": None,
+        "entropy": None,
+        "grad_norm": None,
+    }
+    if payload.get("is_server_error"):
+        updates["server_error"] = True
+    if payload.get("is_truncated"):
+        updates["truncated"] = True
+    return updates
+
+
+def _payload_to_sample_log(payload: dict, per_token_kl_records: Optional[list] = None) -> dict:
+    """Build a single-sample log dict from a payload (for minibatch iteration_logs).
+
+    Used so each generated proof in a minibatch has a full log entry (prompts, raw_output,
+    verification, and optionally per_token_kl for KL artifacts). When per_token_kl_records
+    is None (skipped sample), the sample log has no KL data; when present, it is attached.
+    """
+    sample = {
+        "iteration": payload.get("iteration"),
+        "student_prompt": payload.get("base_prompt"),
+        "teacher_prompt": payload.get("teacher_prompt"),
+        "raw_output": payload.get("raw_output"),
+        "extracted_block": payload.get("extracted_block"),
+        "full_code": payload.get("full_code"),
+        "verification": payload.get("verification"),
+        "success": payload.get("is_success", False),
+        "num_tokens": payload.get("num_tokens", 0),
+        "feedback": payload.get("feedback", ""),
+    }
+    if _should_skip_gradient_step(payload):
+        sample.update(_skip_iter_log_updates(payload))
+    if per_token_kl_records is not None:
+        sample["per_token_kl"] = per_token_kl_records
+    return sample
+
+
+# Number of leading response tokens to exclude from the KL loss (context noise).
+# The first few tokens often reflect prompt/format variance rather than the actual mistake.
+KL_DROP_FIRST_N_TOKENS = 32
+
+
+def _kl_loss_scalar(
+    per_token_kl,
+    drop_first_n: int = KL_DROP_FIRST_N_TOKENS,
+    kl_span: Optional[Tuple[int, int]] = None,
+):
+    """KL loss for training: mean over tokens (average KL).
+
+    When kl_span=(start, end) is provided (KL-mask-final-code mode), loss is the mean
+    over that span only; context is full but we want loss only over the final code block.
+    Otherwise mean over tokens excluding the first drop_first_n (context noise).
+    """
+    if kl_span is not None:
+        start, end = kl_span
+        seq_len = per_token_kl.shape[0]
+        start = max(0, min(start, seq_len))
+        end = max(start, min(end, seq_len))
+        return per_token_kl[start:end].mean()
+    if per_token_kl.shape[0] > drop_first_n:
+        return per_token_kl[drop_first_n:].mean()
+    return per_token_kl.mean()
 
 
 # LoRA target modules covering the full Qwen3.5 hybrid architecture.
@@ -151,16 +238,16 @@ def _setup_trainer(trainer_self) -> None:
     #   In-place weight updates via load_weights() preserve tensor addresses, so
     #   graphs remain valid after each sync (no recapture).
     # enable_prefix_caching=True: cache the shared problem prefix across generations.
-    # 0.4 × 80GB (H100) = 32GB for vLLM KV cache.
+    # 0.32 × 80GB (H100) ≈ 25.6GB for vLLM KV cache; leaves headroom for HF training model and minibatch generation.
     # The QLoRA training model (4-bit 4B) peaks at ~10GB (weights + activations +
-    # AdamW optimizer state on LoRA params only). The remaining ~38GB is headroom.
-    print("Initializing vLLM (gpu_memory_utilization=0.4)...")
+    # AdamW optimizer state on LoRA params only). The remaining headroom avoids OOM on long sequences.
+    print("Initializing vLLM (gpu_memory_utilization=0.32)...")
     trainer_self.vllm_engine = LLM(
         model=model_name,
         dtype="bfloat16",
         trust_remote_code=True,
         download_dir="/hf_cache",
-        gpu_memory_utilization=0.4,
+        gpu_memory_utilization=0.32,
         max_model_len=16384,
         language_model_only=True,
         enforce_eager=False,
@@ -250,6 +337,43 @@ if modal is not None and app is not None:
             raw_text, generated_ids, finish_reason = self._generate_proof(config, prompt)
             return raw_text, generated_ids.tolist(), finish_reason
 
+        def _generate_proof_batch(self, config: SDPOConfig, prompts: list[str]):
+            """Run vLLM generation for a list of prompts in one batch.
+
+            Returns list of (raw_text, token_ids as list, finish_reason) — one per prompt.
+            """
+            from vllm import SamplingParams
+
+            sampling_params = SamplingParams(
+                temperature=config.temperature,
+                top_p=config.top_p,
+                top_k=config.top_k,
+                min_p=config.min_p,
+                repetition_penalty=config.repetition_penalty,
+                max_tokens=config.max_new_tokens,
+            )
+            outputs = self.vllm_engine.generate(prompts, sampling_params)
+            result = []
+            for out in outputs:
+                completion = out.outputs[0]
+                generated_text = completion.text
+                finish_reason = completion.finish_reason
+                generated_ids = self.tokenizer(
+                    generated_text, return_tensors="pt", add_special_tokens=False
+                ).input_ids[0]
+                result.append((generated_text, generated_ids.tolist(), finish_reason))
+            return result
+
+        @modal.method()
+        def generate_batch(self, config_dict: dict, prompts: list[str]) -> list[tuple[str, list[int], str]]:
+            """Generate one response per prompt in a single vLLM batch call.
+
+            Returns list of (raw_text, generated_ids as Python list, finish_reason).
+            Used for minibatch on-policy training; minibatch_size=1 uses a single-element list.
+            """
+            config = SDPOConfig(**config_dict)
+            return self._generate_proof_batch(config, prompts)
+
         @modal.method()
         def run_sdpo_step(self, config_dict: dict, payload: dict) -> dict:
             """Run one SDPO gradient step, sync weights to vLLM, and return the iteration log.
@@ -257,6 +381,7 @@ if modal is not None and app is not None:
             Skips the gradient step (but still logs) if:
               - is_success=True (proof verified; no update needed)
               - is_server_error=True (Kimina was unavailable; skip to avoid poisoning)
+              - is_truncated=True (generation was cut off; no complete proof to learn from)
 
             After a successful gradient step, merged LoRA weights are pushed into the
             vLLM engine via CUDA IPC so the next generate_only() call uses updated weights.
@@ -265,7 +390,7 @@ if modal is not None and app is not None:
               iteration, base_prompt, teacher_prompt, raw_output, extracted_block,
               full_code, verification, generated_ids (list), num_tokens,
               teacher_response_ids (list), teacher_response_mode, cot_len,
-              is_success, is_server_error, feedback (optional)
+              is_success, is_server_error, is_truncated, feedback (optional)
 
             Returns iter_log dict with loss/reward/kl_div/entropy/grad_norm set.
             """
@@ -289,49 +414,29 @@ if modal is not None and app is not None:
                 "num_tokens": payload.get("num_tokens", 0),
             }
 
-            # Skip the gradient step when proof succeeded or a server error occurred.
+            # Skip the gradient step when proof succeeded, server error, or truncated.
             # On success, there is no failure to learn from. On server error, the
-            # feedback signal is unreliable and would poison the update.
-            if payload.get("is_success") or payload.get("is_server_error"):
-                iter_log["loss"] = None
-                iter_log["reward"] = None
-                iter_log["kl_div"] = None
-                iter_log["entropy"] = None
-                iter_log["grad_norm"] = None
-                if payload.get("is_server_error"):
-                    iter_log["server_error"] = True
+            # feedback signal is unreliable. On truncation, there is no complete proof.
+            if _should_skip_gradient_step(payload):
+                iter_log.update(_skip_iter_log_updates(payload))
                 return iter_log
 
             model_device = next(self.model.parameters()).device
             generated_ids = torch.tensor(
                 payload["generated_ids"], dtype=torch.long, device=model_device
             )
+            seq_len = generated_ids.shape[-1]
 
-            teacher_response_mode = payload.get("teacher_response_mode", "full")
-            cot_len = payload.get("cot_len", 0)
-            teacher_response_ids_py = payload.get("teacher_response_ids")
-            use_response_slice = (
-                teacher_response_mode in ("answer_only", "code_only")
-                and cot_len is not None
-                and teacher_response_ids_py is not None
+            # KL-mask-final-code: full context forward, loss summed only over final code block span.
+            kl_start = payload.get("kl_final_code_start")
+            kl_end = payload.get("kl_final_code_end")
+            use_kl_span = (
+                kl_start is not None
+                and kl_end is not None
+                and 0 <= kl_start < kl_end <= seq_len
             )
 
-            if use_response_slice:
-                teacher_response_ids = torch.tensor(
-                    teacher_response_ids_py, dtype=torch.long, device=model_device
-                )
-                per_token_kl, reward, avg_kl, entropy = compute_sdpo_loss(
-                    self.model,
-                    self.tokenizer,
-                    config,
-                    payload["base_prompt"],
-                    payload["teacher_prompt"],
-                    generated_ids,
-                    teacher_response_ids=teacher_response_ids,
-                    cot_len=cot_len,
-                )
-                ids_for_kl = teacher_response_ids
-            else:
+            if use_kl_span:
                 per_token_kl, reward, avg_kl, entropy = compute_sdpo_loss(
                     self.model,
                     self.tokenizer,
@@ -341,7 +446,42 @@ if modal is not None and app is not None:
                     generated_ids,
                 )
                 ids_for_kl = generated_ids
-            loss = per_token_kl.mean()
+                loss = _kl_loss_scalar(per_token_kl, kl_span=(kl_start, kl_end))
+            else:
+                teacher_response_mode = payload.get("teacher_response_mode", "full")
+                cot_len = payload.get("cot_len", 0)
+                teacher_response_ids_py = payload.get("teacher_response_ids")
+                use_response_slice = (
+                    teacher_response_mode in ("answer_only", "code_only")
+                    and cot_len is not None
+                    and teacher_response_ids_py is not None
+                )
+                if use_response_slice:
+                    teacher_response_ids = torch.tensor(
+                        teacher_response_ids_py, dtype=torch.long, device=model_device
+                    )
+                    per_token_kl, reward, avg_kl, entropy = compute_sdpo_loss(
+                        self.model,
+                        self.tokenizer,
+                        config,
+                        payload["base_prompt"],
+                        payload["teacher_prompt"],
+                        generated_ids,
+                        teacher_response_ids=teacher_response_ids,
+                        cot_len=cot_len,
+                    )
+                    ids_for_kl = teacher_response_ids
+                else:
+                    per_token_kl, reward, avg_kl, entropy = compute_sdpo_loss(
+                        self.model,
+                        self.tokenizer,
+                        config,
+                        payload["base_prompt"],
+                        payload["teacher_prompt"],
+                        generated_ids,
+                    )
+                    ids_for_kl = generated_ids
+                loss = _kl_loss_scalar(per_token_kl)
             self._optimizer.zero_grad()
             loss.backward()
 
@@ -374,6 +514,178 @@ if modal is not None and app is not None:
             iter_log["per_token_kl"] = collect_per_token_kl(
                 per_token_kl, ids_for_kl, self.tokenizer
             )
+            return iter_log
+
+        @modal.method()
+        def run_sdpo_step_minibatch(self, config_dict: dict, payloads: list[dict]) -> dict:
+            """Run one SDPO gradient step over a minibatch of payloads.
+
+            Skips the gradient step (returns combined iter_log only) when all payloads
+            are skip (is_success, is_server_error, or is_truncated). Otherwise:
+            n_valid = number of non-skip payloads; for each non-skip payload run one
+            forward (compute_sdpo_loss), (loss_i / n_valid).backward() to accumulate
+            gradients; then one optimizer.step(), sync to vLLM. Returns one aggregated
+            iter_log (mean loss/reward over valid samples; optional n_valid/minibatch_size).
+            """
+            import torch
+
+            if not payloads:
+                return {
+                    "iteration": None,
+                    "loss": None,
+                    "reward": None,
+                    "kl_div": None,
+                    "entropy": None,
+                    "grad_norm": None,
+                    "n_valid": 0,
+                    "minibatch_size": 0,
+                }
+
+            config = SDPOConfig(**config_dict)
+            if self._optimizer is None:
+                self._optimizer = torch.optim.AdamW(
+                    self.model.parameters(), lr=config.learning_rate
+                )
+
+            n_valid = sum(1 for p in payloads if not _should_skip_gradient_step(p))
+
+            if n_valid == 0:
+                # All skipped — return combined iter_log from first payload plus per-sample logs.
+                first = payloads[0]
+                iter_log = {
+                    "iteration": first.get("iteration"),
+                    "student_prompt": first.get("base_prompt"),
+                    "teacher_prompt": first.get("teacher_prompt"),
+                    "raw_output": first.get("raw_output"),
+                    "extracted_block": first.get("extracted_block"),
+                    "full_code": first.get("full_code"),
+                    "verification": first.get("verification"),
+                    "success": first.get("is_success", False),
+                    "num_tokens": first.get("num_tokens", 0),
+                    "loss": None,
+                    "reward": None,
+                    "kl_div": None,
+                    "entropy": None,
+                    "grad_norm": None,
+                    "n_valid": 0,
+                    "minibatch_size": len(payloads),
+                }
+                iter_log.update(_skip_iter_log_updates(first))
+                iter_log["samples"] = [_payload_to_sample_log(p) for p in payloads]
+                return iter_log
+
+            model_device = next(self.model.parameters()).device
+            self._optimizer.zero_grad()
+
+            losses, rewards, kl_divs, entropies = [], [], [], []
+            sample_records = []
+            for payload in payloads:
+                if _should_skip_gradient_step(payload):
+                    sample_records.append(_payload_to_sample_log(payload))
+                    continue
+                generated_ids = torch.tensor(
+                    payload["generated_ids"], dtype=torch.long, device=model_device
+                )
+                seq_len = generated_ids.shape[-1]
+                kl_start = payload.get("kl_final_code_start")
+                kl_end = payload.get("kl_final_code_end")
+                use_kl_span = (
+                    kl_start is not None
+                    and kl_end is not None
+                    and 0 <= kl_start < kl_end <= seq_len
+                )
+                if use_kl_span:
+                    per_token_kl, reward, avg_kl, entropy = compute_sdpo_loss(
+                        self.model,
+                        self.tokenizer,
+                        config,
+                        payload["base_prompt"],
+                        payload["teacher_prompt"],
+                        generated_ids,
+                    )
+                    ids_for_kl = generated_ids
+                    loss_i = _kl_loss_scalar(per_token_kl, kl_span=(kl_start, kl_end))
+                else:
+                    teacher_response_mode = payload.get("teacher_response_mode", "full")
+                    cot_len = payload.get("cot_len", 0)
+                    teacher_response_ids_py = payload.get("teacher_response_ids")
+                    use_response_slice = (
+                        teacher_response_mode in ("answer_only", "code_only")
+                        and cot_len is not None
+                        and teacher_response_ids_py is not None
+                    )
+                    if use_response_slice:
+                        teacher_response_ids = torch.tensor(
+                            teacher_response_ids_py,
+                            dtype=torch.long,
+                            device=model_device,
+                        )
+                        per_token_kl, reward, avg_kl, entropy = compute_sdpo_loss(
+                            self.model,
+                            self.tokenizer,
+                            config,
+                            payload["base_prompt"],
+                            payload["teacher_prompt"],
+                            generated_ids,
+                            teacher_response_ids=teacher_response_ids,
+                            cot_len=cot_len,
+                        )
+                        ids_for_kl = teacher_response_ids
+                    else:
+                        per_token_kl, reward, avg_kl, entropy = compute_sdpo_loss(
+                            self.model,
+                            self.tokenizer,
+                            config,
+                            payload["base_prompt"],
+                            payload["teacher_prompt"],
+                            generated_ids,
+                        )
+                        ids_for_kl = generated_ids
+                    loss_i = _kl_loss_scalar(per_token_kl)
+                (loss_i / n_valid).backward()
+                losses.append(loss_i.item())
+                rewards.append(reward)
+                kl_divs.append(avg_kl)
+                entropies.append(entropy)
+                per_token_kl_records = collect_per_token_kl(
+                    per_token_kl, ids_for_kl, self.tokenizer
+                )
+                sample_records.append(_payload_to_sample_log(payload, per_token_kl_records))
+
+            grad_norm = sum(
+                p.grad.data.norm(2).item() ** 2
+                for p in self.model.parameters()
+                if p.grad is not None
+            ) ** 0.5
+            torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
+            self._optimizer.step()
+            sync_lora_weights_to_vllm(
+                self.model,
+                self.vllm_engine,
+                _QWEN35_LORA_TARGET_MODULES,
+            )
+
+            first = next(p for p in payloads if not _should_skip_gradient_step(p))
+            iter_log = {
+                "iteration": first.get("iteration"),
+                "student_prompt": first.get("base_prompt"),
+                "teacher_prompt": first.get("teacher_prompt"),
+                "raw_output": first.get("raw_output"),
+                "extracted_block": first.get("extracted_block"),
+                "full_code": first.get("full_code"),
+                "verification": first.get("verification"),
+                "success": first.get("is_success", False),
+                "num_tokens": first.get("num_tokens", 0),
+                "loss": sum(losses) / len(losses),
+                "reward": sum(rewards) / len(rewards),
+                "kl_div": sum(kl_divs) / len(kl_divs),
+                "entropy": sum(entropies) / len(entropies),
+                "grad_norm": grad_norm,
+                "feedback": first.get("feedback", ""),
+                "n_valid": n_valid,
+                "minibatch_size": len(payloads),
+                "samples": sample_records,
+            }
             return iter_log
 
         @modal.method()

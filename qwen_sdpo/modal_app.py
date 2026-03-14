@@ -24,8 +24,9 @@ CLI usage:
   # Non-thinking mode (no <think> blocks; teacher prompt includes full generation)
   python3 -m modal run qwen_sdpo/modal_app.py --model "Qwen/Qwen3.5-4B" --use-think-mode false
 
-  # Batch: train on multiple problems from a sampled_problems JSON (each from base HF model)
-  python3 -m modal run qwen_sdpo/modal_app.py run-sdpo-batch --problems-json results/.../sampled_problems.json --model "Qwen/Qwen3.5-4B"
+  # Batch: train on multiple problems; default loads qwen_sdpo/problem_idx.json
+  python3 -m modal run qwen_sdpo/modal_app.py::run_sdpo_batch --model "Qwen/Qwen3.5-4B"
+  # Override: --problems-json results/.../sampled_problems.json (relative = project root)
 
 Verification runs locally via Kimina Docker — start it before running:
   docker run -d -p 8000:8000 projectnumina/kimina-lean-server:2.0.0
@@ -34,7 +35,12 @@ Verification runs locally via Kimina Docker — start it before running:
 # Infrastructure (app, image, volumes) lives in _modal_infra to avoid circular imports:
 #   modal_app.py  → imports QwenSDPOTrainer from modal_trainer.py
 #   modal_trainer.py → imports app/image/volumes from _modal_infra.py
+import dataclasses
 from qwen_sdpo._modal_infra import app
+from qwen_sdpo.config import SDPOConfig
+
+# Single source of truth for default learning rate (used by CLI when --learning-rate omitted)
+_DEFAULT_LR = next(f.default for f in dataclasses.fields(SDPOConfig) if f.name == "learning_rate")
 
 if app is not None:
     from qwen_sdpo.modal_trainer import QwenSDPOTrainer
@@ -50,20 +56,27 @@ if app is not None:
         max_iterations: int = 5,
         dataset: str = "cat-searcher/minif2f-lean4",
         dataset_split: str = "test",
-        learning_rate: float = 1e-5,
+        learning_rate: float = _DEFAULT_LR,
         temperature: float = 0.6,
         feedback_errors_only: bool = True,
         use_think_mode: bool = True,
         teacher_mode: str = "full_output",
+        minibatch_size: int = 1,
+        kl_mask_final_code_only: bool = False,
         kimina_url: str = "http://localhost:8000",
+        results_base_dir: str = "sdpo_results",
     ):
         """Local entrypoint: configure SDPOConfig and hand off to entrypoint.run_main().
 
+        minibatch_size: Number of on-policy samples per iteration (1 = single-sample; >1 = minibatch).
+        kl_mask_final_code_only: When True, KL loss is summed only over the final code block; context remains full.
         use_think_mode: When True, Qwen3.5 may emit <think> reasoning (default). When False,
             non-thinking mode: student and teacher use enable_thinking=False; teacher
             prompt includes the full failed generation.
         teacher_mode: One of "full_output", "answer_only", "code_only". Controls which
             part of the generation is used for the teacher in the KL loss.
+        results_base_dir: Base directory for local run output (default: sdpo_results).
+            Output is written to {results_base_dir}/{model_tag}/{teacher_mode}/run_.../
         This function runs on your local machine; generate_only and run_sdpo_step
         execute on the Modal H100 GPU.
         """
@@ -86,7 +99,10 @@ if app is not None:
             feedback_errors_only=feedback_errors_only,
             use_think_mode=use_think_mode,
             teacher_response_mode=teacher_mode,
+            minibatch_size=minibatch_size,
+            kl_mask_final_code_only=kl_mask_final_code_only,
             kimina_url=kimina_url,
+            results_base_dir=results_base_dir,
         )
 
         # _trainer is already hydrated (module-level). model_name is forwarded
@@ -95,26 +111,27 @@ if app is not None:
 
     @app.local_entrypoint()
     def run_sdpo_batch(
-        problems_json: str,
+        problems_json: str = "",
         model: str = "Qwen/Qwen3.5-4B",
         max_iterations: int = 5,
+        minibatch_size: int = 1,
         dataset: str = "cat-searcher/minif2f-lean4",
         dataset_split: str = "test",
-        learning_rate: float = 1e-5,
+        learning_rate: float = _DEFAULT_LR,
         temperature: float = 0.6,
         feedback_errors_only: bool = True,
         use_think_mode: bool = True,
         teacher_mode: str = "full_output",
+        kl_mask_final_code_only: bool = False,
         kimina_url: str = "http://localhost:8000",
     ):
-        """Train on multiple problems from a sampled_problems JSON; each problem from base HF model.
+        """Train on multiple problems; each problem from base HF model.
 
-        Loads problem_indices and problems from the JSON (same schema as
-        results/.../sampled_problems.json). Each problem is trained from the base
-        HuggingFace model (reset_to_base between problems).         Results are saved
-        after each problem. Manifest and all outputs live under sdpo_results
-        (same base dir as single-problem runs). Same GPU is reused when calls
-        stay within scaledown_window.
+        By default loads from qwen_sdpo/problem_idx.json (same folder as this app).
+        Pass --problems-json <path> to use another file; relative paths are resolved
+        against the project root. JSON schema: problem_indices, problems (problem_idx,
+        problem_id). Each problem is trained from the base HuggingFace model
+        (reset_to_base between problems). Results and manifest under sdpo_results.
         """
         import json
         from dataclasses import replace
@@ -124,7 +141,17 @@ if app is not None:
         from qwen_sdpo.config import SDPOConfig
         from qwen_sdpo.entrypoint import run_main_batch
 
-        path = Path(problems_json)
+        _qwen_sdpo_dir = Path(__file__).resolve().parent
+        _project_root = _qwen_sdpo_dir.parent
+        default_problems_path = _qwen_sdpo_dir / "problem_idx.json"
+
+        if not (problems_json and problems_json.strip()):
+            path = default_problems_path
+        else:
+            path = Path(problems_json)
+            if not path.is_absolute():
+                path = (_project_root / path).resolve()
+
         if not path.exists():
             raise FileNotFoundError(f"problems_json not found: {path}")
 
@@ -136,6 +163,11 @@ if app is not None:
             raise ValueError("problems_json must contain a non-empty 'problem_indices' list")
         problem_id_by_idx = {p["problem_idx"]: p["problem_id"] for p in problems}
 
+        n = len(problem_indices)
+        first_few = problem_indices[: min(5, n)]
+        print(f"Problems JSON: {path}")
+        print(f"Problems: {n} indices, first: {first_few}")
+
         allowed = ("full_output", "answer_only", "code_only")
         if teacher_mode not in allowed:
             raise ValueError(f"teacher_mode must be one of {allowed}, got {teacher_mode!r}")
@@ -144,6 +176,7 @@ if app is not None:
             model_name=model,
             problem_idx=problem_indices[0],  # overwritten per problem in run_main_batch
             max_iterations=max_iterations,
+            minibatch_size=minibatch_size,
             gpu="H100",
             dataset_name=dataset,
             dataset_split=dataset_split,
@@ -152,6 +185,7 @@ if app is not None:
             feedback_errors_only=feedback_errors_only,
             use_think_mode=use_think_mode,
             teacher_response_mode=teacher_mode,
+            kl_mask_final_code_only=kl_mask_final_code_only,
             kimina_url=kimina_url,
         )
 

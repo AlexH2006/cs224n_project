@@ -2,9 +2,9 @@
 TLDR: Build chat-formatted prompts for the SDPO student and teacher.
 
 Four templates: student_prompt_thinking, student_prompt_no_thinking, teacher_prompt_thinking,
-teacher_prompt_no_thinking. All share the same system prompt. build_student_prompt(cfg) selects
-student template by cfg.use_think_mode; build_teacher_prompt uses teacher thinking;
-build_teacher_prompt_with_full_generation uses teacher no-thinking (includes full_generation).
+teacher_prompt_no_thinking. All share the same system prompt. When CLI passes --no-use-think-mode
+(cfg.use_think_mode=False), both student and teacher use no-thinking templates and
+enable_thinking=False. Teacher prompts never include previous attempt text; only problem + feedback.
 
 Used by: entrypoint.py (builds both prompts locally before sending to Modal).
 """
@@ -17,7 +17,7 @@ _SYSTEM_PROMPT = "You are an expert in mathematics and Lean 4 theorem proving."
 
 # ---------------------------------------------------------------------------
 # Four prompt templates: student/teacher x thinking/no_thinking
-# Format keys: {informal}, {header_and_theorem}; teacher also {feedback}; no-thinking teacher also {full_generation}.
+# Format keys: student: {informal}, {header_and_theorem}; teacher: also {feedback}. No previous attempts in teacher.
 # ---------------------------------------------------------------------------
 
 # Thinking-mode student: zero-shot CoT, identical to qwen_eval's build_prompt() content.
@@ -62,7 +62,7 @@ You MUST avoid the following compiler errors of earlier attempts:
 {feedback}
 """
 
-# Non-thinking teacher: problem + full_generation (failed attempt) + feedback + instructions.
+# Non-thinking teacher: problem + feedback only (no previous attempt text).
 _TEACHER_PROMPT_NO_THINKING = """\
 Prove the following Lean 4 theorem without using `sorry`. At the very end of your response, output your complete, final solution as exactly one ```lean4``` code block.
 
@@ -121,10 +121,11 @@ def build_student_prompt(
     tokenizer,
     cfg: SDPOConfig,
 ) -> str:
-    """Build the student prompt. Template chosen by cfg.use_think_mode.
+    """Build the student prompt. Template and enable_thinking follow cfg.use_think_mode.
 
-    Uses _STUDENT_PROMPT_THINKING when use_think_mode=True, _STUDENT_PROMPT_NO_THINKING
-    when False. The student sees only the problem (no error feedback).
+    When CLI passes --no-use-think-mode (use_think_mode=False): uses _STUDENT_PROMPT_NO_THINKING
+    and enable_thinking=False. When use_think_mode=True: uses _STUDENT_PROMPT_THINKING and
+    enable_thinking=True. The student sees only the problem (no error feedback).
 
     Args:
         theorem_code: Formal Lean 4 theorem (with `sorry` placeholder).
@@ -158,7 +159,7 @@ def build_teacher_prompt(
 ) -> str:
     """Build the teacher prompt (thinking mode). Uses _TEACHER_PROMPT_THINKING.
 
-    Problem + raw feedback + closing instruction; no generation in the prompt.
+    Problem + feedback only; previous attempts are never included in the teacher prompt.
     enable_thinking is set by caller (e.g. False for answer_only/code_only when not truncated).
 
     Args:
@@ -183,26 +184,25 @@ def build_teacher_prompt(
     return _build_chat_prompt(user_content, tokenizer, enable_thinking=enable_thinking)
 
 
-def build_teacher_prompt_with_full_generation(
+def build_teacher_prompt_no_thinking(
     theorem_code: str,
     informal: str,
     header: str,
     feedback: str,
-    full_generation: str,
     tokenizer,
     cfg: SDPOConfig,
 ) -> str:
     """Build the teacher prompt (non-thinking mode). Uses _TEACHER_PROMPT_NO_THINKING.
 
-    User message includes problem, full_generation (the raw failed attempt), feedback, and
-    instructions. Always uses enable_thinking=False. Used by entrypoint when cfg.use_think_mode is False.
+    When CLI passes --no-use-think-mode (cfg.use_think_mode=False), entrypoint uses this
+    so both student and teacher use no-thinking (enable_thinking=False). Teacher sees
+    problem + feedback only; previous attempts are never included.
 
     Args:
         theorem_code:   Formal Lean 4 theorem (with `sorry` placeholder).
         informal:       Natural language problem description.
         header:         Dataset-provided header. May be empty; falls back to cfg.default_header.
         feedback:       Raw feedback string (compiler error, truncation, or parse failure).
-        full_generation: The entire raw model output from the failed attempt (appended to prompt).
         tokenizer:      HuggingFace tokenizer with apply_chat_template.
         cfg:            SDPOConfig (passes default_header).
 
@@ -214,6 +214,5 @@ def build_teacher_prompt_with_full_generation(
         informal=_safe_informal(informal),
         header_and_theorem=header_and_theorem,
         feedback=feedback.strip() if feedback else "Proof verification failed.",
-        full_generation=full_generation.strip() if full_generation else "(no generation)",
     )
     return _build_chat_prompt(user_content, tokenizer, enable_thinking=False)

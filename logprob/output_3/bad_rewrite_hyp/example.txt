@@ -1,8 +1,0 @@
-=== CONTEXT ===
-import Mathlib
-
-theorem bad_rewrite_hyp (a b : Nat) (h : a = b) : b = a := by
-
-=== PROOF ===
-  rw [h] at h
-  exact h

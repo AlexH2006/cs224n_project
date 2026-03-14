@@ -2,20 +2,25 @@
 TLDR: Local SDPO loop — orchestrates generate → parse → verify → update for one problem.
 
 The local driver runs on your machine. GPU-heavy work (generation + gradient step)
-executes on Modal via trainer.generate_only.remote() and trainer.run_sdpo_step.remote().
+executes on Modal via trainer.generate_batch.remote() and trainer.run_sdpo_step_minibatch.remote().
 Parsing and verification use self-contained qwen_sdpo modules (parsing, _verifier).
 
+Minibatch flow (config.minibatch_size, default 1): each iteration generates minibatch_size
+samples in one vLLM batch; each sample is parsed/verified and a payload built; one
+run_sdpo_step_minibatch aggregates valid (non-skip) losses and performs a single
+gradient update. When minibatch_size=1, behavior matches the original single-sample flow.
+
 Loop for each SDPO iteration:
-  1. Modal: generate one proof attempt (vLLM, student prompt)
-  2. Local: parse the lean4 code block  (qwen_sdpo.parsing)
-  3. Local: verify with Kimina Docker   (qwen_sdpo._verifier)
-  4. Build teacher prompt from THIS iteration's compiler feedback
-  5. Modal: SDPO gradient step          (student + teacher prompts)
-  6. Log metrics, save locally
+  1. Modal: generate_batch(minibatch_size prompts) → list of (raw_output, ids, finish_reason)
+  2. Local: for each result — parse, verify, build teacher prompt, build payload
+  3. If any sample succeeded: set best_proof, call run_sdpo_step_minibatch (logging only), break
+  4. Modal: run_sdpo_step_minibatch(payloads) → one aggregated iter_log, one optimizer step
+  5. Log metrics, save locally
 
 The teacher prompt is always built from the current iteration's verification
-result, never from a prior step. Every failed iteration produces a gradient
-update — there is no warm-up lag.
+result, never from a prior step. Every failed, non-truncated iteration produces
+a gradient update — there is no warm-up lag. Truncated generations skip the
+update and the loop continues.
 
 Exit conditions:
   - Proof verified successfully (is_success=True): loop ends, best proof saved.
@@ -65,10 +70,11 @@ from qwen_sdpo.parsing import (
     get_code_token_slice,
 )
 from qwen_sdpo.config import SDPOConfig
+from qwen_sdpo.modal_trainer import _should_skip_gradient_step
 from qwen_sdpo.prompts import (
     build_student_prompt,
     build_teacher_prompt,
-    build_teacher_prompt_with_full_generation,
+    build_teacher_prompt_no_thinking,
 )
 from qwen_sdpo.results import plot_training_curves, save_local_run
 
@@ -117,6 +123,8 @@ def _build_cfg_dict(cfg: SDPOConfig) -> dict:
         "feedback_errors_only": cfg.feedback_errors_only,
         "use_think_mode": cfg.use_think_mode,
         "teacher_response_mode": cfg.teacher_response_mode,
+        "max_feedback_errors": cfg.max_feedback_errors,
+        "minibatch_size": cfg.minibatch_size,
         "default_header": cfg.default_header,
         "use_lora": cfg.use_lora,
         "lora_r": cfg.lora_r,
@@ -130,6 +138,15 @@ def _build_cfg_dict(cfg: SDPOConfig) -> dict:
     }
 
 
+def _feedback_for_teacher_prompt(verification: dict, max_errors: int) -> str:
+    """Return the feedback string for the teacher prompt, truncated to the first max_errors when verification has an errors list."""
+    errors = verification.get("errors") or []
+    if isinstance(errors, list) and len(errors) > 0:
+        first_n = errors[:max_errors]
+        return "\n".join(str(e) for e in first_n)
+    return verification.get("feedback") or "Proof verification failed."
+
+
 def _print_banner(cfg: SDPOConfig) -> None:
     print("=" * 60)
     print("SDPO Qwen3.5 — Test-Time RL on Modal")
@@ -139,6 +156,7 @@ def _print_banner(cfg: SDPOConfig) -> None:
     print(f"Dataset:         {cfg.dataset_name} [{cfg.dataset_split}]")
     print(f"Problem index:   {cfg.problem_idx}")
     print(f"Max iterations:  {cfg.max_iterations}")
+    print(f"Minibatch size:  {cfg.minibatch_size}")
     print(f"Feedback mode:   {'errors only' if cfg.feedback_errors_only else 'errors + failed proof'}")
     print(f"Think mode:      {'on' if cfg.use_think_mode else 'off (non-thinking)'}")
     print(f"Teacher COT:     {cfg.teacher_response_mode}")
@@ -220,120 +238,122 @@ def run_main(
         iter_start = time.time()
         print(f"\n--- Iteration {iteration + 1}/{cfg.max_iterations} ---")
 
-        # --- Generate ---
-        raw_output, generated_ids_list, finish_reason = trainer.generate_only.remote(
-            cfg_dict, student_prompt
-        )
-        num_tokens = len(generated_ids_list)
-        print(f"  Generated {len(raw_output)} chars, {num_tokens} tokens, finish={finish_reason}")
+        # --- Minibatch generate: one vLLM batch call ---
+        prompts = [student_prompt] * cfg.minibatch_size
+        results = trainer.generate_batch.remote(cfg_dict, prompts)
+        print(f"  Generated minibatch of {len(results)} samples")
 
-        # --- Parse ---
-        # finish_reason="length" means vLLM hit max_tokens and stopped forcibly —
-        # the definitive truncation signal, regardless of think-tag presence.
-        parse_result = extract_full_lean_block_parsed(
-            raw_output,
-            finish_reason=finish_reason,
-        )
-        extracted_block = parse_result.block
-        is_truncated = parse_result.truncated
-        is_no_block = parse_result.no_block
-        full_code = create_full_lean_code(theorem_code, extracted_block, cfg.default_header)
+        payloads = []
+        any_success = False
+        for b, (raw_output, generated_ids_list, finish_reason) in enumerate(results):
+            num_tokens = len(generated_ids_list)
 
-        # --- Verify ---
-        # Skip the network round-trip if parsing already failed — the verifier
-        # would just see a sorry-bearing file and produce an unhelpful error.
-        if parse_result.failed:
-            verification = {"success": False, "complete": False, "errors": []}
-            if is_truncated:
-                verification["truncated"] = True
-                verification["feedback"] = (
-                    "Generation was truncated; no complete proof was produced."
+            # --- Parse ---
+            parse_result = extract_full_lean_block_parsed(
+                raw_output,
+                finish_reason=finish_reason,
+            )
+            extracted_block = parse_result.block
+            is_truncated = parse_result.truncated
+            is_no_block = parse_result.no_block
+            full_code = create_full_lean_code(theorem_code, extracted_block, cfg.default_header)
+
+            # --- Verify ---
+            if parse_result.failed:
+                verification = {"success": False, "complete": False, "errors": []}
+                if is_truncated:
+                    verification["truncated"] = True
+                    verification["feedback"] = (
+                        "Generation was truncated; no complete proof was produced."
+                    )
+                else:
+                    verification["no_block"] = True
+                    verification["feedback"] = (
+                        "No lean4 code block was found in your response. "
+                        "At the very end of your response, you MUST output your proof as "
+                        "exactly one ```lean4 code block that is complete and self-contained."
+                    )
+            else:
+                verification = _verify_with_retries(full_code, cfg)
+
+            is_server_error = verification.get("is_server_error", False)
+            is_success = (
+                not parse_result.failed
+                and verification.get("success", False)
+                and verification.get("complete", False)
+            )
+
+            if is_success:
+                any_success = True
+                best_proof = extracted_block
+
+            # --- Build teacher prompt from this sample's verification result ---
+            feedback = _feedback_for_teacher_prompt(verification, cfg.max_feedback_errors)
+            if cfg.use_think_mode:
+                teacher_enable_thinking = is_truncated or cfg.teacher_response_mode == "full_output"
+                teacher_prompt = build_teacher_prompt(
+                    theorem_code, informal, header, feedback, tokenizer, cfg,
+                    enable_thinking=teacher_enable_thinking,
                 )
             else:
-                verification["no_block"] = True
-                verification["feedback"] = (
-                    "No lean4 code block was found in your response. "
-                    "At the very end of your response, you MUST output your proof as "
-                    "exactly one ```lean4 code block that is complete and self-contained."
+                teacher_prompt = build_teacher_prompt_no_thinking(
+                    theorem_code, informal, header, feedback, tokenizer, cfg,
                 )
-        else:
-            verification = _verify_with_retries(full_code, cfg)
 
-        is_server_error = verification.get("is_server_error", False)
-        is_success = (
-            not parse_result.failed
-            and verification.get("success", False)
-            and verification.get("complete", False)
-        )
-
-        # Log parse + verification result.
-        if is_truncated:
-            print("  Parse: TRUNCATED (reasoning exceeded token limit — no code block reached)")
-        elif is_no_block:
-            print("  Parse: FAILED (no lean4 code block found in output)")
-        elif is_server_error:
-            print("  Verification: SERVER ERROR (skipping SDPO update)")
-        else:
-            print(f"  Verification: {'SUCCESS' if is_success else 'FAILED'}")
-
-        # Print feedback when the proof failed.
-        if not is_success and not is_server_error:
-            feedback_text = verification.get("feedback", "")
-            errors = verification.get("errors", [])
-            if feedback_text:
-                lines = feedback_text.strip().split("\n")
-                label = "Truncation feedback" if is_truncated else "Parse feedback" if is_no_block else "Lean feedback"
-                print(f"  {label}:\n" + "\n".join(f"    {l}" for l in lines), flush=True)
-            elif errors:
-                print("  Lean errors:\n" + "\n".join(f"    {e}" for e in errors), flush=True)
-            else:
-                print("  (no feedback captured)", flush=True)
-
-        # --- Build teacher prompt from THIS iteration's verification result. ---
-        # The teacher is the feedback-conditioned policy: same model, same problem,
-        # but with the compiler error from the current attempt appended to the prompt.
-        # This is the core of SDPO self-distillation — the teacher signal is always
-        # derived from the immediately preceding generation, never from a prior step.
-        feedback = verification.get("feedback") or "Proof verification failed."
-        if cfg.use_think_mode:
-            # Thinking mode: teacher prompt = problem + feedback; enable_thinking
-            # depends on teacher_response_mode and truncation.
-            teacher_enable_thinking = is_truncated or cfg.teacher_response_mode == "full_output"
-            teacher_prompt = build_teacher_prompt(
-                theorem_code, informal, header, feedback, tokenizer, cfg,
-                enable_thinking=teacher_enable_thinking,
-            )
-        else:
-            # Non-thinking mode: teacher sees full generation in the prompt; always disable thinking.
-            teacher_prompt = build_teacher_prompt_with_full_generation(
-                theorem_code, informal, header, feedback, raw_output, tokenizer, cfg,
-            )
-
-        # --- Build payload: teacher_response_ids and teacher_response_mode ---
-        # Apply mode-specific slice logic. Truncation: answer_only still uses get_answer_token_slice;
-        # code_only has no block when truncated → use full. Payload uses "full" | "answer_only" | "code_only".
-        mode = cfg.teacher_response_mode
-        if mode == "full_output":
-            teacher_response_ids = generated_ids_list
-            teacher_response_mode = "full"
-            cot_len = 0
-        elif mode == "answer_only":
-            answer_ids, cot_len = get_answer_token_slice(
-                raw_output, generated_ids_list, tokenizer
-            )
-            teacher_response_ids = answer_ids
-            teacher_response_mode = "answer_only"
-        elif mode == "code_only":
-            if (
-                is_truncated
-                or parse_result.failed
-                or parse_result.code_block_start_char is None
-                or parse_result.code_block_end_char is None
-            ):
+            # --- Build payload: teacher_response_ids and teacher_response_mode ---
+            mode = cfg.teacher_response_mode
+            if mode == "full_output":
                 teacher_response_ids = generated_ids_list
                 teacher_response_mode = "full"
                 cot_len = 0
+            elif mode == "answer_only":
+                answer_ids, cot_len = get_answer_token_slice(
+                    raw_output, generated_ids_list, tokenizer
+                )
+                teacher_response_ids = answer_ids
+                teacher_response_mode = "answer_only"
+            elif mode == "code_only":
+                if (
+                    is_truncated
+                    or parse_result.failed
+                    or parse_result.code_block_start_char is None
+                    or parse_result.code_block_end_char is None
+                ):
+                    teacher_response_ids = generated_ids_list
+                    teacher_response_mode = "full"
+                    cot_len = 0
+                else:
+                    code_ids, code_start = get_code_token_slice(
+                        raw_output,
+                        generated_ids_list,
+                        tokenizer,
+                        parse_result.code_block_start_char,
+                        parse_result.code_block_end_char,
+                    )
+                    if code_start == 0 and len(code_ids) == len(generated_ids_list):
+                        teacher_response_ids = generated_ids_list
+                        teacher_response_mode = "full"
+                        cot_len = 0
+                    else:
+                        teacher_response_ids = code_ids
+                        teacher_response_mode = "code_only"
+                        cot_len = code_start
             else:
+                teacher_response_ids = generated_ids_list
+                teacher_response_mode = "full"
+                cot_len = 0
+
+            # KL loss mask: when kl_mask_final_code_only, pass final code block token span
+            # for loss only; context remains full. Trainer sums KL only over this span.
+            kl_final_code_start = None
+            kl_final_code_end = None
+            if (
+                cfg.kl_mask_final_code_only
+                and not is_truncated
+                and not parse_result.failed
+                and parse_result.code_block_start_char is not None
+                and parse_result.code_block_end_char is not None
+            ):
                 code_ids, code_start = get_code_token_slice(
                     raw_output,
                     generated_ids_list,
@@ -341,42 +361,40 @@ def run_main(
                     parse_result.code_block_start_char,
                     parse_result.code_block_end_char,
                 )
-                if code_start == 0 and len(code_ids) == len(generated_ids_list):
-                    teacher_response_ids = generated_ids_list
-                    teacher_response_mode = "full"
-                    cot_len = 0
-                else:
-                    teacher_response_ids = code_ids
-                    teacher_response_mode = "code_only"
-                    cot_len = code_start
-        else:
-            teacher_response_ids = generated_ids_list
-            teacher_response_mode = "full"
-            cot_len = 0
+                kl_final_code_start = code_start
+                kl_final_code_end = code_start + len(code_ids)
 
-        payload = {
-            "iteration": iteration + 1,
-            "base_prompt": student_prompt,
-            "teacher_prompt": teacher_prompt,
-            "raw_output": raw_output,
-            "generated_ids": generated_ids_list,
-            "teacher_response_ids": teacher_response_ids,
-            "teacher_response_mode": teacher_response_mode,
-            "cot_len": cot_len,
-            "extracted_block": extracted_block,
-            "full_code": full_code,
-            "verification": verification,
-            "num_tokens": num_tokens,
-            "feedback": feedback,
-            "is_success": is_success,
-            "is_server_error": is_server_error,
-        }
+            payload = {
+                "iteration": iteration + 1,
+                "base_prompt": student_prompt,
+                "teacher_prompt": teacher_prompt,
+                "raw_output": raw_output,
+                "generated_ids": generated_ids_list,
+                "teacher_response_ids": teacher_response_ids,
+                "teacher_response_mode": teacher_response_mode,
+                "cot_len": cot_len,
+                "kl_final_code_start": kl_final_code_start,
+                "kl_final_code_end": kl_final_code_end,
+                "extracted_block": extracted_block,
+                "full_code": full_code,
+                "verification": verification,
+                "num_tokens": num_tokens,
+                "feedback": feedback,
+                "is_success": is_success,
+                "is_server_error": is_server_error,
+                "is_truncated": is_truncated,
+            }
+            payloads.append(payload)
+            if any_success:
+                break
 
-        if is_success:
-            # Proof found — log this iteration (no gradient update needed) then stop.
-            best_proof = extracted_block
-            iter_log = trainer.run_sdpo_step.remote(cfg_dict, payload)
-            logs["iteration_logs"].append(iter_log)
+        # --- Log and step: one call per iteration (minibatch or single) ---
+        iter_log = trainer.run_sdpo_step_minibatch.remote(cfg_dict, payloads)
+        logs["iteration_logs"].append(iter_log)
+
+        n_valid = iter_log.get("n_valid", 0)
+        minibatch_size = iter_log.get("minibatch_size", len(payloads))
+        if any_success:
             metrics["iterations"].append(iteration + 1)
             metrics["losses"].append(0.0)
             metrics["rewards"].append(1.0)
@@ -384,18 +402,20 @@ def run_main(
             metrics["entropies"].append(0.0)
             metrics["grad_norms"].append(0.0)
             metrics["timestamps"].append(time.time() - iter_start)
-            print("  Proof verified!")
+            print(f"  Proof verified! ({n_valid}/{minibatch_size} valid in minibatch)")
             break
 
-        if is_server_error:
-            # Don't update on Kimina outages — the feedback signal is unreliable.
-            iter_log = trainer.run_sdpo_step.remote(cfg_dict, payload)
-            logs["iteration_logs"].append(iter_log)
-            print("  Skipping SDPO update (server error).")
+        if n_valid == 0:
+            print(f"  Skipping SDPO update (all {minibatch_size} skipped).")
+            metrics["iterations"].append(iteration + 1)
+            metrics["losses"].append(0.0)
+            metrics["rewards"].append(0.0)
+            metrics["kl_divs"].append(0.0)
+            metrics["entropies"].append(0.0)
+            metrics["grad_norms"].append(0.0)
+            metrics["timestamps"].append(time.time() - iter_start)
             continue
 
-        iter_log = trainer.run_sdpo_step.remote(cfg_dict, payload)
-        logs["iteration_logs"].append(iter_log)
         loss = iter_log.get("loss") or 0.0
         reward = iter_log.get("reward") or 0.0
         grad_norm = iter_log.get("grad_norm") or 0.0
@@ -407,9 +427,8 @@ def run_main(
         metrics["grad_norms"].append(grad_norm)
         metrics["timestamps"].append(time.time() - iter_start)
         print(
-            f"  Loss: {loss:.4f}  "
-            f"Reward: {reward:.4f}  "
-            f"Grad norm: {grad_norm:.4f}"
+            f"  Loss: {loss:.4f}  Reward: {reward:.4f}  Grad norm: {grad_norm:.4f}  "
+            f"({n_valid}/{minibatch_size} valid)"
         )
 
     # --- Finalise ---

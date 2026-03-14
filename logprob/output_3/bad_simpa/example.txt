@@ -1,7 +1,0 @@
-=== CONTEXT ===
-import Mathlib
-
-theorem bad_simpa (n : Nat) : n + 0 = n := by
-
-=== PROOF ===
-  simpa using Nat.zero_add n

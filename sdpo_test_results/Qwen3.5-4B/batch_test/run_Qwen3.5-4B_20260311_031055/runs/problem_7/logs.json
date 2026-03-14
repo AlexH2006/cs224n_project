@@ -1,0 +1,97 @@
+{
+  "problem_id": "mathd_algebra_44",
+  "problem": {
+    "problem_idx": 7,
+    "problem_id": "mathd_algebra_44",
+    "formal_statement": "theorem mathd_algebra_44\n  (s t : \u211d)\n  (h\u2080 : s = 9 - 2 * t)\n  (h\u2081 : t = 3 * s + 1) :\n  s = 1 \u2227 t = 4 := sorry",
+    "informal_stmt": "At which point do the lines $s=9-2t$ and $t=3s+1$ intersect? Give your answer as an ordered pair in the form $(s, t).$ Show that it is (1,4).",
+    "header": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology"
+  },
+  "config": {
+    "model_name": "Qwen/Qwen3.5-4B",
+    "dataset_name": "cat-searcher/minif2f-lean4",
+    "dataset_split": "test",
+    "problem_idx": 7,
+    "max_new_tokens": 8192,
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "repetition_penalty": 1.0,
+    "max_iterations": 8,
+    "learning_rate": 1e-05,
+    "distillation_topk": 20,
+    "feedback_errors_only": true,
+    "use_think_mode": false,
+    "teacher_response_mode": "full_output",
+    "default_header": "import Mathlib\nset_option maxHeartbeats 400000\nopen BigOperators Real Nat Topology Rat",
+    "use_lora": true,
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "kimina_url": "http://localhost:8000",
+    "verify_timeout_s": 60,
+    "verify_retries": 3,
+    "verify_retry_wait_s": 3.0,
+    "results_base_dir": "sdpo_results",
+    "gpu": "H100"
+  },
+  "iteration_logs": [
+    {
+      "iteration": 1,
+      "student_prompt": "<|im_start|>system\nYou are an expert in mathematics and Lean 4 theorem proving.<|im_end|>\n<|im_start|>user\nProve the following Lean 4 theorem without using `sorry`. At the very end of your response, output your complete, final solution as exactly one ```lean4``` code block.\n\n# Informal problem:\nAt which point do the lines $s=9-2t$ and $t=3s+1$ intersect? Give your answer as an ordered pair in the form $(s, t).$ Show that it is (1,4).\n\n# Lean 4 theorem to prove:\n```lean4\nimport Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\ntheorem mathd_algebra_44\n  (s t : \u211d)\n  (h\u2080 : s = 9 - 2 * t)\n  (h\u2081 : t = 3 * s + 1) :\n  s = 1 \u2227 t = 4 := sorry\n```<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+      "teacher_prompt": "<|im_start|>system\nYou are an expert in mathematics and Lean 4 theorem proving.<|im_end|>\n<|im_start|>user\nProve the following Lean 4 theorem without using `sorry`. At the very end of your response, output your complete, final solution as exactly one ```lean4``` code block.\n\n# Informal problem:\nAt which point do the lines $s=9-2t$ and $t=3s+1$ intersect? Give your answer as an ordered pair in the form $(s, t).$ Show that it is (1,4).\n\n# Lean 4 theorem to prove:\n```lean4\nimport Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\n\nopen BigOperators\nopen Real\nopen Nat\nopen Topology\ntheorem mathd_algebra_44\n  (s t : \u211d)\n  (h\u2080 : s = 9 - 2 * t)\n  (h\u2081 : t = 3 * s + 1) :\n  s = 1 \u2227 t = 4 := sorry\n```\n\nYou MUST avoid the following compiler errors of earlier attempts:\nProof verification failed.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+      "raw_output": "To prove the theorem, we need to solve the system of linear equations given by the hypotheses:\n1. $s = 9 - 2t$\n2. $t = 3s + 1$\n\nWe will substitute the expression for $s$ from the first equation into the second equation to find $t$, and then substitute that value back to find $s$.\n\n### Step-by-Step Deduction\n\n1.  **Substitute $s$ in the second equation:**\n    From $s = 9 - 2t$, substitute $s$ into $t = 3s + 1$:\n    $$t = 3(9 - 2t) + 1$$\n\n2.  **Solve for $t$:**\n    Distribute the 3:\n    $$t = 27 - 6t + 1$$\n    Combine constant terms:\n    $$t = 28 - 6t$$\n    Add $6t$ to both sides:\n    $$7t = 28$$\n    Divide by 7:\n    $$t = 4$$\n\n3.  **Solve for $s$:**\n    Substitute $t = 4$ back into the first equation $s = 9 - 2t$:\n    $$s = 9 - 2(4)$$\n    $$s = 9 - 8$$\n    $$s = 1$$\n\n4.  **Verification:**\n    Check if $(s, t) = (1, 4)$ satisfies both original equations:\n    - Equation 1: $1 = 9 - 2(4) \\implies 1 = 9 - 8 \\implies 1 = 1$ (True)\n    - Equation 2: $4 = 3(1) + 1 \\implies 4 = 3 + 1 \\implies 4 = 4$ (True)\n\nThus, the unique solution is $s = 1$ and $t = 4$.\n\n### Lean 4 Proof\n\n```lean4\nimport Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\n\nopen Real\n\ntheorem mathd_algebra_44\n  (s t : \u211d)\n  (h\u2080 : s = 9 - 2 * t)\n  (h\u2081 : t = 3 * s + 1) :\n  s = 1 \u2227 t = 4 := by\n  have h\u2082 : t = 4 := by\n    rw [h\u2080] at h\u2081\n    linarith\n  have h\u2083 : s = 1 := by\n    rw [h\u2082] at *\n    linarith\n  exact \u27e8h\u2083, h\u2082\u27e9\n```\n\n```lean4\nimport Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\n\nopen Real\n\ntheorem mathd_algebra_44\n  (s t : \u211d)\n  (h\u2080 : s = 9 - 2 * t)\n  (h\u2081 : t = 3 * s + 1) :\n  s = 1 \u2227 t = 4 := by\n  have h\u2082 : t = 4 := by\n    rw [h\u2080] at h\u2081\n    linarith\n  have h\u2083 : s = 1 := by\n    rw [h\u2082] at *\n    linarith\n  exact \u27e8h\u2083, h\u2082\u27e9\n```",
+      "extracted_block": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\n\nopen Real\n\ntheorem mathd_algebra_44\n  (s t : \u211d)\n  (h\u2080 : s = 9 - 2 * t)\n  (h\u2081 : t = 3 * s + 1) :\n  s = 1 \u2227 t = 4 := by\n  have h\u2082 : t = 4 := by\n    rw [h\u2080] at h\u2081\n    linarith\n  have h\u2083 : s = 1 := by\n    rw [h\u2082] at *\n    linarith\n  exact \u27e8h\u2083, h\u2082\u27e9",
+      "full_code": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\n\nopen Real\n\ntheorem mathd_algebra_44\n  (s t : \u211d)\n  (h\u2080 : s = 9 - 2 * t)\n  (h\u2081 : t = 3 * s + 1) :\n  s = 1 \u2227 t = 4 := by\n  have h\u2082 : t = 4 := by\n    rw [h\u2080] at h\u2081\n    linarith\n  have h\u2083 : s = 1 := by\n    rw [h\u2082] at *\n    linarith\n  exact \u27e8h\u2083, h\u2082\u27e9",
+      "verification": {
+        "success": true,
+        "complete": true,
+        "has_sorry": false,
+        "feedback": "",
+        "errors": [],
+        "messages": [],
+        "sorries": [],
+        "source": "kimina",
+        "is_server_error": false,
+        "debug": {
+          "verifier_wall_s": 0.252
+        }
+      },
+      "success": true,
+      "num_tokens": 746,
+      "loss": null,
+      "reward": null,
+      "kl_div": null,
+      "entropy": null,
+      "grad_norm": null
+    }
+  ],
+  "start_time": "2026-03-11T03:11:02.074637",
+  "end_time": "2026-03-11T03:16:43.071406",
+  "success": true,
+  "best_proof": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\n\nopen Real\n\ntheorem mathd_algebra_44\n  (s t : \u211d)\n  (h\u2080 : s = 9 - 2 * t)\n  (h\u2081 : t = 3 * s + 1) :\n  s = 1 \u2227 t = 4 := by\n  have h\u2082 : t = 4 := by\n    rw [h\u2080] at h\u2081\n    linarith\n  have h\u2083 : s = 1 := by\n    rw [h\u2082] at *\n    linarith\n  exact \u27e8h\u2083, h\u2082\u27e9",
+  "metrics": {
+    "iterations": [
+      1
+    ],
+    "losses": [
+      0.0
+    ],
+    "rewards": [
+      1.0
+    ],
+    "kl_divs": [
+      0.0
+    ],
+    "entropies": [
+      0.0
+    ],
+    "grad_norms": [
+      0.0
+    ],
+    "timestamps": [
+      340.9962041378021
+    ]
+  },
+  "total_generation_tokens": 746
+}
