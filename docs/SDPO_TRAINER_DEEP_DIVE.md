@@ -1,194 +1,95 @@
-# SDPO Trainer — Deep Dive (Current Code)
+# SDPO Trainer — Deep Dive (qwen_sdpo)
 
-This document reflects the **current** state of `lean_sdpo_modal.py` (1545 lines) and provides a line-by-line style breakdown of the trainer plus a workflow diagram.
-
----
-
-## 1. Recent / Notable Updates (vs earlier version)
-
-| Area | Change |
-|------|--------|
-| **Model reset** | **Removed.** No more `initial_state` or `reload_model()`. The comment in `run_sdpo` states: *"Model weights are NOT reset between problems - this is intentional! SDPO is a test-time training method where the model accumulates learning across problems."* So the same Modal container can run multiple problems and the model keeps updated weights. |
-| **Generation** | `max_new_tokens` increased to **8192** (from 4096) for long thinking outputs. |
-| **Sorry replacement** | **Only the last `sorry`** in the theorem file is replaced with tactics (fixes Putnam-style problems with `abbrev ... := sorry` and `theorem ... := sorry`). Explicit patterns `:= by sorry` and `:= by\n  sorry` are still handled first. |
-| **Config** | Config now carries **field name lists**: `theorem_fields`, `informal_fields`, `header_fields`, `id_fields`. Optional overrides: `system_prompt`, `default_header`. |
-| **main()** | More robust dataset loading (e.g. `trust_remote_code`, fallback splits). CLI overrides: `--theorem-field`, `--informal-field`, `--header-field`, `--system-prompt`, `--default-header`. Built `config_dict` includes the field lists and optional overrides. |
-| **Iteration logs** | Each `iter_log` stores `student_prompt` and `teacher_prompt` (or `current_teacher_prompt`) for analysis. |
+This document describes the **current** SDPO pipeline: **qwen_sdpo** — Qwen 3.5 (4B/9B) with QLoRA on Modal, verification and orchestration on your machine (Kimina Docker). For a high-level workflow and diagram, see **[docs/QWEN_SDPO_WORKFLOW.md](QWEN_SDPO_WORKFLOW.md)**.
 
 ---
 
-## 2. SDPOConfig (used by the trainer)
+## 1. Architecture: Local vs Modal
 
-- **Model:** `model_name`.
-- **Dataset:** `dataset_name`, `dataset_subset`, `dataset_split`, `problem_idx`.
-- **Field mapping:** `theorem_fields`, `informal_fields`, `header_fields`, `id_fields` (lists of candidate keys for dataset-agnostic access).
-- **Generation:** `max_new_tokens` (8192), `temperature`, `top_p`, `stop_tokens` (list).
-- **RL:** `max_iterations`, `learning_rate`, `distillation_topk` (top-K for KL).
-- **Prompts:** `system_prompt`, `default_header` (Lean imports when no dataset header and no model imports).
-- **Feedback:** `feedback_include_failed_proof`, `feedback_attempt_template`, `feedback_attempt_template_errors_only`, `feedback_separator`.
-- **Output:** `output_dir`.
+| Where | What |
+|-------|------|
+| **Local** | Entrypoint (`modal run qwen_sdpo/modal_app.py`), dataset load, prompt building, **parsing** (lean4 block), **verification** (Kimina HTTP), payload construction, saving logs and plots |
+| **Modal (H100)** | vLLM generation, HuggingFace QLoRA model for SDPO loss, optimizer step, **LoRA → vLLM weight sync** so the next generation uses the updated policy |
+
+The trainer class **QwenSDPOTrainer** lives on Modal. The **local** driver in `entrypoint.py` runs the loop: call Modal to generate → parse and verify locally → build teacher payloads → call Modal to run one SDPO step (loss + backward + sync).
 
 ---
 
-## 3. SDPOTrainer — Detailed Breakdown
+## 2. SDPOConfig (qwen_sdpo)
 
-### 3.1 Class and `setup` (lines ~370–438)
+Defined in **[qwen_sdpo/config.py](../qwen_sdpo/config.py)**.
 
-- **Modal:** `@app.cls` with A100-40GB, 1h timeout, 10 min scaledown, volumes `/cache` (HF), `/output` (results), secret `huggingface`.
-- **Parameter:** `model_name` so callers can pass a different HF model ID.
-- **`setup` (`@modal.enter()`):**
-  - Sets `HF_HOME=/cache` and copies `HF_TOKEN` → `HUGGING_FACE_HUB_TOKEN` if set.
-  - **Tokenizer:** `AutoTokenizer.from_pretrained(model_name)`, left padding, pad = eos if missing.
-  - **vLLM:** `LLM(..., gpu_memory_utilization=0.25, max_model_len=4096)` for **generation only** (no gradients).
-  - **HF model:** Same weights via `AutoModelForCausalLM`, bfloat16, `device_map="auto"`, `train()`, gradient checkpointing if available.
-  - No snapshot of initial weights; the model is trained in place and not reset after a run.
-
-### 3.2 `_get_field` (static, ~441–455)
-
-- **Purpose:** Dataset-agnostic field access.
-- **Logic:** Given `data` and a list of keys (e.g. `theorem_fields`), returns the first key’s value that exists and is non-empty. If value is list/tuple, returns `str(value[0])`; if str, returns it. Else `default`.
-- Used everywhere the trainer needs theorem code, header, or informal text from a `problem` dict.
-
-### 3.3 `run_sdpo` (lines ~457–630)
-
-**Signature:** `run_sdpo(config_dict, problem, verifier_results=None)`. `verifier_results` is unused.
-
-**Setup:**
-
-- `config = SDPOConfig(**config_dict)`.
-- **metrics:** lists for iterations, losses, rewards, kl_divs, entropies, grad_norms, timestamps.
-- **logs:** problem, config, iteration_logs, start_time (later: end_time, success, best_proof, metrics, model_save_path).
-- **optimizer:** `AdamW(model.parameters(), lr=config.learning_rate)`.
-- **feedback_history:** list of `(feedback_str, tactics_str)` for failed attempts.
-- **base_prompt:** built once with `_create_base_prompt(config, problem)`. This is the **student** prompt (problem only) and never changes during the run.
-
-**Per iteration:**
-
-1. **Generate**  
-   `raw_output, generated_ids = _generate_proof(config, base_prompt)`.  
-   Generation is **always** from `base_prompt` (student context only).
-
-2. **Extract tactics**  
-   `tactics = _extract_proof_tactics(raw_output)`.
-
-3. **Dataset fields**  
-   `lean4_code = _get_field(problem, config.theorem_fields)`, `header = _get_field(problem, config.header_fields)`.
-
-4. **Full Lean file**  
-   `full_code = _create_full_lean_code(config, lean4_code, tactics, header)`.
-
-5. **Verify**  
-   `LeanVerifier().verify.remote(full_code)` up to 3 times on server errors.
-
-6. **Success**  
-   `is_success = verification["success"] and verification["complete"]`.  
-   If `tactics.strip().lower() == "sorry"`, force failure and set feedback to forbid `sorry`.
-
-7. **Logging**  
-   `current_teacher_prompt = _create_feedback_prompt(...)` if there is feedback_history (for logging).  
-   `iter_log` = iteration, student_prompt, teacher_prompt (or current_teacher_prompt), raw_output, extracted_tactics, full_code, verification, success.
-
-8. **If success**  
-   Set best_proof, append to logs/metrics (loss/reward/kl/entropy/grad_norm as 0 or None), **break**.
-
-9. **If server error**  
-   Append iter_log with server_error, **continue** (no training).
-
-10. **Else (failed proof)**  
-    - Append `(feedback, tactics)` to feedback_history.  
-    - `teacher_prompt = _create_feedback_prompt(config, problem, feedback_history)`.  
-    - `per_token_kl, reward, avg_kl, entropy = _compute_sdpo_loss(config, base_prompt, teacher_prompt, generated_ids)`.  
-    - `loss = per_token_kl.mean()`, backward, grad norm, `clip_grad_norm_(1.0)`, optimizer step.  
-    - Append iter_log (with full teacher_prompt, loss, reward, kl, entropy, grad_norm, feedback) and same to metrics/timestamps.
-
-**After loop:** Set logs (end_time, success, best_proof, metrics), call `_save_results(config, logs, metrics)` (saves model + logs + plots + metrics), set `logs["model_save_path"]`, **return logs** (no model reset).
-
-### 3.4 `_create_base_prompt` (lines ~672–719)
-
-- **Role:** Student prompt only; no informal, no feedback.
-- Gets `lean4_code` and `header` via config field lists; `has_header = bool(header.strip())`.
-- **User text:** “Prove the following Lean 4 theorem.” + lean4 block + “output ONLY the proof tactics in a ```lean4 code block”, replace sorry; then either “Do NOT include import/theorem/:= sorry” (if has_header) or “Include necessary import… Do NOT include theorem or := sorry”.
-- Renders with `apply_chat_template` (system = `config.system_prompt`, user = user_content, add_generation_prompt=True) or a simple "System: ... User: ... Assistant:" fallback.
-
-### 3.5 `_create_feedback_prompt` (lines ~721–800)
-
-- **Role:** Teacher prompt: same theorem + informal (if any) + all previous failed attempts.
-- Gets lean4_code, informal, header via config field lists.
-- **User text:** “Prove the following Lean 4 theorem.” + optional “Problem: {informal}” + lean4 block + if feedback_history: “The following N proof attempt(s) failed:” then for each attempt either `feedback_attempt_template` (attempt_num, feedback, failed_proof) or `feedback_attempt_template_errors_only` (attempt_num, feedback), joined by feedback_separator, then “Analyze the errors and provide a corrected proof.” Then “Provide corrected proof tactics” (and optional “include any necessary imports” if no header).
-- **System:** `config.system_prompt + " After reasoning, output the proof tactics in a ```lean4 code block."`  
-- Same chat-template vs fallback as base.
-
-### 3.6 `_generate_proof` (lines ~802–819)
-
-- Builds vLLM `SamplingParams` from config (temperature, top_p, max_tokens, stop=config.stop_tokens).
-- `vllm_engine.generate([prompt], sampling_params)` → first output text.
-- Tokenizes that text with the **HF tokenizer** (add_special_tokens=False) → `generated_ids` for the HF model (SDPO loss uses HF model + tokenizer).
-- Returns `(generated_text, generated_ids)`.
-
-### 3.7 `_is_degenerate_output` (lines ~821–845)
-
-- Detects repetitive output: if any phrase of length 10/15/20 words appears ≥ threshold (default 5), returns True.
-- Used in `_extract_proof_tactics` to return `"sorry"` and avoid training on looping garbage.
-
-### 3.8 `_extract_tactics_from_code_block` (lines ~847–893)
-
-- Input: one code block string.
-- Keeps: lines starting with `import `, `open `, `set_option `, and lines that are not filtered out.
-- Skips: theorem/lemma lines, parameter lines `(x : T)`, “:= sorry”, conclusion/type-signature lines (several regexes), lines ending with “:=” or “:= by”.
-- Returns joined kept lines (tactics + optional header-like lines).
-
-### 3.9 `_extract_proof_tactics` (lines ~895–1006)
-
-- If `_is_degenerate_output(output)`: return `"sorry"`.
-- **1)** After `</think>`: look for lean4/lean code blocks or use raw text; run through `_extract_tactics_from_code_block`; take first valid tactics.
-- **2)** If no tactics, inside `<think>...</think>`: extract from code blocks there, join all tactic-like blocks.
-- **3)** If still none, any code block in full output.
-- **4)** If still none, “:= by” pattern: take lines after last “:= by” (up to 10, no comments).
-- Clean: strip leading “by”, reject “:= sorry” or tactics that are just “sorry” or too short.
-- No keyword heuristics (e.g. “simp” in reasoning); if nothing found, return `"sorry"`.
-
-### 3.10 `_create_full_lean_code` (lines ~1008–1078)
-
-- Splits `proof_tactics` into model_imports, model_opens, model_set_options vs tactic lines; builds `tactics_clean` and `indented_proof`.
-- **Sorry replacement (main-theorem only):**
-  - If `":= by sorry"` in theorem_code → replace that with `":= by\n  " + indented_proof`.
-  - Elif `":= by\n  sorry"` → replace that with `":= by\n  " + indented_proof`.
-  - Else: replace **only the last** `"sorry"` (rfind) with indented_proof, so earlier sorries (e.g. abbrev) stay.
-- **Header:** If dataset header: use it. Else if model gave imports: use them (+ set_options, opens). Else `config.default_header`.
-- Returns `final_header + "\n\n" + theorem_with_proof`.
-
-### 3.11 `_add_tail` (static, lines ~1080–1087)
-
-- Given log-probs over vocab, appends a “tail” bucket so the distribution over [top-k + tail] sums to 1 for KL.
-
-### 3.12 `_compute_sdpo_loss` (lines ~1089–1185)
-
-- Tokenizes base_prompt and teacher_prompt (truncate 2048), concats each with generated_ids → student_input_ids, teacher_input_ids.
-- **Student:** HF forward on student_input_ids; logits over **response** positions only.
-- **Entropy:** From student logits on response (logsumexp and -p*log(p)).
-- **Top-K:** For each position, keep top-K student logits and indices; teacher logits at those indices (no grad).
-- **Tail:** `_add_tail` on student and teacher top-k log-probs.
-- **KL:** `F.kl_div(teacher, student, log_target=True)` per bucket, sum → per_token_kl.
-- **Reward (logging):** From student vs teacher log-prob of actual response tokens (no grad).
-- Returns `(per_token_kl, total_reward, avg_kl, entropy)`.
-
-### 3.13 `_save_results` (lines ~1187–1260)
-
-- Creates `/output/{output_dir}/run_{timestamp}/`, saves **current model + tokenizer** in `run_dir/final_model/`, writes logs.json, metrics.json, and if there are iterations a 2×2 plot (loss, grad norm, entropy, KL) as training_curves.png. Returns path to final_model.
+- **Model / dataset:** `model_name`, `dataset_name`, `dataset_subset`, `dataset_split`, `problem_idx`.
+- **Generation:** `max_new_tokens`, `temperature`, `top_p`, `minibatch_size` (samples per iteration).
+- **SDPO:** `max_iterations`, `learning_rate`, `distillation_topk` (top-K for KL), `teacher_response_mode` (full_output / answer_only / code_only), `kl_mask_final_code_only`, `feedback_errors_only`.
+- **LoRA:** `lora_r`, `lora_alpha`, `lora_dropout`, etc.
+- **Verification:** `kimina_url`, `verify_timeout` (used locally).
 
 ---
 
-## 4. main() (local entrypoint)
+## 3. QwenSDPOTrainer (Modal) — Main Methods
 
-- Parses CLI (model, dataset, subset, split, problem_idx, max_iterations, lr, temperature, feedback_errors_only, system_prompt, default_header, theorem_field, informal_field, header_field).
-- Loads dataset (with fallbacks: trust_remote_code, different splits).
-- Builds theorem_fields, informal_fields, header_fields with user overrides at front; gets problem dict and prints id / lean4 / informal / header.
-- Builds config_dict (including those field lists and optional system_prompt, default_header).
-- `SDPOTrainer(model_name=model).run_sdpo.remote(config_dict, problem)`.
-- Prints results and writes local copy under `sdpo_results/run_{problem_idx}_{timestamp}/` (logs, metrics, training_curves.png).
+### 3.1 Setup (`@modal.enter()`)
+
+- **vLLM:** `LLM(..., tensor_parallel_size=1)` for **generation only** (no gradients).
+- **HuggingFace:** Same base model with **QLoRA** (`BitsAndBytesConfig` 4-bit), `device_map="auto"`, `train()`, gradient checkpointing. Used for SDPO loss.
+- **Optimizer:** AdamW on trainable (LoRA) parameters.
+- **Weight sync:** After each gradient step, LoRA weights are copied from the HF model into vLLM’s weight tensors in-place ([_weight_sync.py](../qwen_sdpo/_weight_sync.py)), so the next `generate_batch` uses the updated policy (online RL).
+
+### 3.2 `generate_batch(prompts)` (Modal)
+
+- **Input:** List of strings (e.g. `[student_prompt]` for minibatch_size=1).
+- **vLLM:** `SamplingParams` from config (temperature, max_tokens, stop); `llm.generate(prompts, sampling_params)`.
+- **Output:** For each sample: `raw_output` (text), `generated_ids` (token ids from HF tokenizer, for loss), `finish_reason`. Used by the local driver to parse, verify, and build payloads.
+
+### 3.3 `run_sdpo_step_minibatch(cfg_dict, payloads)` (Modal)
+
+- **Input:** `cfg_dict` (SDPOConfig as dict), `payloads` = list of dicts from local: each has `student_input_ids`, `teacher_input_ids`, `response_mask` / `teacher_response_ids`, optional `cot_len` (for answer_only/code_only), etc.
+- **Skip conditions:** If any payload is marked success / server_error / truncated, the step is skipped (no backward).
+- **Loss:** For each payload, [sdpo_loss.compute_sdpo_loss](../qwen_sdpo/sdpo_loss.py): student and teacher forward on HF model; KL(student ‖ teacher) on **top-K + tail** logits over response tokens; optional masking (e.g. final code block only). Loss = mean over batch.
+- **Backward:** `loss.backward()`, `clip_grad_norm_`, `optimizer.step()`, `optimizer.zero_grad()`.
+- **Sync:** `sync_lora_weights_to_vllm()` so vLLM uses the new LoRA weights for the next iteration.
+
+### 3.4 `finalize_run(cfg_dict, logs)` (Modal)
+
+- Saves the current model (HF + LoRA) and logs to the Modal volume (`/output/...`).
 
 ---
 
-## 5. Workflow Illustration
+## 4. Local driver (entrypoint.run_main)
 
-See `SDPO_WORKFLOW.md` in this directory for the Mermaid diagram of the end-to-end and per-iteration flow.
+In **[qwen_sdpo/entrypoint.py](../qwen_sdpo/entrypoint.py)**:
+
+1. Load dataset (HuggingFace), pick problem by `problem_idx`.
+2. Build **student_prompt** (problem only; fixed for the whole run).
+3. **Loop** (up to `max_iterations`):
+   - Call **Modal** `trainer.generate_batch.remote([student_prompt] * minibatch_size)`.
+   - For each sample: **parse** ([parsing.py](../qwen_sdpo/parsing.py): `extract_full_lean_block_parsed`, `create_full_lean_code`) → **verify** ([_verifier.py](../qwen_sdpo/_verifier.py): HTTP to Kimina) → if success, break and finalize.
+   - If failure: build **teacher_prompt** (problem + compiler errors, and optionally failed proof) and build payload (tokenized student/teacher + response masks).
+   - Call **Modal** `trainer.run_sdpo_step_minibatch.remote(cfg_dict, payloads)`.
+4. After loop or on success: `trainer.finalize_run.remote(...)`, then locally `save_local_run()`, `plot_training_curves()`.
+
+---
+
+## 5. SDPO loss (compute_sdpo_loss)
+
+In **[qwen_sdpo/sdpo_loss.py](../qwen_sdpo/sdpo_loss.py)**:
+
+- **Inputs:** Student and teacher input IDs, response mask or explicit `teacher_response_ids`, optional `cot_len` (for answer_only/code_only modes).
+- **Student:** Forward through HF model; logits at **response** positions only.
+- **Teacher:** Forward (no grad); same response positions.
+- **Top-K + tail:** For each position, keep top-K logits from student; get teacher log-probs at those indices; add a tail bucket so the distribution sums to 1.
+- **KL:** `F.kl_div(teacher_probs, student_log_probs, ...)` per position, then sum or mask (e.g. final code only).
+- Returns loss (and optional reward/entropy for logging).
+
+---
+
+## 6. Workflow diagram
+
+End-to-end and per-iteration flow: **[docs/QWEN_SDPO_WORKFLOW.md](QWEN_SDPO_WORKFLOW.md)** (ASCII + Mermaid). Rendered image: [qwen_sdpo_workflow.png](qwen_sdpo_workflow.png).
+
+---
+
+## 7. Legacy: lean_sdpo_modal (training/)
+
+The older **training/lean_sdpo_modal.py** pipeline runs **entirely on Modal**: one `SDPOTrainer` class does generation, verification (LeanVerifier on Modal), and SDPO steps in one process. No local verification; no separate “generate_batch” vs “run_sdpo_step_minibatch” RPC. The **qwen_sdpo** pipeline replaces this as the main SDPO path: verification is local (Kimina), and the split between local (parse, verify, orchestrate) and Modal (generate + train + sync) is as above. For reference, the legacy trainer used a single `run_sdpo(config_dict, problem)` with internal generate → extract tactics → full Lean file → verify → feedback prompt → `_compute_sdpo_loss` → backward → step, all on the same container.

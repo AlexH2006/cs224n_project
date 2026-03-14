@@ -1,43 +1,43 @@
 # Test-Time Self-Distillation for Lean Theorem Proving
 
-**TL;DR** — Test-time and full SDPO (Self-Distilled Policy Optimization) for Lean 4: generate proof attempts, verify with a Lean backend, use feedback for self-distillation and (on Modal) gradient updates.
+**TL;DR** — Test-time self-distillation for Lean 4: generate proof attempts, verify with Kimina (or local Lean), use compiler feedback to build a teacher prompt and compute KL loss; gradient updates run on Modal (Qwen 3.5 + QLoRA), with LoRA synced into vLLM after each step so the next generation uses the updated policy.
 
-## Overview
+## Current pipeline: qwen_sdpo
 
-The pipeline works as follows:
+The **main pipeline** is **[qwen_sdpo/](qwen_sdpo/)**: Qwen 3.5 (4B or 9B) with QLoRA on Modal (H100). Generation runs on Modal (vLLM); verification runs **locally** via Kimina Docker; the local driver orchestrates generate → parse → verify → build payload → Modal SDPO step (loss, backward, sync LoRA to vLLM).
+
+**Workflow diagram:** See [QWEN_SDPO_WORKFLOW.md](QWEN_SDPO_WORKFLOW.md) for the full flow (ASCII + Mermaid). Rendered diagram:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    Test-Time Self-Distillation              │
+│                    Test-Time Self-Distillation (qwen_sdpo)   │
 ├─────────────────────────────────────────────────────────────┤
-│  1. Generate N proof attempts (vLLM / transformers)         │
+│  1. LOCAL: Load problem; build student prompt (problem only) │
 │                     ↓                                       │
-│  2. Verify each proof (Kimina HTTP or local lake exe repl)   │
+│  2. MODAL: Generate proof attempts (vLLM, minibatch_size)   │
 │                     ↓                                       │
-│  3. If success → Return proof                               │
-│     If failure → Extract compiler errors as feedback         │
+│  3. LOCAL: Parse lean4 block → full_code; verify (Kimina)    │
+│     If success → done. If failure → extract errors as feedback │
 │                     ↓                                       │
-│  4. Reprompt with feedback (self-distillation)              │
-│     - Include error messages from failed attempts            │
-│     - Include successful proofs as demonstrations            │
+│  4. LOCAL: Build teacher prompt (problem + feedback)         │
 │                     ↓                                       │
-│  5. Compute KL divergence for policy regularization         │
+│  5. MODAL: SDPO loss (KL student ‖ teacher), backward, step│
+│     Sync LoRA weights into vLLM → next gen uses new policy │
 │                     ↓                                       │
-│  6. Repeat until success or max iterations                  │
+│  6. Repeat until success or max_iterations                  │
 └─────────────────────────────────────────────────────────────┘
 ```
 
+![qwen_sdpo workflow](qwen_sdpo_workflow.png)
+
 ### Verification backends
 
-| Backend | Use case | Package / script |
-|--------|----------|-------------------|
-| **Kimina** (HTTP) | Cloud or local Docker Lean server | `sdpo_modal` (Modal), `verification/verify_proofs_kimina.py` |
-| **Local Lean** (`lake exe repl`) | No Kimina; verify in mathlib4 workspace | `sdpo_modal_local_verify`, `sdpo_modal_local_verify_goedel`, `sdpo_modal_local_verify_kimina` |
+| Backend | Use case | Where used |
+|--------|----------|-------------|
+| **Kimina** (HTTP) | qwen_sdpo (local Docker) | [qwen_sdpo/_verifier.py](../qwen_sdpo/_verifier.py); start `docker run -p 8000:8000 projectnumina/kimina-lean-server:2.0.0` |
+| **Local Lean** (`lake exe repl`) | training/ pipelines | `sdpo_modal_local_verify_goedel`, `sdpo_modal_local_verify_kimina` (see [training/](training/)) |
 
-Modal pipelines that use **Kimina** live in `sdpo_modal/` and are invoked by `training/lean_sdpo_*_modal.py` (e.g. Kimina 2B, Distill 1.7B, Goedel 8B). The **local verification** pipelines:
-- `sdpo_modal_local_verify/` — Kimina-Prover base (invoked by `lean_sdpo_local_verify_modal.py` in some configs)
-- `sdpo_modal_local_verify_goedel/` — Goedel-Prover-V2-8B; last lean4 block parsing, truncation detection
-- `sdpo_modal_local_verify_kimina/` — Kimina-Prover-RL-1.7B; **online RL** via in-place LoRA→vLLM weight sync after each gradient step (generation improves each iteration); teacher uses current iteration's feedback. Requires `transformers>=5.2.0`. See [sdpo_modal_local_verify_kimina/README.md](../sdpo_modal_local_verify_kimina/README.md)
+**Other Modal pipelines** (in [training/](training/)): Kimina 2B, Goedel 8B, Qwen 3B, DeepSeek 7B, and local-verify variants (Goedel, Kimina-Prover with LoRA→vLLM sync). See main [README](../README.md) for links.
 
 ## Requirements
 
@@ -58,53 +58,52 @@ docker run -d -p 80:80 projectnumina/kimina-lean-server:2.0.0
 
 ## Usage
 
-Basic usage (from project root):
+**qwen_sdpo (recommended)** — from project root, with Kimina Docker running on port 8000:
+
+```bash
+# Single problem (default: Qwen3.5-4B, problem_idx=0)
+python3 -m modal run qwen_sdpo/modal_app.py --model "Qwen/Qwen3.5-4B" --problem-idx 4
+
+# Batch (multiple problems; reset to base model between each)
+python3 -m modal run qwen_sdpo/modal_app.py::run_sdpo_batch --model "Qwen/Qwen3.5-4B"
+```
+
+**Local test-time only** (no Modal; uses `training/lean_sdpo_ttt.py`):
+
 ```bash
 python training/lean_sdpo_ttt.py --n_problems 5 --n_samples 4 --max_iterations 3
 ```
 
-Full options:
-```bash
-python training/lean_sdpo_ttt.py \
-    --model "Qwen/Qwen3-1.7B" \
-    --dataset "Goedel-Prover-V2/dataset/minif2f.jsonl" \
-    --n_problems 10 \
-    --n_samples 8 \
-    --max_iterations 5 \
-    --kimina_url "http://localhost:80" \
-    --temperature 0.7 \
-    --kl_coef 0.1 \
-    --output "results/sdpo_results.json"
-```
+## Key components (qwen_sdpo)
 
-## Key Components
+### 1. Local orchestration ([qwen_sdpo/entrypoint.py](../qwen_sdpo/entrypoint.py))
+- Loads problem from HuggingFace dataset; builds **student_prompt** (problem only).
+- Each iteration: calls Modal `generate_batch.remote(prompts)` → for each sample: **parse** ([parsing.py](../qwen_sdpo/parsing.py)), **verify** ([_verifier.py](../qwen_sdpo/_verifier.py) → Kimina), build **teacher_prompt** (problem + feedback), build payload → `run_sdpo_step_minibatch.remote(payloads)`.
+- Saves logs and training curves locally; Modal writes model + logs to volume.
 
-### 1. LeanVerifier
-Wraps the Kimina client to verify Lean 4 proofs and extract compiler errors as rich feedback.
+### 2. Modal trainer ([qwen_sdpo/modal_trainer.py](../qwen_sdpo/modal_trainer.py))
+- **vLLM**: batched generation (student_prompt only).
+- **HuggingFace**: QLoRA model for SDPO loss (same weights conceptually; LoRA is trained).
+- After each gradient step: **sync_lora_weights_to_vllm** ([_weight_sync.py](../qwen_sdpo/_weight_sync.py)) so the next generation uses the updated policy (online RL).
 
-### 2. LeanSDPO
-Main class implementing test-time self-distillation:
-- `generate_proofs()`: Generate multiple proof attempts
-- `compute_kl_divergence()`: Compute KL between policy and reference model
-- `self_distill_iteration()`: One iteration of generation + verification + feedback
-- `solve_theorem()`: Full solving loop with multiple iterations
+### 3. Feedback and loss
+- **Teacher prompt**: problem + compiler errors (and optionally failed proof) from the **current** attempt only.
+- **SDPO loss** ([sdpo_loss.py](../qwen_sdpo/sdpo_loss.py)): KL(student ‖ teacher) on top-K token logits + tail bucket; optional mask over final code block only (`kl_mask_final_code_only`).
 
-### 3. Feedback Templates
-The system uses two types of feedback:
-- **Error feedback**: Lean compiler errors from failed attempts
-- **Solution demonstrations**: Successful proofs to guide subsequent attempts
+## Configuration (qwen_sdpo)
 
-## Configuration
-
-Key parameters in `SDPOConfig`:
+Key parameters in [qwen_sdpo/config.py](qwen_sdpo/config.py) `SDPOConfig`:
 
 | Parameter | Default | Description |
 |-----------|---------|-------------|
-| `n_samples` | 4 | Proof attempts per iteration |
-| `max_iterations` | 3 | Maximum self-correction iterations |
-| `temperature` | 0.7 | Sampling temperature |
-| `kl_coef` | 0.1 | KL divergence penalty coefficient |
-| `alpha` | 0.5 | KL interpolation (0=forward, 1=reverse, 0.5=JSD) |
+| `max_iterations` | 5 | Maximum self-correction iterations |
+| `learning_rate` | 5e-6 | AdamW learning rate |
+| `minibatch_size` | 1 | Samples per iteration (one vLLM batch, one gradient step) |
+| `temperature` | 0.6 | Sampling temperature |
+| `distillation_topk` | 20 | Top-K logits for KL (+ tail bucket) |
+| `feedback_errors_only` | True | Teacher prompt: errors only vs errors + failed proof |
+| `teacher_response_mode` | "full_output" | full_output \| answer_only \| code_only (which tokens KL uses) |
+| `kl_mask_final_code_only` | False | If True, loss summed only over final lean4 block |
 
 ## Output Format
 
@@ -164,6 +163,7 @@ The `SDPO/` directory contains the verl framework used for batch training.
 
 ## References
 
+- **qwen_sdpo workflow:** [docs/QWEN_SDPO_WORKFLOW.md](QWEN_SDPO_WORKFLOW.md) — flow diagram and file map
+- **Deep dive:** [docs/SDPO_TRAINER_DEEP_DIVE.md](SDPO_TRAINER_DEEP_DIVE.md) — qwen_sdpo trainer and loss
 - [SDPO Paper (arXiv:2601.20802)](https://arxiv.org/abs/2601.20802)
 - [Kimina Lean Server](https://github.com/project-numina/kimina-lean-server)
-- [Goedel-Prover-V2](https://github.com/Goedel-LM/Goedel-Prover-V2)
