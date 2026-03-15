@@ -43,6 +43,7 @@ jack_verification/
 # Project
 assets/
 sdpo_modal/
+imo_p6_experiment/
 collect.py
 output.txt
 *.log
